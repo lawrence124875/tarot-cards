@@ -1,0 +1,7 @@
+# 介面翻譯（ARB，HANDOFF §16）。做法與智慧聽覺巡航相同（同一套 CI 已驗證）。
+# 產生的 lib/l10n/app_localizations*.dart 不進 repo（.gitignore），由 flutter pub get / gen-l10n 產生。
+arb-dir: lib/l10n
+template-arb-file: app_zh.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false

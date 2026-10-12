@@ -1,0 +1,379 @@
+{
+  "@@locale": "en",
+  "appTitle": "Qiangua",
+  "appSubtitle": "I Ching · 64 Hexagram Cards",
+  "homeMotto": "The I Ching is not for telling fortunes\nbut for learning to read images and decide",
+  "homeDisclaimer": "For self-reflection and entertainment only",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "delete": "Delete",
+  "back": "Back",
+  "save": "Save",
+  "viewReading": "See the Reading",
+  "separator": " · ",
+  "listSeparator": ", ",
+  "featureDraw": "Draw a Card",
+  "featureJournal": "Journal",
+  "featureBreath": "Breathing Soundscape",
+  "readingActionBreath": "Breathe with This Hexagram",
+  "questionTitle": "Your Question",
+  "questionHint": "In a sentence or two, what is on your mind? (optional)",
+  "questionPromptLink": "Write down your question (optional)",
+  "questionShown": "Q: {question}",
+  "@questionShown": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "optionalHint": "Optional",
+  "drawPromptBefore": "Hold one matter in mind\nTap the card when you are ready",
+  "drawPromptAfter": "This is the image of this moment",
+  "drawAgain": "Draw Again",
+  "sectionReading": "Reading",
+  "sectionImage": "The Image",
+  "sectionSource": "Where the Image Comes From",
+  "sectionForYou": "For You Now",
+  "sectionAction": "A Small Step for Today",
+  "sectionQuestion": "A Question to Reflect On",
+  "sectionEastWest": "East Meets West",
+  "readingNotWritten": "The reading for this hexagram is still being written. For now, look at the scene on the card and notice what it brings to mind.",
+  "savedToJournalHint": "Saved to your Journal. Come back from the home screen to compare later.",
+  "saveThisReading": "Save This Reading",
+  "quoteMarks": "“{text}”",
+  "@quoteMarks": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "quoteAttribution": "{author}, {source}",
+  "@quoteAttribution": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "cardZoomLabel": "Enlarge the card art for {name}",
+  "@cardZoomLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "artViewerLabel": "Card art for {name}. Tap to go back",
+  "@artViewerLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "tapToReturn": "Tap to go back",
+  "journalEmpty": "No entries yet\n\nAfter drawing a card\ntap “Save This Reading” at the end of the reading\nThen come back later\nto see how the image played out",
+  "journalNoQuestion": "(No question written)",
+  "journalReviewCount": "{count, plural, =1{1 note} other{{count} notes}}",
+  "@journalReviewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalReminderOn": "Reminder {date}",
+  "@journalReminderOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "journalNotFound": "This entry could not be found. It may have been deleted.",
+  "journalDeleteTitle": "Delete this entry?",
+  "journalDeleteBody": "This cannot be undone.",
+  "journalReadingThen": "Reading at the time",
+  "journalQuestionEmpty": "(Not filled in. Tap to add)",
+  "journalViewReading": "View the Reading from Then",
+  "journalReviews": "Looking Back",
+  "journalReviewPrompt": "What happened afterwards? Looking back, where does the image meet what happened?",
+  "journalAddReview": "Write What Happened",
+  "journalReviewDialogTitle": "What happened afterwards?",
+  "journalEditReview": "Edit This Note",
+  "journalReminderSection": "Review Reminder",
+  "journalReminderPending": "You will be reminded on {date} at {hour} p.m.",
+  "@journalReminderPending": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "journalReminderNone": "No reminder set. Choose a number of days from today:",
+  "reminderFailed": "The reminder could not be set. {reason}",
+  "@reminderFailed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "saveSheetNote": "Stored only on this phone. Come back later to compare and practise reading the image.",
+  "saveSheetRemind": "Remind Me to Look Back",
+  "saveSheetRemindIn": "{days, plural, =1{Reminder tomorrow at {hour} p.m.} other{Reminder in {days} days at {hour} p.m.}}",
+  "@saveSheetRemindIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOk": "Saved to your Journal.",
+  "savedReminderFailed": "Saved to your Journal, but the reminder could not be set. {reason}",
+  "@savedReminderFailed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderPickerTitle": "Remind me in how many days?",
+  "daysSuffix": "days",
+  "daysHint": "1–365",
+  "reminderOff": "No reminder",
+  "reminderDays": "{days, plural, =1{1 day} other{{days} days}}",
+  "@reminderDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderCustom": "Custom",
+  "reminderPermissionDenied": "Notifications are off for Qiangua. You can turn them on in Settings → Apps → Qiangua → Notifications.",
+  "reminderInitFailed": "Notifications could not start: {detail}",
+  "@reminderInitFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderScheduleFailed": "Scheduling failed: {detail}",
+  "@reminderScheduleFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderUnsupported": "Reminders are not supported on this platform yet",
+  "reminderChannelName": "Journal review reminders",
+  "reminderChannelDescription": "Reminds you to look back at readings you saved",
+  "reviewNotificationTitle": "Look back: {name}",
+  "@reviewNotificationTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewNotificationBody": "{days, plural, =1{Yesterday you drew {name}. Look back: how did the image play out?} other{{days} days ago you drew {name}. Look back: how did the image play out?}}",
+  "@reviewNotificationBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathChannelName": "Breathing soundscape",
+  "breathSetupTitle": "Breathing Soundscape · {name}",
+  "@breathSetupTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathSetupNote": "Breathe in for 4 seconds and out for 6 (6 breaths a minute). The soundscape rises and falls with your breath; tones and bells are tuned to 432 Hz.",
+  "breathDuration": "Length",
+  "breathCustom": "Custom",
+  "breathLongNote": "For a longer sit, you can turn off the soft bell and keep just the soundscape.",
+  "minutes": "{m, plural, =1{1 minute} other{{m} minutes}}",
+  "@minutes": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "breathBells": "Soft bell when the breath turns",
+  "breathBellsSub": "Follow along with your eyes closed",
+  "breathBinaural": "Binaural beat 7.83 Hz",
+  "breathBinauralSub": "Headphones required; the two ears differ by 7.83 Hz",
+  "breathHeadphones": "Headphones recommended; phone speakers struggle with low sounds.",
+  "breathStart": "Start",
+  "breathMediaTitle": "{name} · Breathing Soundscape",
+  "@breathMediaTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathMediaSubtitle": "{sounds} | {duration}",
+  "@breathMediaSubtitle": {
+    "placeholders": {
+      "sounds": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "breathPreparing": "Creating the soundscape",
+  "breathPreparingSub": "The first time takes a few seconds",
+  "breathFailed": "This phone cannot play the soundscape right now.\nYou can use silent guidance instead.",
+  "breathEnded": "Ended",
+  "breathDone": "Done",
+  "breathStoppedFromNotification": "Stopped from the notification",
+  "breathSummary": "{minutes} min · {breaths} breaths",
+  "@breathSummary": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "breaths": {
+        "type": "int"
+      }
+    }
+  },
+  "breathPaused": "Paused",
+  "breathUseSilent": "Use Silent Guidance",
+  "breathBackToReading": "Back to the Reading",
+  "breathViewArtAgain": "View the Card Again",
+  "breathRemaining": "{time} left",
+  "@breathRemaining": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "breathSilentMark": " · silent",
+  "breathViewArt": "Card",
+  "breathResume": "Resume",
+  "breathPause": "Pause",
+  "breathEnd": "End",
+  "breathPhase": "{phase, select, prepare{Ready} inhale{In} exhale{Out} done{Done} other{-}}",
+  "@breathPhase": {
+    "placeholders": {
+      "phase": {
+        "type": "String"
+      }
+    }
+  },
+  "soundscapeName": "{key, select, qian{High Clear Wind} kun{Night Field Crickets} zhen{Distant Thunder, Spring Rain} xun{Wind in the Trees} kan{Mountain Stream} li{Campfire} gen{Mountain Stillness} dui{Lakeside Ripples} other{-}}",
+  "@soundscapeName": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumTitle": "Qiangua Premium",
+  "premiumSubtitle": "No ads, and every feature without limits",
+  "premiumBenefitNoAds": "No ads at all",
+  "premiumBenefitCasts": "Unlimited card draws and coin casts",
+  "premiumBenefitJournal": "Unlimited journal entries",
+  "premiumBenefitBreath": "3- and 5-minute breathing and binaural beats",
+  "premiumFreeNote": "The classic texts, line readings, all three interpretations, and East Meets West are always free.",
+  "planMonthly": "Monthly",
+  "planYearly": "Yearly",
+  "premiumSubscribe": "Subscribe",
+  "premiumRestore": "Restore purchases",
+  "premiumManage": "Manage subscription",
+  "premiumActive": "You’re a Qiangua Premium member. Thank you for your support.",
+  "premiumUnavailable": "Subscriptions aren’t available yet.",
+  "premiumLoadFailed": "Couldn’t load subscription plans. Please check your connection and try again.",
+  "premiumTerms": "Subscriptions renew automatically. Cancel anytime in Google Play under Payments & subscriptions; you keep Premium until the end of the current period.",
+  "premiumThanks": "You’re subscribed. Thank you for your support!",
+  "premiumPurchaseFailed": "The purchase wasn’t completed. You haven’t been charged.",
+  "premiumRestoreNone": "No subscription found to restore.",
+  "castLimitTitle": "You’ve used today’s {count} free casts",
+  "castLimitBody": "Watch a short ad for one more cast, or go Premium for unlimited casts and no ads.",
+  "castLimitBodyExhausted": "That’s all for today. Sit a while with the image you drew and come back tomorrow, or go Premium for unlimited casts.",
+  "castWatchAd": "Watch an ad for one more cast",
+  "castAdNotReady": "The ad couldn’t load right now. Please try again later.",
+  "castComeTomorrow": "Come back tomorrow",
+  "journalLimitTitle": "You’ve reached the free limit of {count} journal entries",
+  "journalLimitBody": "Everything you’ve saved stays. Watch an ad to save this one, or go Premium to add entries without limit.",
+  "menuPremium": "Qiangua Premium",
+  "menuAdPrivacy": "Ad privacy settings",
+  "menuPrivacyPolicy": "Privacy policy",
+  "journalWatchAd": "Watch an ad to save this one",
+  "notNow": "Not now",
+  "breathCarrier128": "Left 128 Hz · right 135.83 Hz",
+  "breathCarrier216": "Left 216 Hz · right 223.83 Hz",
+  "menuIntro": "Feature tour",
+  "menuShareApp": "Recommend to a friend",
+  "introSkip": "Skip",
+  "introNext": "Next",
+  "introStart": "Get started",
+  "intro1Title": "Draw a hexagram, read the moment",
+  "intro1Body": "The home screen has four buttons: Draw a Card, Cast with Three Coins, Cast with Yarrow Stalks and Journal. Hold one matter in mind and pick a way to cast. Each hexagram comes with its image, a reading, a small action and a question to help you think things through.",
+  "intro2Title": "Journal: note it, look back",
+  "intro2Body": "Save your question and hexagram to the journal, set a reminder, and come back later to see what you thought and how things turned out. You can also back up the journal to a file and restore it on a new phone.",
+  "intro3Title": "Breathe with the hexagram",
+  "intro3Body": "From a reading you can breathe with the soundscapes of its upper and lower trigrams: in for 4 seconds, out for 6. The background tones and bells are tuned to 432 Hz; with headphones you can turn on a 7.83 Hz binaural beat (the two ears differ by 7.83 Hz). Choose 1, 2, 3 or 5 minutes, or set a custom length of up to 60 minutes for a longer sit.",
+  "intro4Title": "Sharing and membership",
+  "intro4Body": "Turn a hexagram you like into a card and share it with friends. The texts and readings are always free; members get no ads, unlimited casts, longer breathing sessions and binaural beats.",
+  "intro5Title": "Tell us what you think",
+  "intro5Body": "The menu at the top right of the home screen lets you replay this tour, send us feedback, and choose whether to share anonymous usage stats. Your suggestions help make the app better.",
+  "menuFeedback": "Send feedback",
+  "feedbackCategoryLabel": "Type",
+  "feedbackCategoryBug": "Report a problem",
+  "feedbackCategorySuggestion": "Feature suggestion",
+  "feedbackCategoryOther": "Other",
+  "feedbackMessageLabel": "Message",
+  "feedbackMessageHint": "Tell us about a problem you ran into, or a feature you'd like…",
+  "feedbackEmailLabel": "Contact email (optional)",
+  "feedbackEmailHint": "Leave your email if you'd like a reply",
+  "feedbackSubmit": "Send feedback",
+  "feedbackEmpty": "Please write something before sending",
+  "feedbackThanks": "Thanks for your feedback! We'll look at it soon.",
+  "feedbackFailed": "Couldn't send. Please check your connection and try again.",
+  "shareReading": "Share this hexagram",
+  "shareImage": "Share image",
+  "shareFailed": "Couldn't share right now. Please try again later.",
+  "shareAppText": "I've been using Qiangua to draw I Ching cards and breathe with their soundscapes. Try it: {url}",
+  "shareReadingText": "I drew {name}: \"{title}\"\nDraw your own I Ching card with Qiangua: {url}",
+  "journalMenuBackup": "Back up journal",
+  "journalMenuRestore": "Restore from backup",
+  "journalBackupBody": "The backup file includes the questions and notes you wrote. Next, choose where to keep it, such as your cloud drive, or send it to yourself.\n\nOn a new phone or after reinstalling, choose “Restore from backup” here to bring it back.",
+  "journalBackupContinue": "Choose where to save",
+  "journalBackupEmpty": "There are no entries to back up yet.",
+  "journalBackupSubject": "Qiangua journal backup {date}",
+  "journalRestoreDone": "{count, plural, =1{Restored 1 entry} other{Restored {count} entries}}",
+  "journalRestoreNone": "Every entry in this backup is already on this phone.",
+  "journalRestoreFailed": "Couldn't read this file. Please choose a Qiangua journal backup (.json).",
+  "menuShareUsage": "Share anonymous usage stats & crash reports",
+  "premiumTermsIos": "Subscriptions renew automatically. Cancel anytime on your iPhone in Settings → Apple Account → Subscriptions; you keep Premium until the end of the current period.",
+  "termsOfUse": "Terms of Use"
+}

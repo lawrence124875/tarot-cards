@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 以下圖示只在程式中以名稱字串引用，資源壓縮時會被當成沒用到而移除，必須保留：
+     ic_stat_tarot：通知小圖示
+     audio_service_*：鎖定畫面／通知列的暫停、播放、停止按鈕圖示（被移除時小米卡片整排按鈕不顯示，0.1.0+15 修正） -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@drawable/ic_stat_tarot,@drawable/audio_service_*" />

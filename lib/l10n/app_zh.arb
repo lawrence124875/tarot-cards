@@ -1,0 +1,765 @@
+{
+  "@@locale": "zh",
+  "appTitle": "塔羅",
+  "@appTitle": {
+    "description": "App 名稱（桌面名稱另由 patch_android.sh 設定）"
+  },
+  "appSubtitle": "塔羅學習與自我覺察",
+  "homeMotto": "塔羅不是用來算命\n而是看見此刻，溫柔地往前走",
+  "@homeMotto": {
+    "description": "置中提示語：不加標點，逗號處換行（HANDOFF §15.1）"
+  },
+  "homeDisclaimer": "內容僅供自我探索與學習參考，不能取代專業意見",
+  "cancel": "取消",
+  "ok": "好",
+  "delete": "刪除",
+  "back": "返回",
+  "save": "儲存",
+  "viewReading": "看解讀",
+  "separator": "・",
+  "@separator": {
+    "description": "並列項目的分隔符號"
+  },
+  "listSeparator": "、",
+  "featureDraw": "抽牌",
+  "featureJournal": "塔羅日記",
+  "featureBreath": "呼吸音景",
+  "readingActionBreath": "跟著這張牌呼吸",
+  "questionTitle": "想問的事",
+  "questionHint": "用一兩句話寫下心裡想著的事（可不填）",
+  "questionPromptLink": "寫下想問的事（可不填）",
+  "questionShown": "問：{question}",
+  "@questionShown": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "optionalHint": "可不填",
+  "drawPromptBefore": "心裡想著眼前的一件事\n準備好了就開始",
+  "@drawPromptBefore": {
+    "description": "置中提示語：不加標點"
+  },
+  "drawPromptAfter": "這是此刻的象",
+  "@drawPromptAfter": {
+    "description": "置中提示語：不加標點"
+  },
+  "drawAgain": "重新抽牌",
+  "sectionReading": "解讀",
+  "sectionImage": "象的畫面",
+  "sectionSource": "象從哪裡來",
+  "sectionForYou": "給現在的你",
+  "sectionAction": "今日小行動",
+  "sectionQuestion": "反思提問",
+  "sectionEastWest": "東西相映",
+  "readingNotWritten": "這張牌的解讀還在撰寫中。可以先看看牌面的景象，想想它讓你聯想到什麼。",
+  "savedToJournalHint": "已記在「塔羅日記」，日後可從首頁回來對照。",
+  "saveThisReading": "記在塔羅日記",
+  "quoteMarks": "「{text}」",
+  "@quoteMarks": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "quoteAttribution": "{author}，{source}",
+  "@quoteAttribution": {
+    "placeholders": {
+      "author": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
+  "cardZoomLabel": "放大看{name}的牌面",
+  "@cardZoomLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "artViewerLabel": "{name}的牌面，點一下返回",
+  "@artViewerLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "tapToReturn": "點一下返回",
+  "journalEmpty": "還沒有日記\n\n抽牌後\n在解讀頁最下方按「記在塔羅日記」\n日後回來對照\n看看牌面的象怎麼對應到生活裡",
+  "@journalEmpty": {
+    "description": "置中提示語：不加標點"
+  },
+  "journalNoQuestion": "（未寫想問的事）",
+  "journalReviewCount": "{count, plural, other{回顧 {count} 次}}",
+  "@journalReviewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalReminderOn": "{date} 提醒",
+  "@journalReminderOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "journalNotFound": "找不到這筆日記，可能已經刪除。",
+  "journalDeleteTitle": "刪除這筆日記？",
+  "journalDeleteBody": "刪除後無法復原。",
+  "journalReadingThen": "當時的解讀",
+  "journalQuestionEmpty": "（未填寫，點這裡補上）",
+  "journalViewReading": "看當時的解讀",
+  "journalReviews": "回顧",
+  "journalReviewPrompt": "後來發生了什麼？現在回頭看，這張牌的象對應到事情的哪裡？",
+  "journalAddReview": "寫下後來的發展",
+  "journalReviewDialogTitle": "後來發生了什麼？",
+  "journalEditReview": "修改回顧",
+  "journalReminderSection": "回顧提醒",
+  "journalReminderPending": "{date} 晚上 {hour} 點會提醒你",
+  "@journalReminderPending": {
+    "description": "hour 為 12 小時制（晚上 8 點＝8）",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "journalReminderNone": "目前沒有提醒。選一個天數，從今天起算：",
+  "reminderFailed": "提醒沒有設定成功。{reason}",
+  "@reminderFailed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "saveSheetNote": "只存在這支手機裡。日後回來對照，練習看象。",
+  "saveSheetRemind": "提醒我回來回顧",
+  "saveSheetRemindIn": "{days, plural, other{{days} 天後晚上 {hour} 點提醒}}",
+  "@saveSheetRemindIn": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "hour": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOk": "已記在「塔羅日記」。",
+  "savedReminderFailed": "已記在「塔羅日記」，但提醒沒有設定成功。{reason}",
+  "@savedReminderFailed": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderPickerTitle": "幾天後提醒？",
+  "daysSuffix": "天",
+  "daysHint": "1～365",
+  "reminderOff": "不提醒",
+  "reminderDays": "{days, plural, other{{days} 天}}",
+  "@reminderDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderCustom": "自訂",
+  "reminderPermissionDenied": "尚未允許「塔羅」發送通知，可到手機設定 → 應用程式 → 塔羅 → 通知 開啟",
+  "reminderInitFailed": "通知初始化失敗：{detail}",
+  "@reminderInitFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderScheduleFailed": "排程失敗：{detail}",
+  "@reminderScheduleFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderUnsupported": "這個平台尚未支援提醒",
+  "reminderChannelName": "日記回顧提醒",
+  "@reminderChannelName": {
+    "description": "Android 通知類別名稱（系統設定中可見）"
+  },
+  "reminderChannelDescription": "提醒你回來回顧之前記下的牌",
+  "reviewNotificationTitle": "回顧一張牌：{name}",
+  "@reviewNotificationTitle": {
+    "description": "通知內文不可放「想問的事」（鎖定畫面可見）",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewNotificationBody": "{days, plural, other{{days} 天前抽到{name}。回頭看看，這張牌的象後來怎麼對上了？}}",
+  "@reviewNotificationBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathChannelName": "呼吸音景",
+  "@breathChannelName": {
+    "description": "Android 通知類別名稱"
+  },
+  "breathSetupTitle": "呼吸音景・{name}",
+  "@breathSetupTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathSetupNote": "吸氣 4 秒、吐氣 6 秒（每分鐘 6 次）。音景依這張牌的元素而來，會跟著呼吸起伏，長鳴與鈴聲以 432Hz 調音。",
+  "@breathSetupNote": {
+    "description": "只描述做法，不寫療效（Google Play 健康宣稱政策，HANDOFF §14.2）"
+  },
+  "breathDuration": "時長",
+  "breathCustom": "自訂",
+  "breathLongNote": "長時間靜坐時，可以關掉「換氣時輕敲鈴聲」，只留音景。",
+  "minutes": "{m, plural, other{{m} 分鐘}}",
+  "@minutes": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "breathBells": "換氣時輕敲鈴聲",
+  "breathBellsSub": "閉上眼睛也能跟著吸吐",
+  "breathBinaural": "雙耳節拍 7.83Hz",
+  "breathBinauralSub": "需戴耳機；左右耳相差 7.83Hz",
+  "breathHeadphones": "建議戴耳機；手機喇叭較難聽出低沉的聲音。",
+  "breathStart": "開始",
+  "breathMediaTitle": "{name}・呼吸音景",
+  "@breathMediaTitle": {
+    "description": "通知列與鎖定畫面的標題",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "breathMediaSubtitle": "{sounds}｜{duration}",
+  "@breathMediaSubtitle": {
+    "placeholders": {
+      "sounds": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "breathPreparing": "正在生成音景",
+  "breathPreparingSub": "第一次約需數秒",
+  "breathFailed": "這台手機暫時無法播放音景，\n可以改用無聲引導。",
+  "breathEnded": "已結束",
+  "breathDone": "完成",
+  "breathStoppedFromNotification": "已從通知列停止",
+  "breathSummary": "{minutes} 分鐘・{breaths} 次呼吸",
+  "@breathSummary": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      },
+      "breaths": {
+        "type": "int"
+      }
+    }
+  },
+  "breathPaused": "暫停中",
+  "breathUseSilent": "改用無聲引導",
+  "breathBackToReading": "回到解讀",
+  "breathViewArtAgain": "再看一次牌面",
+  "breathRemaining": "剩下 {time}",
+  "@breathRemaining": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "breathSilentMark": "・無聲",
+  "breathViewArt": "看圖",
+  "breathResume": "繼續",
+  "breathPause": "暫停",
+  "breathEnd": "結束",
+  "breathPhase": "{phase, select, prepare{準備} inhale{吸} exhale{吐} done{完成} other{-}}",
+  "@breathPhase": {
+    "placeholders": {
+      "phase": {
+        "type": "String"
+      }
+    }
+  },
+  "soundscapeName": "{key, select, sky{高空清風} lake{湖畔水波} fire{營火} thunder{遠雷春雨} wind{林間風聲} water{山澗流水} mountain{山林寂靜} earth{夜野蟲鳴} other{-}}",
+  "@soundscapeName": {
+    "description": "八經卦音景名稱（HANDOFF §14）",
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumTitle": "塔羅會員",
+  "premiumSubtitle": "沒有廣告，進階牌陣與完整課程",
+  "premiumBenefitNoAds": "沒有任何廣告",
+  "premiumBenefitCasts": "抽牌不限次數，開放所有進階牌陣",
+  "premiumBenefitJournal": "塔羅日記不限則數，完整學習課程",
+  "premiumBenefitBreath": "呼吸 3／5 分鐘、自訂時長與雙耳節拍",
+  "premiumFreeNote": "78 張牌的解讀、象徵與東西相映，永遠免費。",
+  "planMonthly": "月訂",
+  "planYearly": "年訂",
+  "premiumSubscribe": "訂閱",
+  "premiumRestore": "恢復購買",
+  "premiumManage": "管理訂閱",
+  "premiumActive": "你已是塔羅會員，謝謝支持。",
+  "premiumUnavailable": "訂閱尚未開放，敬請期待。",
+  "premiumLoadFailed": "暫時讀不到訂閱方案，請確認網路後再試。",
+  "premiumTerms": "訂閱會自動續訂，可隨時在 Google Play 的「付款和訂閱」中取消；取消後，會員資格保留到本期結束。",
+  "premiumThanks": "訂閱成功，謝謝支持！",
+  "premiumPurchaseFailed": "購買沒有完成，不會收取費用。",
+  "premiumRestoreNone": "沒有找到可以恢復的訂閱。",
+  "castLimitTitle": "今天的 {count} 次免費抽牌已用完",
+  "@castLimitTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "castLimitBody": "看一支短廣告，可以再抽一次；或成為會員，不限次數、沒有廣告。",
+  "castLimitBodyExhausted": "今天的次數都用完了。不妨靜下來，再看看剛才的牌，明天再來；或成為會員，不限次數。",
+  "castWatchAd": "看廣告再抽一次",
+  "castAdNotReady": "廣告暫時無法載入，請稍後再試。",
+  "castComeTomorrow": "明天再來",
+  "journalLimitTitle": "塔羅日記已達免費版上限 {count} 則",
+  "@journalLimitTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalLimitBody": "已記下的日記都會保留。可以看一支廣告存下這一則，或成為會員，不限則數。",
+  "menuPremium": "塔羅會員",
+  "menuAdPrivacy": "廣告隱私設定",
+  "menuPrivacyPolicy": "隱私權政策",
+  "journalWatchAd": "看廣告存這一則",
+  "notNow": "先不要",
+  "breathCarrier128": "左 128Hz・右 135.83Hz",
+  "breathCarrier216": "左 216Hz・右 223.83Hz",
+  "menuIntro": "功能介紹",
+  "menuShareApp": "推薦給朋友",
+  "introSkip": "略過",
+  "introNext": "下一步",
+  "introStart": "開始使用",
+  "intro1Title": "抽一張牌，看見此刻",
+  "intro1Body": "首頁有「今日一張」與「抽牌」。心裡放著一件事，選一個牌陣，可以快速抽，也可以自己洗牌、切牌、從 78 張裡挑。每張牌都有牌面的象、牌義、給現在的你、小行動與一個提問。",
+  "intro2Title": "學習：從認識每一張牌開始",
+  "intro2Body": "「學習」裡有 78 張牌的牌庫、入門課程，以及用間隔重複幫你記牌的認牌練習。牌面上的象徵物可以點開，看它在說什麼。",
+  "intro3Title": "塔羅日記：記下，再回顧",
+  "intro3Body": "把問題、抽到的牌與你第一眼注意到的東西存進日記，可以設定日後提醒，回頭看看當時的想法與後來的發展。日記也能備份成檔案，換手機時再還原。",
+  "intro4Title": "跟著牌呼吸",
+  "intro4Body": "在解讀頁可以跟著這張牌的元素音景呼吸：吸 4 秒、吐 6 秒。火是營火、水是流水、風是林間風聲、土是山林寂靜。戴耳機可開 7.83Hz 雙耳節拍。",
+  "intro5Title": "分享、會員與你的想法",
+  "intro5Body": "喜歡的牌可以做成卡片分享。牌義永遠免費；塔羅會員沒有廣告，開放進階牌陣與完整課程。首頁右上角的選單可以調整設定、重看介紹、傳意見給我們。",
+  "menuFeedback": "意見回饋",
+  "feedbackCategoryLabel": "類型",
+  "feedbackCategoryBug": "回報問題",
+  "feedbackCategorySuggestion": "功能建議",
+  "feedbackCategoryOther": "其他",
+  "feedbackMessageLabel": "內容",
+  "feedbackMessageHint": "告訴我們你遇到的問題，或希望增加什麼功能……",
+  "feedbackEmailLabel": "聯絡信箱（選填）",
+  "feedbackEmailHint": "想收到回覆的話可以留信箱",
+  "feedbackSubmit": "送出回饋",
+  "feedbackEmpty": "請先填寫內容再送出",
+  "feedbackThanks": "感謝你的回饋，我們會盡快查看。",
+  "feedbackFailed": "送出失敗，請確認網路連線後再試一次",
+  "shareReading": "分享這次抽牌",
+  "shareImage": "分享圖片",
+  "shareFailed": "暫時無法分享，請稍後再試。",
+  "shareAppText": "我在用「塔羅」學塔羅、看見此刻的自己，推薦給你：{url}",
+  "@shareAppText": {
+    "description": "推薦給朋友的分享文字",
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "shareReadingText": "我抽到{name}：「{title}」\n用「塔羅」抽一張牌：{url}",
+  "@shareReadingText": {
+    "description": "分享解讀卡片時附上的文字",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      },
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "journalMenuBackup": "備份日記",
+  "journalMenuRestore": "從備份還原",
+  "journalBackupBody": "備份檔包含你寫下的問題與回顧。下一步請選擇存放的地方，例如雲端硬碟，或傳給自己。\n\n換手機或重裝 App 後，在這裡選「從備份還原」即可取回。",
+  "journalBackupContinue": "選擇存放位置",
+  "journalBackupEmpty": "還沒有日記可以備份。",
+  "journalBackupSubject": "塔羅日記備份 {date}",
+  "@journalBackupSubject": {
+    "description": "分享備份檔時的主旨",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "journalRestoreDone": "{count, plural, other{已還原 {count} 則日記}}",
+  "@journalRestoreDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalRestoreNone": "備份裡的日記都已經在這支手機上了。",
+  "journalRestoreFailed": "無法讀取這個檔案。請選擇塔羅日記的備份檔（.json）。",
+  "menuShareUsage": "分享匿名使用統計與當機報告",
+  "premiumTermsIos": "訂閱會自動續訂，可隨時在 iPhone 的「設定 → Apple 帳號 → 訂閱項目」中取消；取消後，會員資格保留到本期結束。",
+  "termsOfUse": "使用條款",
+  "@premiumTermsIos": {
+    "description": "iOS 版訂閱頁續訂說明（App Store）"
+  },
+  "featureDaily": "今日一張",
+  "featureLearn": "學習",
+  "spreadPickerTitle": "選一個牌陣",
+  "spreadPickerHint": "牌陣是提問的方式。不確定時，從一張牌或三張牌開始。",
+  "cardCount": "{n, plural, other{{n} 張牌}}",
+  "@cardCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "drawQuick": "直接抽牌",
+  "drawRitual": "自己洗牌、切牌、選牌",
+  "shuffleHint": "心裡想著那件事，按幾次洗牌，覺得可以了就停下來",
+  "shuffle": "洗牌",
+  "shuffleCount": "再洗一次（已洗 {n} 次）",
+  "@shuffleCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "shuffleDone": "洗好了",
+  "cutHint": "把牌分成三疊，憑直覺選一疊放到最上面",
+  "cutPile": "第 {n} 疊",
+  "@cutPile": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pickHint": "{n, plural, =1{從扇形的牌裡選 1 張} other{從扇形的牌裡選 {n} 張}}",
+  "@pickHint": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "pickCardLabel": "第 {n} 張牌",
+  "@pickCardLabel": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "revealHint": "點牌翻開，或一次翻開全部",
+  "revealAll": "全部翻開",
+  "firstImpressionShown": "第一眼：{text}",
+  "@firstImpressionShown": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "firstImpressionTitle": "你第一眼注意到什麼？",
+  "firstImpressionBody": "在讀解讀之前，先看看牌面。一個顏色、一個人物、一個東西，或一種感覺都可以。這是你自己的直覺，會一起存進日記。",
+  "firstImpressionHint": "例如：那隻小狗、天空很亮、有點不安……",
+  "firstImpressionSave": "記下並看解讀",
+  "firstImpressionSkip": "直接看解讀",
+  "firstImpressionSection": "你第一眼注意到的",
+  "readingTitle": "解讀",
+  "readingTapCardHint": "點牌陣裡的牌，跳到那張牌的解讀",
+  "readingDisclaimer": "塔羅是一面鏡子，幫你看見此刻；決定與行動永遠在你手上。若正經歷很難熬的時刻，請找信任的人或專業協助聊聊。",
+  "positionHeading": "{n}・{name}",
+  "@positionHeading": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cardDetailButton": "{name}的牌義與象徵",
+  "@cardDetailButton": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionAtmosphere": "整體氛圍",
+  "sectionMeaning": "牌義",
+  "sectionKeywords": "關鍵詞",
+  "sectionSymbols": "牌面上的象徵",
+  "sectionWaite": "偉特原文怎麼說",
+  "sectionAffirmation": "給自己的一句話",
+  "cardFacts": "{arcana}・{element}",
+  "@cardFacts": {
+    "placeholders": {
+      "arcana": {
+        "type": "String"
+      },
+      "element": {
+        "type": "String"
+      }
+    }
+  },
+  "arcanaMajor": "大阿爾克那",
+  "arcanaMinor": "小阿爾克那",
+  "suitGroup": "{suit}（{element}）",
+  "@suitGroup": {
+    "placeholders": {
+      "suit": {
+        "type": "String"
+      },
+      "element": {
+        "type": "String"
+      }
+    }
+  },
+  "attributionLine": "黃金黎明對應：{name}",
+  "@attributionLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "attributionName": "{key, select, air{風元素} water{水元素} fire{火元素} mercury{水星} moon{月亮} venus{金星} jupiter{木星} mars{火星} sun{太陽} saturn{土星} aries{牡羊座} taurus{金牛座} gemini{雙子座} cancer{巨蟹座} leo{獅子座} virgo{處女座} libra{天秤座} scorpio{天蠍座} sagittarius{射手座} capricorn{摩羯座} aquarius{水瓶座} pisces{雙魚座} other{-}}",
+  "@attributionName": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "elementName": "{key, select, fire{火} water{水} air{風} earth{土} other{-}}",
+  "@elementName": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "cardReversedName": "{name}（逆位）",
+  "@cardReversedName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "upright": "正位",
+  "reversed": "逆位",
+  "waiteIntro": "亞瑟・偉特 1910 年《塔羅圖像之鑰》的占卜意義（本 App 自譯）：",
+  "waiteUpright": "正位：{text}",
+  "@waiteUpright": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "waiteReversed": "逆位：{text}",
+  "@waiteReversed": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "readingAngle": "{angle, select, figure{從人物與動作看} symbol{從象徵與顏色看} number{從數字與元素看} other{另一個角度}}",
+  "@readingAngle": {
+    "placeholders": {
+      "angle": {
+        "type": "String"
+      }
+    }
+  },
+  "tapSymbolsHint": "點牌面上的光點，看象徵物的意思",
+  "showSymbols": "顯示象徵",
+  "hideSymbols": "隱藏象徵",
+  "methodQuick": "直接抽牌",
+  "methodRitual": "洗牌選牌",
+  "methodDaily": "今日一張",
+  "journalTitleSpread": "{name}{count, plural, =1{} other{ 等 {count} 張}}",
+  "@journalTitleSpread": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "breathSoundElement": "{element}元素：{upper}・{lower}",
+  "@breathSoundElement": {
+    "placeholders": {
+      "element": {
+        "type": "String"
+      },
+      "upper": {
+        "type": "String"
+      },
+      "lower": {
+        "type": "String"
+      }
+    }
+  },
+  "dailyPrompt": "今天的牌在等你翻開",
+  "dailyDate": "{month} 月 {day} 日的牌",
+  "@dailyDate": {
+    "placeholders": {
+      "month": {
+        "type": "int"
+      },
+      "day": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyFlip": "翻開今天的牌",
+  "dailyAffirmation": "今天給自己的一句話",
+  "dailyFullReading": "看完整解讀",
+  "dailyComeBack": "今天的牌只有一張，明天再來翻新的一張。",
+  "dailyReminder": "今日一張提醒",
+  "dailyReminderOn": "每天 {time} 提醒",
+  "@dailyReminderOn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dailyReminderOff": "未開啟",
+  "dailyReminderTime": "提醒時間",
+  "dailyNotificationTitle": "今天的牌準備好了",
+  "dailyNotificationBody": "花一分鐘翻開它，看看今天的提醒是什麼。",
+  "learnLibrary": "牌庫",
+  "learnLibraryHint": "78 張牌，逐張看牌義與象徵",
+  "learnQuiz": "認牌練習",
+  "learnQuizHint": "看牌面認牌名，答錯的會更常出現",
+  "learnQuizProgress": "練過 {seen} 張・熟記 {mastered} 張",
+  "@learnQuizProgress": {
+    "placeholders": {
+      "seen": {
+        "type": "int"
+      },
+      "mastered": {
+        "type": "int"
+      }
+    }
+  },
+  "learnCourses": "課程",
+  "learnComingSoon": "即將推出",
+  "lessonCards": "這一課提到的牌",
+  "lessonSources": "出處",
+  "lessonNext": "下一課",
+  "lessonDone": "完成這個單元",
+  "quizIntro": "看牌面選出正確的牌名。答對的牌會隔幾天再出現，答錯的明天再練，慢慢就記住了。",
+  "quizPoolAll": "全部 78 張",
+  "quizQuestion": "這是哪一張牌？",
+  "quizProgress": "認牌練習 {n}／{total}",
+  "@quizProgress": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quizRight": "答對了！",
+  "quizWrong": "這是{name}。下次會再遇到它。",
+  "@quizWrong": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "quizNext": "下一張",
+  "quizDone": "這一輪答對 {correct}／{total} 張",
+  "@quizDone": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quizAgain": "再練一輪",
+  "quizNothingDue": "這個範圍今天沒有要複習的牌了。明天再來，或換一個範圍。",
+  "settingsTitle": "設定",
+  "settingsDeck": "牌面",
+  "settingsNoDeck": "牌面圖尚未放入，暫時以文字牌面顯示。",
+  "settingsDeckAi": "此牌面由 AI 繪製",
+  "settingsReversals": "使用逆位",
+  "settingsReversalsHint": "逆位代表能量向內、需要整理的地方，不是壞牌"
+}

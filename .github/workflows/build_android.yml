@@ -1,0 +1,234 @@
+name: Build Android APK
+
+# 目前只手動執行：需要 Secret BUILDS_REPO_TOKEN（讀私人內容、發佈到 tarot-content 的 Release）。
+# 設定好之後可改回 push 時自動建置。測試版由 tarot-content 的 build_android.yml 建置（不需額外 Secret）。
+on:
+  workflow_dispatch:
+    inputs:
+      force_lang:
+        # 測試用（HANDOFF §16）：不論手機語言，強制使用某語言的介面（例如 en），內容仍為繁中。
+        # 留空＝正式版（依手機語言，只開放內容已完成的語言）。
+        description: '測試用：強制介面語言（例如 en），留空為正式版'
+        required: false
+        default: ''
+      force_premium:
+        # 測試用（HANDOFF §23）：填 true＝一律視為會員（無廣告、無限制），只建 APK、不建 AAB。
+        description: '測試用：填 true 視為會員（無廣告），留空為正式版'
+        required: false
+        default: ''
+
+concurrency:
+  group: android-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # 解讀內容與牌面圖放在私人 repo；只取需要的資料夾（不抓 sources/ 原圖）。
+      - name: 取得私人內容（tarot-content）
+        uses: actions/checkout@v5
+        with:
+          repository: lawrence124875/tarot-content
+          token: ${{ secrets.BUILDS_REPO_TOKEN }}
+          path: _content
+          sparse-checkout: |
+            zh-Hant
+            en
+            zh-Hans
+            ja
+            ko
+            vi
+            es
+            pt-BR
+            id
+            th
+            ar
+            decks
+            store/release-notes
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: 匯入內容
+        run: bash scripts/import_content.sh _content
+
+      # 思源黑體／宋體（Google Fonts，OFL）固定在某個 commit，避免上游更新改變字形。
+      # 換版本：改 NOTO_COMMIT（並同步改 cache key）。
+      - name: 快取字型原檔
+        uses: actions/cache@v4
+        with:
+          path: _fonts_src
+          key: noto-tc-sc-jp-kr-th-ar-9710da1e
+
+      - name: 產生字型子集
+        env:
+          NOTO_COMMIT: 9710da1eacb3be272583c3224dcb70f9da6eadbb
+        run: |
+          set -euo pipefail
+          mkdir -p _fonts_src
+          base="https://raw.githubusercontent.com/google/fonts/${NOTO_COMMIT}/ofl"
+          [ -s "_fonts_src/NotoSansTC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansTC[wght].ttf" "${base}/notosanstc/NotoSansTC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifTC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifTC[wght].ttf" "${base}/notoseriftc/NotoSerifTC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansSC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansSC[wght].ttf" "${base}/notosanssc/NotoSansSC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifSC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifSC[wght].ttf" "${base}/notoserifsc/NotoSerifSC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansJP[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansJP[wght].ttf" "${base}/notosansjp/NotoSansJP%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifJP[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifJP[wght].ttf" "${base}/notoserifjp/NotoSerifJP%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansKR[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansKR[wght].ttf" "${base}/notosanskr/NotoSansKR%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifKR[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifKR[wght].ttf" "${base}/notoserifkr/NotoSerifKR%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansThai[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansThai[wdth,wght].ttf" "${base}/notosansthai/NotoSansThai%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifThai[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifThai[wdth,wght].ttf" "${base}/notoserifthai/NotoSerifThai%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansArabic[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansArabic[wdth,wght].ttf" "${base}/notosansarabic/NotoSansArabic%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoNaskhArabic[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoNaskhArabic[wght].ttf" "${base}/notonaskharabic/NotoNaskhArabic%5Bwght%5D.ttf"
+          pip install --quiet fonttools==4.62.1
+          python3 scripts/build_fonts.py _fonts_src assets/fonts
+
+      # 本 repo 只放跨平台程式（lib/、pubspec.yaml）；android/ 在這裡自動產生。
+      - name: 產生 Android 平台資料夾
+        run: |
+          if [ ! -d android ]; then
+            flutter create --platforms=android --project-name=tarot_cards --org com.lclab .
+          fi
+          rm -f test/widget_test.dart
+
+      - name: 套用 App 設定（名稱、簽署）
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: bash scripts/patch_android.sh
+
+      # Firebase（HANDOFF §18）：與智慧聽覺巡航共用專案。先檢查 Secret 能解碼且含 com.lclab.tarot
+      # （只印套件名稱），再加 Gradle 外掛。需在 patch_android.sh 之後（沿用其 proguard-rules.pro）。
+      - name: 套用 Firebase 設定
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+        run: bash scripts/patch_firebase.sh
+
+      # 廣告與訂閱（HANDOFF §23）：AdMob App ID（沒設定用 Google 測試 ID）、ProGuard
+      - name: 套用廣告與訂閱設定
+        env:
+          ADMOB_APP_ID: ${{ secrets.ADMOB_APP_ID }}
+          REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_ANDROID_API_KEY }}
+        run: bash scripts/patch_ads.sh
+
+      - name: 安裝套件
+        run: flutter pub get
+
+      # 錯誤轉成 annotation，Claude 可用 check-runs API 讀取（容器連不到日誌下載網址）。
+      - name: 靜態檢查
+        run: |
+          set +e
+          flutter analyze --no-fatal-infos --no-fatal-warnings > /tmp/analyze.log 2>&1
+          status=$?
+          cat /tmp/analyze.log
+          if [ $status -ne 0 ]; then
+            grep -E "error •|error -" /tmp/analyze.log | head -30 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
+
+      - name: 單元測試
+        run: |
+          set +e
+          flutter test > /tmp/test.log 2>&1
+          status=$?
+          cat /tmp/test.log
+          if [ $status -ne 0 ]; then
+            grep -E "\[E\]|Expected|Actual|Error" /tmp/test.log | head -30 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
+
+      - name: 建置 APK（release）
+        env:
+          FORCE_LANG: ${{ inputs.force_lang }}
+          FORCE_PREMIUM: ${{ inputs.force_premium }}
+          REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_ANDROID_API_KEY }}
+          ADMOB_BANNER_AD_UNIT_ID: ${{ secrets.ADMOB_BANNER_AD_UNIT_ID }}
+          ADMOB_INTERSTITIAL_AD_UNIT_ID: ${{ secrets.ADMOB_INTERSTITIAL_AD_UNIT_ID }}
+          ADMOB_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_AD_UNIT_ID }}
+        run: |
+          set +e
+          flutter build apk --release ${FORCE_LANG:+--dart-define=FORCE_LANG=$FORCE_LANG} \
+            ${FORCE_PREMIUM:+--dart-define=FORCE_PREMIUM=$FORCE_PREMIUM} \
+            --dart-define=REVENUECAT_API_KEY="$REVENUECAT_API_KEY" --dart-define=ADMOB_BANNER_AD_UNIT_ID="$ADMOB_BANNER_AD_UNIT_ID" --dart-define=ADMOB_INTERSTITIAL_AD_UNIT_ID="$ADMOB_INTERSTITIAL_AD_UNIT_ID" --dart-define=ADMOB_REWARDED_AD_UNIT_ID="$ADMOB_REWARDED_AD_UNIT_ID" > /tmp/build.log 2>&1
+          status=$?
+          tail -n 40 /tmp/build.log
+          if [ $status -ne 0 ]; then
+            grep -E "\.dart:[0-9]+|Error:|error:|FAILURE|What went wrong" /tmp/build.log | head -30 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
+
+      # 上架用 AAB（HANDOFF §19.2 第 1 項）：Play 依裝置自動拆分，使用者下載較小。
+      # 強制介面語言的測試版不建 AAB（不會上傳 Play）。
+      - name: 建置 AAB（release）
+        if: ${{ inputs.force_lang == '' && inputs.force_premium == '' }}
+        env:
+          REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_ANDROID_API_KEY }}
+          ADMOB_BANNER_AD_UNIT_ID: ${{ secrets.ADMOB_BANNER_AD_UNIT_ID }}
+          ADMOB_INTERSTITIAL_AD_UNIT_ID: ${{ secrets.ADMOB_INTERSTITIAL_AD_UNIT_ID }}
+          ADMOB_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_AD_UNIT_ID }}
+        run: |
+          set +e
+          flutter build appbundle --release --dart-define=REVENUECAT_API_KEY="$REVENUECAT_API_KEY" --dart-define=ADMOB_BANNER_AD_UNIT_ID="$ADMOB_BANNER_AD_UNIT_ID" --dart-define=ADMOB_INTERSTITIAL_AD_UNIT_ID="$ADMOB_INTERSTITIAL_AD_UNIT_ID" --dart-define=ADMOB_REWARDED_AD_UNIT_ID="$ADMOB_REWARDED_AD_UNIT_ID" > /tmp/bundle.log 2>&1
+          status=$?
+          tail -n 20 /tmp/bundle.log
+          if [ $status -ne 0 ]; then
+            grep -E "\.dart:[0-9]+|Error:|error:|FAILURE|What went wrong" /tmp/bundle.log | head -30 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
+
+      # ⚠️ 永久原則（HANDOFF §10.4）：APK／AAB 不可用 upload-artifact 放在公開 repo，
+      # 一律發佈到私人 repo tarot-content 的 Release。
+      - name: 發佈到私人 repo 的 Release
+        env:
+          GH_TOKEN: ${{ secrets.BUILDS_REPO_TOKEN }}
+          FORCE_LANG: ${{ inputs.force_lang }}
+          FORCE_PREMIUM: ${{ inputs.force_premium }}
+        run: |
+          set -euo pipefail
+          ver=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          n=${{ github.run_number }}
+          f="tarot_${ver}_run${n}${FORCE_LANG:+_ui-$FORCE_LANG}${FORCE_PREMIUM:+_premium}.apk"
+          cp build/app/outputs/flutter-apk/app-release.apk "$f"
+          files=("$f")
+          aab=build/app/outputs/bundle/release/app-release.aab
+          if [ -z "${FORCE_LANG}" ] && [ -z "${FORCE_PREMIUM}" ] && [ -f "$aab" ]; then
+            cp "$aab" "tarot_${ver}_run${n}.aab"
+            files+=("tarot_${ver}_run${n}.aab")
+          fi
+          # 版本詳細資訊（Play「版本資訊」，HANDOFF §10.4）：tarot-content store/release-notes/<版本>.txt，
+          # 已是 Play 可整段貼上的 <zh-TW>…</zh-TW> 格式；沒寫的版本註明尚未撰寫（不讓建置失敗）。
+          {
+            echo "commit ${{ github.sha }}；簽署：${SIGNING}；Firebase：${FIREBASE}；廣告：${ADS}；訂閱：${SUBS}"
+            echo
+            echo "### 版本詳細資訊（貼到 Play Console）"
+            rn="_content/store/release-notes/${ver}.txt"
+            if [ -f "$rn" ]; then
+              echo; echo '```'; cat "$rn"; echo '```'
+            else
+              echo; echo "（尚未撰寫：tarot-content store/release-notes/${ver}.txt）"
+            fi
+          } > notes.md
+          [ -f "_content/store/release-notes/${ver}.txt" ] || echo "::warning::版本詳細資訊尚未撰寫：store/release-notes/${ver}.txt"
+          gh release create "tarot-android-run${n}" "${files[@]}" \
+            --repo lawrence124875/tarot-content \
+            --title "塔羅 ${ver}（run ${n}）${FORCE_LANG:+［測試：介面 $FORCE_LANG］}${FORCE_PREMIUM:+［測試：會員］}" \
+            --notes-file notes.md
+
+      # 依 run 編號排序：Release 的 createdAt 取自 tarot-content 被標記的 commit，
+      # 內容沒變時每個 Release 都相同，用它排序會誤刪最新的一個（run 6 曾發生）。
+      - name: 只保留最近 5 個建置 Release
+        env:
+          GH_TOKEN: ${{ secrets.BUILDS_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release list --repo lawrence124875/tarot-content --limit 100 --json tagName \
+            --jq '[.[] | select(.tagName | startswith("tarot-android-run"))] | sort_by(.tagName | ltrimstr("tarot-android-run") | tonumber) | reverse | .[5:] | .[].tagName' |
+          while IFS= read -r tag; do
+            gh release delete "$tag" --repo lawrence124875/tarot-content --yes --cleanup-tag
+          done

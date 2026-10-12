@@ -1,0 +1,119 @@
+name: tarot_cards
+description: "塔羅｜塔羅學習與自我覺察（LC Lab）"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+# 原則（HANDOFF §9.1）：只用同時支援 Android 與 iOS 的套件。
+# 版本與智慧聽覺巡航相同（已在同一套 CI 驗證可建置）。
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations: # 介面翻譯（ARB，HANDOFF §16）
+    sdk: flutter
+  intl: any # 版本由 flutter_localizations 決定
+  path_provider: ^2.1.4 # 卦記存檔位置
+  flutter_local_notifications: ^18.0.1 # 卦記回顧提醒
+  timezone: ^0.9.4 # 通知排程時間（只用 UTC，不查時區名稱）
+  just_audio: ^0.10.4 # 呼吸音景：播放程式合成的 WAV
+  wakelock_plus: ^1.2.8 # 呼吸練習時保持螢幕亮著
+  audio_service: ^0.18.15 # 呼吸音景：背景播放、通知與鎖定畫面控制（版本同智慧聽覺巡航）
+  # Firebase（HANDOFF §18）：與智慧聽覺巡航共用同一專案；core／analytics／crashlytics 版本同英文 App
+  firebase_core: ^3.6.0
+  firebase_analytics: ^11.3.3
+  firebase_crashlytics: ^4.1.3
+  cloud_firestore: ^5.4.4 # 意見回饋（集合 qg_feedback，版本同英文 App）
+  firebase_remote_config: ^5.1.3 # 遠端開關（參數 qg_ 開頭，只設在謙卦 App 條件下）
+  # 廣告與訂閱（HANDOFF §23）：版本同智慧聽覺巡航（同一套 CI 已驗證）
+  google_mobile_ads: ^9.0.0
+  purchases_flutter: ">=9.0.0 <10.8.0"
+  url_launcher: ^6.3.1 # 隱私權政策、管理訂閱
+  share_plus: ^13.3.1 # 分享卦象卡片、推薦給朋友
+  file_picker: ^13.1.0 # 卦記從備份還原：選擇備份檔
+  package_info_plus: ^10.2.2 # 意見回饋附上 App 版本
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true # 由 lib/l10n/*.arb 產生 AppLocalizations（l10n.yaml）
+  # 這兩個資料夾在公開 repo 只有 .gitkeep；內容由 CI 從私人 repo iching-content 匯入
+  #（scripts/import_content.sh），絕不 commit 到本 repo。
+  assets:
+    - assets/content/zh-Hant/
+    - assets/content/en/
+    - assets/content/zh-Hans/
+    - assets/content/ja/
+    - assets/content/ko/
+    - assets/content/vi/
+    - assets/content/es/
+    - assets/content/pt-BR/
+    - assets/content/id/
+    - assets/content/th/
+    - assets/content/ar/
+    - assets/decks/
+    - assets/decks/rws1909/
+    - assets/decks/gemini/
+    - assets/licenses/
+
+  # 思源黑體／宋體子集（HANDOFF §15）：字型檔由 CI 以 scripts/build_fonts.py 產生，
+  # 不進 repo（.gitignore 擋 *.ttf）。授權 OFL 1.1，全文在 assets/licenses/。
+  fonts:
+    - family: NotoSansTC
+      fonts:
+        - asset: assets/fonts/NotoSansTC-400.ttf
+        - asset: assets/fonts/NotoSansTC-500.ttf
+          weight: 500
+    - family: NotoSerifTC
+      fonts:
+        - asset: assets/fonts/NotoSerifTC-400.ttf
+    # 簡中補字（只含 TC 沒有的簡體字，HANDOFF §15）
+    - family: NotoSansSC
+      fonts:
+        - asset: assets/fonts/NotoSansSC-400.ttf
+        - asset: assets/fonts/NotoSansSC-500.ttf
+          weight: 500
+    - family: NotoSerifSC
+      fonts:
+        - asset: assets/fonts/NotoSerifSC-400.ttf
+    # 日文介面的主字型（日本字形，HANDOFF §15）
+    - family: NotoSansJP
+      fonts:
+        - asset: assets/fonts/NotoSansJP-400.ttf
+        - asset: assets/fonts/NotoSansJP-500.ttf
+          weight: 500
+    - family: NotoSerifJP
+      fonts:
+        - asset: assets/fonts/NotoSerifJP-400.ttf
+    # 韓文介面的主字型（HANDOFF §15）
+    - family: NotoSansKR
+      fonts:
+        - asset: assets/fonts/NotoSansKR-400.ttf
+        - asset: assets/fonts/NotoSansKR-500.ttf
+          weight: 500
+    - family: NotoSerifKR
+      fonts:
+        - asset: assets/fonts/NotoSerifKR-400.ttf
+    # 泰文介面的主字型（HANDOFF §15）
+    - family: NotoSansThai
+      fonts:
+        - asset: assets/fonts/NotoSansThai-400.ttf
+        - asset: assets/fonts/NotoSansThai-500.ttf
+          weight: 500
+    - family: NotoSerifThai
+      fonts:
+        - asset: assets/fonts/NotoSerifThai-400.ttf
+    # 阿拉伯文介面的主字型（HANDOFF §15）
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic-400.ttf
+        - asset: assets/fonts/NotoSansArabic-500.ttf
+          weight: 500
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-400.ttf

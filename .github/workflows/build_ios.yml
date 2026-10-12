@@ -1,0 +1,117 @@
+name: Build iOS (no codesign)
+
+# iOS 準備（HANDOFF §24）：驗證同一份程式能編出 iOS 版。不簽章、不產生可安裝檔，
+# 也不上傳任何東西；簽章與 TestFlight 要等 Apple 開發者帳號（年費 US$99）。
+# macOS 執行環境對公開 repo 免費。
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # 解讀內容與牌面圖放在私人 repo；只取需要的資料夾（不抓 images/raw 原圖）。
+      - name: 取得私人內容（tarot-content）
+        uses: actions/checkout@v5
+        with:
+          repository: lawrence124875/tarot-content
+          token: ${{ secrets.BUILDS_REPO_TOKEN }}
+          path: _content
+          sparse-checkout: |
+            zh-Hant
+            en
+            zh-Hans
+            ja
+            ko
+            vi
+            es
+            pt-BR
+            id
+            th
+            ar
+            decks
+            store/release-notes
+
+      # macOS 系統 Python 不允許直接 pip 安裝（字型子集要 fontTools）
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: 匯入內容
+        run: bash scripts/import_content.sh _content
+
+      # 思源黑體／宋體（Google Fonts，OFL）固定在某個 commit，避免上游更新改變字形。
+      # 換版本：改 NOTO_COMMIT（並同步改 cache key）。
+      - name: 快取字型原檔
+        uses: actions/cache@v4
+        with:
+          path: _fonts_src
+          key: noto-tc-sc-jp-kr-th-ar-9710da1e
+
+      - name: 產生字型子集
+        env:
+          NOTO_COMMIT: 9710da1eacb3be272583c3224dcb70f9da6eadbb
+        run: |
+          set -euo pipefail
+          mkdir -p _fonts_src
+          base="https://raw.githubusercontent.com/google/fonts/${NOTO_COMMIT}/ofl"
+          [ -s "_fonts_src/NotoSansTC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansTC[wght].ttf" "${base}/notosanstc/NotoSansTC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifTC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifTC[wght].ttf" "${base}/notoseriftc/NotoSerifTC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansSC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansSC[wght].ttf" "${base}/notosanssc/NotoSansSC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifSC[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifSC[wght].ttf" "${base}/notoserifsc/NotoSerifSC%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansJP[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansJP[wght].ttf" "${base}/notosansjp/NotoSansJP%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifJP[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifJP[wght].ttf" "${base}/notoserifjp/NotoSerifJP%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansKR[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansKR[wght].ttf" "${base}/notosanskr/NotoSansKR%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifKR[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifKR[wght].ttf" "${base}/notoserifkr/NotoSerifKR%5Bwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansThai[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansThai[wdth,wght].ttf" "${base}/notosansthai/NotoSansThai%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoSerifThai[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSerifThai[wdth,wght].ttf" "${base}/notoserifthai/NotoSerifThai%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoSansArabic[wdth,wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoSansArabic[wdth,wght].ttf" "${base}/notosansarabic/NotoSansArabic%5Bwdth%2Cwght%5D.ttf"
+          [ -s "_fonts_src/NotoNaskhArabic[wght].ttf" ] || curl -fsSL -o "_fonts_src/NotoNaskhArabic[wght].ttf" "${base}/notonaskharabic/NotoNaskhArabic%5Bwght%5D.ttf"
+          pip install --quiet fonttools==4.62.1
+          python3 scripts/build_fonts.py _fonts_src assets/fonts
+
+      - name: 產生 iOS 平台資料夾
+        run: |
+          flutter create --platforms=ios --project-name=tarot_cards --org com.lclab .
+          rm -f test/widget_test.dart
+
+      - name: 套用 iOS 設定
+        env:
+          ADMOB_IOS_APP_ID: ${{ secrets.ADMOB_IOS_APP_ID }}
+        run: bash scripts/patch_ios.sh
+
+      - name: 安裝套件
+        run: flutter pub get
+
+      - name: 建置 iOS（release，不簽章）
+        env:
+          REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_IOS_API_KEY }}
+          ADMOB_BANNER_AD_UNIT_ID: ${{ secrets.ADMOB_IOS_BANNER_AD_UNIT_ID }}
+          ADMOB_INTERSTITIAL_AD_UNIT_ID: ${{ secrets.ADMOB_IOS_INTERSTITIAL_AD_UNIT_ID }}
+          ADMOB_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_IOS_REWARDED_AD_UNIT_ID }}
+        run: |
+          set +e
+          flutter build ios --release --no-codesign \
+            --dart-define=REVENUECAT_API_KEY="$REVENUECAT_API_KEY" --dart-define=ADMOB_BANNER_AD_UNIT_ID="$ADMOB_BANNER_AD_UNIT_ID" --dart-define=ADMOB_INTERSTITIAL_AD_UNIT_ID="$ADMOB_INTERSTITIAL_AD_UNIT_ID" --dart-define=ADMOB_REWARDED_AD_UNIT_ID="$ADMOB_REWARDED_AD_UNIT_ID" > /tmp/build.log 2>&1
+          status=$?
+          tail -n 60 /tmp/build.log
+          if [ $status -ne 0 ]; then
+            grep -E "\.dart:[0-9]+|Error|error:|failed" /tmp/build.log | head -30 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
+
+      - name: 結果
+        run: |
+          du -sh build/ios/iphoneos/Runner.app
+          echo "::notice::iOS 不簽章建置成功（Runner.app $(du -sh build/ios/iphoneos/Runner.app | cut -f1)）"
