@@ -1,0 +1,47 @@
+name: Test
+
+# 每次 push 自動跑靜態檢查與單元測試（公開 repo 的 Actions 免費）。不需內容與任何 Secret。
+# 失敗時只把錯誤摘要寫成 annotation，方便快速查看。
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      # 字型子集由建置流程產生；測試只需要檔案存在
+      - name: 字型佔位檔
+        run: |
+          mkdir -p assets/fonts
+          for f in $(grep -o "assets/fonts/[A-Za-z0-9-]*\.ttf" pubspec.yaml); do : > "$f"; done
+      - run: flutter pub get
+      - name: 靜態檢查
+        run: |
+          set +e
+          flutter analyze --no-fatal-infos --no-fatal-warnings > /tmp/analyze.log 2>&1
+          status=$?
+          tail -n 5 /tmp/analyze.log
+          grep -E "error •" /tmp/analyze.log | head -20 | while IFS= read -r line; do echo "::error::$line"; done
+          exit $status
+      - name: 單元測試
+        run: |
+          set +e
+          flutter test --reporter=compact > /tmp/test.log 2>&1
+          status=$?
+          tail -n 3 /tmp/test.log
+          if [ $status -ne 0 ]; then
+            grep -E "\[E\]|Expected|Actual|Error" /tmp/test.log | head -20 | while IFS= read -r line; do echo "::error::$line"; done
+          fi
+          exit $status
