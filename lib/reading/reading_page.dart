@@ -39,6 +39,7 @@ class ReadingPage extends StatefulWidget {
     required this.draw,
     this.question = '',
     this.firstImpression = '',
+    this.area = '',
     this.readingIndexes,
     this.review = false,
     this.deck,
@@ -47,6 +48,9 @@ class ReadingPage extends StatefulWidget {
   final SpreadDraw draw;
   final String question;
   final String firstImpression;
+
+  /// 問題類型（ReadingAreas）；有選時每張牌多顯示該面向的一句。
+  final String area;
   final List<int?>? readingIndexes;
   final bool review;
 
@@ -193,6 +197,7 @@ class _ReadingPageState extends State<ReadingPage> {
                     positionText: d.spread?.positions[_draw.spread.positions[i].key],
                     single: _single,
                     deck: widget.deck,
+                    area: widget.area,
                   ),
                 ),
               if (keyContent?.eastWest != null) EastWestSection(ew: keyContent!.eastWest!),
@@ -254,6 +259,7 @@ class _ReadingPageState extends State<ReadingPage> {
       question: widget.question,
       firstImpression: widget.firstImpression,
       readingIndexes: _indexes(d),
+      area: widget.area,
     );
     if (entry == null) return;
     _s.events.emit(JournalSaved(hasReminder: entry.reminderAt != null));
@@ -299,7 +305,10 @@ class _CardReading extends StatelessWidget {
     required this.positionText,
     required this.single,
     this.deck,
+    this.area = '',
   });
+
+  final String area;
 
   final int position;
   final DrawnCard drawn;
@@ -368,6 +377,8 @@ class _CardReading extends StatelessWidget {
           Section(title: l.sectionImage, child: Text(r.image, style: t.bodyLarge)),
           if (single) Section(title: l.sectionSource, child: Text(r.source)),
           Section(title: l.sectionMeaning, child: Text(r.meaning)),
+          if (area.isNotEmpty && (content?.area(drawn.reversed, area).isNotEmpty ?? false))
+            Section(title: l.sectionArea(area), child: Text(content!.area(drawn.reversed, area))),
           Section(title: l.sectionForYou, child: Text(r.forYou)),
           if (!single)
             Theme(

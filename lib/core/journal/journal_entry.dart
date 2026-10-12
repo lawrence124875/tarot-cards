@@ -1,3 +1,4 @@
+import '../content/reading_area.dart';
 import '../tarot/draw.dart';
 import '../tarot/spread.dart';
 
@@ -27,6 +28,7 @@ class JournalEntry {
     required List<DrawnCard> cards,
     this.question = '',
     this.firstImpression = '',
+    this.area = '',
     List<int?> readingIndexes = const [],
     this.deckId = '',
     this.reminderAt,
@@ -40,6 +42,7 @@ class JournalEntry {
     required DateTime now,
     String question = '',
     String firstImpression = '',
+    String area = '',
     List<int?> readingIndexes = const [],
     String deckId = '',
     DateTime? reminderAt,
@@ -52,6 +55,7 @@ class JournalEntry {
         cards: draw.cards,
         question: question,
         firstImpression: firstImpression,
+        area: area,
         readingIndexes: readingIndexes,
         deckId: deckId,
         reminderAt: reminderAt,
@@ -66,6 +70,9 @@ class JournalEntry {
 
   /// 翻牌後、看解讀前寫下的「第一眼注意到什麼」（直覺）。
   final String firstImpression;
+
+  /// 問題類型（ReadingAreas：love、work、self；空字串＝不指定）。
+  final String area;
 
   /// 每張牌當時隨機顯示的是第幾組解讀；回顧時顯示同一組。內容尚未撰寫時為 null。
   final List<int?> readingIndexes;
@@ -99,6 +106,7 @@ class JournalEntry {
         cards: cards,
         question: question ?? this.question,
         firstImpression: firstImpression ?? this.firstImpression,
+        area: area,
         readingIndexes: readingIndexes,
         deckId: deckId,
         reminderAt: clearReminder ? null : (reminderAt ?? this.reminderAt),
@@ -113,6 +121,7 @@ class JournalEntry {
         'cards': [for (final c in cards) c.toJson()],
         'question': question,
         if (firstImpression.isNotEmpty) 'firstImpression': firstImpression,
+        if (area.isNotEmpty) 'area': area,
         'readingIndexes': readingIndexes,
         if (deckId.isNotEmpty) 'deck': deckId,
         if (reminderAt != null) 'reminderAt': reminderAt!.toIso8601String(),
@@ -138,6 +147,7 @@ class JournalEntry {
       cards: cards.cast<DrawnCard>(),
       question: j['question'] as String? ?? '',
       firstImpression: j['firstImpression'] as String? ?? '',
+      area: ReadingAreas.all.contains(j['area']) ? j['area'] as String : '',
       readingIndexes: idx is List ? [for (final i in idx) i is int ? i : null] : const [],
       deckId: j['deck'] as String? ?? '',
       reminderAt: DateTime.tryParse(j['reminderAt'] as String? ?? ''),

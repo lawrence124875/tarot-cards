@@ -16,20 +16,22 @@ Future<JournalEntry?> showSaveReadingSheet(
   required String question,
   required String firstImpression,
   required List<int?> readingIndexes,
+  String area = '',
 }) =>
     showModalBottomSheet<JournalEntry>(
       context: context,
       isScrollControlled: true,
       backgroundColor: TarotColors.inkCard,
-      builder: (_) => _SaveSheet(draw: draw, question: question, firstImpression: firstImpression, readingIndexes: readingIndexes),
+      builder: (_) => _SaveSheet(draw: draw, question: question, firstImpression: firstImpression, readingIndexes: readingIndexes, area: area),
     );
 
 class _SaveSheet extends StatefulWidget {
-  const _SaveSheet({required this.draw, required this.question, required this.firstImpression, required this.readingIndexes});
+  const _SaveSheet({required this.draw, required this.question, required this.firstImpression, required this.readingIndexes, this.area = ''});
 
   final SpreadDraw draw;
   final String question;
   final String firstImpression;
+  final String area;
   final List<int?> readingIndexes;
 
   @override
@@ -61,6 +63,7 @@ class _SaveSheetState extends State<_SaveSheet> {
       now: now,
       question: _controller.text.trim(),
       firstImpression: _impression.text.trim(),
+      area: widget.area,
       readingIndexes: widget.readingIndexes,
       deckId: services.deck.value?.id ?? '',
       reminderAt: _days == null ? null : JournalReminders.reviewTime(now, _days!),

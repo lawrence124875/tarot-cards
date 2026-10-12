@@ -792,5 +792,21 @@
       }
     }
   },
-  "journalStatsNote": "這是你自己紀錄的整理，方便回顧，不代表任何預測。"
+  "journalStatsNote": "這是你自己紀錄的整理，方便回顧，不代表任何預測。",
+  "areaName": "{key, select, love{感情} work{工作} self{自己} other{不指定}}",
+  "@areaName": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionArea": "{key, select, love{放進感情裡看} work{放進工作裡看} self{放回自己身上看} other{放進你的問題}}",
+  "@sectionArea": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  }
 }

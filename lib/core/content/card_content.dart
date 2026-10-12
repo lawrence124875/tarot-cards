@@ -12,6 +12,7 @@ class CardContent {
     required this.symbols,
     required this.affirmation,
     this.eastWest,
+    this.areas = const {},
   });
 
   final int id;
@@ -30,6 +31,12 @@ class CardContent {
   /// 今日一張的肯定語。
   final String affirmation;
   final EastWestContent? eastWest;
+
+  /// 面向解讀：`upright`／`reversed` → `love`、`work`、`self` 各一句（使用者選了問題類型時顯示）。
+  final Map<String, Map<String, String>> areas;
+
+  /// 該面向的一句；沒寫時回傳空字串。
+  String area(bool isReversed, String area) => areas[isReversed ? 'reversed' : 'upright']?[area] ?? '';
 
   List<ReadingContent> readings(bool isReversed) => isReversed ? reversed : upright;
 
@@ -55,6 +62,10 @@ class CardContent {
       symbols: [for (final s in _list(j['symbols'])) SymbolContent.fromJson(_map(s))],
       affirmation: _s(j, 'affirmation'),
       eastWest: j['eastWest'] is Map ? EastWestContent.fromJson(_map(j['eastWest'])) : null,
+      areas: {
+        for (final e in _map(j['areas']).entries)
+          e.key: {for (final a in _map(e.value).entries) a.key: a.value.toString()},
+      },
     );
   }
 }
