@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
@@ -86,6 +87,7 @@ class _DrawPageState extends State<DrawPage> {
   Future<void> _shuffleOnce() async {
     if (_shaking) return;
     _deck!.reshuffle(_s.random, reversals: _s.settings.reversals);
+    HapticFeedback.mediumImpact();
     setState(() {
       _shuffles++;
       _shaking = true;
@@ -96,11 +98,13 @@ class _DrawPageState extends State<DrawPage> {
 
   void _cut(int pile) {
     _deck!.cut(pile);
+    HapticFeedback.lightImpact();
     setState(() => _stage = _Stage.pick);
   }
 
   void _pickFromFan(int index) {
     if (_pickedFromFan.contains(index) || _picked.length >= _spread.size) return;
+    HapticFeedback.selectionClick();
     setState(() {
       _pickedFromFan.add(index);
       _picked.add(_deck!.at(index));
@@ -110,11 +114,13 @@ class _DrawPageState extends State<DrawPage> {
 
   void _reveal(int position) {
     if (position >= _picked.length || _revealed.contains(position)) return;
+    HapticFeedback.lightImpact();
     setState(() => _revealed.add(position));
     _maybeAskImpression();
   }
 
   void _revealAll() {
+    HapticFeedback.mediumImpact();
     setState(() => _revealed.addAll(List.generate(_spread.size, (i) => i)));
     _maybeAskImpression();
   }

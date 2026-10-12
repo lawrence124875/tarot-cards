@@ -5,6 +5,8 @@ import '../../shared/premium/ad_banner.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/journal/journal_entry.dart';
+import '../../core/journal/journal_stats.dart';
+import '../../core/tarot/tarot_card.dart';
 import '../../core/journal/journal_store.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/format.dart';
@@ -23,7 +25,15 @@ class JournalListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.featureJournal),
-        actions: [if (store != null) const JournalBackupMenu()],
+        actions: [
+          if (store != null)
+            IconButton(
+              tooltip: context.l10n.journalStatsTitle,
+              icon: const Icon(Icons.insights_outlined),
+              onPressed: () => _showStats(context, store),
+            ),
+          if (store != null) const JournalBackupMenu(),
+        ],
       ),
       body: store == null ? const _Empty() : _List(store: store),
       bottomNavigationBar: const AdBanner(),
@@ -125,4 +135,63 @@ class _Empty extends StatelessWidget {
       ),
     );
   }
+}
+
+/// 日記統計（只是紀錄的整理，不是預測）。
+Future<void> _showStats(BuildContext context, JournalStore store) async {
+  final stats = JournalStats.from(await store.all());
+  if (!context.mounted) return;
+  final l = context.l10n;
+  final t = Theme.of(context).textTheme;
+  await showModalBottomSheet<void>(
+    context: context,
+    isScrollControlled: true,
+    builder: (context) => SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(l.journalStatsTitle, style: t.titleLarge),
+          const SizedBox(height: 12),
+          if (stats.total == 0)
+            Text(l.journalStatsEmpty)
+          else ...[
+            Text(l.journalStatsCards(stats.total)),
+            const SizedBox(height: 12),
+            for (final row in [
+              (l.arcanaMajor, stats.majors),
+              for (final s in Suit.values) ('${l.suitName(s)}（${l.elementLabel(s.element)}）', stats.suits[s]!),
+            ])
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Row(children: [
+                  SizedBox(width: 120, child: Text(row.$1, style: t.bodySmall)),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: row.$2 / stats.total,
+                        minHeight: 8,
+                        color: TarotColors.rice,
+                        backgroundColor: TarotColors.mountain.withValues(alpha: 0.4),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 36, child: Text('${row.$2}', textAlign: TextAlign.end, style: t.bodySmall)),
+                ]),
+              ),
+            const SizedBox(height: 8),
+            Text(l.journalStatsReversed(stats.reversed, stats.total), style: t.bodySmall),
+            if (stats.top.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              Text(l.journalStatsTop, style: t.titleSmall),
+              const SizedBox(height: 6),
+              for (final c in stats.top) Text('${l.cardName(c.cardId)}　${l.journalStatsTimes(c.count)}'),
+            ],
+          ],
+          const SizedBox(height: 16),
+          Text(l.journalStatsNote, style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
+        ]),
+      ),
+    ),
+  );
 }

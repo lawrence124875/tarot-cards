@@ -144,9 +144,13 @@ class SpreadText {
 class PositionText {
   PositionText.fromJson(Map<String, dynamic> j)
       : name = _s(j, 'name'),
-        meaning = _s(j, 'meaning');
+        meaning = _s(j, 'meaning'),
+        prompt = _s(j, 'prompt');
 
   final String name, meaning;
+
+  /// 把這個位置放回自己問題裡的引導提問（可為空）。
+  final String prompt;
 }
 
 /// 整體氛圍各規則的文字（內容檔 atmosphere.json）：鍵為規則代碼，值為字串或依子代碼分的字串表。

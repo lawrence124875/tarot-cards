@@ -57,6 +57,7 @@ class StandardAtmosphere implements AtmosphereRule {
   /// 元素互動要看的相鄰位置（依牌陣）。
   static const pairs = <String, List<(int, int)>>{
     'three': [(0, 1), (1, 2)],
+    'advice': [(0, 1), (1, 2)],
     'choice': [(1, 2), (3, 4)],
     'relationship': [(0, 1)],
     'celtic': [(0, 1)],

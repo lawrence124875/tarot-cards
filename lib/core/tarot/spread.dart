@@ -55,6 +55,17 @@ class Spreads {
     keyPosition: 1,
   );
 
+  /// 現狀・挑戰・建議：同樣三張由左到右，關鍵牌是「建議」。
+  static const advice = Spread(
+    id: 'advice',
+    positions: [
+      SpreadPosition('situation', 0, 0),
+      SpreadPosition('challenge', 1.2, 0),
+      SpreadPosition('advice', 2.4, 0),
+    ],
+    keyPosition: 2,
+  );
+
   /// 二選一：下方是現在，左右兩條路各兩張（做法→可能的走向）。
   static const choice = Spread(
     id: 'choice',
@@ -104,7 +115,7 @@ class Spreads {
     source: SpreadSource.waite,
   );
 
-  static const all = [one, three, choice, relationship, celtic];
+  static const all = [one, three, advice, choice, relationship, celtic];
 
   static Spread byId(String id) => all.firstWhere((s) => s.id == id, orElse: () => one);
 }

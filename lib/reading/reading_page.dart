@@ -335,6 +335,10 @@ class _CardReading extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(positionText!.meaning, style: t.bodySmall),
                   ],
+                  if (positionText != null && positionText!.prompt.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(positionText!.prompt, style: t.bodySmall?.copyWith(color: TarotColors.twilight)),
+                  ],
                 ]),
               ),
             ]),

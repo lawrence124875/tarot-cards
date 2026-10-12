@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
@@ -48,6 +49,7 @@ class _DailyPageState extends State<DailyPage> {
 
   Future<void> _draw() async {
     if (_card != null) return;
+    HapticFeedback.lightImpact();
     final c = await _s.daily.drawToday(DateTime.now(), _s.random, reversals: _s.settings.reversals);
     final content = await _s.content.card(c.cardId);
     if (!mounted) return;

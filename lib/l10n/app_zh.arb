@@ -761,5 +761,36 @@
   "settingsNoDeck": "牌面圖尚未放入，暫時以文字牌面顯示。",
   "settingsDeckAi": "此牌面由 AI 繪製",
   "settingsReversals": "使用逆位",
-  "settingsReversalsHint": "逆位代表能量向內、需要整理的地方，不是壞牌"
+  "settingsReversalsHint": "逆位代表能量向內、需要整理的地方，不是壞牌",
+  "journalStatsTitle": "常出現的牌",
+  "journalStatsEmpty": "記下幾次之後，這裡會整理出常出現的牌與花色。",
+  "journalStatsCards": "日記裡共記下 {count} 張牌",
+  "@journalStatsCards": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalStatsReversed": "其中逆位 {count}／{total} 張",
+  "@journalStatsReversed": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "journalStatsTop": "出現兩次以上的牌",
+  "journalStatsTimes": "{n} 次",
+  "@journalStatsTimes": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "journalStatsNote": "這是你自己紀錄的整理，方便回顧，不代表任何預測。"
 }
