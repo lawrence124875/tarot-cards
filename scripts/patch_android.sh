@@ -9,6 +9,9 @@ sed -i 's/android:label="[^"]*"/android:label="塔羅"/' "$MANIFEST"
 # 套件名稱（Google Play 身分，上傳後永遠不能改）：com.lclab.tarot
 # 只改 applicationId；namespace 維持 flutter create 產生的值，MainActivity 不必搬移
 GRADLE="android/app/build.gradle.kts"
+
+# 新版 flutter create 範本啟用 AGP 9 的 android.newDsl，部分外掛尚不相容（2026-10-12 建置失敗），先關閉
+grep -q '^android.newDsl' android/gradle.properties 2>/dev/null || echo 'android.newDsl=false' >> android/gradle.properties
 sed -i 's/applicationId = "[^"]*"/applicationId = "com.lclab.tarot"/' "$GRADLE"
 grep -q 'applicationId = "com.lclab.tarot"' "$GRADLE" && echo "套件名稱：com.lclab.tarot"
 # 不鎖方向、不限制調整大小（2026-10-07）：Android 16 起大螢幕（平板、摺疊機）會忽略這些限制，
