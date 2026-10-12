@@ -1,379 +1,296 @@
 {
   "@@locale": "en",
-  "appTitle": "Qiangua",
-  "appSubtitle": "I Ching · 64 Hexagram Cards",
-  "homeMotto": "The I Ching is not for telling fortunes\nbut for learning to read images and decide",
-  "homeDisclaimer": "For self-reflection and entertainment only",
+  "appTitle": "Tarot",
+  "appSubtitle": "Learn tarot, know yourself",
+  "homeMotto": "Tarot isn’t about telling the future\nit helps you see this moment and gently move forward",
+  "homeDisclaimer": "For self-reflection and learning only. Not a substitute for professional advice.",
   "cancel": "Cancel",
   "ok": "OK",
   "delete": "Delete",
   "back": "Back",
   "save": "Save",
-  "viewReading": "See the Reading",
+  "viewReading": "View reading",
   "separator": " · ",
   "listSeparator": ", ",
-  "featureDraw": "Draw a Card",
-  "featureJournal": "Journal",
+  "featureDraw": "Draw",
+  "featureJournal": "Tarot Journal",
   "featureBreath": "Breathing Soundscape",
-  "readingActionBreath": "Breathe with This Hexagram",
-  "questionTitle": "Your Question",
-  "questionHint": "In a sentence or two, what is on your mind? (optional)",
+  "readingActionBreath": "Breathe with this card",
+  "questionTitle": "Your question",
+  "questionHint": "In a sentence or two, what’s on your mind? (optional)",
   "questionPromptLink": "Write down your question (optional)",
   "questionShown": "Q: {question}",
-  "@questionShown": {
-    "placeholders": {
-      "question": {
-        "type": "String"
-      }
-    }
-  },
   "optionalHint": "Optional",
-  "drawPromptBefore": "Hold one matter in mind\nTap the card when you are ready",
-  "drawPromptAfter": "This is the image of this moment",
-  "drawAgain": "Draw Again",
+  "drawPromptBefore": "Hold one thing in mind\nbegin when you’re ready",
+  "drawPromptAfter": "Here is what this moment shows",
+  "drawAgain": "Draw again",
   "sectionReading": "Reading",
-  "sectionImage": "The Image",
-  "sectionSource": "Where the Image Comes From",
-  "sectionForYou": "For You Now",
-  "sectionAction": "A Small Step for Today",
-  "sectionQuestion": "A Question to Reflect On",
-  "sectionEastWest": "East Meets West",
-  "readingNotWritten": "The reading for this hexagram is still being written. For now, look at the scene on the card and notice what it brings to mind.",
-  "savedToJournalHint": "Saved to your Journal. Come back from the home screen to compare later.",
-  "saveThisReading": "Save This Reading",
+  "sectionImage": "What the card shows",
+  "sectionSource": "Where the imagery comes from",
+  "sectionForYou": "For you right now",
+  "sectionAction": "A small step for today",
+  "sectionQuestion": "A question to reflect on",
+  "sectionEastWest": "East meets West",
+  "readingNotWritten": "The reading for this card is still being written. For now, look at the scene on the card and notice what it brings to mind.",
+  "savedToJournalHint": "Saved to your Tarot Journal. Come back from the home screen anytime to look back.",
+  "saveThisReading": "Save to Tarot Journal",
   "quoteMarks": "“{text}”",
-  "@quoteMarks": {
-    "placeholders": {
-      "text": {
-        "type": "String"
-      }
-    }
-  },
   "quoteAttribution": "{author}, {source}",
-  "@quoteAttribution": {
-    "placeholders": {
-      "author": {
-        "type": "String"
-      },
-      "source": {
-        "type": "String"
-      }
-    }
-  },
-  "cardZoomLabel": "Enlarge the card art for {name}",
-  "@cardZoomLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "artViewerLabel": "Card art for {name}. Tap to go back",
-  "@artViewerLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "cardZoomLabel": "Zoom in on {name}",
+  "artViewerLabel": "{name} card art. Tap to go back",
   "tapToReturn": "Tap to go back",
-  "journalEmpty": "No entries yet\n\nAfter drawing a card\ntap “Save This Reading” at the end of the reading\nThen come back later\nto see how the image played out",
+  "journalEmpty": "No journal entries yet\n\nAfter you draw\ntap “Save to Tarot Journal” at the bottom of the reading\nthen come back later\nto see how the card’s imagery showed up in your life",
   "journalNoQuestion": "(No question written)",
-  "journalReviewCount": "{count, plural, =1{1 note} other{{count} notes}}",
-  "@journalReviewCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "journalReminderOn": "Reminder {date}",
-  "@journalReminderOn": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "journalNotFound": "This entry could not be found. It may have been deleted.",
+  "journalReviewCount": "{count, plural, one{{count} look-back} other{{count} look-backs}}",
+  "journalReminderOn": "Reminder on {date}",
+  "journalNotFound": "This entry can’t be found. It may have been deleted.",
   "journalDeleteTitle": "Delete this entry?",
-  "journalDeleteBody": "This cannot be undone.",
-  "journalReadingThen": "Reading at the time",
+  "journalDeleteBody": "This can’t be undone.",
+  "journalReadingThen": "The reading at the time",
   "journalQuestionEmpty": "(Not filled in. Tap to add)",
-  "journalViewReading": "View the Reading from Then",
-  "journalReviews": "Looking Back",
-  "journalReviewPrompt": "What happened afterwards? Looking back, where does the image meet what happened?",
-  "journalAddReview": "Write What Happened",
-  "journalReviewDialogTitle": "What happened afterwards?",
-  "journalEditReview": "Edit This Note",
-  "journalReminderSection": "Review Reminder",
-  "journalReminderPending": "You will be reminded on {date} at {hour} p.m.",
-  "@journalReminderPending": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      },
-      "hour": {
-        "type": "int"
-      }
-    }
-  },
-  "journalReminderNone": "No reminder set. Choose a number of days from today:",
-  "reminderFailed": "The reminder could not be set. {reason}",
-  "@reminderFailed": {
-    "placeholders": {
-      "reason": {
-        "type": "String"
-      }
-    }
-  },
-  "saveSheetNote": "Stored only on this phone. Come back later to compare and practise reading the image.",
-  "saveSheetRemind": "Remind Me to Look Back",
-  "saveSheetRemindIn": "{days, plural, =1{Reminder tomorrow at {hour} p.m.} other{Reminder in {days} days at {hour} p.m.}}",
-  "@saveSheetRemindIn": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      },
-      "hour": {
-        "type": "int"
-      }
-    }
-  },
-  "savedOk": "Saved to your Journal.",
-  "savedReminderFailed": "Saved to your Journal, but the reminder could not be set. {reason}",
-  "@savedReminderFailed": {
-    "placeholders": {
-      "reason": {
-        "type": "String"
-      }
-    }
-  },
+  "journalViewReading": "View the reading at the time",
+  "journalReviews": "Looking back",
+  "journalReviewPrompt": "What happened next? Looking back now, where does this card’s imagery meet what happened?",
+  "journalAddReview": "Write what happened next",
+  "journalReviewDialogTitle": "What happened next?",
+  "journalEditReview": "Edit look-back",
+  "journalReminderSection": "Look-back reminder",
+  "journalReminderPending": "We’ll remind you on {date} at {hour} p.m.",
+  "journalReminderNone": "No reminder set. Choose how many days from today:",
+  "reminderFailed": "The reminder couldn’t be set. {reason}",
+  "saveSheetNote": "Stored only on this phone. Come back later to look back and practice reading the imagery.",
+  "saveSheetRemind": "Remind me to look back",
+  "saveSheetRemindIn": "{days, plural, one{Remind me tomorrow at {hour} p.m.} other{Remind me in {days} days at {hour} p.m.}}",
+  "savedOk": "Saved to your Tarot Journal.",
+  "savedReminderFailed": "Saved to your Tarot Journal, but the reminder couldn’t be set. {reason}",
   "reminderPickerTitle": "Remind me in how many days?",
   "daysSuffix": "days",
   "daysHint": "1–365",
   "reminderOff": "No reminder",
-  "reminderDays": "{days, plural, =1{1 day} other{{days} days}}",
-  "@reminderDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "reminderDays": "{days, plural, one{{days} day} other{{days} days}}",
   "reminderCustom": "Custom",
-  "reminderPermissionDenied": "Notifications are off for Qiangua. You can turn them on in Settings → Apps → Qiangua → Notifications.",
-  "reminderInitFailed": "Notifications could not start: {detail}",
-  "@reminderInitFailed": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
-  "reminderScheduleFailed": "Scheduling failed: {detail}",
-  "@reminderScheduleFailed": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
-  "reminderUnsupported": "Reminders are not supported on this platform yet",
-  "reminderChannelName": "Journal review reminders",
-  "reminderChannelDescription": "Reminds you to look back at readings you saved",
-  "reviewNotificationTitle": "Look back: {name}",
-  "@reviewNotificationTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "reviewNotificationBody": "{days, plural, =1{Yesterday you drew {name}. Look back: how did the image play out?} other{{days} days ago you drew {name}. Look back: how did the image play out?}}",
-  "@reviewNotificationBody": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      },
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "breathChannelName": "Breathing soundscape",
+  "reminderPermissionDenied": "Notifications are off for Tarot. You can turn them on in Settings → Apps → Tarot → Notifications.",
+  "reminderInitFailed": "Couldn’t set up notifications: {detail}",
+  "reminderScheduleFailed": "Couldn’t schedule: {detail}",
+  "reminderUnsupported": "Reminders aren’t supported on this platform yet",
+  "reminderChannelName": "Journal look-back reminders",
+  "reminderChannelDescription": "Reminds you to look back at cards you saved",
+  "reviewNotificationTitle": "Look back at a card: {name}",
+  "reviewNotificationBody": "{days, plural, one{You drew {name} {days} day ago. Looking back, how did this card’s imagery fit what happened?} other{You drew {name} {days} days ago. Looking back, how did this card’s imagery fit what happened?}}",
+  "breathChannelName": "Breathing Soundscape",
   "breathSetupTitle": "Breathing Soundscape · {name}",
-  "@breathSetupTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "breathSetupNote": "Breathe in for 4 seconds and out for 6 (6 breaths a minute). The soundscape rises and falls with your breath; tones and bells are tuned to 432 Hz.",
-  "breathDuration": "Length",
+  "breathSetupNote": "Breathe in for 4 seconds and out for 6 (6 breaths a minute). The soundscape comes from this card’s element and rises and falls with your breath; tones and bells are tuned to 432 Hz.",
+  "breathDuration": "Duration",
   "breathCustom": "Custom",
-  "breathLongNote": "For a longer sit, you can turn off the soft bell and keep just the soundscape.",
-  "minutes": "{m, plural, =1{1 minute} other{{m} minutes}}",
-  "@minutes": {
-    "placeholders": {
-      "m": {
-        "type": "int"
-      }
-    }
-  },
-  "breathBells": "Soft bell when the breath turns",
-  "breathBellsSub": "Follow along with your eyes closed",
+  "breathLongNote": "For longer sessions, you can turn off “Soft bell at each breath” and keep just the soundscape.",
+  "minutes": "{m, plural, one{{m} minute} other{{m} minutes}}",
+  "breathBells": "Soft bell at each breath",
+  "breathBellsSub": "Follow along even with your eyes closed",
   "breathBinaural": "Binaural beat 7.83 Hz",
   "breathBinauralSub": "Headphones required; the two ears differ by 7.83 Hz",
-  "breathHeadphones": "Headphones recommended; phone speakers struggle with low sounds.",
+  "breathHeadphones": "Headphones recommended; low tones are hard to hear on phone speakers.",
   "breathStart": "Start",
   "breathMediaTitle": "{name} · Breathing Soundscape",
-  "@breathMediaTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "breathMediaSubtitle": "{sounds} | {duration}",
-  "@breathMediaSubtitle": {
-    "placeholders": {
-      "sounds": {
-        "type": "String"
-      },
-      "duration": {
-        "type": "String"
-      }
-    }
-  },
   "breathPreparing": "Creating the soundscape",
   "breathPreparingSub": "The first time takes a few seconds",
-  "breathFailed": "This phone cannot play the soundscape right now.\nYou can use silent guidance instead.",
+  "breathFailed": "This phone can’t play the soundscape right now.\nYou can use silent guidance instead.",
   "breathEnded": "Ended",
   "breathDone": "Done",
   "breathStoppedFromNotification": "Stopped from the notification",
   "breathSummary": "{minutes} min · {breaths} breaths",
-  "@breathSummary": {
-    "placeholders": {
-      "minutes": {
-        "type": "int"
-      },
-      "breaths": {
-        "type": "int"
-      }
-    }
-  },
   "breathPaused": "Paused",
-  "breathUseSilent": "Use Silent Guidance",
-  "breathBackToReading": "Back to the Reading",
-  "breathViewArtAgain": "View the Card Again",
+  "breathUseSilent": "Use silent guidance",
+  "breathBackToReading": "Back to the reading",
+  "breathViewArtAgain": "See the card again",
   "breathRemaining": "{time} left",
-  "@breathRemaining": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "breathSilentMark": " · silent",
-  "breathViewArt": "Card",
+  "breathSilentMark": " · Silent",
+  "breathViewArt": "View card",
   "breathResume": "Resume",
   "breathPause": "Pause",
   "breathEnd": "End",
   "breathPhase": "{phase, select, prepare{Ready} inhale{In} exhale{Out} done{Done} other{-}}",
-  "@breathPhase": {
-    "placeholders": {
-      "phase": {
-        "type": "String"
-      }
-    }
-  },
-  "soundscapeName": "{key, select, qian{High Clear Wind} kun{Night Field Crickets} zhen{Distant Thunder, Spring Rain} xun{Wind in the Trees} kan{Mountain Stream} li{Campfire} gen{Mountain Stillness} dui{Lakeside Ripples} other{-}}",
-  "@soundscapeName": {
-    "placeholders": {
-      "key": {
-        "type": "String"
-      }
-    }
-  },
-  "premiumTitle": "Qiangua Premium",
-  "premiumSubtitle": "No ads, and every feature without limits",
+  "soundscapeName": "{key, select, sky{High breeze} lake{Lakeside ripples} fire{Campfire} thunder{Distant thunder, spring rain} wind{Wind in the trees} water{Mountain stream} mountain{Mountain stillness} earth{Night meadow crickets} other{-}}",
+  "premiumTitle": "Tarot Premium",
+  "premiumSubtitle": "No ads, advanced spreads, and full courses",
   "premiumBenefitNoAds": "No ads at all",
-  "premiumBenefitCasts": "Unlimited card draws and coin casts",
-  "premiumBenefitJournal": "Unlimited journal entries",
-  "premiumBenefitBreath": "3- and 5-minute breathing and binaural beats",
-  "premiumFreeNote": "The classic texts, line readings, all three interpretations, and East Meets West are always free.",
+  "premiumBenefitCasts": "Unlimited draws and every advanced spread",
+  "premiumBenefitJournal": "Unlimited Tarot Journal entries and full courses",
+  "premiumBenefitBreath": "3- and 5-minute breathing, custom durations, and binaural beats",
+  "premiumFreeNote": "Readings, symbols, and East meets West for all 78 cards are always free.",
   "planMonthly": "Monthly",
   "planYearly": "Yearly",
   "premiumSubscribe": "Subscribe",
   "premiumRestore": "Restore purchases",
   "premiumManage": "Manage subscription",
-  "premiumActive": "You’re a Qiangua Premium member. Thank you for your support.",
-  "premiumUnavailable": "Subscriptions aren’t available yet.",
-  "premiumLoadFailed": "Couldn’t load subscription plans. Please check your connection and try again.",
+  "premiumActive": "You’re a Tarot Premium member. Thank you for your support.",
+  "premiumUnavailable": "Subscriptions aren’t available yet. Stay tuned.",
+  "premiumLoadFailed": "Couldn’t load plans right now. Check your connection and try again.",
   "premiumTerms": "Subscriptions renew automatically. Cancel anytime in Google Play under Payments & subscriptions; you keep Premium until the end of the current period.",
   "premiumThanks": "You’re subscribed. Thank you for your support!",
-  "premiumPurchaseFailed": "The purchase wasn’t completed. You haven’t been charged.",
+  "premiumPurchaseFailed": "The purchase didn’t go through. You haven’t been charged.",
   "premiumRestoreNone": "No subscription found to restore.",
-  "castLimitTitle": "You’ve used today’s {count} free casts",
-  "castLimitBody": "Watch a short ad for one more cast, or go Premium for unlimited casts and no ads.",
-  "castLimitBodyExhausted": "That’s all for today. Sit a while with the image you drew and come back tomorrow, or go Premium for unlimited casts.",
-  "castWatchAd": "Watch an ad for one more cast",
-  "castAdNotReady": "The ad couldn’t load right now. Please try again later.",
+  "castLimitTitle": "You’ve used today’s {count} free draws",
+  "castLimitBody": "Watch a short ad for one more draw, or go Premium for unlimited draws and no ads.",
+  "castLimitBodyExhausted": "That’s all for today. Take a quiet moment with the cards you just drew and come back tomorrow, or go Premium for unlimited draws.",
+  "castWatchAd": "Watch an ad to draw again",
+  "castAdNotReady": "The ad couldn’t load. Please try again later.",
   "castComeTomorrow": "Come back tomorrow",
-  "journalLimitTitle": "You’ve reached the free limit of {count} journal entries",
-  "journalLimitBody": "Everything you’ve saved stays. Watch an ad to save this one, or go Premium to add entries without limit.",
-  "menuPremium": "Qiangua Premium",
+  "journalLimitTitle": "Your free Tarot Journal is full ({count} entries)",
+  "journalLimitBody": "All your saved entries stay. Watch an ad to save this one, or go Premium for unlimited entries.",
+  "menuPremium": "Tarot Premium",
   "menuAdPrivacy": "Ad privacy settings",
-  "menuPrivacyPolicy": "Privacy policy",
-  "journalWatchAd": "Watch an ad to save this one",
+  "menuPrivacyPolicy": "Privacy Policy",
+  "journalWatchAd": "Watch an ad to save this",
   "notNow": "Not now",
-  "breathCarrier128": "Left 128 Hz · right 135.83 Hz",
-  "breathCarrier216": "Left 216 Hz · right 223.83 Hz",
-  "menuIntro": "Feature tour",
-  "menuShareApp": "Recommend to a friend",
+  "breathCarrier128": "Left 128 Hz · Right 135.83 Hz",
+  "breathCarrier216": "Left 216 Hz · Right 223.83 Hz",
+  "menuIntro": "How it works",
+  "menuShareApp": "Share with a friend",
   "introSkip": "Skip",
   "introNext": "Next",
   "introStart": "Get started",
-  "intro1Title": "Draw a hexagram, read the moment",
-  "intro1Body": "The home screen has four buttons: Draw a Card, Cast with Three Coins, Cast with Yarrow Stalks and Journal. Hold one matter in mind and pick a way to cast. Each hexagram comes with its image, a reading, a small action and a question to help you think things through.",
-  "intro2Title": "Journal: note it, look back",
-  "intro2Body": "Save your question and hexagram to the journal, set a reminder, and come back later to see what you thought and how things turned out. You can also back up the journal to a file and restore it on a new phone.",
-  "intro3Title": "Breathe with the hexagram",
-  "intro3Body": "From a reading you can breathe with the soundscapes of its upper and lower trigrams: in for 4 seconds, out for 6. The background tones and bells are tuned to 432 Hz; with headphones you can turn on a 7.83 Hz binaural beat (the two ears differ by 7.83 Hz). Choose 1, 2, 3 or 5 minutes, or set a custom length of up to 60 minutes for a longer sit.",
-  "intro4Title": "Sharing and membership",
-  "intro4Body": "Turn a hexagram you like into a card and share it with friends. The texts and readings are always free; members get no ads, unlimited casts, longer breathing sessions and binaural beats.",
-  "intro5Title": "Tell us what you think",
-  "intro5Body": "The menu at the top right of the home screen lets you replay this tour, send us feedback, and choose whether to share anonymous usage stats. Your suggestions help make the app better.",
-  "menuFeedback": "Send feedback",
+  "intro1Title": "Draw a card, see this moment",
+  "intro1Body": "The home screen has Card of the Day and Draw. Hold something in mind and choose a spread. Draw quickly, or shuffle, cut, and pick from all 78 cards yourself. Each card comes with its imagery, meaning, a note for you right now, a small step, and a question.",
+  "intro2Title": "Learn: get to know each card",
+  "intro2Body": "Learn has a library of all 78 cards, beginner courses, and a card quiz that uses spaced repetition to help you remember. Tap the symbols on a card to see what they’re saying.",
+  "intro3Title": "Tarot Journal: save, then look back",
+  "intro3Body": "Save your question, the cards you drew, and what you noticed first. Set a reminder to look back later at what you thought then and how things unfolded. You can back up your journal to a file and restore it on a new phone.",
+  "intro4Title": "Breathe with the card",
+  "intro4Body": "From a reading, you can breathe with the soundscape of the card’s element: in for 4 seconds, out for 6. Fire is a campfire, Water a flowing stream, Air wind in the trees, Earth mountain stillness. With headphones, you can turn on a 7.83 Hz binaural beat.",
+  "intro5Title": "Sharing, Premium, and your thoughts",
+  "intro5Body": "Turn a card you like into an image to share. Card meanings are always free; Tarot Premium removes ads and opens advanced spreads and full courses. The menu at the top right of the home screen has settings, this intro, and a way to send us feedback.",
+  "menuFeedback": "Feedback",
   "feedbackCategoryLabel": "Type",
   "feedbackCategoryBug": "Report a problem",
-  "feedbackCategorySuggestion": "Feature suggestion",
+  "feedbackCategorySuggestion": "Suggest a feature",
   "feedbackCategoryOther": "Other",
   "feedbackMessageLabel": "Message",
-  "feedbackMessageHint": "Tell us about a problem you ran into, or a feature you'd like…",
-  "feedbackEmailLabel": "Contact email (optional)",
-  "feedbackEmailHint": "Leave your email if you'd like a reply",
+  "feedbackMessageHint": "Tell us about a problem you ran into, or what you’d like to see…",
+  "feedbackEmailLabel": "Email (optional)",
+  "feedbackEmailHint": "Leave your email if you’d like a reply",
   "feedbackSubmit": "Send feedback",
-  "feedbackEmpty": "Please write something before sending",
-  "feedbackThanks": "Thanks for your feedback! We'll look at it soon.",
-  "feedbackFailed": "Couldn't send. Please check your connection and try again.",
-  "shareReading": "Share this hexagram",
+  "feedbackEmpty": "Please write a message before sending",
+  "feedbackThanks": "Thanks for your feedback. We’ll take a look soon.",
+  "feedbackFailed": "Couldn’t send. Check your connection and try again",
+  "shareReading": "Share this reading",
   "shareImage": "Share image",
-  "shareFailed": "Couldn't share right now. Please try again later.",
-  "shareAppText": "I've been using Qiangua to draw I Ching cards and breathe with their soundscapes. Try it: {url}",
-  "shareReadingText": "I drew {name}: \"{title}\"\nDraw your own I Ching card with Qiangua: {url}",
+  "shareFailed": "Can’t share right now. Please try again later.",
+  "shareAppText": "I’m using Tarot to learn tarot and see myself more clearly. Thought you might like it: {url}",
+  "shareReadingText": "I drew {name}: “{title}”\nDraw a card with Tarot: {url}",
   "journalMenuBackup": "Back up journal",
   "journalMenuRestore": "Restore from backup",
-  "journalBackupBody": "The backup file includes the questions and notes you wrote. Next, choose where to keep it, such as your cloud drive, or send it to yourself.\n\nOn a new phone or after reinstalling, choose “Restore from backup” here to bring it back.",
+  "journalBackupBody": "The backup file includes the questions and look-backs you wrote. Next, choose where to keep it, such as your cloud drive, or send it to yourself.\n\nOn a new phone or after reinstalling, choose “Restore from backup” here to bring it back.",
   "journalBackupContinue": "Choose where to save",
-  "journalBackupEmpty": "There are no entries to back up yet.",
-  "journalBackupSubject": "Qiangua journal backup {date}",
-  "journalRestoreDone": "{count, plural, =1{Restored 1 entry} other{Restored {count} entries}}",
-  "journalRestoreNone": "Every entry in this backup is already on this phone.",
-  "journalRestoreFailed": "Couldn't read this file. Please choose a Qiangua journal backup (.json).",
+  "journalBackupEmpty": "No journal entries to back up yet.",
+  "journalBackupSubject": "Tarot Journal backup {date}",
+  "journalRestoreDone": "{count, plural, one{Restored {count} entry} other{Restored {count} entries}}",
+  "journalRestoreNone": "All entries in this backup are already on this phone.",
+  "journalRestoreFailed": "Can’t read this file. Please choose a Tarot Journal backup file (.json).",
   "menuShareUsage": "Share anonymous usage stats & crash reports",
   "premiumTermsIos": "Subscriptions renew automatically. Cancel anytime on your iPhone in Settings → Apple Account → Subscriptions; you keep Premium until the end of the current period.",
-  "termsOfUse": "Terms of Use"
+  "termsOfUse": "Terms of Use",
+  "featureDaily": "Card of the Day",
+  "featureLearn": "Learn",
+  "spreadPickerTitle": "Choose a spread",
+  "spreadPickerHint": "A spread is a way of asking. If you’re not sure, start with one or three cards.",
+  "cardCount": "{n, plural, one{{n} card} other{{n} cards}}",
+  "drawQuick": "Quick draw",
+  "drawRitual": "Shuffle, cut, and pick yourself",
+  "shuffleHint": "Keep your question in mind, tap Shuffle a few times, and stop when it feels right",
+  "shuffle": "Shuffle",
+  "shuffleCount": "Shuffle again (shuffled {n}×)",
+  "shuffleDone": "Done shuffling",
+  "cutHint": "The deck is cut into three piles. Trust your gut and pick one to go on top",
+  "cutPile": "Pile {n}",
+  "pickHint": "{n, plural, =1{Pick 1 card from the fan} other{Pick {n} cards from the fan}}",
+  "pickCardLabel": "Card {n}",
+  "revealHint": "Tap a card to turn it over, or reveal them all",
+  "revealAll": "Reveal all",
+  "firstImpressionShown": "First impression: {text}",
+  "firstImpressionTitle": "What do you notice first?",
+  "firstImpressionBody": "Before reading the meaning, look at the card. A color, a figure, an object, or a feeling — anything works. This is your own intuition, and it’s saved to your journal too.",
+  "firstImpressionHint": "e.g. the little dog, the bright sky, a bit uneasy…",
+  "firstImpressionSave": "Save and see the reading",
+  "firstImpressionSkip": "Go to the reading",
+  "firstImpressionSection": "What you noticed first",
+  "readingTitle": "Reading",
+  "readingTapCardHint": "Tap a card in the spread to jump to its reading",
+  "readingDisclaimer": "Tarot is a mirror that helps you see this moment; the choices and actions are always yours. If you’re going through a hard time, please talk with someone you trust or a professional.",
+  "positionHeading": "{n} · {name}",
+  "cardDetailButton": "Meaning and symbols of {name}",
+  "sectionAtmosphere": "Overall mood",
+  "sectionMeaning": "Meaning",
+  "sectionKeywords": "Keywords",
+  "sectionSymbols": "Symbols on the card",
+  "sectionWaite": "What Waite wrote",
+  "sectionAffirmation": "A few words for yourself",
+  "cardFacts": "{arcana} · {element}",
+  "arcanaMajor": "Major Arcana",
+  "arcanaMinor": "Minor Arcana",
+  "suitGroup": "{suit} ({element})",
+  "attributionLine": "Golden Dawn attribution: {name}",
+  "attributionName": "{key, select, air{Air} water{Water} fire{Fire} mercury{Mercury} moon{Moon} venus{Venus} jupiter{Jupiter} mars{Mars} sun{Sun} saturn{Saturn} aries{Aries} taurus{Taurus} gemini{Gemini} cancer{Cancer} leo{Leo} virgo{Virgo} libra{Libra} scorpio{Scorpio} sagittarius{Sagittarius} capricorn{Capricorn} aquarius{Aquarius} pisces{Pisces} other{-}}",
+  "elementName": "{key, select, fire{Fire} water{Water} air{Air} earth{Earth} other{-}}",
+  "cardReversedName": "{name} (Reversed)",
+  "upright": "Upright",
+  "reversed": "Reversed",
+  "waiteIntro": "The traditional meanings from Arthur Edward Waite’s The Pictorial Key to the Tarot (1910):",
+  "waiteUpright": "Upright: {text}",
+  "waiteReversed": "Reversed: {text}",
+  "readingAngle": "{angle, select, figure{Through the figures and their actions} symbol{Through symbols and colors} number{Through number and element} other{From another angle}}",
+  "tapSymbolsHint": "Tap the glowing dots on the card to see what each symbol means",
+  "showSymbols": "Show symbols",
+  "hideSymbols": "Hide symbols",
+  "methodQuick": "Quick draw",
+  "methodRitual": "Shuffle & pick",
+  "methodDaily": "Card of the Day",
+  "journalTitleSpread": "{name}{count, plural, =1{} other{ + {count} cards}}",
+  "breathSoundElement": "{element}: {upper} · {lower}",
+  "dailyPrompt": "Today’s card is waiting for you",
+  "dailyDate": "Your card for {month}/{day}",
+  "dailyFlip": "Turn over today’s card",
+  "dailyAffirmation": "A few words for today",
+  "dailyFullReading": "See the full reading",
+  "dailyComeBack": "There’s one card each day. Come back tomorrow for a new one.",
+  "dailyReminder": "Card of the Day reminder",
+  "dailyReminderOn": "Every day at {time}",
+  "dailyReminderOff": "Off",
+  "dailyReminderTime": "Reminder time",
+  "dailyNotificationTitle": "Today’s card is ready",
+  "dailyNotificationBody": "Take a minute to turn it over and see what it has for you today.",
+  "learnLibrary": "Card Library",
+  "learnLibraryHint": "All 78 cards, with meanings and symbols",
+  "learnQuiz": "Card Quiz",
+  "learnQuizHint": "Name the card from its art; ones you miss come up more often",
+  "learnQuizProgress": "{seen} practiced · {mastered} learned",
+  "learnCourses": "Courses",
+  "learnComingSoon": "Coming soon",
+  "lessonCards": "Cards in this lesson",
+  "lessonSources": "Sources",
+  "lessonNext": "Next lesson",
+  "lessonDone": "Finish this unit",
+  "quizIntro": "Look at the card and choose its name. Cards you get right come back in a few days; ones you miss come back tomorrow. Little by little, you’ll know them all.",
+  "quizPoolAll": "All 78 cards",
+  "quizQuestion": "Which card is this?",
+  "quizProgress": "Card Quiz {n}/{total}",
+  "quizRight": "Correct!",
+  "quizWrong": "This is {name}. You’ll see it again soon.",
+  "quizNext": "Next card",
+  "quizDone": "This round: {correct}/{total} correct",
+  "quizAgain": "Practice again",
+  "quizNothingDue": "Nothing to review in this set today. Come back tomorrow, or try another set.",
+  "settingsTitle": "Settings",
+  "settingsDeck": "Deck",
+  "settingsNoDeck": "Card art isn’t installed yet, so cards are shown as text for now.",
+  "settingsDeckAi": "This deck was illustrated with AI",
+  "settingsReversals": "Use reversed cards",
+  "settingsReversalsHint": "A reversed card points to energy turned inward or something to sort out — not a bad card",
+  "journalStatsTitle": "Cards that keep showing up",
+  "journalStatsEmpty": "After a few entries, you’ll see which cards and suits show up most often here.",
+  "journalStatsCards": "Cards saved in your journal: {count}",
+  "journalStatsReversed": "{count} of {total} reversed",
+  "journalStatsTop": "Cards that came up more than once",
+  "journalStatsTimes": "{n} times",
+  "journalStatsNote": "This simply sorts your own entries so you can look back. It doesn’t say anything about what will happen."
 }
