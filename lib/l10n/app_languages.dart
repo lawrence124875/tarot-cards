@@ -46,42 +46,42 @@ class AppLanguages {
     code: 'en',
     locale: Locale('en'),
     contentFolder: 'en',
-    contentReady: true, // 2026-10-05 英文 64 卦完成（§22）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   static const zhHans = AppLanguage(
     code: 'zh-Hans',
     locale: Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
     contentFolder: 'zh-Hans',
-    contentReady: true, // 2026-10-05 由繁中轉出（iching-content tools/to_hans.py，§19.2 第 5 項）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   static const ja = AppLanguage(
     code: 'ja',
     locale: Locale('ja'),
     contentFolder: 'ja',
-    contentReady: true, // 2026-10-05 日文 64 卦完成（§22、iching-content ja/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   static const ko = AppLanguage(
     code: 'ko',
     locale: Locale('ko'),
     contentFolder: 'ko',
-    contentReady: true, // 2026-10-05 韓文 64 卦完成（§22、iching-content ko/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   static const vi = AppLanguage(
     code: 'vi',
     locale: Locale('vi'),
     contentFolder: 'vi',
-    contentReady: true, // 2026-10-05 越南文 64 卦完成（§22、iching-content vi/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   static const es = AppLanguage(
     code: 'es',
     locale: Locale('es'),
     contentFolder: 'es',
-    contentReady: true, // 2026-10-06 西班牙文 64 卦完成（§22、iching-content es/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   /// 葡萄牙文：內容寫巴西葡萄牙文（pt-BR，代碼與術語表一致），手機語言是任何葡萄牙文（含葡萄牙 pt-PT）都用這一份（見 [resolve]）。
@@ -89,7 +89,7 @@ class AppLanguages {
     code: 'pt-BR',
     locale: Locale('pt'),
     contentFolder: 'pt-BR',
-    contentReady: true, // 2026-10-06 巴西葡萄牙文 64 卦完成（§22、iching-content pt-BR/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   /// 印尼文：標準印尼文（kamu 體）。
@@ -97,7 +97,7 @@ class AppLanguages {
     code: 'id',
     locale: Locale('id'),
     contentFolder: 'id',
-    contentReady: true, // 2026-10-06 印尼文 64 卦完成（§22、iching-content id/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   /// 泰文：書面標準泰文（讀者稱 คุณ），字型用 Noto Sans/Serif Thai（§15）。
@@ -105,7 +105,7 @@ class AppLanguages {
     code: 'th',
     locale: Locale('th'),
     contentFolder: 'th',
-    contentReady: true, // 2026-10-06 泰文 64 卦完成（§22、iching-content th/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   /// 阿拉伯文：現代標準阿拉伯文（讀者稱 أنت），由右至左（MaterialApp 依 locale 自動 RTL），
@@ -114,7 +114,7 @@ class AppLanguages {
     code: 'ar',
     locale: Locale('ar'),
     contentFolder: 'ar',
-    contentReady: true, // 2026-10-07 阿拉伯文 64 卦完成（§22、iching-content ar/README.md）
+    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
   );
 
   /// 已有介面翻譯（ARB）的語言。順序無意義。
