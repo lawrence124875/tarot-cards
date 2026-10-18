@@ -99,6 +99,9 @@ void main() {
         await _settle(tester);
         await tester.tap(find.widgetWithText(TextButton, l.drawAgain));
         await _settle(tester);
+        // 橫放時右側欄會捲動，先捲到按鈕
+        await tester.ensureVisible(find.text(l.drawRitual));
+        await tester.pump();
         await tester.tap(find.text(l.drawRitual));
         await _settle(tester);
         await tester.tap(find.widgetWithText(FilledButton, l.shuffle));
