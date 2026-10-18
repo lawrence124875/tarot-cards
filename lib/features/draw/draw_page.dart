@@ -181,10 +181,13 @@ class _DrawPageState extends State<DrawPage> {
             QuestionPrompt(question: _question, onChanged: (q) => setState(() => _question = q)),
             Wrap(
               alignment: WrapAlignment.center,
-              spacing: 8,
+              spacing: 6,
+              runSpacing: 4,
               children: [
                 for (final a in ['', ...ReadingAreas.all])
                   ChoiceChip(
+                    visualDensity: VisualDensity.compact,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     label: Text(l.areaName(a.isEmpty ? 'none' : a)),
                     selected: _area == a,
                     onSelected: (_) => setState(() => _area = a),
