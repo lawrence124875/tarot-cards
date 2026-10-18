@@ -22,6 +22,7 @@ class _LearnHubPageState extends State<LearnHubPage> {
   late final Services _s = AppServices.of(context);
   LessonBook? _book;
   int _mastered = 0, _seen = 0;
+  Map<String, int> _unitDone = const {};
   bool _loading = true;
 
   @override
@@ -34,11 +35,15 @@ class _LearnHubPageState extends State<LearnHubPage> {
     final book = await _s.content.lessons();
     final mastered = await _s.quiz.mastered();
     final seen = await _s.quiz.seen();
+    final unitDone = {
+      for (final u in book?.units ?? const <LessonUnit>[]) u.id: await _s.lessonProgress.doneIn(u.id, [for (final l in u.lessons) l.id]),
+    };
     if (!mounted) return;
     setState(() {
       _book = book;
       _mastered = mastered;
       _seen = seen;
+      _unitDone = unitDone;
       _loading = false;
     });
   }
@@ -93,7 +98,11 @@ class _LearnHubPageState extends State<LearnHubPage> {
                     _Tile(
                       leadingText: '${i + 1}',
                       title: u.title,
-                      subtitle: u.ready ? u.summary : l.learnComingSoon,
+                      subtitle: !u.ready
+                          ? l.learnComingSoon
+                          : (_unitDone[u.id] ?? 0) > 0
+                              ? '${l.learnUnitProgress(_unitDone[u.id]!, u.lessons.length)}\n${u.summary}'
+                              : u.summary,
                       locked: u.ready && !u.free && !_s.isPremium,
                       enabled: u.ready,
                       onTap: () => _openUnit(u),
