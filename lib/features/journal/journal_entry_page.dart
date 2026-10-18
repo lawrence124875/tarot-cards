@@ -228,6 +228,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
               draw: e.draw,
               question: e.question,
               firstImpression: e.firstImpression,
+              area: e.area,
               readingIndexes: e.readingIndexes,
               review: true,
               deck: _deck,

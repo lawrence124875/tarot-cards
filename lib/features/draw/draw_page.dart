@@ -15,6 +15,7 @@ import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_back.dart';
 import '../../shared/widgets/card_face.dart';
 import '../../shared/widgets/question_dialog.dart';
+import '../../core/content/reading_area.dart';
 import '../../shared/widgets/spread_layout.dart';
 import 'first_impression_sheet.dart';
 
@@ -39,6 +40,7 @@ class _DrawPageState extends State<DrawPage> {
   late final Services _s = AppServices.of(context);
   _Stage _stage = _Stage.question;
   String _question = '';
+  String _area = '';
   String _method = DrawMethods.quick;
   ShuffledDeck? _deck;
   int _shuffles = 0;
@@ -139,7 +141,7 @@ class _DrawPageState extends State<DrawPage> {
     final draw = SpreadDraw(spreadId: _spread.id, methodId: _method, cards: _picked);
     final ads = _s.ads;
     await Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (_) => ReadingPage(draw: draw, question: _question, firstImpression: _impression),
+      builder: (_) => ReadingPage(draw: draw, question: _question, firstImpression: _impression, area: _area),
     ));
     ads.readingClosed(); // 看完解讀回來：依限頻規則可能跳插頁（不在儀式與閱讀中跳出）
   }
@@ -177,6 +179,18 @@ class _DrawPageState extends State<DrawPage> {
           top: [
             Text(l.drawPromptBefore, style: hint, textAlign: TextAlign.center),
             QuestionPrompt(question: _question, onChanged: (q) => setState(() => _question = q)),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8,
+              children: [
+                for (final a in ['', ...ReadingAreas.all])
+                  ChoiceChip(
+                    label: Text(l.areaName(a.isEmpty ? 'none' : a)),
+                    selected: _area == a,
+                    onSelected: (_) => setState(() => _area = a),
+                  ),
+              ],
+            ),
           ],
           middle: SpreadLayout(spread: _spread, cards: const [], revealed: const {}, maxCardWidth: 120),
           bottom: [
