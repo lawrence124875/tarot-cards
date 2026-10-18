@@ -1,379 +1,298 @@
 {
   "@@locale": "id",
-  "appTitle": "Qiangua",
-  "appSubtitle": "I Ching · 64 Kartu Heksagram",
-  "homeMotto": "I Ching bukan untuk menebak nasib\nmelainkan untuk belajar membaca citra dan memutuskan",
-  "homeDisclaimer": "Hanya untuk refleksi diri dan hiburan",
+  "appTitle": "Tarot",
+  "appSubtitle": "Belajar tarot dan mengenal diri",
+  "homeMotto": "Tarot bukan untuk meramal nasib\nmelainkan untuk melihat saat ini dan melangkah dengan lembut",
+  "homeDisclaimer": "Konten ini hanya untuk eksplorasi diri dan belajar, bukan pengganti saran profesional",
   "cancel": "Batal",
-  "ok": "OK",
+  "ok": "Oke",
   "delete": "Hapus",
   "back": "Kembali",
   "save": "Simpan",
-  "viewReading": "Lihat Ulasan",
+  "viewReading": "Lihat tafsiran",
   "separator": " · ",
   "listSeparator": ", ",
-  "featureDraw": "Ambil Satu Kartu",
-  "featureJournal": "Jurnal",
-  "featureBreath": "Lanskap Suara Napas",
-  "readingActionBreath": "Bernapas bersama Heksagram Ini",
-  "questionTitle": "Pertanyaanmu",
-  "questionHint": "Dalam satu atau dua kalimat, apa yang sedang kamu pikirkan? (opsional)",
-  "questionPromptLink": "Tuliskan pertanyaanmu (opsional)",
-  "questionShown": "T: {question}",
-  "@questionShown": {
-    "placeholders": {
-      "question": {
-        "type": "String"
-      }
-    }
-  },
+  "featureDraw": "Tarik Kartu",
+  "featureJournal": "Jurnal Tarot",
+  "featureBreath": "Napas & Lanskap Suara",
+  "readingActionBreath": "Bernapas bersama kartu ini",
+  "questionTitle": "Yang ingin kamu tanyakan",
+  "questionHint": "Tulis satu-dua kalimat tentang hal yang sedang kamu pikirkan (opsional)",
+  "questionPromptLink": "Tulis yang ingin kamu tanyakan (opsional)",
+  "questionShown": "Tanya: {question}",
   "optionalHint": "Opsional",
-  "drawPromptBefore": "Pikirkan satu hal\nKetuk kartu saat kamu siap",
-  "drawPromptAfter": "Inilah citra saat ini",
-  "drawAgain": "Ambil Lagi",
-  "sectionReading": "Ulasan",
-  "sectionImage": "Citra",
-  "sectionSource": "Dari Mana Citra Ini Datang",
-  "sectionForYou": "Untukmu Saat Ini",
-  "sectionAction": "Langkah Kecil Hari Ini",
-  "sectionQuestion": "Pertanyaan untuk Direnungkan",
-  "sectionEastWest": "Timur Bertemu Barat",
-  "readingNotWritten": "Ulasan untuk heksagram ini masih sedang ditulis. Untuk sementara, lihatlah pemandangan pada kartu dan perhatikan apa yang terlintas di benakmu.",
-  "savedToJournalHint": "Tersimpan di Jurnalmu. Kembalilah dari layar utama untuk membandingkannya nanti.",
-  "saveThisReading": "Simpan Bacaan Ini",
+  "drawPromptBefore": "Pikirkan satu hal yang sedang kamu hadapi\nKalau sudah siap mulailah",
+  "drawPromptAfter": "Inilah gambaran saat ini",
+  "drawAgain": "Tarik ulang",
+  "sectionReading": "Tafsiran",
+  "sectionImage": "Gambaran di kartu",
+  "sectionSource": "Asal gambaran ini",
+  "sectionForYou": "Untukmu saat ini",
+  "sectionAction": "Langkah kecil hari ini",
+  "sectionQuestion": "Pertanyaan refleksi",
+  "sectionEastWest": "Timur dan Barat",
+  "readingNotWritten": "Tafsiran kartu ini masih ditulis. Untuk sementara, perhatikan gambar di kartu dan pikirkan apa yang muncul di benakmu.",
+  "savedToJournalHint": "Tersimpan di Jurnal Tarot. Nanti kamu bisa kembali dari beranda untuk membandingkannya.",
+  "saveThisReading": "Simpan ke Jurnal Tarot",
   "quoteMarks": "“{text}”",
-  "@quoteMarks": {
-    "placeholders": {
-      "text": {
-        "type": "String"
-      }
-    }
-  },
   "quoteAttribution": "{author}, {source}",
-  "@quoteAttribution": {
-    "placeholders": {
-      "author": {
-        "type": "String"
-      },
-      "source": {
-        "type": "String"
-      }
-    }
-  },
-  "cardZoomLabel": "Perbesar gambar kartu {name}",
-  "@cardZoomLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "artViewerLabel": "Gambar kartu {name}. Ketuk untuk kembali",
-  "@artViewerLabel": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "cardZoomLabel": "Perbesar kartu {name}",
+  "artViewerLabel": "Kartu {name}, ketuk untuk kembali",
   "tapToReturn": "Ketuk untuk kembali",
-  "journalEmpty": "Belum ada catatan\n\nSetelah mengambil kartu\nketuk “Simpan Bacaan Ini” di akhir ulasan\nLalu kembalilah nanti\nuntuk melihat bagaimana citra itu terwujud",
-  "journalNoQuestion": "(Tidak ada pertanyaan yang ditulis)",
-  "journalReviewCount": "{count, plural, =1{1 catatan} other{{count} catatan}}",
-  "@journalReviewCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
+  "journalEmpty": "Belum ada jurnal\n\nSetelah menarik kartu\nketuk “Simpan ke Jurnal Tarot” di bagian bawah halaman tafsiran\nlalu kembali nanti untuk membandingkan\nbagaimana gambaran di kartu terhubung dengan hidupmu",
+  "journalNoQuestion": "(Tanpa pertanyaan)",
+  "journalReviewCount": "{count, plural, other{Ditinjau {count} kali}}",
   "journalReminderOn": "Pengingat {date}",
-  "@journalReminderOn": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "journalNotFound": "Catatan ini tidak ditemukan. Mungkin sudah dihapus.",
+  "journalNotFound": "Catatan ini tidak ditemukan, mungkin sudah dihapus.",
   "journalDeleteTitle": "Hapus catatan ini?",
-  "journalDeleteBody": "Tindakan ini tidak dapat dibatalkan.",
-  "journalReadingThen": "Ulasan saat itu",
-  "journalQuestionEmpty": "(Belum diisi. Ketuk untuk menambahkan)",
-  "journalViewReading": "Lihat Ulasan Saat Itu",
-  "journalReviews": "Menengok Kembali",
-  "journalReviewPrompt": "Apa yang terjadi sesudahnya? Bila menengok kembali, di mana citra itu bertemu dengan apa yang terjadi?",
-  "journalAddReview": "Tulis Apa yang Terjadi",
-  "journalReviewDialogTitle": "Apa yang terjadi sesudahnya?",
-  "journalEditReview": "Ubah Catatan Ini",
-  "journalReminderSection": "Pengingat untuk Menengok Kembali",
-  "journalReminderPending": "Kamu akan diingatkan pada {date} pukul {hour} malam.",
-  "@journalReminderPending": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      },
-      "hour": {
-        "type": "int"
-      }
-    }
-  },
-  "journalReminderNone": "Belum ada pengingat. Pilih jumlah hari dari hari ini:",
-  "reminderFailed": "Pengingat tidak dapat dipasang. {reason}",
-  "@reminderFailed": {
-    "placeholders": {
-      "reason": {
-        "type": "String"
-      }
-    }
-  },
-  "saveSheetNote": "Hanya disimpan di ponsel ini. Kembalilah nanti untuk membandingkan dan berlatih membaca citra.",
-  "saveSheetRemind": "Ingatkan Aku untuk Menengok Kembali",
-  "saveSheetRemindIn": "{days, plural, =1{Pengingat besok pukul {hour} malam} other{Pengingat {days} hari lagi pukul {hour} malam}}",
-  "@saveSheetRemindIn": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      },
-      "hour": {
-        "type": "int"
-      }
-    }
-  },
-  "savedOk": "Tersimpan di Jurnalmu.",
-  "savedReminderFailed": "Tersimpan di Jurnalmu, tetapi pengingat tidak dapat dipasang. {reason}",
-  "@savedReminderFailed": {
-    "placeholders": {
-      "reason": {
-        "type": "String"
-      }
-    }
-  },
-  "reminderPickerTitle": "Ingatkan aku berapa hari lagi?",
+  "journalDeleteBody": "Catatan yang dihapus tidak dapat dipulihkan.",
+  "journalReadingThen": "Tafsiran saat itu",
+  "journalQuestionEmpty": "(Belum diisi, ketuk di sini untuk menambahkan)",
+  "journalViewReading": "Lihat tafsiran saat itu",
+  "journalReviews": "Tinjauan",
+  "journalReviewPrompt": "Apa yang terjadi setelahnya? Jika dilihat sekarang, bagian mana dari kejadian itu yang tergambar di kartu ini?",
+  "journalAddReview": "Tulis perkembangan setelahnya",
+  "journalReviewDialogTitle": "Apa yang terjadi setelahnya?",
+  "journalEditReview": "Ubah tinjauan",
+  "journalReminderSection": "Pengingat tinjauan",
+  "journalReminderPending": "Kamu akan diingatkan pada {date} pukul {hour} malam",
+  "journalReminderNone": "Belum ada pengingat. Pilih jumlah hari, dihitung dari hari ini:",
+  "reminderFailed": "Pengingat tidak berhasil diatur. {reason}",
+  "saveSheetNote": "Hanya disimpan di ponsel ini. Kembalilah nanti untuk membandingkan dan berlatih membaca gambaran.",
+  "saveSheetRemind": "Ingatkan aku untuk meninjau",
+  "saveSheetRemindIn": "{days, plural, other{Ingatkan {days} hari lagi pukul {hour} malam}}",
+  "savedOk": "Tersimpan di Jurnal Tarot.",
+  "savedReminderFailed": "Tersimpan di Jurnal Tarot, tetapi pengingat tidak berhasil diatur. {reason}",
+  "reminderPickerTitle": "Ingatkan berapa hari lagi?",
   "daysSuffix": "hari",
   "daysHint": "1–365",
   "reminderOff": "Tanpa pengingat",
-  "reminderDays": "{days, plural, =1{1 hari} other{{days} hari}}",
-  "@reminderDays": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
+  "reminderDays": "{days, plural, other{{days} hari}}",
   "reminderCustom": "Atur sendiri",
-  "reminderPermissionDenied": "Notifikasi untuk Qiangua sedang mati. Kamu dapat menyalakannya di Setelan → Aplikasi → Qiangua → Notifikasi.",
-  "reminderInitFailed": "Notifikasi tidak dapat dimulai: {detail}",
-  "@reminderInitFailed": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
-  "reminderScheduleFailed": "Penjadwalan gagal: {detail}",
-  "@reminderScheduleFailed": {
-    "placeholders": {
-      "detail": {
-        "type": "String"
-      }
-    }
-  },
+  "reminderPermissionDenied": "Tarot belum diizinkan mengirim notifikasi. Kamu dapat menyalakannya di Setelan → Aplikasi → Tarot → Notifikasi.",
+  "reminderInitFailed": "Gagal menyiapkan notifikasi: {detail}",
+  "reminderScheduleFailed": "Gagal menjadwalkan: {detail}",
   "reminderUnsupported": "Pengingat belum didukung di platform ini",
-  "reminderChannelName": "Pengingat jurnal",
-  "reminderChannelDescription": "Mengingatkanmu untuk menengok kembali bacaan yang kamu simpan",
-  "reviewNotificationTitle": "Tengok kembali: {name}",
-  "@reviewNotificationTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "reviewNotificationBody": "{days, plural, =1{Kemarin kamu mengambil {name}. Tengok kembali: bagaimana citra itu terwujud?} other{{days} hari yang lalu kamu mengambil {name}. Tengok kembali: bagaimana citra itu terwujud?}}",
-  "@reviewNotificationBody": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      },
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "breathChannelName": "Lanskap suara napas",
-  "breathSetupTitle": "Lanskap Suara Napas · {name}",
-  "@breathSetupTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "breathSetupNote": "Tarik napas selama 4 detik dan embuskan selama 6 detik (6 napas per menit). Lanskap suara naik dan turun mengikuti napasmu; nada dan lonceng disetel pada 432 Hz.",
+  "reminderChannelName": "Pengingat tinjauan jurnal",
+  "reminderChannelDescription": "Mengingatkanmu untuk meninjau kartu yang pernah kamu catat",
+  "reviewNotificationTitle": "Tinjau satu kartu: {name}",
+  "reviewNotificationBody": "{days, plural, other{{days} hari lalu kamu menarik {name}. Coba lihat lagi, bagaimana gambaran kartu ini terhubung dengan yang terjadi kemudian?}}",
+  "breathChannelName": "Napas & Lanskap Suara",
+  "breathSetupTitle": "Napas & Lanskap Suara · {name}",
+  "breathSetupNote": "Tarik napas 4 detik, embuskan 6 detik (6 napas per menit). Lanskap suara dipilih sesuai unsur kartu ini dan naik turun mengikuti napasmu; nada panjang dan lonceng disetel pada 432 Hz.",
   "breathDuration": "Durasi",
   "breathCustom": "Atur sendiri",
-  "breathLongNote": "Untuk duduk tenang lebih lama, kamu bisa mematikan lonceng dan hanya mendengar lanskap suara.",
-  "minutes": "{m, plural, =1{1 menit} other{{m} menit}}",
-  "@minutes": {
-    "placeholders": {
-      "m": {
-        "type": "int"
-      }
-    }
-  },
+  "breathLongNote": "Untuk duduk tenang lebih lama, kamu bisa mematikan “Lonceng lembut saat napas berganti” dan hanya mendengar lanskap suara.",
+  "minutes": "{m, plural, other{{m} menit}}",
   "breathBells": "Lonceng lembut saat napas berganti",
-  "breathBellsSub": "Ikuti dengan mata terpejam",
+  "breathBellsSub": "Ikuti napas walau mata terpejam",
   "breathBinaural": "Ketukan binaural 7,83 Hz",
   "breathBinauralSub": "Perlu headphone; kedua telinga berbeda 7,83 Hz",
-  "breathHeadphones": "Disarankan memakai headphone; pengeras suara ponsel kesulitan memutar suara rendah.",
+  "breathHeadphones": "Disarankan memakai headphone; pengeras suara ponsel sulit memutar suara rendah.",
   "breathStart": "Mulai",
-  "breathMediaTitle": "{name} · Lanskap Suara Napas",
-  "@breathMediaTitle": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "breathMediaTitle": "{name} · Napas & Lanskap Suara",
   "breathMediaSubtitle": "{sounds} | {duration}",
-  "@breathMediaSubtitle": {
-    "placeholders": {
-      "sounds": {
-        "type": "String"
-      },
-      "duration": {
-        "type": "String"
-      }
-    }
-  },
   "breathPreparing": "Menyiapkan lanskap suara",
-  "breathPreparingSub": "Pertama kali perlu beberapa detik",
-  "breathFailed": "Ponsel ini tidak dapat memutar lanskap suara saat ini.\nKamu dapat memakai panduan tanpa suara.",
+  "breathPreparingSub": "Pertama kali butuh beberapa detik",
+  "breathFailed": "Ponsel ini belum dapat memutar lanskap suara,\nkamu bisa memakai panduan tanpa suara.",
   "breathEnded": "Selesai",
   "breathDone": "Selesai",
   "breathStoppedFromNotification": "Dihentikan dari notifikasi",
   "breathSummary": "{minutes} menit · {breaths} napas",
-  "@breathSummary": {
-    "placeholders": {
-      "minutes": {
-        "type": "int"
-      },
-      "breaths": {
-        "type": "int"
-      }
-    }
-  },
   "breathPaused": "Dijeda",
-  "breathUseSilent": "Pakai Panduan Tanpa Suara",
-  "breathBackToReading": "Kembali ke Ulasan",
-  "breathViewArtAgain": "Lihat Kartu Lagi",
+  "breathUseSilent": "Pakai panduan tanpa suara",
+  "breathBackToReading": "Kembali ke tafsiran",
+  "breathViewArtAgain": "Lihat kartu lagi",
   "breathRemaining": "Sisa {time}",
-  "@breathRemaining": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "breathSilentMark": " · tanpa suara",
-  "breathViewArt": "Kartu",
+  "breathSilentMark": " · Tanpa suara",
+  "breathViewArt": "Lihat gambar",
   "breathResume": "Lanjutkan",
   "breathPause": "Jeda",
   "breathEnd": "Akhiri",
-  "breathPhase": "{phase, select, prepare{Siap} inhale{Tarik} exhale{Embuskan} done{Selesai} other{-}}",
-  "@breathPhase": {
-    "placeholders": {
-      "phase": {
-        "type": "String"
-      }
-    }
-  },
-  "soundscapeName": "{key, select, qian{Angin Jernih di Ketinggian} kun{Jangkrik di Padang Malam} zhen{Guntur Jauh, Hujan Musim Semi} xun{Angin di Pepohonan} kan{Aliran Sungai Gunung} li{Api Unggun} gen{Keheningan Gunung} dui{Riak di Tepi Danau} other{-}}",
-  "@soundscapeName": {
-    "placeholders": {
-      "key": {
-        "type": "String"
-      }
-    }
-  },
-  "premiumTitle": "Qiangua Premium",
-  "premiumSubtitle": "Tanpa iklan, dan semua fitur tanpa batas",
-  "premiumBenefitNoAds": "Sama sekali tanpa iklan",
-  "premiumBenefitCasts": "Ambil kartu dan lempar koin tanpa batas",
-  "premiumBenefitJournal": "Catatan jurnal tanpa batas",
-  "premiumBenefitBreath": "Latihan napas 3 dan 5 menit serta ketukan binaural",
-  "premiumFreeNote": "Teks klasik, ulasan tiap garis, ketiga ulasan, dan Timur Bertemu Barat selalu gratis.",
+  "breathPhase": "{phase, select, prepare{Bersiap} inhale{Tarik} exhale{Embuskan} done{Selesai} other{-}}",
+  "soundscapeName": "{key, select, sky{Angin Jernih di Ketinggian} lake{Riak di Tepi Danau} fire{Api Unggun} thunder{Guntur Jauh, Hujan Musim Semi} wind{Angin di Pepohonan} water{Aliran Sungai Gunung} mountain{Keheningan Gunung} earth{Jangkrik di Padang Malam} other{-}}",
+  "premiumTitle": "Tarot Premium",
+  "premiumSubtitle": "Tanpa iklan, susunan kartu lanjutan, dan kursus lengkap",
+  "premiumBenefitNoAds": "Tanpa iklan sama sekali",
+  "premiumBenefitCasts": "Tarik kartu tanpa batas, semua susunan kartu lanjutan terbuka",
+  "premiumBenefitJournal": "Jurnal Tarot tanpa batas, kursus belajar lengkap",
+  "premiumBenefitBreath": "Napas 3/5 menit, durasi bebas, dan ketukan binaural",
+  "premiumFreeNote": "Tafsiran, simbol, dan bagian Timur dan Barat untuk 78 kartu selalu gratis.",
   "planMonthly": "Bulanan",
   "planYearly": "Tahunan",
   "premiumSubscribe": "Berlangganan",
   "premiumRestore": "Pulihkan pembelian",
   "premiumManage": "Kelola langganan",
-  "premiumActive": "Kamu anggota Qiangua Premium. Terima kasih atas dukunganmu.",
-  "premiumUnavailable": "Langganan belum tersedia.",
-  "premiumLoadFailed": "Paket langganan tidak dapat dimuat. Periksa koneksimu dan coba lagi.",
+  "premiumActive": "Kamu sudah menjadi anggota Tarot Premium. Terima kasih atas dukunganmu.",
+  "premiumUnavailable": "Langganan belum tersedia. Nantikan, ya.",
+  "premiumLoadFailed": "Paket langganan belum dapat dimuat. Periksa koneksimu lalu coba lagi.",
   "premiumTerms": "Langganan diperpanjang otomatis. Batalkan kapan saja di Google Play pada Pembayaran & langganan; Premium tetap aktif sampai akhir periode yang sedang berjalan.",
-  "premiumThanks": "Kamu sudah berlangganan. Terima kasih atas dukunganmu!",
+  "premiumThanks": "Langganan berhasil. Terima kasih atas dukunganmu!",
   "premiumPurchaseFailed": "Pembelian tidak selesai. Kamu tidak dikenai biaya.",
   "premiumRestoreNone": "Tidak ada langganan yang dapat dipulihkan.",
-  "castLimitTitle": "Kamu sudah memakai {count} kesempatan gratis hari ini",
-  "castLimitBody": "Tonton iklan singkat untuk satu kesempatan lagi, atau pilih Premium untuk kesempatan tanpa batas dan tanpa iklan.",
-  "castLimitBodyExhausted": "Itu saja untuk hari ini. Renungkan sejenak citra yang kamu dapat dan kembalilah besok, atau pilih Premium untuk kesempatan tanpa batas.",
-  "castWatchAd": "Tonton iklan untuk satu kesempatan lagi",
+  "castLimitTitle": "{count} tarikan gratis hari ini sudah habis",
+  "castLimitBody": "Tonton iklan singkat untuk menarik sekali lagi, atau pilih Premium untuk tarikan tanpa batas dan tanpa iklan.",
+  "castLimitBodyExhausted": "Kesempatan hari ini sudah habis. Coba tenangkan diri dan lihat lagi kartu tadi, lalu kembali besok; atau pilih Premium untuk tarikan tanpa batas.",
+  "castWatchAd": "Tonton iklan untuk menarik lagi",
   "castAdNotReady": "Iklan tidak dapat dimuat saat ini. Coba lagi nanti.",
   "castComeTomorrow": "Kembali besok",
-  "journalLimitTitle": "Kamu sudah mencapai batas gratis {count} catatan jurnal",
-  "journalLimitBody": "Semua yang sudah kamu simpan tetap ada. Tonton iklan untuk menyimpan yang ini, atau pilih Premium untuk menambah catatan tanpa batas.",
-  "menuPremium": "Qiangua Premium",
+  "journalLimitTitle": "Jurnal Tarot sudah mencapai batas versi gratis, {count} catatan",
+  "journalLimitBody": "Semua catatan yang sudah ada tetap tersimpan. Tonton iklan untuk menyimpan yang ini, atau pilih Premium untuk catatan tanpa batas.",
+  "menuPremium": "Tarot Premium",
   "menuAdPrivacy": "Setelan privasi iklan",
   "menuPrivacyPolicy": "Kebijakan privasi",
-  "journalWatchAd": "Tonton iklan untuk menyimpan yang ini",
+  "journalWatchAd": "Tonton iklan untuk menyimpan",
   "notNow": "Nanti saja",
-  "breathCarrier128": "Kiri 128 Hz · kanan 135,83 Hz",
-  "breathCarrier216": "Kiri 216 Hz · kanan 223,83 Hz",
-  "menuIntro": "Kenali fitur",
+  "breathCarrier128": "Kiri 128 Hz · Kanan 135,83 Hz",
+  "breathCarrier216": "Kiri 216 Hz · Kanan 223,83 Hz",
+  "menuIntro": "Pengenalan fitur",
   "menuShareApp": "Rekomendasikan ke teman",
   "introSkip": "Lewati",
   "introNext": "Berikutnya",
   "introStart": "Mulai",
-  "intro1Title": "Ambil satu heksagram, baca saat ini",
-  "intro1Body": "Beranda punya empat tombol: Ambil Satu Kartu, Lempar Tiga Koin, Batang Yarrow, dan Jurnal. Simpan satu hal di benakmu, lalu pilih satu cara. Setiap heksagram punya citra, bacaan, satu langkah kecil, dan satu pertanyaan untuk membantumu berpikir jernih.",
-  "intro2Title": "Jurnal: catat, lalu tinjau",
-  "intro2Body": "Simpan pertanyaan dan heksagrammu ke jurnal, atur pengingat, lalu kembali nanti untuk melihat pikiranmu saat itu dan perkembangan sesudahnya. Jurnal juga bisa dicadangkan ke file dan dipulihkan saat ganti ponsel.",
-  "intro3Title": "Bernapas bersama heksagram",
-  "intro3Body": "Dari halaman bacaan kamu bisa bernapas mengikuti lanskap suara trigram atas dan bawahnya: tarik napas 4 detik, embuskan 6 detik. Nada latar dan lonceng disetel pada 432 Hz; dengan headphone kamu bisa menyalakan ketukan binaural 7,83 Hz (kedua telinga berbeda 7,83 Hz). Pilih 1, 2, 3, atau 5 menit, atau atur sendiri hingga 60 menit untuk duduk tenang lebih lama.",
-  "intro4Title": "Berbagi dan keanggotaan",
-  "intro4Body": "Jadikan heksagram yang kamu suka sebagai kartu dan bagikan ke teman. Teks dan bacaan selalu gratis; anggota bebas iklan, bisa mengambil heksagram tanpa batas, dan mendapat latihan napas lebih panjang serta ketukan binaural.",
-  "intro5Title": "Sampaikan pendapatmu",
-  "intro5Body": "Dari menu di kanan atas beranda, kamu bisa melihat lagi pengenalan ini, mengirim masukan kepada kami, dan memilih apakah ingin membagikan statistik penggunaan anonim. Saranmu membantu aplikasi ini menjadi lebih baik.",
-  "menuFeedback": "Kirim masukan",
+  "intro1Title": "Tarik satu kartu, lihat saat ini",
+  "intro1Body": "Di beranda ada “Kartu Hari Ini” dan “Tarik Kartu”. Simpan satu hal di hatimu, pilih susunan kartu, lalu tarik cepat, atau kocok, potong, dan pilih sendiri dari 78 kartu. Setiap kartu punya gambaran, makna, pesan untukmu saat ini, langkah kecil, dan satu pertanyaan.",
+  "intro2Title": "Belajar: mulai dengan mengenal setiap kartu",
+  "intro2Body": "Di “Belajar” ada pustaka 78 kartu, kursus dasar, dan latihan mengenal kartu dengan pengulangan berjarak. Simbol di kartu bisa diketuk untuk melihat artinya.",
+  "intro3Title": "Jurnal Tarot: catat, lalu tinjau",
+  "intro3Body": "Simpan pertanyaan, kartu yang kamu tarik, dan hal pertama yang kamu perhatikan ke jurnal. Atur pengingat untuk meninjau pikiranmu saat itu dan apa yang terjadi kemudian. Jurnal juga bisa dicadangkan sebagai file dan dipulihkan di ponsel baru.",
+  "intro4Title": "Bernapas bersama kartu",
+  "intro4Body": "Di halaman tafsiran, kamu bisa bernapas mengikuti lanskap suara sesuai unsur kartu: tarik 4 detik, embuskan 6 detik. Api adalah api unggun, Air adalah aliran sungai, Udara adalah angin di pepohonan, Tanah adalah keheningan gunung. Dengan headphone, kamu bisa menyalakan ketukan binaural 7,83 Hz.",
+  "intro5Title": "Berbagi, Premium, dan pendapatmu",
+  "intro5Body": "Kartu favoritmu bisa dijadikan kartu bergambar untuk dibagikan. Makna kartu selalu gratis; Tarot Premium tanpa iklan, membuka susunan kartu lanjutan dan kursus lengkap. Menu di pojok kanan atas beranda bisa dipakai untuk mengatur setelan, melihat pengenalan lagi, dan mengirim masukan kepada kami.",
+  "menuFeedback": "Masukan",
   "feedbackCategoryLabel": "Jenis",
   "feedbackCategoryBug": "Laporkan masalah",
-  "feedbackCategorySuggestion": "Usulan fitur",
+  "feedbackCategorySuggestion": "Saran fitur",
   "feedbackCategoryOther": "Lainnya",
   "feedbackMessageLabel": "Isi",
   "feedbackMessageHint": "Ceritakan masalah yang kamu alami atau fitur yang kamu inginkan…",
-  "feedbackEmailLabel": "Email kontak (opsional)",
+  "feedbackEmailLabel": "Email (opsional)",
   "feedbackEmailHint": "Tinggalkan email jika kamu ingin menerima balasan",
   "feedbackSubmit": "Kirim masukan",
-  "feedbackEmpty": "Tulis masukanmu dulu sebelum mengirim",
+  "feedbackEmpty": "Isi pesan terlebih dahulu sebelum mengirim",
   "feedbackThanks": "Terima kasih atas masukanmu, kami akan segera meninjaunya!",
   "feedbackFailed": "Gagal mengirim. Periksa koneksi internet lalu coba lagi.",
-  "shareReading": "Bagikan heksagram ini",
+  "shareReading": "Bagikan tarikan ini",
   "shareImage": "Bagikan gambar",
-  "shareFailed": "Belum bisa membagikan sekarang. Coba lagi nanti.",
-  "shareAppText": "Aku pakai Qiangua untuk mengambil kartu I Ching dan bernapas mengikuti lanskap suaranya. Coba deh: {url}",
-  "shareReadingText": "Aku mendapat {name}: “{title}”\nAmbil kartu I Ching-mu dengan Qiangua: {url}",
+  "shareFailed": "Belum bisa membagikan. Coba lagi nanti.",
+  "shareAppText": "Aku pakai Tarot untuk belajar tarot dan melihat diriku saat ini. Coba juga: {url}",
+  "shareReadingText": "Aku menarik {name}: “{title}”\nTarik satu kartu dengan Tarot: {url}",
   "journalMenuBackup": "Cadangkan jurnal",
   "journalMenuRestore": "Pulihkan dari cadangan",
-  "journalBackupBody": "File cadangan berisi pertanyaan dan catatan yang kamu tulis. Selanjutnya, pilih tempat menyimpannya, misalnya penyimpanan awan, atau kirim ke dirimu sendiri.\n\nDi ponsel baru atau setelah memasang ulang aplikasi, pilih “Pulihkan dari cadangan” di sini untuk mengembalikannya.",
+  "journalBackupBody": "File cadangan berisi pertanyaan dan tinjauan yang kamu tulis. Selanjutnya, pilih tempat menyimpannya, misalnya penyimpanan awan, atau kirim ke dirimu sendiri.\n\nDi ponsel baru atau setelah memasang ulang aplikasi, pilih “Pulihkan dari cadangan” di sini untuk mengembalikannya.",
   "journalBackupContinue": "Pilih tempat menyimpan",
-  "journalBackupEmpty": "Belum ada catatan untuk dicadangkan.",
-  "journalBackupSubject": "Cadangan jurnal Qiangua {date}",
-  "journalRestoreDone": "{count, plural, other{{count} catatan dipulihkan}}",
+  "journalBackupEmpty": "Belum ada jurnal untuk dicadangkan.",
+  "journalBackupSubject": "Cadangan Jurnal Tarot {date}",
+  "journalRestoreDone": "{count, plural, other{{count} catatan jurnal dipulihkan}}",
   "journalRestoreNone": "Semua catatan di cadangan ini sudah ada di ponsel ini.",
-  "journalRestoreFailed": "File ini tidak dapat dibaca. Pilih file cadangan jurnal Qiangua (.json).",
-  "menuShareUsage": "Bagikan statistik anonim dan laporan error",
+  "journalRestoreFailed": "File ini tidak dapat dibaca. Pilih file cadangan Jurnal Tarot (.json).",
+  "menuShareUsage": "Bagikan statistik penggunaan anonim dan laporan error",
   "premiumTermsIos": "Langganan diperpanjang otomatis. Batalkan kapan saja di iPhone melalui Pengaturan → Akun Apple → Langganan; Premium tetap aktif sampai akhir periode yang sedang berjalan.",
-  "termsOfUse": "Ketentuan Penggunaan"
+  "termsOfUse": "Ketentuan penggunaan",
+  "featureDaily": "Kartu Hari Ini",
+  "featureLearn": "Belajar",
+  "spreadPickerTitle": "Pilih susunan kartu",
+  "spreadPickerHint": "Susunan kartu adalah cara bertanya. Jika ragu, mulailah dengan satu atau tiga kartu.",
+  "cardCount": "{n, plural, other{{n} kartu}}",
+  "drawQuick": "Langsung tarik",
+  "drawRitual": "Kocok, potong, dan pilih sendiri",
+  "shuffleHint": "Pikirkan hal itu, ketuk kocok beberapa kali, lalu berhenti saat terasa cukup",
+  "shuffle": "Kocok",
+  "shuffleCount": "Kocok lagi (sudah {n} kali)",
+  "shuffleDone": "Selesai mengocok",
+  "cutHint": "Bagi kartu menjadi tiga tumpukan, lalu ikuti intuisimu untuk menaruh satu tumpukan di atas",
+  "cutPile": "Tumpukan {n}",
+  "pickHint": "{n, plural, =1{Pilih 1 kartu dari kipas kartu} other{Pilih {n} kartu dari kipas kartu}}",
+  "pickCardLabel": "Kartu ke-{n}",
+  "revealHint": "Ketuk kartu untuk membukanya, atau buka semuanya sekaligus",
+  "revealAll": "Buka semua",
+  "firstImpressionShown": "Kesan pertama: {text}",
+  "firstImpressionTitle": "Apa yang pertama kali kamu perhatikan?",
+  "firstImpressionBody": "Sebelum membaca tafsiran, lihat dulu kartunya. Satu warna, satu sosok, satu benda, atau satu perasaan, semuanya boleh. Ini intuisimu sendiri dan akan ikut tersimpan di jurnal.",
+  "firstImpressionHint": "Misalnya: anjing kecil itu, langitnya terang, agak gelisah…",
+  "firstImpressionSave": "Catat dan lihat tafsiran",
+  "firstImpressionSkip": "Langsung lihat tafsiran",
+  "firstImpressionSection": "Yang pertama kali kamu perhatikan",
+  "readingTitle": "Tafsiran",
+  "readingTapCardHint": "Ketuk kartu dalam susunan untuk melompat ke tafsirannya",
+  "readingDisclaimer": "Tarot adalah cermin yang membantumu melihat saat ini; keputusan dan tindakan selalu ada di tanganmu. Jika kamu sedang melewati masa yang berat, bicaralah dengan orang yang kamu percaya atau tenaga profesional.",
+  "positionHeading": "{n} · {name}",
+  "cardDetailButton": "Makna dan simbol {name}",
+  "sectionAtmosphere": "Suasana keseluruhan",
+  "sectionMeaning": "Makna kartu",
+  "sectionKeywords": "Kata kunci",
+  "sectionSymbols": "Simbol di kartu",
+  "sectionWaite": "Kata Waite",
+  "sectionAffirmation": "Satu kalimat untuk diri sendiri",
+  "cardFacts": "{arcana} · {element}",
+  "arcanaMajor": "Arkana Mayor",
+  "arcanaMinor": "Arkana Minor",
+  "suitGroup": "{suit} ({element})",
+  "attributionLine": "Padanan Golden Dawn: {name}",
+  "attributionName": "{key, select, air{Unsur Udara} water{Unsur Air} fire{Unsur Api} mercury{Merkurius} moon{Bulan} venus{Venus} jupiter{Jupiter} mars{Mars} sun{Matahari} saturn{Saturnus} aries{Aries} taurus{Taurus} gemini{Gemini} cancer{Cancer} leo{Leo} virgo{Virgo} libra{Libra} scorpio{Scorpio} sagittarius{Sagitarius} capricorn{Capricorn} aquarius{Aquarius} pisces{Pisces} other{-}}",
+  "elementName": "{key, select, fire{Api} water{Air} air{Udara} earth{Tanah} other{-}}",
+  "cardReversedName": "{name} (terbalik)",
+  "upright": "Tegak",
+  "reversed": "Terbalik",
+  "waiteIntro": "Makna tradisional dari Arthur Waite dalam “The Pictorial Key to the Tarot” (1910), diterjemahkan oleh aplikasi ini:",
+  "waiteUpright": "Tegak: {text}",
+  "waiteReversed": "Terbalik: {text}",
+  "readingAngle": "{angle, select, figure{Dari sosok dan gerakannya} symbol{Dari simbol dan warnanya} number{Dari angka dan unsurnya} other{Sudut pandang lain}}",
+  "tapSymbolsHint": "Ketuk titik cahaya di kartu untuk melihat arti simbolnya",
+  "showSymbols": "Tampilkan simbol",
+  "hideSymbols": "Sembunyikan simbol",
+  "methodQuick": "Langsung tarik",
+  "methodRitual": "Kocok dan pilih",
+  "methodDaily": "Kartu Hari Ini",
+  "journalTitleSpread": "{name}{count, plural, =1{} other{ dan lainnya ({count} kartu)}}",
+  "breathSoundElement": "Unsur {element}: {upper} · {lower}",
+  "dailyPrompt": "Kartu hari ini menunggu untuk kamu buka",
+  "dailyDate": "Kartu tanggal {day}/{month}",
+  "dailyFlip": "Buka kartu hari ini",
+  "dailyAffirmation": "Satu kalimat untuk dirimu hari ini",
+  "dailyFullReading": "Lihat tafsiran lengkap",
+  "dailyComeBack": "Kartu hari ini hanya satu. Kembali besok untuk membuka kartu baru.",
+  "dailyReminder": "Pengingat Kartu Hari Ini",
+  "dailyReminderOn": "Setiap hari pukul {time}",
+  "dailyReminderOff": "Mati",
+  "dailyReminderTime": "Waktu pengingat",
+  "dailyNotificationTitle": "Kartu hari ini sudah siap",
+  "dailyNotificationBody": "Luangkan satu menit untuk membukanya dan lihat pesannya untukmu hari ini.",
+  "learnLibrary": "Pustaka kartu",
+  "learnLibraryHint": "78 kartu, lihat makna dan simbol satu per satu",
+  "learnQuiz": "Latihan mengenal kartu",
+  "learnQuizHint": "Kenali nama kartu dari gambarnya; kartu yang salah dijawab akan lebih sering muncul",
+  "learnQuizProgress": "Sudah dilatih {seen} kartu · Dikuasai {mastered} kartu",
+  "learnCourses": "Kursus",
+  "learnComingSoon": "Segera hadir",
+  "lessonCards": "Kartu dalam pelajaran ini",
+  "lessonSources": "Sumber",
+  "lessonNext": "Pelajaran berikutnya",
+  "lessonDone": "Selesaikan unit ini",
+  "quizIntro": "Lihat gambar kartu lalu pilih nama yang benar. Kartu yang dijawab benar akan muncul lagi beberapa hari kemudian, yang salah akan dilatih lagi besok, sampai kamu hafal perlahan-lahan.",
+  "quizPoolAll": "Semua 78 kartu",
+  "quizQuestion": "Kartu apakah ini?",
+  "quizProgress": "Latihan mengenal kartu {n}/{total}",
+  "quizRight": "Benar!",
+  "quizWrong": "Ini {name}. Kamu akan bertemu lagi dengannya nanti.",
+  "quizNext": "Kartu berikutnya",
+  "quizDone": "Putaran ini benar {correct}/{total} kartu",
+  "quizAgain": "Latihan satu putaran lagi",
+  "quizNothingDue": "Tidak ada kartu untuk diulang di cakupan ini hari ini. Kembali besok, atau pilih cakupan lain.",
+  "settingsTitle": "Setelan",
+  "settingsDeck": "Desain kartu",
+  "settingsNoDeck": "Gambar kartu belum tersedia, untuk sementara kartu ditampilkan sebagai teks.",
+  "settingsDeckAi": "Desain kartu ini dibuat dengan AI",
+  "settingsReversals": "Gunakan kartu terbalik",
+  "settingsReversalsHint": "Kartu terbalik menunjukkan energi yang mengarah ke dalam atau hal yang perlu ditata, bukan kartu buruk",
+  "journalStatsTitle": "Kartu yang sering muncul",
+  "journalStatsEmpty": "Setelah beberapa catatan, di sini akan muncul ringkasan kartu dan jenis kartu yang sering keluar.",
+  "journalStatsCards": "Total {count} kartu tercatat di jurnal",
+  "journalStatsReversed": "{count}/{total} di antaranya terbalik",
+  "journalStatsTop": "Kartu yang muncul dua kali atau lebih",
+  "journalStatsTimes": "{n} kali",
+  "journalStatsNote": "Ini ringkasan dari catatanmu sendiri agar mudah ditinjau, bukan prediksi apa pun.",
+  "areaName": "{key, select, love{Cinta} work{Pekerjaan} self{Diri sendiri} other{Tanpa fokus}}",
+  "sectionArea": "{key, select, love{Dalam hubungan cinta} work{Dalam pekerjaan} self{Untuk dirimu sendiri} other{Dalam pertanyaanmu}}"
 }
