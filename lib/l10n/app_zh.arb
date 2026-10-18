@@ -719,6 +719,18 @@
   "lessonSources": "出處",
   "lessonNext": "下一課",
   "lessonDone": "完成這個單元",
+  "learnUnitProgress": "已讀 {done}／{total} 課",
+  "@learnUnitProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonRead": "已讀",
   "quizIntro": "看牌面選出正確的牌名。答對的牌會隔幾天再出現，答錯的明天再練，慢慢就記住了。",
   "quizPoolAll": "全部 78 張",
   "quizQuestion": "這是哪一張牌？",
