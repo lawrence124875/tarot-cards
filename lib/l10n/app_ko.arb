@@ -292,5 +292,7 @@
   "journalStatsReversed": "그중 역방향 {count}/{total}장",
   "journalStatsTop": "두 번 이상 나온 카드",
   "journalStatsTimes": "{n}번",
-  "journalStatsNote": "직접 남긴 기록을 돌아보기 쉽게 정리한 것일 뿐, 앞으로 일어날 일을 알려 주는 건 아니에요."
+  "journalStatsNote": "직접 남긴 기록을 돌아보기 쉽게 정리한 것일 뿐, 앞으로 일어날 일을 알려 주는 건 아니에요.",
+  "areaName": "{key, select, love{연애} work{일} self{나 자신} other{선택 안 함}}",
+  "sectionArea": "{key, select, love{연애에 비춰 보면} work{일에 비춰 보면} self{나 자신에게 비춰 보면} other{내 질문에 비춰 보면}}"
 }

@@ -292,5 +292,7 @@
   "journalStatsReversed": "ในจำนวนนี้กลับหัว {count}/{total} ใบ",
   "journalStatsTop": "ไพ่ที่ปรากฏตั้งแต่สองครั้งขึ้นไป",
   "journalStatsTimes": "{n} ครั้ง",
-  "journalStatsNote": "นี่คือการสรุปจากบันทึกของคุณเอง เพื่อให้ทบทวนได้ง่าย ไม่ใช่การทำนายใด ๆ"
+  "journalStatsNote": "นี่คือการสรุปจากบันทึกของคุณเอง เพื่อให้ทบทวนได้ง่าย ไม่ใช่การทำนายใด ๆ",
+  "areaName": "{key, select, love{ความรัก} work{การงาน} self{ตัวเอง} other{ไม่ระบุ}}",
+  "sectionArea": "{key, select, love{มองในเรื่องความรัก} work{มองในเรื่องการงาน} self{มองกลับมาที่ตัวเอง} other{มองในคำถามของคุณ}}"
 }

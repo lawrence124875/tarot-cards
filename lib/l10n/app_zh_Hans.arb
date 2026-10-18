@@ -292,5 +292,7 @@
   "journalStatsReversed": "其中逆位 {count}／{total} 张",
   "journalStatsTop": "出现两次以上的牌",
   "journalStatsTimes": "{n} 次",
-  "journalStatsNote": "这是你自己纪录的整理，方便回顾，不代表任何预测。"
+  "journalStatsNote": "这是你自己纪录的整理，方便回顾，不代表任何预测。",
+  "areaName": "{key, select, love{感情} work{工作} self{自己} other{不指定}}",
+  "sectionArea": "{key, select, love{放进感情里看} work{放进工作里看} self{放回自己身上看} other{放进你的问题}}"
 }

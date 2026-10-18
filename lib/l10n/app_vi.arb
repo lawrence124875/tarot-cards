@@ -292,5 +292,7 @@
   "journalStatsReversed": "Trong đó {count}/{total} lá ngược",
   "journalStatsTop": "Những lá xuất hiện từ hai lần trở lên",
   "journalStatsTimes": "{n} lần",
-  "journalStatsNote": "Đây là bản tổng hợp từ chính ghi chép của bạn để tiện nhìn lại, không phải dự đoán."
+  "journalStatsNote": "Đây là bản tổng hợp từ chính ghi chép của bạn để tiện nhìn lại, không phải dự đoán.",
+  "areaName": "{key, select, love{Tình cảm} work{Công việc} self{Bản thân} other{Không chọn}}",
+  "sectionArea": "{key, select, love{Trong chuyện tình cảm} work{Trong công việc} self{Với chính bạn} other{Trong câu hỏi của bạn}}"
 }

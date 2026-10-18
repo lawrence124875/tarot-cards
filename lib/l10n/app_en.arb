@@ -292,5 +292,7 @@
   "journalStatsReversed": "{count} of {total} reversed",
   "journalStatsTop": "Cards that came up more than once",
   "journalStatsTimes": "{n} times",
-  "journalStatsNote": "This simply sorts your own entries so you can look back. It doesn’t say anything about what will happen."
+  "journalStatsNote": "This simply sorts your own entries so you can look back. It doesn’t say anything about what will happen.",
+  "areaName": "{key, select, love{Love} work{Work} self{Self} other{No focus}}",
+  "sectionArea": "{key, select, love{In your love life} work{In your work} self{For yourself} other{In your question}}"
 }

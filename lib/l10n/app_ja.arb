@@ -292,5 +292,7 @@
   "journalStatsReversed": "そのうち逆位置は {count}／{total} 枚",
   "journalStatsTop": "2回以上出たカード",
   "journalStatsTimes": "{n} 回",
-  "journalStatsNote": "あなた自身の記録をふり返りやすくまとめたもので、これから起こることを示すものではありません。"
+  "journalStatsNote": "あなた自身の記録をふり返りやすくまとめたもので、これから起こることを示すものではありません。",
+  "areaName": "{key, select, love{恋愛} work{仕事} self{自分} other{指定なし}}",
+  "sectionArea": "{key, select, love{恋愛に当てはめると} work{仕事に当てはめると} self{自分自身に向けると} other{あなたの問いに当てはめると}}"
 }

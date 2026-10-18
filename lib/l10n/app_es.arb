@@ -292,5 +292,7 @@
   "journalStatsReversed": "Invertidas: {count} de {total}",
   "journalStatsTop": "Cartas que aparecieron dos veces o más",
   "journalStatsTimes": "{n} veces",
-  "journalStatsNote": "Es un resumen de tus propios registros para ayudarte a revisar; no dice nada sobre el futuro."
+  "journalStatsNote": "Es un resumen de tus propios registros para ayudarte a revisar; no dice nada sobre el futuro.",
+  "areaName": "{key, select, love{Amor} work{Trabajo} self{Tú} other{Sin enfoque}}",
+  "sectionArea": "{key, select, love{En el amor} work{En el trabajo} self{Para ti} other{En tu pregunta}}"
 }

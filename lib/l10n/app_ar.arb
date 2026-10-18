@@ -292,5 +292,7 @@
   "journalStatsReversed": "المقلوبة منها: {count}/{total}",
   "journalStatsTop": "بطاقات ظهرت مرتين أو أكثر",
   "journalStatsTimes": "المرّات: {n}",
-  "journalStatsNote": "هذا ترتيب لما سجّلته بنفسك لتسهيل المراجعة، ولا يحمل أيّ قول عن المستقبل."
+  "journalStatsNote": "هذا ترتيب لما سجّلته بنفسك لتسهيل المراجعة، ولا يحمل أيّ قول عن المستقبل.",
+  "areaName": "{key, select, love{الحب} work{العمل} self{الذات} other{دون تحديد}}",
+  "sectionArea": "{key, select, love{في الحب} work{في العمل} self{مع ذاتك} other{في سؤالك}}"
 }
