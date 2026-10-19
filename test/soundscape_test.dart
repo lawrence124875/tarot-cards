@@ -122,7 +122,7 @@ void main() {
     final d = ByteData.sublistView(bytes);
     expect(d.getUint32(24, Endian.little), 8000);
     expect(d.getInt16(44, Endian.little).abs(), lessThan(10)); // 從無聲淡入
-    expect(spec.key, 'v4_earth_mountain_b_1m');
+    expect(spec.key, 'v5_earth_mountain_b_1m');
     expect(d.getUint16(22, Endian.little), 1);
   });
 
@@ -133,7 +133,7 @@ void main() {
     final samples = (spec.timeline.totalSeconds * 8000).round();
     expect(bytes.length, 44 + samples * 4);
     expect(d.getUint16(22, Endian.little), 2);
-    expect(spec.key, 'v4_sky_sky_q_bi128_1m');
+    expect(spec.key, 'v5_sky_sky_q_bi128_1m');
     var diff = 0;
     for (var i = 8000 * 10; i < 8000 * 11; i++) {
       diff += (d.getInt16(44 + i * 4, Endian.little) - d.getInt16(46 + i * 4, Endian.little)).abs();

@@ -91,5 +91,7 @@ void _registerFontLicenses() {
       final text = await rootBundle.loadString('assets/licenses/$name-OFL.txt');
       yield LicenseEntryWithLineBreaks([name], text);
     }
+    // 真實自然錄音（CC0／公有領域，不要求標示，仍列出作者與來源）
+    yield LicenseEntryWithLineBreaks(['Nature recordings'], await rootBundle.loadString('assets/audio/CREDITS.md'));
   });
 }
