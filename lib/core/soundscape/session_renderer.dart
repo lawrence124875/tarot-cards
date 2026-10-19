@@ -6,6 +6,7 @@ import 'sound_bed.dart';
 import 'bed_source.dart';
 import 'dsp.dart';
 import 'breath_timeline.dart';
+import 'recorded_bed_source.dart';
 import 'synth_bed_source.dart';
 
 /// 一次呼吸練習要產生的音檔規格。只含基本型別，可送進背景 isolate。
@@ -34,8 +35,11 @@ class SessionSpec {
 
   /// 快取檔名用。改了合成方式請把版本往上加，舊快取自然失效
   /// （v2：0.1.0+10 柔和版＋432Hz；v3：432Hz 長音墊、精準頻率、雙耳節拍可選 128／216Hz；
-  /// v4：0.2.0+48 分段播放、音景循環 40／50 秒、鳥鳴與水泡改用 432Hz 系統的音）。
-  String get key => 'v4_${_soundKey}_${minutes}m';
+  /// v4：0.2.0+48 分段播放、音景循環 40／50 秒、鳥鳴與水泡改用 432Hz 系統的音；
+  /// v5：溪流、雨與遠雷、湖畔、山林改用真實自然錄音）。
+  String get key => '${_v}_${_soundKey}_${minutes}m';
+
+  static const _v = 'v5';
 
   /// 不含時長的部分：開頭段與循環段只跟音景、鈴聲、雙耳節拍有關，換時長可以沿用。
   String get _soundKey =>
@@ -49,10 +53,10 @@ class SessionSpec {
     const p = SessionRenderer.loopSeconds;
     final tl = timeline;
     final n = (tl.breathSeconds / p).floor();
-    if (n == 0) return [SessionPart('v4_${_soundKey}_${minutes}m', 0, tl.totalSeconds)];
-    final head = SessionPart('v4_${_soundKey}_head', 0, tl.leadIn + p);
-    final loop = SessionPart('v4_${_soundKey}_loop', tl.leadIn + p, tl.leadIn + 2 * p);
-    final tail = SessionPart('v4_${_soundKey}_${minutes}m_end', tl.leadIn + n * p, tl.totalSeconds);
+    if (n == 0) return [SessionPart(key, 0, tl.totalSeconds)];
+    final head = SessionPart('${_v}_${_soundKey}_head', 0, tl.leadIn + p);
+    final loop = SessionPart('${_v}_${_soundKey}_loop', tl.leadIn + p, tl.leadIn + 2 * p);
+    final tail = SessionPart('${_v}_${_soundKey}_${minutes}m_end', tl.leadIn + n * p, tl.totalSeconds);
     return [head, for (var i = 1; i < n; i++) loop, tail];
   }
 }
@@ -301,8 +305,10 @@ class _Bell {
 }
 
 /// 在背景 isolate 執行：產生一段音檔並寫入 [path]（先寫暫存檔再改名，避免留下半個檔案）。
-Future<void> renderSessionToFile(SessionSpec spec, SessionPart part, String path) async {
-  final bytes = const SessionRenderer().renderPart(spec, part.start, part.end);
+/// [recordings]：這次用到的真實錄音（音景 → assets/audio 的檔案內容），沒有的音景用合成。
+Future<void> renderSessionToFile(SessionSpec spec, SessionPart part, String path,
+    {Map<SoundBed, Uint8List> recordings = const {}}) async {
+  final bytes = SessionRenderer(source: RecordedBedSource(recordings)).renderPart(spec, part.start, part.end);
   final tmp = File('$path.part');
   await tmp.writeAsBytes(bytes, flush: true);
   await tmp.rename(path);
