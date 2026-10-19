@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "塔羅",
+  "appTitle": "光穗塔羅",
   "@appTitle": {
     "description": "App 名稱（桌面名稱另由 patch_android.sh 設定）"
   },
@@ -181,7 +181,7 @@
     }
   },
   "reminderCustom": "自訂",
-  "reminderPermissionDenied": "尚未允許「塔羅」發送通知，可到手機設定 → 應用程式 → 塔羅 → 通知 開啟",
+  "reminderPermissionDenied": "尚未允許「光穗塔羅」發送通知，可到手機設定 → 應用程式 → 光穗塔羅 → 通知 開啟",
   "reminderInitFailed": "通知初始化失敗：{detail}",
   "@reminderInitFailed": {
     "placeholders": {
@@ -407,7 +407,7 @@
   "shareReading": "分享這次抽牌",
   "shareImage": "分享圖片",
   "shareFailed": "暫時無法分享，請稍後再試。",
-  "shareAppText": "我在用「塔羅」學塔羅、看見此刻的自己，推薦給你：{url}",
+  "shareAppText": "我在用「光穗塔羅」學塔羅、看見此刻的自己，推薦給你：{url}",
   "@shareAppText": {
     "description": "推薦給朋友的分享文字",
     "placeholders": {
@@ -416,7 +416,7 @@
       }
     }
   },
-  "shareReadingText": "我抽到{name}：「{title}」\n用「塔羅」抽一張牌：{url}",
+  "shareReadingText": "我抽到{name}：「{title}」\n用「光穗塔羅」抽一張牌：{url}",
   "@shareReadingText": {
     "description": "分享解讀卡片時附上的文字",
     "placeholders": {
