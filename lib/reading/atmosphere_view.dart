@@ -69,7 +69,7 @@ class AtmosphereSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(top: 7),
                   child: Icon(Icons.brightness_7_outlined, size: 14, color: TarotColors.rice),
                 ),

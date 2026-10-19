@@ -60,7 +60,7 @@ class _LessonUnitPageState extends State<LessonUnitPage> {
                 title: Text(lesson.title),
                 trailing: _done.contains(lesson.id)
                     ? Icon(Icons.check_circle_outline, color: TarotColors.earth, semanticLabel: l.lessonRead)
-                    : const Icon(Icons.chevron_right, color: TarotColors.textSub),
+                    : Icon(Icons.chevron_right, color: TarotColors.textSub),
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: unit, index: i)))
                     .then((_) => _load()),

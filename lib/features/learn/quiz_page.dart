@@ -51,7 +51,7 @@ class QuizSetupPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 10),
               child: ListTile(
                 title: Text(label(p)),
-                trailing: const Icon(Icons.chevron_right, color: TarotColors.textSub),
+                trailing: Icon(Icons.chevron_right, color: TarotColors.textSub),
                 onTap: () => Navigator.of(context)
                     .pushReplacement(MaterialPageRoute<void>(builder: (_) => QuizPage(pool: p))),
               ),
