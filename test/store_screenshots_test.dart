@@ -1,6 +1,6 @@
 // 商店截圖：在 tarot-content 的 store_screenshots.yml 匯入內容與字型後執行
 //   flutter test test/store_screenshots_test.dart --update-goldens
-// 產生 test/screenshots/*.png（1080×2340）。公開 repo 沒有內容檔，一般測試時自動略過。
+// 產生 test/screenshots/*.png（1080×1920，Play 限制長邊不超過短邊 2 倍）。公開 repo 沒有內容檔，一般測試時自動略過。
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -51,7 +51,7 @@ void main() {
   final shotKey = GlobalKey();
 
   Future<NavigatorState> start(WidgetTester tester) async {
-    tester.view.physicalSize = const Size(1080, 2340);
+    tester.view.physicalSize = const Size(1080, 1920);
     tester.view.devicePixelRatio = 3;
     tester.platformDispatcher.localesTestValue = const [Locale('zh', 'TW')];
     addTearDown(tester.view.reset);
