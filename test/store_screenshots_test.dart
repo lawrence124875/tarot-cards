@@ -5,7 +5,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tarot_cards/app/app.dart';
@@ -75,7 +78,15 @@ void main() {
 
   Future<void> shot(WidgetTester tester, String name) async {
     await _settle(tester);
-    await expectLater(find.byKey(shotKey), matchesGoldenFile('screenshots/$name.png'));
+    // golden 只輸出邏輯像素（360 寬），改直接以 3 倍像素輸出 1080×1920。
+    final boundary = tester.renderObject<RenderRepaintBoundary>(find.byKey(shotKey));
+    await tester.runAsync(() async {
+      final image = await boundary.toImage(pixelRatio: 3);
+      final png = await image.toByteData(format: ui.ImageByteFormat.png);
+      File('test/screenshots/$name.png')
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(png!.buffer.asUint8List());
+    });
   }
 
   testWidgets('store screenshots', (tester) async {
