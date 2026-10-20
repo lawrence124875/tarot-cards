@@ -43,17 +43,30 @@ sq = np.concatenate([np.repeat(tile[:1], top_pad, 0), tile, np.repeat(tile[-1:],
 art = Image.fromarray(sq.clip(0, 255).astype(np.uint8))
 n = art.size[0]
 
+# 桌面圖示（2026-10-20 Lawrence 重做的圖 branding/source/icon-2026-10-20.jpg，2000×2000、深藍底滿版）：
+# 金色圓框連同框內圖案在 x 338–1709、y 331–1638（量過），以框的中心裁正方形，外圍不夠就延伸邊緣底色
+ICON = Image.open(os.path.join(HERE, 'source', 'icon-2026-10-20.jpg')).convert('RGB')
+CX, CY, DIAM = (338 + 1709) / 2, (331 + 1638) / 2, 1709 - 338
+PAD = 600
+icon_src = Image.fromarray(np.pad(np.asarray(ICON), ((PAD, PAD), (PAD, PAD), (0, 0)), mode='edge'))
+
+
+def icon_crop(ratio):
+    """圓框直徑佔輸出邊長 ratio 的正方形。"""
+    half = DIAM / ratio / 2
+    return icon_src.crop((round(CX + PAD - half), round(CY + PAD - half), round(CX + PAD + half), round(CY + PAD + half)))
+
+
 res = os.path.join(HERE, 'android', 'res')
 dens = {'mdpi': 1, 'hdpi': 1.5, 'xhdpi': 2, 'xxhdpi': 3, 'xxxhdpi': 4}
+legacy = icon_crop(0.86)
+# 自適應圖示：108dp 畫布、可見範圍最小是直徑 72dp 的圓；圓框縮到 66dp，裁成圓形或圓角方形都不會切到
+adaptive = icon_crop(66 / 108)
 for d, k in dens.items():
     out = os.path.join(res, f'mipmap-{d}')
-    art.resize((round(48 * k),) * 2, Image.LANCZOS).save(os.path.join(out, 'ic_launcher.png'))
-    # 自適應圖示：108dp 畫布、可見範圍最小是直徑 72dp 的圓；整張圖縮到 55dp，連四角都在圓內，不會被遮罩切掉
-    fg = Image.new('RGBA', (round(108 * k),) * 2, NAVY + (255,))
-    s = round(55 * k)
-    fg.paste(art.resize((s, s), Image.LANCZOS), ((fg.size[0] - s) // 2,) * 2)
-    fg.save(os.path.join(out, 'ic_launcher_foreground.png'))
-art.resize((1024, 1024), Image.LANCZOS).save(os.path.join(HERE, 'icon-1024.png'))
+    legacy.resize((round(48 * k),) * 2, Image.LANCZOS).save(os.path.join(out, 'ic_launcher.png'))
+    adaptive.resize((round(108 * k),) * 2, Image.LANCZOS).save(os.path.join(out, 'ic_launcher_foreground.png'))
+icon_crop(0.86).resize((1024, 1024), Image.LANCZOS).save(os.path.join(HERE, 'icon-1024.png'))
 
 
 def back_card():
