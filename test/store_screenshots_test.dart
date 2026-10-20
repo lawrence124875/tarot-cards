@@ -34,11 +34,11 @@ Future<void> _loadFonts() async {
   }
 }
 
-/// 圖片在測試環境要在 runAsync 裡解碼，否則截圖是空白。
+/// 圖片在測試環境要在 runAsync 裡解碼，否則截圖是空白；牌面圖是非同步載入，多等幾輪。
 Future<void> _settle(WidgetTester tester) async {
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 6; i++) {
     await tester.runAsync(() async {
-      await Future<void>.delayed(const Duration(milliseconds: 300));
+      await Future<void>.delayed(const Duration(milliseconds: 800));
       for (final e in find.byType(Image).evaluate()) {
         await precacheImage((e.widget as Image).image, e);
       }
