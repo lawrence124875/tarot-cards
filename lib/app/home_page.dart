@@ -121,7 +121,7 @@ class _HomeMenu extends StatelessWidget {
     final l = context.l10n;
     final s = AppServices.of(context);
     return PopupMenuButton<_MenuItem>(
-      icon: const Icon(Icons.more_vert, color: TarotColors.textSub),
+      icon: Icon(Icons.more_vert, color: TarotColors.textSub),
       onSelected: (item) {
         switch (item) {
           case _MenuItem.premium:

@@ -204,7 +204,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
                 child: Text(e.question.isEmpty ? l.journalQuestionEmpty : e.question,
                     style: e.question.isEmpty ? t.bodyMedium?.copyWith(color: TarotColors.textSub) : null),
               ),
-              const Icon(Icons.edit_outlined, size: 18, color: TarotColors.textSub),
+              Icon(Icons.edit_outlined, size: 18, color: TarotColors.textSub),
             ]),
           ),
         ),
@@ -217,7 +217,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
                 child: Text(e.firstImpression.isEmpty ? l.journalQuestionEmpty : e.firstImpression,
                     style: e.firstImpression.isEmpty ? t.bodyMedium?.copyWith(color: TarotColors.textSub) : null),
               ),
-              const Icon(Icons.edit_outlined, size: 18, color: TarotColors.textSub),
+              Icon(Icons.edit_outlined, size: 18, color: TarotColors.textSub),
             ]),
           ),
         ),
@@ -249,7 +249,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
                     width: double.infinity,
                     margin: const EdgeInsets.only(top: 12),
                     padding: const EdgeInsetsDirectional.only(start: 12),
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: BorderDirectional(start: BorderSide(color: TarotColors.rice, width: 2)),
                     ),
                     child: Column(

@@ -9,7 +9,7 @@ import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_face.dart';
 import '../daily/daily_page.dart';
 
-/// 設定：牌面組（1909 原版／AI 繪製版）、是否使用逆位、今日一張的提醒。
+/// 設定：外觀（跟隨系統／淺色／深色）、牌面組（只有一組時不顯示）、是否使用逆位、今日一張的提醒。
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -52,11 +52,26 @@ class _SettingsPageState extends State<SettingsPage> {
         builder: (context, _) => ListView(
           padding: readablePadding(context, top: 8, bottom: 40),
           children: [
-            Text(l.settingsDeck, style: t.titleMedium),
+            Text(l.settingsTheme, style: t.titleMedium),
             const SizedBox(height: 8),
+            SegmentedButton<String>(
+              showSelectedIcon: false,
+              segments: [
+                ButtonSegment(value: 'system', label: Text(l.settingsThemeSystem), icon: const Icon(Icons.brightness_auto_outlined)),
+                ButtonSegment(value: 'light', label: Text(l.settingsThemeLight), icon: const Icon(Icons.light_mode_outlined)),
+                ButtonSegment(value: 'dark', label: Text(l.settingsThemeDark), icon: const Icon(Icons.dark_mode_outlined)),
+              ],
+              selected: {_s.settings.themeMode},
+              onSelectionChanged: (v) => _s.settings.update(themeMode: v.first),
+            ),
+            const SizedBox(height: 20),
+            if (_decks.length > 1) ...[
+              Text(l.settingsDeck, style: t.titleMedium),
+              const SizedBox(height: 8),
+            ],
             if (_decks.isEmpty)
               Text(l.settingsNoDeck, style: t.bodySmall?.copyWith(color: TarotColors.textSub))
-            else
+            else if (_decks.length > 1)
               for (final d in _decks)
                 Card(
                   margin: const EdgeInsets.only(bottom: 10),
@@ -87,9 +102,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           ]),
                         ),
                         if (d.id == current)
-                          const Icon(Icons.check_circle, color: TarotColors.rice)
+                          Icon(Icons.check_circle, color: TarotColors.rice)
                         else if (d.premium && !_s.isPremium)
-                          const Icon(Icons.lock_outline, color: TarotColors.textSub),
+                          Icon(Icons.lock_outline, color: TarotColors.textSub),
                       ]),
                     ),
                   ),
