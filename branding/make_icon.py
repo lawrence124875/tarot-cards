@@ -4,34 +4,53 @@ import os
 import sys
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFilter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
-# 桌面圖示（2026-10-20 Lawrence 重做的圖 branding/source/icon-2026-10-20.jpg，2000×2000、深藍底滿版）：
-# 金色圓框連同框內圖案在 x 338–1709、y 331–1638（量過），以框的中心裁正方形，外圍不夠就延伸邊緣底色
-ICON = Image.open(os.path.join(HERE, 'source', 'icon-2026-10-20.jpg')).convert('RGB')
-CX, CY, DIAM = (338 + 1709) / 2, (331 + 1638) / 2, 1709 - 338
-PAD = 600
-icon_src = Image.fromarray(np.pad(np.asarray(ICON), ((PAD, PAD), (PAD, PAD), (0, 0)), mode='edge'))
+# 桌面圖示（2026-10-20 Lawrence 選的圖 branding/source/icon-2026-10-20b.jpg，2000×2000）：
+# 原圖是淺灰底上一塊帶陰影的深藍圓角方塊，方塊在 x 302–1745、y 303–1744（量過）。
+# 只取方塊，圓角外與立體邊改成該列方塊本身的底色，方塊內圖案一點都不動。
+ICON = Image.open(os.path.join(HERE, 'source', 'icon-2026-10-20b.jpg')).convert('RGB')
+TX0, TY0 = 302, 303
+tile = np.asarray(ICON.crop((TX0, TY0, 1746, 1745))).astype(np.float32)
+th, tw, _ = tile.shape
+# 方塊底色是上淺下深的漸層：取方塊左右內側（避開圖案）的每列中位數、平滑後當底色，
+# 再用羽化遮罩把圓角外與立體邊換成這個底色，接縫看不出來
+cols = np.concatenate([tile[:, 110:180], tile[:, tw - 180:tw - 110]], axis=1)
+bg = np.median(cols, axis=1)
+bg[:90], bg[th - 75:] = bg[90], bg[th - 76]  # 外圈是灰底與立體邊，沿用最近的內側底色
+k = np.ones(61) / 61
+bg = np.stack([np.convolve(np.pad(bg[:, c], 30, mode='edge'), k, mode='valid') for c in range(3)], axis=1)
+m = Image.new('L', (tw, th), 0)
+ImageDraw.Draw(m).rounded_rectangle((85, 85, tw - 86, th - 86), radius=int(tw * 0.15), fill=255)
+# 太陽光芒在頂端中央離邊較近，那一塊保留原圖
+ImageDraw.Draw(m).rectangle((int(tw * 0.38), 45, int(tw * 0.62), 120), fill=255)
+w = (np.asarray(m.filter(ImageFilter.GaussianBlur(12))) / 255.0)[:, :, None]
+tile = tile * w + bg[:, None, :] * (1 - w)
+tile = tile.clip(0, 255).astype(np.uint8)
+# 圖案（太陽到無限符號、麥穗）在原圖 x 444–1594、y 359–1626，中心 (1019, 992)；離中心最遠的實心圖案約 750px
+CX, CY, REACH = 1019 - TX0, 992 - TY0, 750
+PAD = 800
+icon_src = Image.fromarray(np.pad(tile, ((PAD, PAD), (PAD, PAD), (0, 0)), mode='edge'))
 
 
-def icon_crop(ratio):
-    """圓框直徑佔輸出邊長 ratio 的正方形。"""
-    half = DIAM / ratio / 2
-    return icon_src.crop((round(CX + PAD - half), round(CY + PAD - half), round(CX + PAD + half), round(CY + PAD + half)))
+def icon_crop(side):
+    """以圖案中心裁邊長 side（原圖像素）的正方形，超出方塊的部分延伸邊緣底色。"""
+    x, y = CX + PAD - side / 2, CY + PAD - side / 2
+    return icon_src.crop((round(x), round(y), round(x + side), round(y + side)))
 
 
 res = os.path.join(HERE, 'android', 'res')
 dens = {'mdpi': 1, 'hdpi': 1.5, 'xhdpi': 2, 'xxhdpi': 3, 'xxxhdpi': 4}
-legacy = icon_crop(0.86)
-# 自適應圖示：108dp 畫布、可見範圍最小是直徑 72dp 的圓；圓框縮到 66dp，裁成圓形或圓角方形都不會切到
-adaptive = icon_crop(66 / 108)
+legacy = icon_crop(tw)
+# 自適應圖示：108dp 畫布、可見範圍最小是直徑 72dp 的圓；圖案縮到直徑 66dp 的圓內，裁成圓形或圓角方形都不會切到
+adaptive = icon_crop(REACH * 2 * 108 / 66)
 for d, k in dens.items():
     out = os.path.join(res, f'mipmap-{d}')
     legacy.resize((round(48 * k),) * 2, Image.LANCZOS).save(os.path.join(out, 'ic_launcher.png'))
     adaptive.resize((round(108 * k),) * 2, Image.LANCZOS).save(os.path.join(out, 'ic_launcher_foreground.png'))
-icon_crop(0.86).resize((1024, 1024), Image.LANCZOS).save(os.path.join(HERE, 'icon-1024.png'))
+icon_crop(tw).resize((1024, 1024), Image.LANCZOS).save(os.path.join(HERE, 'icon-1024.png'))
 
 
 def back_card():
