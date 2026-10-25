@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, other{{days} 日前に{name}を引きました。いま見返すと、このカードのイメージはその後どう重なりましたか？}}",
   "breathChannelName": "呼吸サウンドスケープ",
   "breathSetupTitle": "呼吸サウンドスケープ・{name}",
-  "breathSetupNote": "4秒吸って6秒吐きます（1分間に6回）。音はこのカードのエレメントにもとづき、呼吸に合わせて満ち引きします。持続音と鈴は432Hzで調律しています。",
+  "breathSetupNote": "4秒吸って6秒吐きます（1分間に6回）。サウンドスケープはこのカードのエレメントから選ばれ、せせらぎ・湖畔・山林は本物の自然の録音です。正確に調律した持続音とベル（432Hz）と合わせて、呼吸に合わせて満ち引きします。",
   "breathDuration": "時間",
   "breathCustom": "カスタム",
   "breathLongNote": "長めに座るときは「息の切り替えで鈴を鳴らす」をオフにして、音だけを残すこともできます。",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} 回",
   "journalStatsNote": "あなた自身の記録をふり返りやすくまとめたもので、これから起こることを示すものではありません。",
   "areaName": "{key, select, love{恋愛} work{仕事} self{自分} other{指定なし}}",
-  "sectionArea": "{key, select, love{恋愛に当てはめると} work{仕事に当てはめると} self{自分自身に向けると} other{あなたの問いに当てはめると}}"
+  "sectionArea": "{key, select, love{恋愛に当てはめると} work{仕事に当てはめると} self{自分自身に向けると} other{あなたの問いに当てはめると}}",
+  "learnUnitProgress": "{total}レッスン中{done}読了",
+  "lessonRead": "読了",
+  "settingsTheme": "外観",
+  "settingsThemeDark": "ダーク",
+  "settingsThemeLight": "ライト",
+  "settingsThemeSystem": "システムに合わせる"
 }

@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, other{{days}일 전에 {name} 카드를 뽑았어요. 돌아보면, 이 카드의 이미지는 그 뒤 어떻게 맞닿았나요?}}",
   "breathChannelName": "호흡 사운드스케이프",
   "breathSetupTitle": "호흡 사운드스케이프 · {name}",
-  "breathSetupNote": "4초 들이쉬고 6초 내쉬어요(1분에 6회). 소리는 이 카드의 원소에서 왔고, 호흡에 맞춰 차오르고 잦아들어요. 지속음과 종소리는 432Hz로 조율했어요.",
+  "breathSetupNote": "4초 들이쉬고 6초 내쉬어요(1분에 6번). 사운드스케이프는 이 카드의 원소에서 왔어요. 시냇물, 호숫가, 숲은 실제 자연 녹음이고, 정밀하게 조율한 긴 음과 종소리(432Hz)가 함께 호흡에 맞춰 오르내려요.",
   "breathDuration": "시간",
   "breathCustom": "직접 설정",
   "breathLongNote": "오래 앉아 있을 때는 ‘숨을 바꿀 때 종소리’를 끄고 소리 풍경만 남길 수 있어요.",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n}번",
   "journalStatsNote": "직접 남긴 기록을 돌아보기 쉽게 정리한 것일 뿐, 앞으로 일어날 일을 알려 주는 건 아니에요.",
   "areaName": "{key, select, love{연애} work{일} self{나 자신} other{선택 안 함}}",
-  "sectionArea": "{key, select, love{연애에 비춰 보면} work{일에 비춰 보면} self{나 자신에게 비춰 보면} other{내 질문에 비춰 보면}}"
+  "sectionArea": "{key, select, love{연애에 비춰 보면} work{일에 비춰 보면} self{나 자신에게 비춰 보면} other{내 질문에 비춰 보면}}",
+  "learnUnitProgress": "{total}과 중 {done}과 읽음",
+  "lessonRead": "읽음",
+  "settingsTheme": "화면 모드",
+  "settingsThemeDark": "다크",
+  "settingsThemeLight": "라이트",
+  "settingsThemeSystem": "시스템 설정 따르기"
 }

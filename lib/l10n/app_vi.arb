@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, other{{days} ngày trước bạn rút được {name}. Nhìn lại xem, hình ảnh của lá bài sau đó đã ứng vào điều gì?}}",
   "breathChannelName": "Thở cùng âm cảnh",
   "breathSetupTitle": "Thở cùng âm cảnh · {name}",
-  "breathSetupNote": "Hít vào 4 giây, thở ra 6 giây (6 nhịp mỗi phút). Âm cảnh được chọn theo nguyên tố của lá bài này, dâng lên và lắng xuống theo hơi thở; tiếng ngân và tiếng chuông được chỉnh theo 432 Hz.",
+  "breathSetupNote": "Hít vào 4 giây, thở ra 6 giây (6 lần mỗi phút). Âm cảnh đến từ nguyên tố của lá bài này: tiếng suối, bờ hồ và rừng núi là bản ghi âm thiên nhiên thật, cùng những âm ngân và tiếng chuông được lên dây chính xác (432Hz), lên xuống theo nhịp thở của bạn.",
   "breathDuration": "Thời lượng",
   "breathCustom": "Tùy chỉnh",
   "breathLongNote": "Khi ngồi tĩnh lâu, bạn có thể tắt “Chuông nhẹ khi đổi hơi thở” và chỉ giữ âm cảnh.",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} lần",
   "journalStatsNote": "Đây là bản tổng hợp từ chính ghi chép của bạn để tiện nhìn lại, không phải dự đoán.",
   "areaName": "{key, select, love{Tình cảm} work{Công việc} self{Bản thân} other{Không chọn}}",
-  "sectionArea": "{key, select, love{Trong chuyện tình cảm} work{Trong công việc} self{Với chính bạn} other{Trong câu hỏi của bạn}}"
+  "sectionArea": "{key, select, love{Trong chuyện tình cảm} work{Trong công việc} self{Với chính bạn} other{Trong câu hỏi của bạn}}",
+  "learnUnitProgress": "Đã đọc {done}/{total} bài",
+  "lessonRead": "Đã đọc",
+  "settingsTheme": "Giao diện",
+  "settingsThemeDark": "Tối",
+  "settingsThemeLight": "Sáng",
+  "settingsThemeSystem": "Theo hệ thống"
 }

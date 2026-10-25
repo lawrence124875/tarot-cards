@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, other{{days} hari lalu kamu menarik {name}. Coba lihat lagi, bagaimana gambaran kartu ini terhubung dengan yang terjadi kemudian?}}",
   "breathChannelName": "Napas & Lanskap Suara",
   "breathSetupTitle": "Napas & Lanskap Suara · {name}",
-  "breathSetupNote": "Tarik napas 4 detik, embuskan 6 detik (6 napas per menit). Lanskap suara dipilih sesuai unsur kartu ini dan naik turun mengikuti napasmu; nada panjang dan lonceng disetel pada 432 Hz.",
+  "breathSetupNote": "Tarik napas 4 detik dan embuskan 6 detik (6 kali per menit). Lanskap suara berasal dari elemen kartu ini: aliran sungai, tepi danau, dan hutan adalah rekaman alam asli, dipadukan dengan nada panjang dan lonceng yang disetel tepat (432 Hz), naik turun mengikuti napasmu.",
   "breathDuration": "Durasi",
   "breathCustom": "Atur sendiri",
   "breathLongNote": "Untuk duduk tenang lebih lama, kamu bisa mematikan “Lonceng lembut saat napas berganti” dan hanya mendengar lanskap suara.",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} kali",
   "journalStatsNote": "Ini ringkasan dari catatanmu sendiri agar mudah ditinjau, bukan prediksi apa pun.",
   "areaName": "{key, select, love{Cinta} work{Pekerjaan} self{Diri sendiri} other{Tanpa fokus}}",
-  "sectionArea": "{key, select, love{Dalam hubungan cinta} work{Dalam pekerjaan} self{Untuk dirimu sendiri} other{Dalam pertanyaanmu}}"
+  "sectionArea": "{key, select, love{Dalam hubungan cinta} work{Dalam pekerjaan} self{Untuk dirimu sendiri} other{Dalam pertanyaanmu}}",
+  "learnUnitProgress": "{done}/{total} pelajaran dibaca",
+  "lessonRead": "Sudah dibaca",
+  "settingsTheme": "Tampilan",
+  "settingsThemeDark": "Gelap",
+  "settingsThemeLight": "Terang",
+  "settingsThemeSystem": "Ikuti sistem"
 }

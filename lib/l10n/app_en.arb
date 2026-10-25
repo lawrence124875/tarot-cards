@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, one{You drew {name} {days} day ago. Looking back, how did this card’s imagery fit what happened?} other{You drew {name} {days} days ago. Looking back, how did this card’s imagery fit what happened?}}",
   "breathChannelName": "Breathing Soundscape",
   "breathSetupTitle": "Breathing Soundscape · {name}",
-  "breathSetupNote": "Breathe in for 4 seconds and out for 6 (6 breaths a minute). The soundscape comes from this card’s element and rises and falls with your breath; tones and bells are tuned to 432 Hz.",
+  "breathSetupNote": "Breathe in for 4 seconds and out for 6 (6 breaths a minute). The soundscape comes from this card’s element: the stream, lakeside, and forest are real nature recordings, paired with precisely tuned tones and bells (432 Hz) that rise and fall with your breath.",
   "breathDuration": "Duration",
   "breathCustom": "Custom",
   "breathLongNote": "For longer sessions, you can turn off “Soft bell at each breath” and keep just the soundscape.",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} times",
   "journalStatsNote": "This simply sorts your own entries so you can look back. It doesn’t say anything about what will happen.",
   "areaName": "{key, select, love{Love} work{Work} self{Self} other{No focus}}",
-  "sectionArea": "{key, select, love{In your love life} work{In your work} self{For yourself} other{In your question}}"
+  "sectionArea": "{key, select, love{In your love life} work{In your work} self{For yourself} other{In your question}}",
+  "learnUnitProgress": "{done}/{total} lessons read",
+  "lessonRead": "Read",
+  "settingsTheme": "Appearance",
+  "settingsThemeDark": "Dark",
+  "settingsThemeLight": "Light",
+  "settingsThemeSystem": "Follow system"
 }

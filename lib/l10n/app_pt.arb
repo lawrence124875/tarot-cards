@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, =1{Ontem você tirou {name}. Olhando para trás, como a imagem desta carta se conectou com o que aconteceu?} one{Há {days} dia você tirou {name}. Olhando para trás, como a imagem desta carta se conectou com o que aconteceu?} other{Há {days} dias você tirou {name}. Olhando para trás, como a imagem desta carta se conectou com o que aconteceu?}}",
   "breathChannelName": "Paisagem sonora para respirar",
   "breathSetupTitle": "Paisagem sonora · {name}",
-  "breathSetupNote": "Inspire por 4 segundos e expire por 6 (6 respirações por minuto). A paisagem sonora vem do elemento desta carta e sobe e desce com a sua respiração; os tons e os sinos estão afinados em 432 Hz.",
+  "breathSetupNote": "Inspire por 4 segundos e expire por 6 (6 respirações por minuto). A paisagem sonora vem do elemento desta carta: o riacho, a beira do lago e a floresta são gravações reais da natureza, com tons e sinos afinados com precisão (432 Hz) que sobem e descem com a sua respiração.",
   "breathDuration": "Duração",
   "breathCustom": "Personalizar",
   "breathLongNote": "Para sessões longas, você pode desligar “Sino suave ao mudar a respiração” e deixar só a paisagem sonora.",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} vezes",
   "journalStatsNote": "É um resumo dos seus próprios registros para ajudar na revisão; não diz nada sobre o futuro.",
   "areaName": "{key, select, love{Amor} work{Trabalho} self{Você} other{Sem foco}}",
-  "sectionArea": "{key, select, love{No amor} work{No trabalho} self{Para você} other{Na sua pergunta}}"
+  "sectionArea": "{key, select, love{No amor} work{No trabalho} self{Para você} other{Na sua pergunta}}",
+  "learnUnitProgress": "{done}/{total} lições lidas",
+  "lessonRead": "Lida",
+  "settingsTheme": "Aparência",
+  "settingsThemeDark": "Escuro",
+  "settingsThemeLight": "Claro",
+  "settingsThemeSystem": "Seguir o sistema"
 }

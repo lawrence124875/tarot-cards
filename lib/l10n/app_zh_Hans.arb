@@ -79,7 +79,7 @@
   "reviewNotificationBody": "{days, plural, other{{days} 天前抽到{name}。回头看看，这张牌的象后来怎么对上了？}}",
   "breathChannelName": "呼吸音景",
   "breathSetupTitle": "呼吸音景・{name}",
-  "breathSetupNote": "吸气 4 秒、吐气 6 秒（每分钟 6 次）。音景依这张牌的元素而来，会跟着呼吸起伏，长鸣与铃声以 432Hz 调音。",
+  "breathSetupNote": "吸气 4 秒、呼气 6 秒（每分钟 6 次）。音景依这张牌的元素而来，流水、湖畔与山林是真实自然录音，搭配精准调音的长音与铃声（432Hz），会跟着呼吸起伏。",
   "breathDuration": "时长",
   "breathCustom": "自订",
   "breathLongNote": "长时间静坐时，可以关掉“换气时轻敲铃声”，只留音景。",
@@ -294,5 +294,11 @@
   "journalStatsTimes": "{n} 次",
   "journalStatsNote": "这是你自己纪录的整理，方便回顾，不代表任何预测。",
   "areaName": "{key, select, love{感情} work{工作} self{自己} other{不指定}}",
-  "sectionArea": "{key, select, love{放进感情里看} work{放进工作里看} self{放回自己身上看} other{放进你的问题}}"
+  "sectionArea": "{key, select, love{放进感情里看} work{放进工作里看} self{放回自己身上看} other{放进你的问题}}",
+  "learnUnitProgress": "已读 {done}／{total} 课",
+  "lessonRead": "已读",
+  "settingsTheme": "外观",
+  "settingsThemeDark": "深色",
+  "settingsThemeLight": "浅色",
+  "settingsThemeSystem": "跟随系统"
 }
