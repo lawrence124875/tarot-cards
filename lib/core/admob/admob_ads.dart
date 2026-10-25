@@ -29,19 +29,22 @@ class AdMobAds implements AdService {
   static String? get _rewardedUnit => resolveUnit(_rewardedId,
       testId: _ios ? 'ca-app-pub-3940256099942544/1712485313' : 'ca-app-pub-3940256099942544/5224354917');
 
-  /// 空值防呆：ID 去空白後為空、"null"、"undefined" 或不是 ca-app-pub- 開頭都算沒設定。
-  /// 沒設定時，非 Release 用測試單元；Release 回傳 null＝這個廣告位安靜略過，不載入。
+  /// 空值防呆：ID 去空白後為空、"null"、"undefined" 或不是 ca-app-pub- 開頭都算沒設定，
+  /// 改用測試單元（畫面標 Test Ad，一看就知道沒注入；與謙卦相同）。測試單元也無效時回傳 null＝略過不載入。
   @visibleForTesting
-  static String? resolveUnit(String? raw, {required String testId, bool release = kReleaseMode}) {
+  static String? resolveUnit(String? raw, {required String testId}) {
+    if (_valid(raw)) return raw!.trim();
+    return _valid(testId) ? testId : null;
+  }
+
+  static bool _valid(String? raw) {
     final id = raw?.trim() ?? '';
     final lower = id.toLowerCase();
-    final valid = id.isNotEmpty && lower != 'null' && lower != 'undefined' && id.startsWith('ca-app-pub-');
-    if (valid) return id;
-    return release ? null : testId;
+    return id.isNotEmpty && lower != 'null' && lower != 'undefined' && id.startsWith('ca-app-pub-');
   }
 
   /// 是否用正式廣告單元（Release 說明顯示用）。
-  static bool get usingRealUnits => resolveUnit(_bannerId, testId: '', release: true) != null;
+  static bool get usingRealUnits => _valid(_bannerId);
 
   final InterstitialPacer _pacer;
   bool _started = false;
