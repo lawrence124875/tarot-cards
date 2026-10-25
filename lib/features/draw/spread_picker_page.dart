@@ -76,7 +76,7 @@ class _SpreadPickerPageState extends State<SpreadPickerPage> {
                                   Text(l.cardCount(sp.size), style: t.bodySmall),
                                   if (sp.premium && !_s.isPremium) ...[
                                     const SizedBox(width: 6),
-                                    const Icon(Icons.lock_outline, size: 16, color: TarotColors.textSub),
+                                    Icon(Icons.lock_outline, size: 16, color: TarotColors.textSub),
                                   ],
                                 ]),
                                 const SizedBox(height: 4),

@@ -121,12 +121,12 @@ class _ArtState extends State<_Art> {
         if (!widget.nameless) return image;
         return Stack(fit: StackFit.expand, children: [
           image,
-          const Align(
+          Align(
             alignment: Alignment.bottomCenter,
             child: FractionallySizedBox(
               widthFactor: 1,
               heightFactor: 0.12,
-              child: ColoredBox(color: TarotColors.inkCard),
+              child: ColoredBox(color: TarotPalette.light.inkCard),
             ),
           ),
         ]);
@@ -169,11 +169,11 @@ class PaintedCardFace extends StatelessWidget {
           height: 160 / kCardAspect,
           child: Column(
             children: [
-              Text(l.cardCorner(card), style: t.titleMedium),
+              Text(l.cardCorner(card), style: t.titleMedium?.copyWith(color: TarotPalette.light.earth)),
               const Spacer(),
-              Icon(elementIcon(card.element), size: 64, color: TarotColors.earth),
+              Icon(elementIcon(card.element), size: 64, color: TarotPalette.light.earth),
               const Spacer(),
-              Text(showName ? l.cardName(cardId) : '?', textAlign: TextAlign.center, style: t.titleMedium?.copyWith(color: TarotColors.text)),
+              Text(showName ? l.cardName(cardId) : '?', textAlign: TextAlign.center, style: t.titleMedium?.copyWith(color: TarotPalette.light.text)),
             ],
           ),
         ),

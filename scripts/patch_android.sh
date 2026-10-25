@@ -4,7 +4,14 @@
 set -euo pipefail
 
 MANIFEST="android/app/src/main/AndroidManifest.xml"
-sed -i 's/android:label="[^"]*"/android:label="塔羅"/' "$MANIFEST"
+# 桌面名稱：中文系統顯示「光穗塔羅」，其他語言顯示「AuraSpica Tarot」
+sed -i 's/android:label="[^"]*"/android:label="@string\/app_name"/' "$MANIFEST"
+RES="android/app/src/main/res"
+for d in values values-zh; do
+  mkdir -p "$RES/$d"
+  [ "$d" = values ] && name="AuraSpica Tarot" || name="光穗塔羅"
+  printf '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <string name="app_name">%s</string>\n</resources>\n' "$name" > "$RES/$d/strings.xml"
+done
 
 # 套件名稱（Google Play 身分，上傳後永遠不能改）：com.lclab.tarot
 # 只改 applicationId；namespace 維持 flutter create 產生的值，MainActivity 不必搬移

@@ -402,7 +402,7 @@ class _CardReading extends StatelessWidget {
             label: Text(l.cardDetailButton(l.cardName(drawn.cardId))),
           ),
         ),
-        if (!single) const Divider(height: 24, color: TarotColors.mountain),
+        if (!single) Divider(height: 24, color: TarotColors.mountain),
       ],
     );
   }

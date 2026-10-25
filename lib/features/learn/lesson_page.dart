@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
 import '../../l10n/l10n.dart';
@@ -8,15 +9,39 @@ import '../../reading/section.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_face.dart';
 
-/// 一個單元的課程列表。
-class LessonUnitPage extends StatelessWidget {
+/// 一個單元的課程列表；讀完的課打勾。
+class LessonUnitPage extends StatefulWidget {
   const LessonUnitPage({super.key, required this.unit});
 
   final LessonUnit unit;
 
   @override
+  State<LessonUnitPage> createState() => _LessonUnitPageState();
+}
+
+class _LessonUnitPageState extends State<LessonUnitPage> {
+  Set<String> _done = const {};
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _load());
+  }
+
+  Future<void> _load() async {
+    final p = AppServices.of(context).lessonProgress;
+    final done = <String>{
+      for (final l in widget.unit.lessons)
+        if (await p.isDone(widget.unit.id, l.id)) l.id,
+    };
+    if (mounted) setState(() => _done = done);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     final t = Theme.of(context).textTheme;
+    final unit = widget.unit;
     return Scaffold(
       appBar: AppBar(title: Text(unit.title)),
       body: ListView(
@@ -33,10 +58,12 @@ class LessonUnitPage extends StatelessWidget {
               child: ListTile(
                 leading: Text('${i + 1}', style: t.titleMedium?.copyWith(color: TarotColors.earth)),
                 title: Text(lesson.title),
-                trailing: const Icon(Icons.chevron_right, color: TarotColors.textSub),
-                onTap: () => Navigator.of(context).push(MaterialPageRoute<void>(
-                  builder: (_) => LessonPage(unit: unit, index: i),
-                )),
+                trailing: _done.contains(lesson.id)
+                    ? Icon(Icons.check_circle_outline, color: TarotColors.earth, semanticLabel: l.lessonRead)
+                    : Icon(Icons.chevron_right, color: TarotColors.textSub),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: unit, index: i)))
+                    .then((_) => _load()),
               ),
             ),
         ],
@@ -51,6 +78,9 @@ class LessonPage extends StatelessWidget {
 
   final LessonUnit unit;
   final int index;
+
+  Future<void> _markDone(BuildContext context) =>
+      AppServices.of(context).lessonProgress.markDone(unit.id, unit.lessons[index].id);
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +136,26 @@ class LessonPage extends StatelessWidget {
           if (hasNext)
             Center(
               child: FilledButton(
-                onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-                  builder: (_) => LessonPage(unit: unit, index: index + 1),
-                )),
+                onPressed: () async {
+                  await _markDone(context);
+                  if (!context.mounted) return;
+                  Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
+                    builder: (_) => LessonPage(unit: unit, index: index + 1),
+                  ));
+                },
                 child: Text(l.lessonNext),
               ),
             )
           else
-            Center(child: OutlinedButton(onPressed: () => Navigator.of(context).pop(), child: Text(l.lessonDone))),
+            Center(
+              child: OutlinedButton(
+                onPressed: () async {
+                  await _markDone(context);
+                  if (context.mounted) Navigator.of(context).pop();
+                },
+                child: Text(l.lessonDone),
+              ),
+            ),
         ],
       ),
     );

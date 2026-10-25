@@ -59,7 +59,7 @@ class _List extends StatelessWidget {
           return ListView.separated(
             padding: readablePadding(context, horizontal: 16, top: 8, bottom: 32),
             itemCount: entries.length,
-            separatorBuilder: (_, __) => const Divider(height: 1, color: TarotColors.mountain),
+            separatorBuilder: (_, __) => Divider(height: 1, color: TarotColors.mountain),
             itemBuilder: (context, i) => _Tile(entry: entries[i]),
           );
         },

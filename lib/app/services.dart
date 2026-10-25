@@ -12,6 +12,7 @@ import '../core/daily/daily_card.dart';
 import '../core/deck/deck.dart';
 import '../core/deck/deck_source.dart';
 import '../core/learn/card_quiz.dart';
+import '../core/learn/lesson_progress.dart';
 import '../core/settings/app_settings.dart';
 import '../core/settings/json_file.dart';
 import '../core/tarot/atmosphere.dart';
@@ -44,6 +45,7 @@ class Services {
     AppSettings? settings,
     DailyCardStore? daily,
     CardQuiz? quiz,
+    LessonProgress? lessonProgress,
     this.journal,
     this.breath,
     this.intro,
@@ -58,6 +60,7 @@ class Services {
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
+        lessonProgress = lessonProgress ?? LessonProgress(store: MemoryKeyValue()),
         premium = premium ?? FreePremium(),
         ads = ads ?? NoAds(),
         limits = limits ?? const FreeLimits(),
@@ -82,6 +85,7 @@ class Services {
         settings: AppSettings(),
         daily: DailyCardStore(),
         quiz: CardQuiz(),
+        lessonProgress: LessonProgress(),
         reminders: LocalNotificationReminders(
           channelName: () => L10n.current.reminderChannelName,
           channelDescription: () => L10n.current.reminderChannelDescription,
@@ -122,6 +126,9 @@ class Services {
 
   /// 認牌練習進度。
   final CardQuiz quiz;
+
+  /// 課程讀到哪裡。
+  final LessonProgress lessonProgress;
 
   /// 塔羅日記；為 null 時（拔除日記功能）解讀頁不顯示「記下這次抽牌」。
   final JournalStore? journal;

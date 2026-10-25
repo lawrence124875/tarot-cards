@@ -11,7 +11,7 @@ sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com\.lclab\.tarotCards;/PRODUCT_BUNDLE_
 grep -q 'PRODUCT_BUNDLE_IDENTIFIER = com.lclab.tarot;' ios/Runner.xcodeproj/project.pbxproj
 
 # 顯示名稱（主畫面圖示下方）
-set_str CFBundleDisplayName "塔羅"
+set_str CFBundleDisplayName "光穗塔羅"
 
 # 介面語言：iOS 只會把清單內的語言交給 Flutter，少了會一律退回英文
 $PB -c "Delete :CFBundleLocalizations" "$PLIST" 2>/dev/null || true

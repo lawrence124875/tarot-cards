@@ -60,6 +60,7 @@ flutter:
     - assets/decks/rws1909/
     - assets/decks/gemini/
     - assets/licenses/
+    - assets/audio/ # 真實自然錄音音景（CC0／公有領域，見 CREDITS.md）
 
   # 思源黑體／宋體子集（HANDOFF §15）：字型檔由 CI 以 scripts/build_fonts.py 產生，
   # 不進 repo（.gitignore 擋 *.ttf）。授權 OFL 1.1，全文在 assets/licenses/。

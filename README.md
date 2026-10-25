@@ -1,4 +1,4 @@
-# 塔羅 Tarot · LC Lab
+#**光穗塔羅 AuraSpica Tarot** · LC Lab
 
 以七十八張塔羅牌為題材的學習與自我反思 App（Flutter，套件名稱 `com.lclab.tarot`）。
 抽牌、牌義解讀、塔羅日記、今日一張、認牌學習與呼吸音景；解讀全部預先寫好，不使用 AI，使用者寫下的文字只存在手機本機。

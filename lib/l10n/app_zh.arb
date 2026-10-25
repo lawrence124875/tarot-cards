@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "塔羅",
+  "appTitle": "光穗塔羅",
   "@appTitle": {
     "description": "App 名稱（桌面名稱另由 patch_android.sh 設定）"
   },
@@ -181,7 +181,7 @@
     }
   },
   "reminderCustom": "自訂",
-  "reminderPermissionDenied": "尚未允許「塔羅」發送通知，可到手機設定 → 應用程式 → 塔羅 → 通知 開啟",
+  "reminderPermissionDenied": "尚未允許「光穗塔羅」發送通知，可到手機設定 → 應用程式 → 光穗塔羅 → 通知 開啟",
   "reminderInitFailed": "通知初始化失敗：{detail}",
   "@reminderInitFailed": {
     "placeholders": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "breathSetupNote": "吸氣 4 秒、吐氣 6 秒（每分鐘 6 次）。音景依這張牌的元素而來，會跟著呼吸起伏，長鳴與鈴聲以 432Hz 調音。",
+  "breathSetupNote": "吸氣 4 秒、吐氣 6 秒（每分鐘 6 次）。音景依這張牌的元素而來，流水、湖畔與山林是真實自然錄音，搭配精準調音的長音與鈴聲（432Hz），會跟著呼吸起伏。",
   "@breathSetupNote": {
     "description": "只描述做法，不寫療效（Google Play 健康宣稱政策，HANDOFF §14.2）"
   },
@@ -407,7 +407,7 @@
   "shareReading": "分享這次抽牌",
   "shareImage": "分享圖片",
   "shareFailed": "暫時無法分享，請稍後再試。",
-  "shareAppText": "我在用「塔羅」學塔羅、看見此刻的自己，推薦給你：{url}",
+  "shareAppText": "我在用「光穗塔羅」學塔羅、看見此刻的自己，推薦給你：{url}",
   "@shareAppText": {
     "description": "推薦給朋友的分享文字",
     "placeholders": {
@@ -416,7 +416,7 @@
       }
     }
   },
-  "shareReadingText": "我抽到{name}：「{title}」\n用「塔羅」抽一張牌：{url}",
+  "shareReadingText": "我抽到{name}：「{title}」\n用「光穗塔羅」抽一張牌：{url}",
   "@shareReadingText": {
     "description": "分享解讀卡片時附上的文字",
     "placeholders": {
@@ -719,6 +719,18 @@
   "lessonSources": "出處",
   "lessonNext": "下一課",
   "lessonDone": "完成這個單元",
+  "learnUnitProgress": "已讀 {done}／{total} 課",
+  "@learnUnitProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "lessonRead": "已讀",
   "quizIntro": "看牌面選出正確的牌名。答對的牌會隔幾天再出現，答錯的明天再練，慢慢就記住了。",
   "quizPoolAll": "全部 78 張",
   "quizQuestion": "這是哪一張牌？",
@@ -760,6 +772,10 @@
   "settingsDeck": "牌面",
   "settingsNoDeck": "牌面圖尚未放入，暫時以文字牌面顯示。",
   "settingsDeckAi": "此牌面由 AI 繪製",
+  "settingsTheme": "外觀",
+  "settingsThemeSystem": "跟隨系統",
+  "settingsThemeLight": "淺色",
+  "settingsThemeDark": "深色",
   "settingsReversals": "使用逆位",
   "settingsReversalsHint": "逆位代表能量向內、需要整理的地方，不是壞牌",
   "journalStatsTitle": "常出現的牌",

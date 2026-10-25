@@ -106,7 +106,7 @@ class _PaywallPageState extends State<PaywallPage> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(children: [
-                    const Icon(Icons.check, size: 18, color: TarotColors.earth),
+                    Icon(Icons.check, size: 18, color: TarotColors.earth),
                     const SizedBox(width: 12),
                     Expanded(child: Text(b, style: t.bodyLarge)),
                   ]),

@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 
-/// 牌背：牌面組有牌背圖就用圖，否則畫一張暮光紫底、晨光金太陽與星星的牌背（App 精神：光明）。
+/// 牌背圖最上、最下一列的顏色（branding/make_icon.py 的 NAVY）。
+const kBackEdge = Color(0xFF171E33);
+
+/// 牌背：牌面組有牌背圖就用圖（完整顯示不裁切，比例不合時多出的邊用牌背的深藍補滿），否則畫一張暮光紫底、晨光金太陽與星星的牌背（App 精神：光明）。
 class CardBack extends StatelessWidget {
   const CardBack({super.key});
 
@@ -16,7 +19,14 @@ class CardBack extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: back != null
-          ? Image.asset(back, fit: BoxFit.cover, errorBuilder: (_, __, ___) => const _PaintedBack())
+          ? ColoredBox(
+              color: kBackEdge,
+              child: Image.asset(back,
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                  height: double.infinity,
+                  errorBuilder: (_, __, ___) => const _PaintedBack()),
+            )
           : const _PaintedBack(),
     );
   }
@@ -29,7 +39,7 @@ class _PaintedBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [Color(0xFF5A4A86), TarotColors.twilight, Color(0xFF6E4E7A)],

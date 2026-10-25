@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tarot_cards/core/learn/card_quiz.dart';
+import 'package:tarot_cards/core/learn/lesson_progress.dart';
 import 'package:tarot_cards/core/settings/json_file.dart';
 
 /// 認牌練習（Leitner 盒子法）。
@@ -93,5 +94,21 @@ void main() {
     final q = CardQuiz(store: MemoryKeyValue());
     final r = await q.round(now, random: Random(1));
     expect(r.toSet(), Set.of(List.generate(10, (i) => i)));
+  });
+
+  test('課程進度：讀完的課記下來，依單元計數，重複標記不重寫', () async {
+    final store = MemoryKeyValue();
+    final p = LessonProgress(store: store);
+    expect(await p.doneIn('intro', ['what', 'history']), 0);
+    await p.markDone('intro', 'what');
+    await p.markDone('intro', 'what');
+    await p.markDone('majors', 'map');
+    expect(store.data['done'], ['intro/what', 'majors/map']);
+    expect(await p.isDone('intro', 'what'), isTrue);
+    expect(await p.isDone('intro', 'history'), isFalse);
+    expect(await p.doneIn('intro', ['what', 'history']), 1);
+    // 重新開啟 App 從檔案讀回
+    final again = LessonProgress(store: store);
+    expect(await again.doneIn('majors', ['map', 'outer']), 1);
   });
 }
