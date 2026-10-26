@@ -15,6 +15,7 @@
 
 - `assets/content/<語言>/`：`00.json`–`77.json`（每張牌）、`spreads.json`、`atmosphere.json`、`lessons.json`
 - `assets/decks/`：`decks.json` 與各牌面組的 `deck.json`、`00.webp`–`77.webp`、`back.webp`
+- `branding/`：App 圖示、通知圖示與牌背原圖（平台設定腳本會用到）
 
 這些檔案不進公開 repo；腳本在 CI 紀錄裡只印數量，不印檔名或內容。
 

@@ -41,4 +41,10 @@ if [ -f "$src/decks/decks.json" ]; then
   done
 fi
 
+# App 圖示與牌背原圖（patch_android.sh／patch_ios.sh 會用到）。
+if [ -d "$src/branding" ]; then
+  rm -rf branding
+  cp -r "$src/branding" branding
+fi
+
 echo "已匯入解讀（${summary# }）、牌面組（${decks# }）"
