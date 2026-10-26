@@ -43,5 +43,6 @@ jobs:
           tail -n 3 /tmp/test.log
           if [ $status -ne 0 ]; then
             grep -E "\[E\]|Expected|Actual|Error" /tmp/test.log | head -20 | while IFS= read -r line; do echo "::error::$line"; done
+            grep -A2 "relevant error-causing widget" /tmp/test.log | grep -E "lib/|test/" | sort -u | head -10 | while IFS= read -r line; do echo "::error::$line"; done
           fi
           exit $status
