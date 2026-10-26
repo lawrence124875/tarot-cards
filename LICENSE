@@ -1,0 +1,17 @@
+Copyright (c) 2026 LC Lab (lawrence124875). All rights reserved.
+版權所有 (c) 2026 LC Lab（lawrence124875）。保留一切權利。
+
+本 repo 公開僅供檢視。未經版權所有人書面同意，不得複製、修改、散布、再授權、
+用於其他 App 或商業用途，亦不得以本 repo 的程式碼、圖示、文字或設計發佈衍生作品。
+
+This repository is public for viewing only. No permission is granted to copy,
+modify, distribute, sublicense, reuse in other apps, use commercially, or
+publish derivative works from any code, icons, text or design in this
+repository without the copyright holder's prior written consent.
+
+第三方素材不受本聲明約束，依其原授權使用 / Third-party materials keep their own licenses:
+- assets/licenses/：Noto 字型，SIL Open Font License 1.1
+- assets/audio/：自然錄音，CC0 或公有領域（見 assets/audio/CREDITS.md）
+- pubspec.yaml 所列的 Flutter／Dart 套件：依各套件授權
+
+聯絡 / Contact: lawrence124875@gmail.com

@@ -1,9 +1,12 @@
-#**光穗塔羅 AuraSpica Tarot** · LC Lab
+# **光穗塔羅 AuraSpica Tarot** · LC Lab
 
 以七十八張塔羅牌為題材的學習與自我反思 App（Flutter，套件名稱 `com.lclab.tarot`）。
 抽牌、牌義解讀、塔羅日記、今日一張、認牌學習與呼吸音景；解讀全部預先寫好，不使用 AI，使用者寫下的文字只存在手機本機。
 
-- 隱私權政策：[`docs/privacy.html`](docs/privacy.html)（GitHub Pages 由 `docs/` 發佈）
+> **版權所有，未經同意不得複製使用。** All rights reserved — no copying or reuse without permission. 詳見 [`LICENSE`](LICENSE)。
+
+- 隱私權政策：https://lawrence124875.github.io/tarot-cards/privacy.html（由 lawrence124875.github.io 發佈）
+- 開發交接文件在私人 repo tarot-content 的 `HANDOFF.md`。
 
 ## 這個 repo 放什麼
 
@@ -56,7 +59,8 @@ lib/
 
 ## 授權與牌面
 
-1909 年原版牌的掃描圖屬公眾領域；選用的 AI 生成牌面在 App 內有清楚標示。
+本 repo 的程式碼、圖示與文字版權所有，見 [`LICENSE`](LICENSE)；第三方字型與錄音依其原授權。
+App 使用 1909 年原版牌的公有領域掃描圖（放在私人 repo）。
 
 ---
 
