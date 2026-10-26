@@ -22,18 +22,29 @@ class AdMobAds implements AdService {
 
   // Google 官方測試廣告單元（Android 與 iOS 各一組）。正式單元由 CI 以 dart-define 傳入（iOS 建置傳 iOS 的單元）。
   static bool get _ios => defaultTargetPlatform == TargetPlatform.iOS;
-  static String get bannerUnit => _bannerId.isNotEmpty
-      ? _bannerId
-      : (_ios ? 'ca-app-pub-3940256099942544/2934735716' : 'ca-app-pub-3940256099942544/6300978111');
-  static String get _interstitialUnit => _interstitialId.isNotEmpty
-      ? _interstitialId
-      : (_ios ? 'ca-app-pub-3940256099942544/4411468910' : 'ca-app-pub-3940256099942544/1033173712');
-  static String get _rewardedUnit => _rewardedId.isNotEmpty
-      ? _rewardedId
-      : (_ios ? 'ca-app-pub-3940256099942544/1712485313' : 'ca-app-pub-3940256099942544/5224354917');
+  static String? get bannerUnit => resolveUnit(_bannerId,
+      testId: _ios ? 'ca-app-pub-3940256099942544/2934735716' : 'ca-app-pub-3940256099942544/6300978111');
+  static String? get _interstitialUnit => resolveUnit(_interstitialId,
+      testId: _ios ? 'ca-app-pub-3940256099942544/4411468910' : 'ca-app-pub-3940256099942544/1033173712');
+  static String? get _rewardedUnit => resolveUnit(_rewardedId,
+      testId: _ios ? 'ca-app-pub-3940256099942544/1712485313' : 'ca-app-pub-3940256099942544/5224354917');
+
+  /// 空值防呆：ID 去空白後為空、"null"、"undefined" 或不是 ca-app-pub- 開頭都算沒設定，
+  /// 改用測試單元（畫面標 Test Ad，一看就知道沒注入；與謙卦相同）。測試單元也無效時回傳 null＝略過不載入。
+  @visibleForTesting
+  static String? resolveUnit(String? raw, {required String testId}) {
+    if (_valid(raw)) return raw!.trim();
+    return _valid(testId) ? testId : null;
+  }
+
+  static bool _valid(String? raw) {
+    final id = raw?.trim() ?? '';
+    final lower = id.toLowerCase();
+    return id.isNotEmpty && lower != 'null' && lower != 'undefined' && id.startsWith('ca-app-pub-');
+  }
 
   /// 是否用正式廣告單元（Release 說明顯示用）。
-  static bool get usingRealUnits => _bannerId.isNotEmpty;
+  static bool get usingRealUnits => _valid(_bannerId);
 
   final InterstitialPacer _pacer;
   bool _started = false;
@@ -42,6 +53,7 @@ class AdMobAds implements AdService {
   bool _privacyRequired = false;
   bool _fullScreenShowing = false;
   InterstitialAd? _interstitial;
+  bool _interstitialLoading = false;
   RewardedAd? _rewarded;
   final ValueNotifier<int> _bannerEpoch = ValueNotifier(0);
 
@@ -122,15 +134,33 @@ class AdMobAds implements AdService {
   // ---------------- 插頁 ----------------
 
   void _loadInterstitial() {
-    if (!_canShow || _interstitial != null) return;
-    InterstitialAd.load(
-      adUnitId: _interstitialUnit,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) => _interstitial = ad,
-        onAdFailedToLoad: (_) => _interstitial = null,
-      ),
-    );
+    if (!_canShow || _interstitial != null || _interstitialLoading) return;
+    final unit = _interstitialUnit;
+    if (unit == null) return;
+    _interstitialLoading = true;
+    try {
+      InterstitialAd.load(
+        adUnitId: unit,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            _interstitialLoading = false;
+            if (!_canShow) {
+              ad.dispose();
+              return;
+            }
+            _interstitial = ad;
+          },
+          onAdFailedToLoad: (_) {
+            _interstitialLoading = false;
+            _interstitial = null;
+          },
+        ),
+      );
+    } catch (e) {
+      _interstitialLoading = false;
+      debugPrint('插頁廣告載入失敗，略過：$e');
+    }
   }
 
   @override
@@ -159,7 +189,13 @@ class AdMobAds implements AdService {
       },
     );
     _fullScreenShowing = true;
-    ad.show();
+    try {
+      ad.show();
+    } catch (e) {
+      _fullScreenShowing = false;
+      ad.dispose();
+      debugPrint('插頁廣告顯示失敗，略過：$e');
+    }
   }
 
   // ---------------- 獎勵 ----------------
@@ -168,20 +204,33 @@ class AdMobAds implements AdService {
   Future<bool> prepareRewarded() async {
     if (!_canShow) return false;
     if (_rewarded != null) return true;
+    final unit = _rewardedUnit;
+    if (unit == null) return false;
     final c = Completer<bool>();
-    RewardedAd.load(
-      adUnitId: _rewardedUnit,
-      request: const AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (ad) {
-          _rewarded = ad;
-          if (!c.isCompleted) c.complete(true);
-        },
-        onAdFailedToLoad: (_) {
-          if (!c.isCompleted) c.complete(false);
-        },
-      ),
-    );
+    try {
+      RewardedAd.load(
+        adUnitId: unit,
+        request: const AdRequest(),
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (ad) {
+            if (!_canShow || c.isCompleted) {
+              ad.dispose(); // 已逾時或已訂閱：不留著
+              if (!c.isCompleted) c.complete(false);
+              return;
+            }
+            _rewarded?.dispose();
+            _rewarded = ad;
+            c.complete(true);
+          },
+          onAdFailedToLoad: (_) {
+            if (!c.isCompleted) c.complete(false);
+          },
+        ),
+      );
+    } catch (e) {
+      debugPrint('獎勵廣告載入失敗，略過：$e');
+      return false;
+    }
     return c.future.timeout(const Duration(seconds: 15), onTimeout: () => false);
   }
 
@@ -206,7 +255,14 @@ class AdMobAds implements AdService {
       },
     );
     _fullScreenShowing = true;
-    await ad.show(onUserEarnedReward: (_, __) => earned = true);
+    try {
+      await ad.show(onUserEarnedReward: (_, __) => earned = true);
+    } catch (e) {
+      _fullScreenShowing = false;
+      ad.dispose();
+      debugPrint('獎勵廣告顯示失敗，略過：$e');
+      return false;
+    }
     await closed.future.timeout(const Duration(minutes: 3), onTimeout: () {});
     return earned;
   }
@@ -262,20 +318,30 @@ class _BannerSlotState extends State<_BannerSlot> {
 
   void _load() {
     if (!widget.ads._canShow) return;
-    _ad = BannerAd(
-      adUnitId: AdMobAds.bannerUnit,
-      size: AdSize.banner,
-      request: const AdRequest(),
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          if (mounted) setState(() => _loaded = true);
-        },
-        onAdFailedToLoad: (ad, _) {
-          ad.dispose();
-          _ad = null;
-        },
-      ),
-    )..load();
+    final unit = AdMobAds.bannerUnit;
+    if (unit == null) return;
+    try {
+      _ad = BannerAd(
+        adUnitId: unit,
+        size: AdSize.banner,
+        request: const AdRequest(),
+        listener: BannerAdListener(
+          onAdLoaded: (ad) {
+            if (!mounted || !identical(ad, _ad)) return; // 已被替換或畫面已關，舊的已釋放
+            setState(() => _loaded = true);
+          },
+          onAdFailedToLoad: (ad, _) {
+            ad.dispose();
+            if (identical(ad, _ad)) _ad = null;
+            if (mounted) setState(() => _loaded = false);
+          },
+        ),
+      )..load();
+    } catch (e) {
+      _ad?.dispose();
+      _ad = null;
+      debugPrint('橫幅廣告載入失敗，略過：$e');
+    }
   }
 
   @override
