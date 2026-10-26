@@ -197,7 +197,7 @@ void main() {
       for (final lang in AppLanguages.all) {
         expect(lookupAppLocalizations(lang.locale).appTitle.trim(), isNotEmpty, reason: lang.code);
       }
-      expect(lookupAppLocalizations(AppLanguages.zhHant.locale).appTitle, '塔羅');
+      expect(lookupAppLocalizations(AppLanguages.zhHant.locale).appTitle, '光穗塔羅');
     });
 
     test(
