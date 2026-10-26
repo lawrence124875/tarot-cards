@@ -46,42 +46,42 @@ class AppLanguages {
     code: 'en',
     locale: Locale('en'),
     contentFolder: 'en',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   static const zhHans = AppLanguage(
     code: 'zh-Hans',
     locale: Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
     contentFolder: 'zh-Hans',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   static const ja = AppLanguage(
     code: 'ja',
     locale: Locale('ja'),
     contentFolder: 'ja',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   static const ko = AppLanguage(
     code: 'ko',
     locale: Locale('ko'),
     contentFolder: 'ko',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   static const vi = AppLanguage(
     code: 'vi',
     locale: Locale('vi'),
     contentFolder: 'vi',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   static const es = AppLanguage(
     code: 'es',
     locale: Locale('es'),
     contentFolder: 'es',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   /// 葡萄牙文：內容寫巴西葡萄牙文（pt-BR，代碼與術語表一致），手機語言是任何葡萄牙文（含葡萄牙 pt-PT）都用這一份（見 [resolve]）。
@@ -89,7 +89,7 @@ class AppLanguages {
     code: 'pt-BR',
     locale: Locale('pt'),
     contentFolder: 'pt-BR',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   /// 印尼文：標準印尼文（kamu 體）。
@@ -97,7 +97,7 @@ class AppLanguages {
     code: 'id',
     locale: Locale('id'),
     contentFolder: 'id',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   /// 泰文：書面標準泰文（讀者稱 คุณ），字型用 Noto Sans/Serif Thai（§15）。
@@ -105,7 +105,7 @@ class AppLanguages {
     code: 'th',
     locale: Locale('th'),
     contentFolder: 'th',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   /// 阿拉伯文：現代標準阿拉伯文（讀者稱 أنت），由右至左（MaterialApp 依 locale 自動 RTL），
@@ -114,7 +114,7 @@ class AppLanguages {
     code: 'ar',
     locale: Locale('ar'),
     contentFolder: 'ar',
-    contentReady: false, // 塔羅內容翻譯中（HANDOFF D）
+    contentReady: true,
   );
 
   /// 已有介面翻譯（ARB）的語言。順序無意義。
