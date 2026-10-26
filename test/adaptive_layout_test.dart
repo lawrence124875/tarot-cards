@@ -162,16 +162,12 @@ void main() {
 /// [allowFrom]：略過由這個檔案的元件造成的例外（已知、另有測試記錄的問題）。
 Future<void> _settle(WidgetTester tester, {int frames = 20, String? allowFrom}) async {
   final original = FlutterError.onError;
-  FlutterError.onError = (details) {
-    final text = details.toString();
-    if (allowFrom != null && text.contains(allowFrom)) return;
-    // CI 只讀摘要：把出錯元件在 lib 的位置印成一行，方便直接定位
-    for (final line in text.split('\n').where((l) => l.contains('.dart') || l.contains('Row') || l.contains('Text('))) {
-      // ignore: avoid_print
-      print('LAYOUT-ERROR-AT: ${line.trim()}');
-    }
-    original?.call(details);
-  };
+  if (allowFrom != null) {
+    FlutterError.onError = (details) {
+      if (details.toString().contains(allowFrom)) return;
+      original?.call(details);
+    };
+  }
   try {
     for (var i = 0; i < frames; i++) {
       await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 10)));
