@@ -47,8 +47,9 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 8),
           child: FilledButton(onPressed: () => open(f), child: Text(f.label(l))),
         ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      // 次要功能用 Wrap：字較長的語言（如阿拉伯文）在橫放的窄欄裡自動換行，不溢出
+      Wrap(
+        alignment: WrapAlignment.center,
         children: [for (final f in secondary) TextButton(onPressed: () => open(f), child: Text(f.label(l)))],
       ),
     ];
