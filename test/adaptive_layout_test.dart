@@ -166,8 +166,9 @@ Future<void> _settle(WidgetTester tester, {int frames = 20, String? allowFrom}) 
     final text = details.toString();
     if (allowFrom != null && text.contains(allowFrom)) return;
     // CI 只讀摘要：把出錯元件在 lib 的位置印成一行，方便直接定位
-    for (final line in text.split('\n').where((l) => l.contains('/lib/') && l.contains('.dart:'))) {
-      debugPrint('LAYOUT-ERROR-AT: ${line.trim()}');
+    for (final line in text.split('\n').where((l) => l.contains('.dart') || l.contains('Row') || l.contains('Text('))) {
+      // ignore: avoid_print
+      print('LAYOUT-ERROR-AT: ${line.trim()}');
     }
     original?.call(details);
   };
