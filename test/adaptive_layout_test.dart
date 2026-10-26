@@ -77,9 +77,9 @@ void main() {
         await tester.tap(find.text('three')); // 內容檔未匯入時牌陣名稱顯示代號
         await _settle(tester);
         expect(find.byType(DrawPage), findsOneWidget);
-        await tester.tap(find.widgetWithText(FilledButton, l.drawQuick));
+        await _tapVisible(tester, find.widgetWithText(FilledButton, l.drawQuick));
         await _settle(tester);
-        await tester.tap(find.widgetWithText(FilledButton, l.revealAll));
+        await _tapVisible(tester, find.widgetWithText(FilledButton, l.revealAll));
         // 全部翻開後跳出「第一眼印象」面板。面板本身的兩個問題（關閉時用到已 dispose 的 controller、
         // 手機橫放時溢出）是 lib 的問題，另見 first_impression_test.dart（skip）；
         // 這裡略過面板造成的例外並直接移除面板，其餘畫面照常嚴格檢查。
@@ -87,7 +87,7 @@ void main() {
         expect(find.text(l.firstImpressionSkip), findsOneWidget);
         nav().removeRoute(ModalRoute.of(tester.element(find.text(l.firstImpressionSkip)))!);
         await _settle(tester);
-        await tester.tap(find.widgetWithText(FilledButton, l.viewReading));
+        await _tapVisible(tester, find.widgetWithText(FilledButton, l.viewReading));
         await _settle(tester);
         expect(find.byType(ReadingPage), findsOneWidget);
         await tester.fling(find.byType(Scrollable).last, const Offset(0, -6000), 3000);
@@ -104,7 +104,7 @@ void main() {
         await tester.pump();
         await tester.tap(find.text(l.drawRitual));
         await _settle(tester);
-        await tester.tap(find.widgetWithText(FilledButton, l.shuffle));
+        await _tapVisible(tester, find.widgetWithText(FilledButton, l.shuffle));
         await _settle(tester);
         await tester.tap(find.text(l.shuffleDone));
         await _settle(tester);
@@ -160,6 +160,13 @@ void main() {
 
 /// 讓資產讀取（真實非同步）與動畫跑完；每一格都檢查有沒有版面例外。
 /// [allowFrom]：略過由這個檔案的元件造成的例外（已知、另有測試記錄的問題）。
+/// 橫放時右側欄會捲動（字較長的語言更明顯），先把按鈕捲進畫面再點
+Future<void> _tapVisible(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
+  await tester.pump();
+  await tester.tap(finder);
+}
+
 Future<void> _settle(WidgetTester tester, {int frames = 20, String? allowFrom}) async {
   final original = FlutterError.onError;
   if (allowFrom != null) {
