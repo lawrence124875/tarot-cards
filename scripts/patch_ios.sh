@@ -13,6 +13,15 @@ grep -q 'PRODUCT_BUNDLE_IDENTIFIER = com.lclab.tarot;' ios/Runner.xcodeproj/proj
 # 顯示名稱（主畫面圖示下方）
 set_str CFBundleDisplayName "光穗塔羅"
 
+# App 圖示：用 branding/icon-1024.png（無透明，App Store 規定）覆蓋 flutter create 的預設圖示，
+# 每個檔案照原本的像素大小重新縮放。
+ICONSET=ios/Runner/Assets.xcassets/AppIcon.appiconset
+for f in "$ICONSET"/*.png; do
+  px=$(sips -g pixelWidth "$f" | awk '/pixelWidth/{print $2}')
+  sips -s format png -z "$px" "$px" branding/icon-1024.png --out "$f" >/dev/null
+done
+ls "$ICONSET"/*.png >/dev/null
+
 # 介面語言：iOS 只會把清單內的語言交給 Flutter，少了會一律退回英文
 $PB -c "Delete :CFBundleLocalizations" "$PLIST" 2>/dev/null || true
 $PB -c "Add :CFBundleLocalizations array" "$PLIST"
@@ -48,4 +57,4 @@ if [ -f "$APPDELEGATE" ] && ! grep -q UNUserNotificationCenter "$APPDELEGATE"; t
   grep -q 'UNUserNotificationCenter.current().delegate = self' "$APPDELEGATE"
 fi
 
-echo "iOS 設定完成：com.lclab.tarot、11 種介面語言、AdMob ${ADMOB_IOS_APP_ID:+正式}${ADMOB_IOS_APP_ID:-測試} App ID、背景播放"
+echo "iOS 設定完成：com.lclab.tarot、App 圖示、11 種介面語言、AdMob ${ADMOB_IOS_APP_ID:+正式}${ADMOB_IOS_APP_ID:-測試} App ID、背景播放"
