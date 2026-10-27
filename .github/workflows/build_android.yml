@@ -47,6 +47,7 @@ jobs:
             th
             ar
             decks
+            branding
             store/release-notes
 
       - uses: subosito/flutter-action@v2

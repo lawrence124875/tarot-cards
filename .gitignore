@@ -53,3 +53,6 @@ google-services.json
 GoogleService-Info.plist
 # 商店截圖原始畫面含私人內容，不進公開 repo（screenshots/README.md）
 /screenshots/out/
+
+# App 圖示與牌背原圖只在私人 repo（tarot-content branding/），建置時由 import_content.sh 複製進來
+/branding/
