@@ -308,5 +308,9 @@
   "settingsTheme": "Apariencia",
   "settingsThemeDark": "Oscuro",
   "settingsThemeLight": "Claro",
-  "settingsThemeSystem": "Según el sistema"
+  "settingsThemeSystem": "Según el sistema",
+  "updateTitle": "Nueva versión disponible",
+  "updateBody": "Hay una nueva versión de AuraSpica Tarot. Actualiza para tener el contenido y las correcciones más recientes.",
+  "updateNow": "Actualizar ahora",
+  "updateLater": "Más tarde"
 }

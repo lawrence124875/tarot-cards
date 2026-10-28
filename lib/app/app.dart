@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import '../core/update/app_updater.dart';
 import '../l10n/l10n.dart';
 import '../features/intro/intro_page.dart';
 import 'feature_registry.dart';
@@ -35,12 +36,37 @@ class _TarotAppState extends State<TarotApp> {
         _open(p);
         return;
       }
-      // 首次開啟顯示功能介紹（從通知打開時不打斷）
+      // 首次開啟顯示功能介紹（從通知打開時不打斷）；看過介紹後才檢查新版
       final intro = services.intro;
-      if (intro == null || await intro.seen()) return;
-      final nav = _navigatorKey.currentState;
-      if (nav != null) await showIntro(nav);
+      if (intro != null && !await intro.seen()) {
+        final nav = _navigatorKey.currentState;
+        if (nav != null) await showIntro(nav);
+        return;
+      }
+      await _maybePromptUpdate(services);
     });
+  }
+
+  static final _updateGate = UpdatePromptGate();
+
+  /// 有新版本時提示「立即更新」（HANDOFF §2：每一版都要保留）。每次啟動最多一次。
+  Future<void> _maybePromptUpdate(Services services) async {
+    if (!await _updateGate.shouldPrompt(services.updater)) return;
+    final ctx = _navigatorKey.currentContext;
+    if (ctx == null || !ctx.mounted) return;
+    final l = ctx.l10n;
+    final go = await showDialog<bool>(
+      context: ctx,
+      builder: (c) => AlertDialog(
+        title: Text(l.updateTitle),
+        content: Text(l.updateBody),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c, false), child: Text(l.updateLater)),
+          FilledButton(onPressed: () => Navigator.pop(c, true), child: Text(l.updateNow)),
+        ],
+      ),
+    );
+    if (go ?? false) await services.updater.startUpdate();
   }
 
   /// 通知帶來的 payload 交給認得它的功能（例如日記開啟該筆紀錄）。

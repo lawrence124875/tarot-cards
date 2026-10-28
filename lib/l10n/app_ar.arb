@@ -308,5 +308,9 @@
   "settingsTheme": "المظهر",
   "settingsThemeDark": "داكن",
   "settingsThemeLight": "فاتح",
-  "settingsThemeSystem": "حسب النظام"
+  "settingsThemeSystem": "حسب النظام",
+  "updateTitle": "يتوفر إصدار جديد",
+  "updateBody": "يتوفر إصدار جديد من AuraSpica Tarot. حدّث التطبيق لتحصل على أحدث المحتوى والإصلاحات.",
+  "updateNow": "حدّث الآن",
+  "updateLater": "لاحقًا"
 }

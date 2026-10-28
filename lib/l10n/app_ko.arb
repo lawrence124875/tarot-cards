@@ -308,5 +308,9 @@
   "settingsTheme": "화면 모드",
   "settingsThemeDark": "다크",
   "settingsThemeLight": "라이트",
-  "settingsThemeSystem": "시스템 설정 따르기"
+  "settingsThemeSystem": "시스템 설정 따르기",
+  "updateTitle": "새 버전이 있어요",
+  "updateBody": "AuraSpica Tarot 새 버전이 나왔어요. 업데이트하면 최신 내용과 수정 사항을 이용할 수 있어요.",
+  "updateNow": "지금 업데이트",
+  "updateLater": "나중에"
 }

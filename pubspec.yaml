@@ -33,6 +33,7 @@ dependencies:
   share_plus: ^13.3.1 # 分享卦象卡片、推薦給朋友
   file_picker: ^13.1.0 # 卦記從備份還原：選擇備份檔
   package_info_plus: ^10.2.2 # 意見回饋附上 App 版本
+  in_app_update: ">=4.2.3 <6.0.0" # 有新版時提示「立即更新」（Google Play In-App Updates）
 
 dev_dependencies:
   flutter_test:

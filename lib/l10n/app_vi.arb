@@ -308,5 +308,9 @@
   "settingsTheme": "Giao diện",
   "settingsThemeDark": "Tối",
   "settingsThemeLight": "Sáng",
-  "settingsThemeSystem": "Theo hệ thống"
+  "settingsThemeSystem": "Theo hệ thống",
+  "updateTitle": "Đã có phiên bản mới",
+  "updateBody": "AuraSpica Tarot đã có phiên bản mới. Cập nhật để dùng nội dung và bản sửa lỗi mới nhất.",
+  "updateNow": "Cập nhật ngay",
+  "updateLater": "Để sau"
 }
