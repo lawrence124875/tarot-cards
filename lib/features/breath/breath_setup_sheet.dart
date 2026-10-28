@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/services.dart';
+import '../../core/events/event_bus.dart';
 import '../../shared/premium/paywall_page.dart';
 
 import '../../core/soundscape/sound_bed.dart';
@@ -82,6 +83,7 @@ class _SetupSheetState extends State<_SetupSheet> {
 
   /// 點了會員功能：開訂閱頁，訂閱成功就套用。
   Future<void> _unlock(VoidCallback apply) async {
+    _s.events.emit(const HitFreeLimit(type: 'breath'));
     if (await openPaywall(context, source: 'breath') && mounted) setState(apply);
   }
 

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
+import '../../core/events/event_bus.dart';
 import '../../core/tarot/spread.dart';
 import '../../l10n/l10n.dart';
+import '../../shared/premium/ad_banner.dart';
 import '../../shared/premium/paywall_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/spread_layout.dart';
@@ -24,6 +26,7 @@ class _SpreadPickerPageState extends State<SpreadPickerPage> {
 
   Future<void> _open(Spread spread) async {
     if (spread.premium && !_s.isPremium) {
+      _s.events.emit(const HitFreeLimit(type: 'spread'));
       if (!await openPaywall(context, source: 'spread_${spread.id}') || !mounted) return;
     }
     if (!mounted) return;
@@ -36,6 +39,7 @@ class _SpreadPickerPageState extends State<SpreadPickerPage> {
     final t = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: Text(l.spreadPickerTitle)),
+      bottomNavigationBar: const AdBanner(),
       body: FutureBuilder<SpreadTexts?>(
         future: _texts,
         builder: (context, snap) {

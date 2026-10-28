@@ -206,6 +206,13 @@ class LessonUnit {
   final List<Lesson> lessons;
 
   bool get ready => lessons.isNotEmpty;
+
+  /// 免費版可讀第 [index] 課嗎（HANDOFF H 第 3 點）：入門單元（free）全部免費；
+  /// 其他單元只有第 1 課免費試讀。以程式規則判斷，不必在 11 語 lessons.json 逐課標記。
+  bool lessonFree(int index) => free || index == 0;
+
+  /// 試讀單元中要訂閱才能讀的課數（試讀課結尾「解鎖本單元其餘 N 課」）。
+  int get lockedCount => free ? 0 : (lessons.length - 1).clamp(0, lessons.length);
 }
 
 class Lesson {

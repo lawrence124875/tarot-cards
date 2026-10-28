@@ -10,18 +10,21 @@ import '../../core/monetization/premium_service.dart';
 import '../../l10n/l10n.dart';
 import '../widgets/adaptive_layout.dart';
 
-/// 開啟訂閱頁。[source]：從哪裡進來（統計用：cast_limit、journal_limit、breath、menu）。
-/// 回傳離開時是否為訂閱戶。
-Future<bool> openPaywall(BuildContext context, {required String source}) async {
+/// 開啟訂閱頁。[source]：從哪裡進來（統計 paywall_view 用，見 [PaywallShown]）。
+/// [note]：頁首的說明（例：今天的抽牌次數用完）。回傳離開時是否為訂閱戶。
+Future<bool> openPaywall(BuildContext context, {required String source, String? note}) async {
   final s = AppServices.of(context);
   s.events.emit(PaywallShown(source: source));
-  await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const PaywallPage()));
+  await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => PaywallPage(note: note)));
   return s.isPremium;
 }
 
-/// 訂閱頁（HANDOFF §23）：月訂、年訂；恢復購買；續訂說明（Google Play 訂閱政策要求清楚揭露）。
+/// 訂閱頁（HANDOFF H 第 6 點）：年訂（預設選取，標每月約多少；有試用優惠時寫明試用與之後的年費）、
+/// 月訂；恢復購買；續訂說明（Google Play 訂閱政策要求清楚揭露）。價格一律用商店回傳的當地字串。
 class PaywallPage extends StatefulWidget {
-  const PaywallPage({super.key});
+  const PaywallPage({super.key, this.note});
+
+  final String? note;
 
   @override
   State<PaywallPage> createState() => _PaywallPageState();
@@ -60,6 +63,7 @@ class _PaywallPageState extends State<PaywallPage> {
     final l = context.l10n;
     switch (r) {
       case PurchaseOutcome.success:
+        if (plan.hasTrial) _s.events.emit(TrialStarted(period: plan.period.name));
         _s.events.emit(Subscribed(period: plan.period.name));
         _toast(l.premiumThanks);
         Navigator.of(context).pop();
@@ -97,12 +101,16 @@ class _PaywallPageState extends State<PaywallPage> {
           builder: (context, premium, _) => ListView(
             padding: readablePadding(context, horizontal: 28, bottom: 24, maxWidth: 560),
             children: [
+              if (widget.note case final note?) ...[
+                Text(note, style: t.bodyMedium, textAlign: TextAlign.center),
+                const SizedBox(height: 20),
+              ],
               Text(l.premiumTitle, style: t.headlineSmall, textAlign: TextAlign.center),
               const SizedBox(height: 6),
               Text(l.premiumSubtitle,
                   style: t.bodyMedium?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
               const SizedBox(height: 24),
-              for (final b in [l.premiumBenefitNoAds, l.premiumBenefitCasts, l.premiumBenefitJournal, l.premiumBenefitBreath])
+              for (final b in [l.premiumBenefitCourses, l.premiumBenefitSpreads, l.premiumBenefitNoAds, l.premiumBenefitJournal])
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(children: [
@@ -145,6 +153,8 @@ class _PaywallPageState extends State<PaywallPage> {
         ),
       ];
     }
+    final locale = Localizations.localeOf(context).toString();
+    final selected = plans.where((p) => p.period == _selected).firstOrNull;
     return [
       for (final p in plans)
         Padding(
@@ -152,16 +162,26 @@ class _PaywallPageState extends State<PaywallPage> {
           child: _PlanTile(
             title: p.period == PlanPeriod.monthly ? l.planMonthly : l.planYearly,
             price: p.price,
+            detail: [
+              if (p.hasTrial && p.period == PlanPeriod.yearly) l.premiumTrial(p.trialDays!, p.price),
+              if (p.perMonth(locale) case final m?) l.planPerMonth(m),
+            ].join('\n'),
             selected: _selected == p.period,
             onTap: () => setState(() => _selected = p.period),
           ),
+        ),
+      if (selected?.hasTrial ?? false)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: Text(l.premiumTrialNote,
+              style: t.bodySmall?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
         ),
       const SizedBox(height: 8),
       FilledButton(
         onPressed: _busy ? null : _buy,
         child: _busy
             ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-            : Text(l.premiumSubscribe),
+            : Text((selected?.hasTrial ?? false) ? l.premiumStartTrial : l.premiumSubscribe),
       ),
       TextButton(onPressed: _busy ? null : _restore, child: Text(l.premiumRestore)),
       const SizedBox(height: 8),
@@ -187,10 +207,19 @@ class _PaywallPageState extends State<PaywallPage> {
 }
 
 class _PlanTile extends StatelessWidget {
-  const _PlanTile({required this.title, required this.price, required this.selected, required this.onTap});
+  const _PlanTile({
+    required this.title,
+    required this.price,
+    this.detail = '',
+    required this.selected,
+    required this.onTap,
+  });
 
   final String title;
   final String price;
+
+  /// 方案下方的小字（試用說明、每月約多少）；空字串不顯示。
+  final String detail;
   final bool selected;
   final VoidCallback onTap;
 
@@ -216,7 +245,13 @@ class _PlanTile extends StatelessWidget {
             Icon(selected ? Icons.radio_button_checked : Icons.radio_button_off,
                 size: 20, color: selected ? TarotColors.earth : TarotColors.textSub),
             const SizedBox(width: 12),
-            Expanded(child: Text(title, style: t.titleMedium)),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(title, style: t.titleMedium),
+                if (detail.isNotEmpty) Text(detail, style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
+              ]),
+            ),
+            const SizedBox(width: 8),
             Text(price, style: t.titleMedium),
           ]),
         ),

@@ -63,8 +63,6 @@ void main() {
           expect(keys.difference(messageKeys(arb(f))), isEmpty, reason: '$f 缺少的鍵');
         }
       },
-      skip: 'lib/l10n：除 app_zh.arb 以外的 10 個 ARB 都還缺約 98 個塔羅新鍵（featureDaily、drawQuick…），'
-          '執行時退回繁中範本文字',
     );
 
     test('翻譯只用範本宣告過的參數；有寫參數說明時與範本相同', () {

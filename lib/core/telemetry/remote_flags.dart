@@ -1,8 +1,8 @@
 /// 遠端開關介面（HANDOFF §9 第 4 項、§18）。目前只用來開關功能入口：
 /// 參數名稱 `tr_feature_<功能 id>`（布林），App 內預設全部開啟。
 ///
-/// Firebase 專案與智慧聽覺巡航共用，所以參數一律 `tr_` 開頭，
-/// 並且在 Firebase 主控台只設定在「謙卦 App」條件下（見 §18）。
+/// Firebase 專案與其他 App 共用，所以參數一律 `tr_` 開頭；在主控台設定值時
+/// 加上條件「App＝com.lclab.tarot」（iOS 上架後再加 iOS App）。
 abstract class RemoteFlags {
   bool featureEnabled(String featureId);
 

@@ -44,18 +44,58 @@ class BreathCompleted extends AppEvent {
   final int minutes;
 }
 
-/// 打開訂閱頁（source：cast_limit、journal_limit、breath、menu）。
+/// 這台裝置第一次抽牌（漏斗起點）。
+class FirstDraw extends AppEvent {
+  const FirstDraw({required this.spreadId});
+
+  final String spreadId;
+}
+
+/// 碰到免費版限制（type：draw、spread、lesson、journal、breath）。
+class HitFreeLimit extends AppEvent {
+  const HitFreeLimit({required this.type});
+
+  final String type;
+}
+
+/// 獎勵廣告播出（source：cast、journal；earned：有沒有看完拿到獎勵）。
+class RewardedAdShown extends AppEvent {
+  const RewardedAdShown({required this.source, required this.earned});
+
+  final String source;
+  final bool earned;
+}
+
+/// 獎勵廣告載入失敗、無填充或顯示失敗。
+class RewardedAdFailed extends AppEvent {
+  const RewardedAdFailed({required this.source});
+
+  final String source;
+}
+
+/// 每日第 1 次抽牌的插頁播出。
+class InterstitialShown extends AppEvent {
+  const InterstitialShown();
+}
+
+/// 插頁載入失敗、無填充、逾時 3 秒或顯示失敗（直接顯示解讀）。
+class InterstitialFailed extends AppEvent {
+  const InterstitialFailed();
+}
+
+/// 打開訂閱頁（source：cast_limit、spread_<id>、lesson_<unitId>、lesson_preview_<unitId>、
+/// journal_limit、breath、deck_<id>、menu）。
 class PaywallShown extends AppEvent {
   const PaywallShown({required this.source});
 
   final String source;
 }
 
-/// 看完一支獎勵廣告並拿到獎勵（source：cast、journal）。
-class RewardedEarned extends AppEvent {
-  const RewardedEarned({required this.source});
+/// 開始免費試用（購買了帶試用優惠的方案）。
+class TrialStarted extends AppEvent {
+  const TrialStarted({required this.period});
 
-  final String source;
+  final String period;
 }
 
 /// 購買或恢復訂閱成功（period：monthly、yearly、restore）。

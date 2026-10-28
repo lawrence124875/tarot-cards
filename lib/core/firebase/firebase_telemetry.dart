@@ -48,6 +48,8 @@ class FirebaseTelemetry {
 
     try {
       await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(sharing);
+      // 共用 Firebase 專案：每個事件都帶 app=tarot（另有內建的「App／串流」維度可篩選）
+      await FirebaseAnalytics.instance.setDefaultEventParameters({'app': 'tarot'});
     } catch (e) {
       debugPrint('Analytics 設定失敗：$e');
     }

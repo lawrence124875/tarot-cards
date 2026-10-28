@@ -6,11 +6,13 @@ import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
+import '../../core/monetization/cast_quota.dart';
 import '../../core/tarot/draw.dart';
 import '../../core/tarot/spread.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/reading_page.dart';
 import '../../shared/premium/cast_gate.dart';
+import '../../shared/premium/reading_interstitial.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_back.dart';
 import '../../shared/widgets/card_face.dart';
@@ -51,6 +53,8 @@ class _DrawPageState extends State<DrawPage> {
   bool _shaking = false;
   String _impression = '';
   bool _askedImpression = false;
+  CastGrant? _grant; // 這次抽牌怎麼來的（每日第 1 次免費抽牌在解讀前播插頁）
+  bool _interstitialPlayed = false;
 
   Spread get _spread => widget.spread;
   bool get _allRevealed => _revealed.length == _spread.size && _picked.length == _spread.size;
@@ -58,9 +62,12 @@ class _DrawPageState extends State<DrawPage> {
   Future<bool> _gate() async {
     if (_checking) return false;
     _checking = true;
-    final ok = await ensureCanCast(context); // 免費版每日次數
+    final grant = await ensureCanCast(context, spreadId: _spread.id); // 免費版每日次數
     _checking = false;
-    return ok && mounted;
+    if (grant == null || !mounted) return false;
+    _grant = grant;
+    _interstitialPlayed = false;
+    return true;
   }
 
   Future<void> _quick() async {
@@ -139,11 +146,14 @@ class _DrawPageState extends State<DrawPage> {
 
   Future<void> _openReading() async {
     final draw = SpreadDraw(spreadId: _spread.id, methodId: _method, cards: _picked);
-    final ads = _s.ads;
+    if ((_grant?.wantsInterstitial ?? false) && !_interstitialPlayed) {
+      _interstitialPlayed = true; // 回頭再看同一次解讀不再播
+      await playReadingInterstitial(context);
+      if (!mounted) return;
+    }
     await Navigator.of(context).push(MaterialPageRoute<void>(
       builder: (_) => ReadingPage(draw: draw, question: _question, firstImpression: _impression, area: _area),
     ));
-    ads.readingClosed(); // 看完解讀回來：依限頻規則可能跳插頁（不在儀式與閱讀中跳出）
   }
 
   void _restart() => setState(() {
