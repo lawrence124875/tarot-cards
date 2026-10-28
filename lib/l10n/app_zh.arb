@@ -856,5 +856,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "updateTitle": "有新版本",
+  "updateBody": "光穗塔羅有新版本了，更新後就能使用最新的內容與修正。",
+  "updateNow": "立即更新",
+  "updateLater": "稍後"
 }

@@ -308,5 +308,9 @@
   "settingsTheme": "รูปลักษณ์",
   "settingsThemeDark": "มืด",
   "settingsThemeLight": "สว่าง",
-  "settingsThemeSystem": "ตามระบบ"
+  "settingsThemeSystem": "ตามระบบ",
+  "updateTitle": "มีเวอร์ชันใหม่",
+  "updateBody": "AuraSpica Tarot มีเวอร์ชันใหม่แล้ว อัปเดตเพื่อใช้เนื้อหาและการแก้ไขล่าสุด",
+  "updateNow": "อัปเดตเลย",
+  "updateLater": "ไว้ทีหลัง"
 }

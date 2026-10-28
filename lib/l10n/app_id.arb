@@ -308,5 +308,9 @@
   "settingsTheme": "Tampilan",
   "settingsThemeDark": "Gelap",
   "settingsThemeLight": "Terang",
-  "settingsThemeSystem": "Ikuti sistem"
+  "settingsThemeSystem": "Ikuti sistem",
+  "updateTitle": "Versi baru tersedia",
+  "updateBody": "Versi baru AuraSpica Tarot sudah tersedia. Perbarui untuk mendapatkan konten dan perbaikan terbaru.",
+  "updateNow": "Perbarui sekarang",
+  "updateLater": "Nanti"
 }

@@ -308,5 +308,9 @@
   "settingsTheme": "外观",
   "settingsThemeDark": "深色",
   "settingsThemeLight": "浅色",
-  "settingsThemeSystem": "跟随系统"
+  "settingsThemeSystem": "跟随系统",
+  "updateTitle": "有新版本",
+  "updateBody": "光穗塔罗有新版本了，更新后就能使用最新的内容与修正。",
+  "updateNow": "立即更新",
+  "updateLater": "稍后"
 }

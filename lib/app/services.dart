@@ -31,6 +31,8 @@ import '../core/soundscape/soundscape_files.dart';
 import '../core/telemetry/analytics.dart';
 import '../core/telemetry/remote_flags.dart';
 import '../core/telemetry/usage_sharing.dart';
+import '../core/update/app_updater.dart';
+import '../core/update/play_app_updater.dart';
 import '../l10n/l10n.dart';
 
 /// App 共用服務。換實作（內容來源、牌面組來源、整體氛圍規則…）只改 Services.standard()。
@@ -57,6 +59,7 @@ class Services {
     AdService? ads,
     FreeLimits? limits,
     CastQuota? quota,
+    this.updater = const NoUpdater(),
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
@@ -105,6 +108,7 @@ class Services {
         ads: ads,
         limits: limits,
         quota: CastQuota(limits: limits),
+        updater: const PlayAppUpdater(),
       );
 
   final ContentSource content;
@@ -162,6 +166,9 @@ class Services {
 
   /// 每日抽牌次數。
   final CastQuota quota;
+
+  /// 新版本提示（Google Play）；測試用 [NoUpdater]。
+  final AppUpdater updater;
 
   bool get isPremium => premium.isPremium.value;
 
