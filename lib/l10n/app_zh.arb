@@ -330,10 +330,10 @@
   },
   "premiumTitle": "塔羅會員",
   "premiumSubtitle": "沒有廣告，進階牌陣與完整課程",
+  "premiumBenefitCourses": "全部課程，完整學習",
+  "premiumBenefitSpreads": "開放所有進階牌陣",
   "premiumBenefitNoAds": "沒有任何廣告",
-  "premiumBenefitCasts": "抽牌不限次數，開放所有進階牌陣",
-  "premiumBenefitJournal": "塔羅日記不限則數，完整學習課程",
-  "premiumBenefitBreath": "呼吸 3／5 分鐘、自訂時長與雙耳節拍",
+  "premiumBenefitJournal": "塔羅日記不限則數",
   "premiumFreeNote": "78 張牌的解讀、象徵與東西相映，永遠免費。",
   "planMonthly": "月訂",
   "planYearly": "年訂",
@@ -347,6 +347,38 @@
   "premiumThanks": "訂閱成功，謝謝支持！",
   "premiumPurchaseFailed": "購買沒有完成，不會收取費用。",
   "premiumRestoreNone": "沒有找到可以恢復的訂閱。",
+  "premiumTrial": "免費試用 {days} 天，之後 {price}/年",
+  "@premiumTrial": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumTrialNote": "可隨時取消；試用到期前會通知你。",
+  "premiumStartTrial": "開始免費試用",
+  "planPerMonth": "每月約 {price}",
+  "@planPerMonth": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "readingPause": "靜心片刻，解讀即將呈現",
+  "learnPreviewFree": "第 1 課可免費試讀",
+  "lessonPreviewEnd": "試讀到這裡。成為會員，就能讀完本單元與所有課程。",
+  "lessonUnlockRest": "解鎖本單元其餘 {count} 課",
+  "@lessonUnlockRest": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "castLimitTitle": "今天的 {count} 次免費抽牌已用完",
   "@castLimitTitle": {
     "placeholders": {

@@ -14,7 +14,7 @@ import '../monetization/ad_service.dart';
 /// - 廣告單元 ID 由 CI 以 --dart-define 注入（GitHub Secrets）；沒注入時用 Google 官方測試 ID。
 /// - 廣告內容分級上限 PG；敏感類別（酒精、賭博等）在 AdMob 後台封鎖（PLAY_CONSOLE.md §5 第 6 項）。
 class AdMobAds implements AdService {
-  AdMobAds._(this._pacer);
+  AdMobAds._();
 
   static const _bannerId = String.fromEnvironment('ADMOB_BANNER_AD_UNIT_ID');
   static const _interstitialId = String.fromEnvironment('ADMOB_INTERSTITIAL_AD_UNIT_ID');
@@ -46,20 +46,19 @@ class AdMobAds implements AdService {
   /// 是否用正式廣告單元（Release 說明顯示用）。
   static bool get usingRealUnits => _valid(_bannerId);
 
-  final InterstitialPacer _pacer;
   bool _started = false;
   bool _enabled = false;
   bool _sdkReady = false;
   bool _privacyRequired = false;
   bool _fullScreenShowing = false;
   InterstitialAd? _interstitial;
-  bool _interstitialLoading = false;
+  Completer<void>? _interstitialLoad; // 載入中時不為 null，載入結束（成功或失敗）時完成
   RewardedAd? _rewarded;
   final ValueNotifier<int> _bannerEpoch = ValueNotifier(0);
 
   /// 建立後立刻可用（還不顯示廣告）；[start] 在 runApp 之後於背景執行，
   /// 不讓同意表單或網路拖慢啟動。
-  static AdMobAds create({required InterstitialPacer pacer}) => AdMobAds._(pacer);
+  static AdMobAds create() => AdMobAds._();
 
   /// 先查同意狀態（需要時顯示表單），可以請求廣告才初始化 SDK。任何失敗都只是不顯示廣告。
   Future<void> start() async {
@@ -134,68 +133,78 @@ class AdMobAds implements AdService {
   // ---------------- 插頁 ----------------
 
   void _loadInterstitial() {
-    if (!_canShow || _interstitial != null || _interstitialLoading) return;
+    if (!_canShow || _interstitial != null || _interstitialLoad != null) return;
     final unit = _interstitialUnit;
     if (unit == null) return;
-    _interstitialLoading = true;
+    final load = _interstitialLoad = Completer<void>();
+    void done() {
+      if (identical(_interstitialLoad, load)) _interstitialLoad = null;
+      if (!load.isCompleted) load.complete();
+    }
+
     try {
       InterstitialAd.load(
         adUnitId: unit,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (ad) {
-            _interstitialLoading = false;
             if (!_canShow) {
               ad.dispose();
-              return;
+            } else {
+              _interstitial = ad;
             }
-            _interstitial = ad;
+            done();
           },
           onAdFailedToLoad: (_) {
-            _interstitialLoading = false;
             _interstitial = null;
+            done();
           },
         ),
       );
     } catch (e) {
-      _interstitialLoading = false;
+      done();
       debugPrint('插頁廣告載入失敗，略過：$e');
     }
   }
 
   @override
-  void readingClosed() {
-    if (!_canShow) return;
-    if (!_pacer.readingClosed()) return;
+  Future<AdResult> showInterstitial({Duration loadTimeout = const Duration(seconds: 3)}) async {
+    if (!_canShow) return AdResult.skipped;
+    if (_fullScreenShowing) return AdResult.failed;
+    if (_interstitial == null) {
+      _loadInterstitial();
+      final load = _interstitialLoad;
+      if (load != null) await load.future.timeout(loadTimeout, onTimeout: () {});
+    }
     final ad = _interstitial;
     final foreground = WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed;
-    if (ad == null || _fullScreenShowing || !foreground) {
-      _loadInterstitial();
-      return;
-    }
+    if (ad == null || !_canShow || _fullScreenShowing || !foreground) return AdResult.failed;
     _interstitial = null;
+    final closed = Completer<AdResult>();
     ad.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (_) => _fullScreenShowing = true,
       onAdDismissedFullScreenContent: (a) {
         _fullScreenShowing = false;
-        _pacer.shown();
         a.dispose();
-        _loadInterstitial();
+        _loadInterstitial(); // 先備好明天的（過期由 SDK 處理，載入失敗明天會再試）
+        if (!closed.isCompleted) closed.complete(AdResult.shown);
       },
       onAdFailedToShowFullScreenContent: (a, _) {
         _fullScreenShowing = false;
         a.dispose();
         _loadInterstitial();
+        if (!closed.isCompleted) closed.complete(AdResult.failed);
       },
     );
     _fullScreenShowing = true;
     try {
-      ad.show();
+      await ad.show();
     } catch (e) {
       _fullScreenShowing = false;
       ad.dispose();
       debugPrint('插頁廣告顯示失敗，略過：$e');
+      return AdResult.failed;
     }
+    return closed.future.timeout(const Duration(minutes: 3), onTimeout: () => AdResult.shown);
   }
 
   // ---------------- 獎勵 ----------------
@@ -235,21 +244,22 @@ class AdMobAds implements AdService {
   }
 
   @override
-  Future<bool> showRewarded() async {
+  Future<AdResult> showRewarded() async {
     final ad = _rewarded;
-    if (ad == null || _fullScreenShowing) return false;
+    if (ad == null || _fullScreenShowing) return AdResult.failed;
     _rewarded = null;
     final closed = Completer<void>();
     var earned = false;
+    var failed = false;
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (a) {
         _fullScreenShowing = false;
-        _pacer.shown();
         a.dispose();
         if (!closed.isCompleted) closed.complete();
       },
       onAdFailedToShowFullScreenContent: (a, _) {
         _fullScreenShowing = false;
+        failed = true;
         a.dispose();
         if (!closed.isCompleted) closed.complete();
       },
@@ -261,10 +271,10 @@ class AdMobAds implements AdService {
       _fullScreenShowing = false;
       ad.dispose();
       debugPrint('獎勵廣告顯示失敗，略過：$e');
-      return false;
+      return AdResult.failed;
     }
     await closed.future.timeout(const Duration(minutes: 3), onTimeout: () {});
-    return earned;
+    return earned ? AdResult.earned : (failed ? AdResult.failed : AdResult.dismissed);
   }
 
   // ---------------- 隱私選項 ----------------

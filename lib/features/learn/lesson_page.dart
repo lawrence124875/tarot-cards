@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
+import '../../core/events/event_bus.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/card_detail_page.dart';
 import '../../reading/section.dart';
+import '../../shared/premium/ad_banner.dart';
+import '../../shared/premium/paywall_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_face.dart';
 
-/// 一個單元的課程列表；讀完的課打勾。
+/// 一個單元的課程列表；讀完的課打勾。免費版在付費單元只開第 1 課（試讀），其餘上鎖。
 class LessonUnitPage extends StatefulWidget {
   const LessonUnitPage({super.key, required this.unit});
 
@@ -37,13 +40,25 @@ class _LessonUnitPageState extends State<LessonUnitPage> {
     if (mounted) setState(() => _done = done);
   }
 
+  Future<void> _open(int i) async {
+    final s = AppServices.of(context);
+    if (!widget.unit.lessonFree(i) && !s.isPremium) {
+      s.events.emit(const HitFreeLimit(type: 'lesson'));
+      if (!await openPaywall(context, source: 'lesson_${widget.unit.id}') || !mounted) return;
+    }
+    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: widget.unit, index: i)));
+    _load();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final t = Theme.of(context).textTheme;
     final unit = widget.unit;
+    final premium = AppServices.of(context).isPremium;
     return Scaffold(
       appBar: AppBar(title: Text(unit.title)),
+      bottomNavigationBar: const AdBanner(),
       body: ListView(
         padding: readablePadding(context, top: 8, bottom: 40),
         children: [
@@ -60,10 +75,9 @@ class _LessonUnitPageState extends State<LessonUnitPage> {
                 title: Text(lesson.title),
                 trailing: _done.contains(lesson.id)
                     ? Icon(Icons.check_circle_outline, color: TarotColors.earth, semanticLabel: l.lessonRead)
-                    : Icon(Icons.chevron_right, color: TarotColors.textSub),
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: unit, index: i)))
-                    .then((_) => _load()),
+                    : Icon(!premium && !unit.lessonFree(i) ? Icons.lock_outline : Icons.chevron_right,
+                        color: TarotColors.textSub),
+                onTap: () => _open(i),
               ),
             ),
         ],
@@ -82,12 +96,22 @@ class LessonPage extends StatelessWidget {
   Future<void> _markDone(BuildContext context) =>
       AppServices.of(context).lessonProgress.markDone(unit.id, unit.lessons[index].id);
 
+  Future<void> _goNext(BuildContext context) async {
+    await _markDone(context);
+    if (!context.mounted) return;
+    Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
+      builder: (_) => LessonPage(unit: unit, index: index + 1),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
     final t = Theme.of(context).textTheme;
     final lesson = unit.lessons[index];
     final hasNext = index + 1 < unit.lessons.length;
+    // 試讀課（付費單元第 1 課）讀完：引導解鎖本單元其餘課
+    final preview = hasNext && !AppServices.of(context).isPremium && !unit.lessonFree(index + 1);
     return Scaffold(
       appBar: AppBar(title: Text(unit.title)),
       body: ListView(
@@ -133,16 +157,12 @@ class LessonPage extends StatelessWidget {
               child: Text(lesson.sources.join('\n'), style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
             ),
           const SizedBox(height: 28),
-          if (hasNext)
+          if (preview)
+            _UnlockRest(unit: unit, onUnlocked: () => _goNext(context))
+          else if (hasNext)
             Center(
               child: FilledButton(
-                onPressed: () async {
-                  await _markDone(context);
-                  if (!context.mounted) return;
-                  Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-                    builder: (_) => LessonPage(unit: unit, index: index + 1),
-                  ));
-                },
+                onPressed: () => _goNext(context),
                 child: Text(l.lessonNext),
               ),
             )
@@ -157,6 +177,37 @@ class LessonPage extends StatelessWidget {
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// 試讀課結尾：「解鎖本單元其餘 N 課」→ 付費牆（來源 lesson_preview_<unitId>）。
+class _UnlockRest extends StatelessWidget {
+  const _UnlockRest({required this.unit, required this.onUnlocked});
+
+  final LessonUnit unit;
+  final VoidCallback onUnlocked;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    final t = Theme.of(context).textTheme;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(children: [
+          Text(l.lessonPreviewEnd, style: t.bodyMedium, textAlign: TextAlign.center),
+          const SizedBox(height: 14),
+          FilledButton.icon(
+            icon: const Icon(Icons.lock_open_outlined, size: 18),
+            label: Text(l.lessonUnlockRest(unit.lockedCount)),
+            onPressed: () async {
+              AppServices.of(context).events.emit(const HitFreeLimit(type: 'lesson'));
+              if (await openPaywall(context, source: 'lesson_preview_${unit.id}') && context.mounted) onUnlocked();
+            },
+          ),
+        ]),
       ),
     );
   }

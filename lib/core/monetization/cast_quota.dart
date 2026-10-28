@@ -17,6 +17,26 @@ enum CastAllowance {
   exhausted,
 }
 
+/// 允許的這一次抽牌是怎麼來的（決定要不要播插頁，HANDOFF H 第 5 點）。
+class CastGrant {
+  const CastGrant({required this.premium, required this.rewarded, required this.dailyIndex, this.firstEver = false});
+
+  /// 訂閱戶（不計次、沒有廣告）。
+  final bool premium;
+
+  /// 這次是看獎勵廣告換來的（不再播插頁）。
+  final bool rewarded;
+
+  /// 今天第幾次抽牌（從 1 起算；訂閱戶為 0）。
+  final int dailyIndex;
+
+  /// 這台裝置第一次抽牌（統計 first_draw）。
+  final bool firstEver;
+
+  /// 每日第 1 次免費抽牌：解讀前播一則插頁。
+  bool get wantsInterstitial => !premium && !rewarded && dailyIndex == 1;
+}
+
 /// 每日起卦次數（本機計數，跨日自動歸零；以手機當地日期為準）。
 /// 計數只存在本機檔案，不上傳；重裝 App 會歸零，這是可接受的寬鬆。
 class CastQuota {
@@ -31,6 +51,7 @@ class CastQuota {
   String _day = '';
   int _used = 0; // 今天已起卦次數（含用獎勵換來的）
   int _rewarded = 0; // 今天看獎勵廣告換到的次數
+  bool _everDrawn = false; // 這台裝置抽過牌沒（不跨日歸零）
   bool _loaded = false;
 
   String _today() {
@@ -44,6 +65,7 @@ class CastQuota {
       _day = m['day'] as String? ?? '';
       _used = (m['used'] as num?)?.toInt() ?? 0;
       _rewarded = (m['rewarded'] as num?)?.toInt() ?? 0;
+      _everDrawn = m['ever'] == true;
       _loaded = true;
     }
     final today = _today();
@@ -54,7 +76,7 @@ class CastQuota {
     }
   }
 
-  Future<void> _persist() => _storage.write({'day': _day, 'used': _used, 'rewarded': _rewarded});
+  Future<void> _persist() => _storage.write({'day': _day, 'used': _used, 'rewarded': _rewarded, 'ever': _everDrawn});
 
   /// 可用次數＝免費次數＋今天看廣告換到的次數。
   Future<CastAllowance> check() async {
@@ -70,14 +92,18 @@ class CastQuota {
     return left < 0 ? 0 : left;
   }
 
-  /// 起卦成功時呼叫一次（訂閱戶不呼叫）。
-  Future<void> recordCast() async {
+  /// 抽牌成功時呼叫一次。免費版計次；訂閱戶（[premium]）不計次，只記「抽過牌」。
+  /// [rewarded]：這次是看獎勵廣告換來的。
+  Future<CastGrant> recordCast({bool premium = false, bool rewarded = false}) async {
     await _ensure();
-    _used++;
-    await _persist();
+    final first = !_everDrawn;
+    _everDrawn = true;
+    if (!premium) _used++;
+    if (!premium || first) await _persist();
+    return CastGrant(premium: premium, rewarded: rewarded, dailyIndex: premium ? 0 : _used, firstEver: first);
   }
 
-  /// 使用者看完獎勵廣告：多一次起卦。
+  /// 看完獎勵廣告（或廣告載入失敗、無填充時照樣給予）：多一次抽牌，計入每日獎勵上限。
   Future<void> grantReward() async {
     await _ensure();
     _rewarded++;

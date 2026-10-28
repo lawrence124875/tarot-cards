@@ -1,9 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-/// 廣告（HANDOFF §23）。畫面只認這個介面；AdMob 只出現在 `lib/core/admob/admob_ads.dart`。
+/// 廣告（HANDOFF H，2026-10-28）。畫面只認這個介面；AdMob 只出現在 `lib/core/admob/admob_ads.dart`。
 ///
-/// 三種廣告：底部橫幅、插頁（解讀頁關閉回到起卦頁時，依 [InterstitialPacer] 限頻）、
-/// 獎勵（使用者自己選擇觀看，換一次額外起卦）。訂閱戶全部不顯示（[enabled] = false）。
+/// 三種廣告：
+/// - 橫幅：只放首頁、卦記列表、牌陣選擇頁、課程列表（解讀、課程內文、呼吸練習不放）。
+/// - 插頁：只在「每日第 1 次抽牌」動畫結束、顯示解讀前播一次（見 [showInterstitial]）。
+/// - 獎勵：使用者自己選擇觀看，換一次額外抽牌。
+/// 訂閱戶全部不顯示（[enabled] = false）。
 abstract class AdService {
   /// 訂閱狀態改變時由 main.dart 設定；false＝不載入、不顯示任何廣告。
   bool get enabled;
@@ -12,19 +15,38 @@ abstract class AdService {
   /// 底部橫幅；不顯示時回傳 null（畫面就不留空位）。
   Widget? banner();
 
-  /// 一次解讀看完、使用者離開解讀頁時呼叫；由限頻規則決定是否跳插頁。
-  void readingClosed();
+  /// 播一則插頁，等使用者關掉才回傳。最多等 [loadTimeout] 載入；
+  /// 載入失敗、無填充、逾時或顯示失敗都回傳 [AdResult.failed]，呼叫端直接往下走。
+  Future<AdResult> showInterstitial({Duration loadTimeout = const Duration(seconds: 3)});
 
   /// 預先載入獎勵廣告（顯示「看廣告再抽一次」之前呼叫）。
   Future<bool> prepareRewarded();
 
-  /// 播放獎勵廣告；使用者看完（拿到獎勵）才回傳 true。
-  Future<bool> showRewarded();
+  /// 播放獎勵廣告：看完拿到獎勵＝[AdResult.earned]；中途關掉＝[AdResult.dismissed]；
+  /// 沒載入、顯示失敗＝[AdResult.failed]。
+  Future<AdResult> showRewarded();
 
   /// 是否需要在選單提供「廣告隱私設定」（歐洲等需要同意的地區才為 true，Google UMP）。
   bool get privacyOptionsRequired;
 
   Future<void> showPrivacyOptions();
+}
+
+enum AdResult {
+  /// 插頁播完並關閉。
+  shown,
+
+  /// 獎勵廣告看完並拿到獎勵。
+  earned,
+
+  /// 獎勵廣告中途關掉（沒有獎勵）。
+  dismissed,
+
+  /// 載入失敗、無填充、逾時或顯示失敗。
+  failed,
+
+  /// 廣告關閉中（訂閱戶、沒有廣告），什麼都沒做。
+  skipped,
 }
 
 /// 沒有廣告（測試、訂閱戶、AdMob 初始化失敗）。
@@ -36,42 +58,17 @@ class NoAds implements AdService {
   Widget? banner() => null;
 
   @override
-  void readingClosed() {}
+  Future<AdResult> showInterstitial({Duration loadTimeout = const Duration(seconds: 3)}) async => AdResult.skipped;
 
   @override
   Future<bool> prepareRewarded() async => false;
 
   @override
-  Future<bool> showRewarded() async => false;
+  Future<AdResult> showRewarded() async => AdResult.failed;
 
   @override
   bool get privacyOptionsRequired => false;
 
   @override
   Future<void> showPrivacyOptions() async {}
-}
-
-/// 插頁廣告限頻（純邏輯，可單獨測試）：
-/// 每 [every] 次解讀最多一次，且距上一次全螢幕廣告至少 [minGap]。
-/// 第一次解讀永遠不跳（新使用者第一次體驗不被打斷）。
-class InterstitialPacer {
-  InterstitialPacer({this.every = 3, this.minGap = const Duration(minutes: 3), DateTime Function()? clock})
-      : _clock = clock ?? DateTime.now;
-
-  final int every;
-  final Duration minGap;
-  final DateTime Function() _clock;
-  int _readings = 0;
-  DateTime? _lastFullScreen;
-
-  /// 記一次解讀，回傳這次是否該跳插頁。真的顯示後要呼叫 [shown]。
-  bool readingClosed() {
-    _readings++;
-    if (every <= 0 || _readings % every != 0) return false;
-    final last = _lastFullScreen;
-    return last == null || _clock().difference(last) >= minGap;
-  }
-
-  /// 任何全螢幕廣告（插頁、獎勵）播完時呼叫，重新計算間隔。
-  void shown() => _lastFullScreen = _clock();
 }

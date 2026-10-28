@@ -35,8 +35,15 @@ void main() {
     const BreathStarted(cardId: 19, minutes: 3, silent: false, binaural: true),
     const BreathCompleted(cardId: 19, minutes: 3),
     const PaywallShown(source: 'cast_limit'),
-    const RewardedEarned(source: 'cast'),
+    const RewardedAdShown(source: 'cast', earned: true),
     const Subscribed(period: 'yearly'),
+    const FirstDraw(spreadId: 'one'),
+    const HitFreeLimit(type: 'lesson'),
+    const RewardedAdFailed(source: 'cast'),
+    const InterstitialShown(),
+    const InterstitialFailed(),
+    const TrialStarted(period: 'yearly'),
+    const Subscribed(period: 'restore'),
   ];
 
   test('統計事件一律 tr_ 開頭、名稱合規、參數只有字串或數字', () {
@@ -68,14 +75,25 @@ void main() {
       'tr_journal_saved',
       'tr_breath_started',
       'tr_breath_completed',
-      'tr_paywall_shown',
-      'tr_rewarded_earned',
-      'tr_subscribed',
+      'tr_paywall_view',
+      'tr_rewarded_ad_shown',
+      'tr_purchase',
+      'tr_first_draw',
+      'tr_hit_free_limit',
+      'tr_rewarded_ad_failed',
+      'tr_interstitial_shown',
+      'tr_interstitial_failed',
+      'tr_trial_start',
+      'tr_restore',
     ]);
     expect(rec.logged.first.$2, {'method': 'ritual', 'spread': 'three', 'card': 40, 'reversed': 1});
     expect(rec.logged[1].$2, {'has_reminder': 1});
     expect(rec.logged[2].$2, {'card': 19, 'minutes': 3, 'silent': 0, 'binaural': 1});
     expect(rec.logged[3].$2, {'card': 19, 'minutes': 3});
+    expect(rec.logged[4].$2, {'source': 'cast_limit'});
+    expect(rec.logged[5].$2, {'source': 'cast', 'earned': 1});
+    expect(rec.logged[6].$2, {'period': 'yearly'});
+    expect(rec.logged[8].$2, {'type': 'lesson'});
     await listener.dispose();
   });
 

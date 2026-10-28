@@ -7,7 +7,7 @@ import '../monetization/premium_service.dart';
 /// RevenueCat 實作（HANDOFF §23）。**唯一 import purchases_flutter 的檔案**。
 ///
 /// - 金鑰：CI 以 --dart-define=REVENUECAT_API_KEY 注入（GitHub Secret `REVENUECAT_ANDROID_API_KEY`，
-///   RevenueCat 專案「謙卦」的 Google Play 公開 SDK 金鑰，goog_ 開頭）。沒注入＝[FreePremium]。
+///   RevenueCat 專案「AuraSpica Tarot」的 Google Play 公開 SDK 金鑰，goog_ 開頭）。沒注入＝[FreePremium]。
 /// - 權限 `premium`；Offering 預設（current）內放 Monthly、Annual 兩個 Package。
 /// - FORCE_PREMIUM=true（只給個人測試建置）時一律視為訂閱戶。
 class RevenueCatPremium implements PremiumService {
@@ -53,13 +53,41 @@ class RevenueCatPremium implements PremiumService {
       final current = (await Purchases.getOfferings()).current;
       if (current == null) return const [];
       return [
-        if (current.monthly case final m?) SubscriptionPlan(period: PlanPeriod.monthly, price: m.storeProduct.priceString, handle: m),
-        if (current.annual case final a?) SubscriptionPlan(period: PlanPeriod.yearly, price: a.storeProduct.priceString, handle: a),
+        if (current.annual case final a?) _plan(PlanPeriod.yearly, a),
+        if (current.monthly case final m?) _plan(PlanPeriod.monthly, m),
       ];
     } catch (e) {
       debugPrint('讀取訂閱方案失敗：$e');
       return const [];
     }
+  }
+
+  static SubscriptionPlan _plan(PlanPeriod period, Package p) {
+    final product = p.storeProduct;
+    return SubscriptionPlan(
+      period: period,
+      price: product.priceString,
+      amount: product.price,
+      currencyCode: product.currencyCode,
+      trialDays: _trialDays(product),
+      handle: p,
+    );
+  }
+
+  /// 免費試用天數：Android 看預設優惠的免費階段；iOS 看價格為 0 的首購優惠。
+  static int? _trialDays(StoreProduct product) {
+    int days(PeriodUnit unit, int n) => switch (unit) {
+          PeriodUnit.day => n,
+          PeriodUnit.week => n * 7,
+          PeriodUnit.month => n * 30,
+          PeriodUnit.year => n * 365,
+          PeriodUnit.unknown => 0,
+        };
+    final free = product.defaultOption?.freePhase?.billingPeriod;
+    if (free != null) return days(free.unit, free.value);
+    final intro = product.introductoryPrice;
+    if (intro != null && intro.price == 0) return days(intro.periodUnit, intro.periodNumberOfUnits);
+    return null;
   }
 
   @override

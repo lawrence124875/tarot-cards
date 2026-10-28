@@ -13,7 +13,6 @@ import 'core/admob/admob_ads.dart';
 import 'core/daily/daily_card.dart';
 import 'core/firebase/firebase_feedback.dart';
 import 'core/firebase/firebase_telemetry.dart';
-import 'core/monetization/ad_service.dart';
 import 'core/monetization/free_limits.dart';
 import 'core/revenuecat/revenuecat_premium.dart';
 import 'core/telemetry/analytics_listener.dart';
@@ -42,12 +41,7 @@ Future<void> main() async {
   // 訂閱與廣告（HANDOFF §23）：訂閱戶不載入任何廣告；廣告同意表單在 runApp 之後才跑，不拖慢啟動
   final limits = FreeLimits.from(telemetry.flags.intValue);
   final premium = await RevenueCatPremium.init();
-  final ads = AdMobAds.create(
-    pacer: InterstitialPacer(
-      every: limits.interstitialEvery,
-      minGap: Duration(minutes: limits.interstitialGapMinutes),
-    ),
-  );
+  final ads = AdMobAds.create();
   var appStarted = false;
   void syncAds() {
     ads.enabled = !premium.isPremium.value;

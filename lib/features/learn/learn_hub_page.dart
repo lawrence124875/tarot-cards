@@ -4,7 +4,7 @@ import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
 import '../../l10n/l10n.dart';
-import '../../shared/premium/paywall_page.dart';
+import '../../shared/premium/ad_banner.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import 'card_library_page.dart';
 import 'lesson_page.dart';
@@ -52,12 +52,9 @@ class _LearnHubPageState extends State<LearnHubPage> {
       .push(MaterialPageRoute<void>(builder: (_) => page))
       .then((_) => _load());
 
-  Future<void> _openUnit(LessonUnit u) async {
+  /// 付費單元也能打開：第 1 課免費試讀，其餘課在單元頁上鎖。
+  void _openUnit(LessonUnit u) {
     if (!u.ready) return;
-    if (!u.free && !_s.isPremium) {
-      final ok = await openPaywall(context, source: 'lesson_${u.id}');
-      if (!ok || !mounted) return;
-    }
     _push(LessonUnitPage(unit: u));
   }
 
@@ -67,6 +64,7 @@ class _LearnHubPageState extends State<LearnHubPage> {
     final t = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: Text(l.featureLearn)),
+      bottomNavigationBar: const AdBanner(),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : ListView(
@@ -100,10 +98,11 @@ class _LearnHubPageState extends State<LearnHubPage> {
                       title: u.title,
                       subtitle: !u.ready
                           ? l.learnComingSoon
-                          : (_unitDone[u.id] ?? 0) > 0
-                              ? '${l.learnUnitProgress(_unitDone[u.id]!, u.lessons.length)}\n${u.summary}'
-                              : u.summary,
-                      locked: u.ready && !u.free && !_s.isPremium,
+                          : [
+                              if ((_unitDone[u.id] ?? 0) > 0) l.learnUnitProgress(_unitDone[u.id]!, u.lessons.length),
+                              if (!u.free && !_s.isPremium) l.learnPreviewFree,
+                              u.summary,
+                            ].join('\n'),
                       enabled: u.ready,
                       onTap: () => _openUnit(u),
                     ),
@@ -120,7 +119,6 @@ class _Tile extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.onTap,
-    this.locked = false,
     this.enabled = true,
   });
 
@@ -128,7 +126,7 @@ class _Tile extends StatelessWidget {
   final String? leadingText;
   final String title, subtitle;
   final VoidCallback onTap;
-  final bool locked, enabled;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +143,7 @@ class _Tile extends StatelessWidget {
         ),
         title: Text(title),
         subtitle: Text(subtitle, maxLines: 3, overflow: TextOverflow.ellipsis),
-        trailing: Icon(locked ? Icons.lock_outline : Icons.chevron_right, color: TarotColors.textSub),
+        trailing: Icon(Icons.chevron_right, color: TarotColors.textSub),
         onTap: onTap,
       ),
     );

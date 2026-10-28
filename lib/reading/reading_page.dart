@@ -6,6 +6,7 @@ import '../app/theme.dart';
 import '../core/content/card_content.dart';
 import '../core/deck/deck.dart';
 import '../core/events/event_bus.dart';
+import '../core/monetization/ad_service.dart';
 import '../core/tarot/atmosphere.dart';
 import '../core/tarot/draw.dart';
 import '../features/share/share.dart';
@@ -250,6 +251,7 @@ class _ReadingPageState extends State<ReadingPage> {
     // 免費版日記上限：已存的不刪，只是不能再新增
     final journal = _s.journal;
     if (!_s.isPremium && journal != null && (await journal.all()).length >= _s.limits.journalMax) {
+      _s.events.emit(const HitFreeLimit(type: 'journal'));
       if (!mounted || !await _journalLimit()) return;
       if (!mounted) return;
     }
@@ -286,12 +288,14 @@ class _ReadingPageState extends State<ReadingPage> {
     if (choice != 'watch') return false;
     final ready = await _s.ads.prepareRewarded();
     if (!mounted) return false;
-    if (!ready || !await _s.ads.showRewarded()) {
-      if (mounted && !ready) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.castAdNotReady)));
-      return false;
+    final result = ready ? await _s.ads.showRewarded() : AdResult.failed;
+    if (result == AdResult.earned || result == AdResult.dismissed) {
+      _s.events.emit(RewardedAdShown(source: 'journal', earned: result == AdResult.earned));
+    } else {
+      _s.events.emit(const RewardedAdFailed(source: 'journal'));
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.castAdNotReady)));
     }
-    _s.events.emit(const RewardedEarned(source: 'journal'));
-    return true;
+    return result == AdResult.earned;
   }
 }
 
