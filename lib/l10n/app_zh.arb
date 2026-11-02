@@ -490,6 +490,10 @@
   "menuShareUsage": "分享匿名使用統計與當機報告",
   "premiumTermsIos": "訂閱會自動續訂，可隨時在 iPhone 的「設定 → Apple 帳號 → 訂閱項目」中取消；取消後，會員資格保留到本期結束。",
   "termsOfUse": "使用條款",
+  "menuTermsOfService": "服務條款",
+  "@menuTermsOfService": {
+    "description": "設定頁與訂閱頁的服務條款連結（GitHub Pages terms.html）"
+  },
   "@premiumTermsIos": {
     "description": "iOS 版訂閱頁續訂說明（App Store）"
   },
