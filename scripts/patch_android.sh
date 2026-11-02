@@ -106,8 +106,8 @@ import re, sys
 path = sys.argv[1]
 m = open(path, encoding="utf-8").read()
 if "com.ryanheise.audioservice.AudioService" not in m:
-    perms = ('    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>\n'
-             '    <uses-permission android:name="android.permission.WAKE_LOCK"/>\n'
+    # 不加 SCHEDULE_EXACT_ALARM：提醒改用不精確排程（Play 限制精確鬧鐘，2026-11-02 Lawrence 決定）
+    perms = ('    <uses-permission android:name="android.permission.WAKE_LOCK"/>\n'
              '    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>\n'
              '    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>\n')
     m = m.replace("    <application", perms + "    <application", 1)
