@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../app/home_page.dart' show privacyPolicyUrl;
+import '../../app/home_page.dart' show privacyPolicyUrl, termsOfServiceUrl;
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/events/event_bus.dart';
@@ -188,11 +188,14 @@ class _PaywallPageState extends State<PaywallPage> {
       Text(_ios ? l.premiumTermsIos : l.premiumTerms,
           style: t.bodySmall?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
       // App Store 審查（3.1.2）要求訂閱頁有使用條款與隱私權政策連結；使用條款用 Apple 標準 EULA。
-      if (_ios)
-        Wrap(alignment: WrapAlignment.center, children: [
-          TextButton(onPressed: () => _open(_appleEula), child: Text(l.termsOfUse)),
-          TextButton(onPressed: () => _open(privacyPolicyUrl), child: Text(l.menuPrivacyPolicy)),
-        ]),
+      // Android 訂閱頁附服務條款（訂閱、試用、退款）與隱私權政策。
+      Wrap(alignment: WrapAlignment.center, children: [
+        if (_ios)
+          TextButton(onPressed: () => _open(_appleEula), child: Text(l.termsOfUse))
+        else
+          TextButton(onPressed: () => _open(termsOfServiceUrl), child: Text(l.menuTermsOfService)),
+        TextButton(onPressed: () => _open(privacyPolicyUrl), child: Text(l.menuPrivacyPolicy)),
+      ]),
     ];
   }
 

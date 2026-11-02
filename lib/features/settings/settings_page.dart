@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../app/home_page.dart' show privacyPolicyUrl, termsOfServiceUrl;
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/deck/deck.dart';
@@ -120,9 +122,28 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 10),
             const DailyReminderTile(),
+            const SizedBox(height: 20),
+            Card(
+              child: Column(children: [
+                ListTile(
+                  leading: const Icon(Icons.description_outlined),
+                  title: Text(l.menuTermsOfService),
+                  trailing: const Icon(Icons.open_in_new, size: 18),
+                  onTap: () => _open(termsOfServiceUrl),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.privacy_tip_outlined),
+                  title: Text(l.menuPrivacyPolicy),
+                  trailing: const Icon(Icons.open_in_new, size: 18),
+                  onTap: () => _open(privacyPolicyUrl),
+                ),
+              ]),
+            ),
           ],
         ),
       ),
     );
   }
+
+  Future<void> _open(String url) => launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
 }

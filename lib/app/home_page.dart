@@ -166,3 +166,6 @@ class _HomeMenu extends StatelessWidget {
 
 /// 隱私權政策（本 repo GitHub Pages，§20）。
 const privacyPolicyUrl = 'https://lawrence124875.github.io/tarot-cards/privacy.html';
+
+/// 服務條款（同一個 GitHub Pages，訂閱、試用、退款與免責聲明）。
+const termsOfServiceUrl = 'https://lawrence124875.github.io/tarot-cards/terms.html';
