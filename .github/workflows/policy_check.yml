@@ -73,11 +73,11 @@ jobs:
         run: |
           set -euo pipefail
           set +o pipefail
-          aab=$(find build -name '*.aab' -print -quit)
-          report=$(find build -name 'manifest-merger-release-report.txt' -print -quit)
-          merged=$(find build -path '*merged_manifest*release*' -name AndroidManifest.xml -print -quit)
-          [ -n "$merged" ] || merged=$(find build -path '*release*' -path '*merged*' -name AndroidManifest.xml -print -quit)
-          [ -n "$aab" ] && [ -n "$report" ] && [ -n "$merged" ] || { find build -name AndroidManifest.xml | sed 's/^/::warning::/' ; echo "::error::找不到 aab/report/merged"; exit 1; }
+          aab=build/app/outputs/bundle/release/app-release.aab
+          report=$(find build/app -name 'manifest-merger-release-report.txt' -print -quit)
+          merged=$(find build/app/intermediates -path '*/merged_manifest/release/*' -name AndroidManifest.xml -print -quit)
+          find build/app/intermediates -name AndroidManifest.xml -path '*release*' | sed 's/^/候選：/'
+          [ -f "$aab" ] && [ -n "$report" ] && [ -n "$merged" ] || { echo "::error::找不到 aab/report/merged"; exit 1; }
           echo "aab=$aab report=$report merged=$merged"
           python3 - "$aab" "$report" "$merged" << 'PYEOF' | tee -a "$GITHUB_STEP_SUMMARY"
           import os, re, sys
@@ -131,6 +131,7 @@ jobs:
           acc = [p for p in svc if 'ACCESSIBILITY' in p]
           print(f"- BIND_ACCESSIBILITY_SERVICE（服務）: {'有' if acc else '無'}")
           print(f"::notice::SDK compile={root.get(A+'compileSdkVersion')} target={sdk.get(A+'targetSdkVersion') if sdk is not None else '?'} min={sdk.get(A+'minSdkVersion') if sdk is not None else '?'} aab={os.path.getsize(aab)/1e6:.1f}MB accessibility={'yes' if acc else 'no'} perms={len(perms)}", file=sys.stderr)
+          if not perms: sys.exit('::error::權限清單是空的，manifest 路徑可能不對')
           PYEOF
 
       - uses: actions/upload-artifact@v4
