@@ -72,10 +72,12 @@ jobs:
       - name: 權限與 SDK 摘要
         run: |
           set -euo pipefail
-          aab=$(find build -name '*.aab' | head -1)
-          report=$(find build -path '*manifest-merger-release-report.txt' | head -1)
-          merged=$(find build -path '*merged_manifest*release*AndroidManifest.xml' | head -1)
-          [ -n "$merged" ] || merged=$(find build -path '*release*' -name AndroidManifest.xml -path '*merged*' | head -1)
+          set +o pipefail
+          aab=$(find build -name '*.aab' -print -quit)
+          report=$(find build -name 'manifest-merger-release-report.txt' -print -quit)
+          merged=$(find build -path '*merged_manifest*release*' -name AndroidManifest.xml -print -quit)
+          [ -n "$merged" ] || merged=$(find build -path '*release*' -path '*merged*' -name AndroidManifest.xml -print -quit)
+          [ -n "$aab" ] && [ -n "$report" ] && [ -n "$merged" ] || { find build -name AndroidManifest.xml | sed 's/^/::warning::/' ; echo "::error::找不到 aab/report/merged"; exit 1; }
           echo "aab=$aab report=$report merged=$merged"
           python3 - "$aab" "$report" "$merged" << 'PYEOF' | tee -a "$GITHUB_STEP_SUMMARY"
           import os, re, sys
@@ -134,5 +136,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: manifest-report
-          path: |
-            build/app/outputs/logs/manifest-merger-release-report.txt
+          path: build/app/outputs/logs/
