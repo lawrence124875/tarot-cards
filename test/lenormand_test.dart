@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,7 +13,7 @@ class _MapBundle extends CachingAssetBundle {
   @override
   Future<ByteData> load(String key) async {
     final s = files[key];
-    if (s == null) throw FlutterError('missing $key');
+    if (s == null) throw StateError('missing $key');
     return ByteData.sublistView(Uint8List.fromList(utf8.encode(s)));
   }
 }

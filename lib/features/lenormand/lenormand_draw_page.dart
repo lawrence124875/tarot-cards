@@ -43,7 +43,12 @@ class _LenormandDrawPageState extends State<LenormandDrawPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final texts = await _s.lenormand.cards();
       final spreads = await _s.lenormand.spreads();
-      if (mounted) setState(() => (_texts, _spreads) = (texts, spreads));
+      if (mounted) {
+        setState(() {
+          _texts = texts;
+          _spreads = spreads;
+        });
+      }
     });
   }
 
