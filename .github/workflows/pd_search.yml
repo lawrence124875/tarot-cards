@@ -11,8 +11,11 @@ jobs:
       - run: pip install pillow
       - run: python3 .github/pd/search.py
         timeout-minutes: 20
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pd-contact
-          path: out/
-          retention-days: 1
+      - name: 存到私人 repo 審閱（不放公開 repo）
+        env:
+          TOKEN: ${{ secrets.BUILDS_REPO_TOKEN }}
+        run: |
+          git clone -q --depth 1 --branch claude/project-thread-qby2fs https://x-access-token:${TOKEN}@github.com/lawrence124875/tarot-content.git _c
+          mkdir -p _c/review/lenormand-pd && cp out/* _c/review/lenormand-pd/
+          cd _c && git config user.name "github-actions" && git config user.email "actions@github.com"
+          git add review/lenormand-pd && git commit -qm "雷諾曼公有領域候選牌組索引圖（審閱用）" && git push -q
