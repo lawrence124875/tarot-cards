@@ -64,7 +64,7 @@ void main() {
 
   test('交叉解讀事件只送選項值（不含問題與牌面）', () {
     expect(AnalyticsListener.describe(const CrossVerified(result: 'yes')), ('tr_cross_verify', {'result': 'yes'}));
-    expect(AnalyticsListener.describe(const CrossShown(relation: 'consensus', full: true))!.\$2.keys.toSet(), {'relation', 'full'});
+    expect(AnalyticsListener.describe(const CrossShown(relation: 'consensus', full: true))!.$2.keys.toSet(), {'relation', 'full'});
   });
 
   test('認不得的事件不送', () {
