@@ -14,7 +14,7 @@ def p(s): out.append(s); print(s)
 groups = defaultdict(list)
 for q in ['"Petit Lenormand"', '"Wahrsagekarten des Kartenschlägerin"', '"Jeu divinatoire de Marie-Anne Le Normand"', 'Lenormand Wahrsage', 'Lenormand cartomancie jeu']:
     cont = {}
-    while True:
+    for _page in range(10):
         d = get({"action": "query", "generator": "search", "gsrsearch": q, "gsrnamespace": 6, "gsrlimit": 50,
                  "prop": "imageinfo", "iiprop": "extmetadata|size", "iiextmetadatafilter": "LicenseShortName|Credit|DateTimeOriginal|ImageDescription",
                  "format": "json", **cont})
@@ -25,8 +25,8 @@ for q in ['"Petit Lenormand"', '"Wahrsagekarten des Kartenschlägerin"', '"Jeu d
             ii = (pg.get("imageinfo") or [{}])[0]; m = ii.get("extmetadata", {})
             groups[key].append((t, m.get("LicenseShortName", {}).get("value", ""), re.sub("<[^>]+>", "", m.get("Credit", {}).get("value", ""))[:120],
                                 re.sub("<[^>]+>", "", m.get("DateTimeOriginal", {}).get("value", ""))[:40], ii.get("width"), ii.get("height")))
-        if "continue" not in d or len(cont) and cont.get("gsroffset", 0) > 400: break
-        cont = d["continue"]
+        if "gsroffset" not in d.get("continue", {}): break
+        cont = {"gsroffset": d["continue"]["gsroffset"], "continue": d["continue"].get("continue", "")}
 
 for k, v in sorted(groups.items(), key=lambda x: -len(x[1])):
     if len(v) < 3 and "Lenormand" not in k and "Normand" not in k: continue
