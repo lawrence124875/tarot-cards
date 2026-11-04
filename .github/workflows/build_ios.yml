@@ -36,6 +36,7 @@ jobs:
             th
             ar
             decks
+            lenormand
             branding
             store/release-notes
 
