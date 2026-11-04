@@ -63,7 +63,9 @@ void main() {
   });
 
   test('交叉解讀事件只送選項值（不含問題與牌面）', () {
-    expect(AnalyticsListener.describe(const CrossVerified(result: 'yes')), ('tr_cross_verify', {'result': 'yes'}));
+    final v = AnalyticsListener.describe(const CrossVerified(result: 'yes'))!;
+    expect(v.$1, 'tr_cross_verify');
+    expect(v.$2, {'result': 'yes'});
     expect(AnalyticsListener.describe(const CrossShown(relation: 'consensus', full: true))!.$2.keys.toSet(), {'relation', 'full'});
   });
 
@@ -92,6 +94,8 @@ void main() {
       'tr_interstitial_failed',
       'tr_trial_start',
       'tr_restore',
+      'tr_cross_shown',
+      'tr_cross_verify',
     ]);
     expect(rec.logged.first.$2, {'method': 'ritual', 'spread': 'three', 'card': 40, 'reversed': 1});
     expect(rec.logged[1].$2, {'has_reminder': 1});
