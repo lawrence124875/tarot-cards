@@ -12,6 +12,7 @@ import '../core/daily/daily_card.dart';
 import '../core/deck/deck.dart';
 import '../core/deck/deck_source.dart';
 import '../core/learn/card_quiz.dart';
+import '../core/lenormand/lenormand.dart';
 import '../core/learn/lesson_progress.dart';
 import '../core/settings/app_settings.dart';
 import '../core/settings/json_file.dart';
@@ -60,6 +61,8 @@ class Services {
     FreeLimits? limits,
     CastQuota? quota,
     this.updater = const NoUpdater(),
+    this.lenormand = const EmptyLenormandSource(),
+    this.crossIntro,
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
@@ -109,6 +112,8 @@ class Services {
         limits: limits,
         quota: CastQuota(limits: limits),
         updater: const PlayAppUpdater(),
+        lenormand: AssetLenormandSource(folder: () => L10n.contentFolder),
+        crossIntro: FileIntroStore(name: 'cross_intro.json'),
       );
 
   final ContentSource content;
@@ -169,6 +174,12 @@ class Services {
 
   /// 新版本提示（Google Play）；測試用 [NoUpdater]。
   final AppUpdater updater;
+
+  /// 雷諾曼內容（牌義、牌陣、課程；zh-Hant／zh-Hans／en，其他語言退回英文）。
+  final LenormandSource lenormand;
+
+  /// 交叉解讀的 3 頁引導是否看過；null＝不自動顯示（測試）。
+  final IntroStore? crossIntro;
 
   bool get isPremium => premium.isPremium.value;
 

@@ -34,6 +34,8 @@ class AnalyticsListener {
         InterstitialFailed _ => ('tr_interstitial_failed', const {}),
         PaywallShown p => ('tr_paywall_view', {'source': p.source}),
         TrialStarted t => ('tr_trial_start', {'period': t.period}),
+        CrossShown c => ('tr_cross_shown', {'relation': c.relation, 'full': c.full ? 1 : 0}),
+        CrossVerified v => ('tr_cross_verify', {'result': v.result}),
         Subscribed s when s.period == 'restore' => ('tr_restore', const {}),
         Subscribed s => ('tr_purchase', {'period': s.period}),
         _ => null,

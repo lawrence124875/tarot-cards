@@ -37,6 +37,9 @@ doc/api/
 /assets/decks/**/*.webp
 /assets/decks/**/*.json
 /assets/decks/*.json
+/assets/lenormand/**/*.json
+/assets/lenormand/**/*.webp
+/assets/cross/**/*.json
 /_content/
 # 金鑰絕不 commit
 *.jks

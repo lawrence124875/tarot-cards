@@ -47,6 +47,8 @@ jobs:
             th
             ar
             decks
+            lenormand
+            cross
             branding
             store/release-notes
 

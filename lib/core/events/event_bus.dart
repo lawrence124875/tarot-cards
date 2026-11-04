@@ -26,6 +26,22 @@ class JournalSaved extends AppEvent {
   final bool hasReminder;
 }
 
+/// 看到一次塔羅 × 雷諾曼交叉頁（只送關係代碼與是否完整內容，不送問題與牌面）。
+class CrossShown extends AppEvent {
+  const CrossShown({required this.relation, required this.full});
+
+  /// consensus／partial／divergent。
+  final String relation;
+  final bool full;
+}
+
+/// 交叉紀錄回顧時選了「事後應驗了嗎？」（只送選項值 yes／partial／no）。
+class CrossVerified extends AppEvent {
+  const CrossVerified({required this.result});
+
+  final String result;
+}
+
 /// 開始一次呼吸練習。
 class BreathStarted extends AppEvent {
   const BreathStarted({required this.cardId, required this.minutes, required this.silent, required this.binaural});

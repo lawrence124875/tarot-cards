@@ -13,10 +13,18 @@ import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_face.dart';
 
 /// 一個單元的課程列表；讀完的課打勾。免費版在付費單元只開第 1 課（試讀），其餘上鎖。
+/// 課中提到的牌的小圖（雷諾曼課程用自己的牌面；省略時用塔羅牌）。
+typedef LessonCardTile = Widget Function(BuildContext context, int cardId);
+
+/// 課末額外內容（例如「塔羅 × 雷諾曼對照」課末導向交叉功能）。
+typedef LessonFooter = Widget? Function(BuildContext context, Lesson lesson);
+
 class LessonUnitPage extends StatefulWidget {
-  const LessonUnitPage({super.key, required this.unit});
+  const LessonUnitPage({super.key, required this.unit, this.cardTile, this.footer});
 
   final LessonUnit unit;
+  final LessonCardTile? cardTile;
+  final LessonFooter? footer;
 
   @override
   State<LessonUnitPage> createState() => _LessonUnitPageState();
@@ -46,7 +54,7 @@ class _LessonUnitPageState extends State<LessonUnitPage> {
       s.events.emit(const HitFreeLimit(type: 'lesson'));
       if (!await openPaywall(context, source: 'lesson_${widget.unit.id}') || !mounted) return;
     }
-    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: widget.unit, index: i)));
+    await Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => LessonPage(unit: widget.unit, index: i, cardTile: widget.cardTile, footer: widget.footer)));
     _load();
   }
 
@@ -88,10 +96,12 @@ class _LessonUnitPageState extends State<LessonUnitPage> {
 
 /// 一課：各段落、課中提到的牌、出處；底部可到下一課。
 class LessonPage extends StatelessWidget {
-  const LessonPage({super.key, required this.unit, required this.index});
+  const LessonPage({super.key, required this.unit, required this.index, this.cardTile, this.footer});
 
   final LessonUnit unit;
   final int index;
+  final LessonCardTile? cardTile;
+  final LessonFooter? footer;
 
   Future<void> _markDone(BuildContext context) =>
       AppServices.of(context).lessonProgress.markDone(unit.id, unit.lessons[index].id);
@@ -100,7 +110,7 @@ class LessonPage extends StatelessWidget {
     await _markDone(context);
     if (!context.mounted) return;
     Navigator.of(context).pushReplacement(MaterialPageRoute<void>(
-      builder: (_) => LessonPage(unit: unit, index: index + 1),
+      builder: (_) => LessonPage(unit: unit, index: index + 1, cardTile: cardTile, footer: footer),
     ));
   }
 
@@ -134,6 +144,7 @@ class LessonPage extends StatelessWidget {
                   separatorBuilder: (_, __) => const SizedBox(width: 10),
                   itemBuilder: (context, i) {
                     final id = lesson.cards[i];
+                    if (cardTile != null) return cardTile!(context, id);
                     return InkWell(
                       onTap: () => Navigator.of(context)
                           .push(MaterialPageRoute<void>(builder: (_) => CardDetailPage(cardId: id))),
@@ -156,6 +167,7 @@ class LessonPage extends StatelessWidget {
               title: l.lessonSources,
               child: Text(lesson.sources.join('\n'), style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
             ),
+          if (footer?.call(context, lesson) case final Widget extra) extra,
           const SizedBox(height: 28),
           if (preview)
             _UnlockRest(unit: unit, onUnlocked: () => _goNext(context))

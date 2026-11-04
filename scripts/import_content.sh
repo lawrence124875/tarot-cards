@@ -41,10 +41,49 @@ if [ -f "$src/decks/decks.json" ]; then
   done
 fi
 
+# 雷諾曼：lenormand/<語言>/cards.json、spreads.json、lessons.json（只有 zh-Hant、zh-Hans、en），
+# lenormand/deck/01.webp–36.webp、back.webp。
+len=""
+if [ -d "$src/lenormand" ]; then
+  for lang in zh-Hant zh-Hans en; do
+    mkdir -p "assets/lenormand/$lang"
+    n=0
+    for f in "$src/lenormand/$lang"/*.json; do
+      [ -e "$f" ] || continue
+      cp "$f" "assets/lenormand/$lang/"
+      n=$((n + 1))
+    done
+    len="$len $lang=$n"
+  done
+  mkdir -p assets/lenormand/deck
+  n=0
+  for f in "$src"/lenormand/deck/[0-9][0-9].webp "$src/lenormand/deck/back.webp"; do
+    [ -e "$f" ] || continue
+    cp "$f" assets/lenormand/deck/
+    n=$((n + 1))
+  done
+  len="$len deck=$n"
+fi
+
+# 交叉解讀：cross/scores.json（預設表＋overrides 合併後）、cross/<語言>/templates.json。
+cross=0
+if [ -f "$src/cross/scores.json" ]; then
+  mkdir -p assets/cross
+  cp "$src/cross/scores.json" assets/cross/
+  cross=1
+  for lang in zh-Hant zh-Hans en; do
+    if [ -f "$src/cross/$lang/templates.json" ]; then
+      mkdir -p "assets/cross/$lang"
+      cp "$src/cross/$lang/templates.json" "assets/cross/$lang/"
+      cross=$((cross + 1))
+    fi
+  done
+fi
+
 # App 圖示與牌背原圖（patch_android.sh／patch_ios.sh 會用到）。
 if [ -d "$src/branding" ]; then
   rm -rf branding
   cp -r "$src/branding" branding
 fi
 
-echo "已匯入解讀（${summary# }）、牌面組（${decks# }）"
+echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、交叉 ${cross} 檔"

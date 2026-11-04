@@ -1,7 +1,7 @@
 name: tarot_cards
 description: "塔羅｜塔羅學習與自我覺察（LC Lab）"
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.2.0+1
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -60,6 +60,14 @@ flutter:
     - assets/decks/
     - assets/decks/rws1909/
     - assets/decks/gemini/
+    - assets/lenormand/zh-Hant/
+    - assets/lenormand/zh-Hans/
+    - assets/lenormand/en/
+    - assets/lenormand/deck/
+    - assets/cross/
+    - assets/cross/zh-Hant/
+    - assets/cross/zh-Hans/
+    - assets/cross/en/
     - assets/licenses/
     - assets/audio/ # 真實自然錄音音景（CC0／公有領域，見 CREDITS.md）
 
