@@ -1,0 +1,11 @@
+name: pd_search (temporary)
+on:
+  push:
+    branches: [claude/project-thread-qby2fs]
+    paths: ['.github/pd/**', '.github/workflows/pd_search.yml']
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/pd/search.py
