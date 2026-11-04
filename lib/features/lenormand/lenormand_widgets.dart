@@ -7,8 +7,8 @@ import '../../l10n/l10n.dart';
 import '../../reading/section.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 
-/// 雷諾曼牌面寬高比（9:16）。
-const double kLenormandAspect = 9 / 16;
+/// 雷諾曼牌面寬高比（2:3，BnF 公有領域掃描裁切後的比例）。
+const double kLenormandAspect = 2 / 3;
 
 /// 雷諾曼牌面：assets/lenormand/deck/NN.webp；沒有圖時畫出牌號與牌名。
 class LenormandFace extends StatelessWidget {
