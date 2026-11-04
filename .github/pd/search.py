@@ -1,12 +1,20 @@
 """暫時用：統計 Commons 上雷諾曼牌組的檔案數、授權與來源，只輸出摘要。"""
-import json, os, re, urllib.request, urllib.parse
+import json, os, re, urllib.request, urllib.parse, urllib.error
 from collections import defaultdict
 
 API = "https://commons.wikimedia.org/w/api.php?"
+import time
 def get(params):
-    req = urllib.request.Request(API + urllib.parse.urlencode(params), headers={"User-Agent": "tarot-pd-search/1.0 (github actions)"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.load(r)
+    req = urllib.request.Request(API + urllib.parse.urlencode(params), headers={"User-Agent": "AuraSpicaTarotBot/1.0 (https://github.com/lawrence124875/tarot-cards; research)"})
+    for attempt in range(6):
+        time.sleep(3)
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return json.load(r)
+        except urllib.error.HTTPError as e:
+            if e.code != 429: raise
+            time.sleep(int(e.headers.get("Retry-After") or 20) + 5 * attempt)
+    return {}
 
 out = []
 def p(s): out.append(s); print(s)

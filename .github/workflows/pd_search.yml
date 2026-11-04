@@ -9,4 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 .github/pd/search.py
-        timeout-minutes: 8
+        timeout-minutes: 20
