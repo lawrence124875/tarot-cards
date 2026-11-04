@@ -8,5 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: pip install pillow
       - run: python3 .github/pd/search.py
         timeout-minutes: 20
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pd-contact
+          path: out/
+          retention-days: 1

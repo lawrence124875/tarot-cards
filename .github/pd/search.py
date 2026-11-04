@@ -1,46 +1,47 @@
-"""暫時用：統計 Commons 上雷諾曼牌組的檔案數、授權與來源，只輸出摘要。"""
-import json, os, re, urllib.request, urllib.parse, urllib.error
-from collections import defaultdict
+"""暫時用：下載三套 BnF（Commons 公有領域）雷諾曼牌組縮圖，做成索引圖供挑選。"""
+import io, json, os, re, time, urllib.request, urllib.parse, urllib.error
+from PIL import Image, ImageDraw
 
 API = "https://commons.wikimedia.org/w/api.php?"
-import time
-def get(params):
-    req = urllib.request.Request(API + urllib.parse.urlencode(params), headers={"User-Agent": "AuraSpicaTarotBot/1.0 (https://github.com/lawrence124875/tarot-cards; research)"})
+UA = {"User-Agent": "AuraSpicaTarotBot/1.0 (https://github.com/lawrence124875/tarot-cards; research)"}
+def fetch(url, raw=False):
     for attempt in range(6):
-        time.sleep(3)
+        time.sleep(1.5)
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
-                return json.load(r)
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+                return r.read() if raw else json.load(r)
         except urllib.error.HTTPError as e:
             if e.code != 429: raise
             time.sleep(int(e.headers.get("Retry-After") or 20) + 5 * attempt)
-    return {}
 
-out = []
-def p(s): out.append(s); print(s)
-
-groups = defaultdict(list)
-for q in ['"Petit Lenormand"', '"Wahrsagekarten des Kartenschlägerin"', '"Jeu divinatoire de Marie-Anne Le Normand"', 'Lenormand Wahrsage', 'Lenormand cartomancie jeu']:
-    cont = {}
-    for _page in range(10):
-        d = get({"action": "query", "generator": "search", "gsrsearch": q, "gsrnamespace": 6, "gsrlimit": 50,
-                 "prop": "imageinfo", "iiprop": "extmetadata|size", "iiextmetadatafilter": "LicenseShortName|Credit|DateTimeOriginal|ImageDescription",
-                 "format": "json", **cont})
+DECKS = {"A_petit_1895": "btv1b10529584r", "B_petit_1875": "btv1b10522499m", "C_wahrsage_1875": "btv1b105433047"}
+os.makedirs("out", exist_ok=True)
+summary = []
+for name, bid in DECKS.items():
+    files, cont = [], {}
+    for _ in range(5):
+        d = fetch(API + urllib.parse.urlencode({"action": "query", "generator": "search", "gsrsearch": f'intitle:"{bid}"', "gsrnamespace": 6, "gsrlimit": 50,
+              "prop": "imageinfo", "iiprop": "url", "iiurlwidth": 220, "format": "json", **cont}))
         for pg in d.get("query", {}).get("pages", {}).values():
-            t = pg["title"][5:]
-            key = re.sub(r"[\s\-_(]*\(?\d+( of \d+)?\)?\.\w+$", "", t)
-            key = re.sub(r"\s*\d+\s*$", "", key)[:90]
-            ii = (pg.get("imageinfo") or [{}])[0]; m = ii.get("extmetadata", {})
-            groups[key].append((t, m.get("LicenseShortName", {}).get("value", ""), re.sub("<[^>]+>", "", m.get("Credit", {}).get("value", ""))[:120],
-                                re.sub("<[^>]+>", "", m.get("DateTimeOriginal", {}).get("value", ""))[:40], ii.get("width"), ii.get("height")))
+            m = re.search(r"\((\d+) of (\d+)\)", pg["title"])
+            if m: files.append((int(m.group(1)), pg["title"], pg["imageinfo"][0]["thumburl"], pg["imageinfo"][0]["url"]))
         if "gsroffset" not in d.get("continue", {}): break
         cont = {"gsroffset": d["continue"]["gsroffset"], "continue": d["continue"].get("continue", "")}
-
-for k, v in sorted(groups.items(), key=lambda x: -len(x[1])):
-    if len(v) < 3 and "Lenormand" not in k and "Normand" not in k: continue
-    lic = sorted({x[1] for x in v}); cred = sorted({x[2] for x in v})[:2]; dates = sorted({x[3] for x in v})[:2]
-    sizes = sorted({f"{x[4]}x{x[5]}" for x in v})[:3]
-    p(f"- [{len(v)}] {k} | lic={lic} | date={dates} | size={sizes} | credit={cred}")
-    p("    e.g. " + " ; ".join(x[0] for x in v[:3]))
-
-with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f: f.write("\n".join(out) + "\n")
+    files.sort()
+    json.dump(files, open(f"out/{name}.json", "w"), ensure_ascii=False, indent=0)
+    cols, tw, th = 10, 110, 170
+    rows = (len(files) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * tw, rows * (th + 16)), "white")
+    dr = ImageDraw.Draw(sheet)
+    for k, (n, t, thumb, full) in enumerate(files):
+        try:
+            im = Image.open(io.BytesIO(fetch(thumb, raw=True))).convert("RGB")
+            im.thumbnail((tw - 6, th - 6))
+            x, y = (k % cols) * tw, (k // cols) * (th + 16)
+            sheet.paste(im, (x + 3, y + 3)); dr.text((x + 4, y + th), str(n), fill="black")
+        except Exception as e:
+            pass
+    sheet.save(f"out/{name}.jpg", quality=80)
+    summary.append(f"- {name} {bid}: {len(files)} files")
+open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(summary) + "\n")
+print("\n".join(summary))
