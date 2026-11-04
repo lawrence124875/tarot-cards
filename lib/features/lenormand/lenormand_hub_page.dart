@@ -8,6 +8,7 @@ import '../../l10n/l10n.dart';
 import '../../shared/premium/ad_banner.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../learn/lesson_page.dart';
+import '../cross/cross_page.dart';
 import 'lenormand_draw_page.dart';
 import 'lenormand_widgets.dart';
 
@@ -72,6 +73,12 @@ class _LenormandHubPageState extends State<LenormandHubPage> {
             title: l.lenormandDrawThree,
             onTap: () => _push(const LenormandDrawPage(spread: LenormandSpread.three)),
           ),
+          _Tile(
+            icon: Icons.join_inner,
+            title: l.featureCross,
+            subtitle: l.crossHubHint,
+            onTap: () => _push(const CrossPage()),
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 24, 4, 8),
             child: Text(l.lenormandLibrary, style: t.titleMedium),
@@ -112,7 +119,7 @@ class _LenormandHubPageState extends State<LenormandHubPage> {
                 ].join('\n'),
                 onTap: () {
                   if (!u.ready) return;
-                  _push(LessonUnitPage(unit: u, cardTile: lenormandLessonTile));
+                  _push(LessonUnitPage(unit: u, cardTile: lenormandLessonTile, footer: _crossFooter));
                 },
               ),
         ],
@@ -120,6 +127,24 @@ class _LenormandHubPageState extends State<LenormandHubPage> {
     );
   }
 }
+
+/// 「塔羅 × 雷諾曼對照」課末：導向交叉功能。
+Widget? _crossFooter(BuildContext context, Lesson lesson) {
+  if (lesson.id != crossLessonId) return null;
+  return Padding(
+    padding: const EdgeInsets.only(top: 20),
+    child: Center(
+      child: FilledButton.icon(
+        icon: const Icon(Icons.join_inner, size: 18),
+        label: Text(context.l10n.crossLessonGo),
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => const CrossPage())),
+      ),
+    ),
+  );
+}
+
+/// 雷諾曼課程最後一課的 id（tarot-content lenormand/src/lessons.py）。
+const crossLessonId = 'cross_compare';
 
 class _Tile extends StatelessWidget {
   const _Tile({required this.icon, required this.title, this.subtitle, required this.onTap});

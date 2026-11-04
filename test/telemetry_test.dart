@@ -44,6 +44,8 @@ void main() {
     const InterstitialFailed(),
     const TrialStarted(period: 'yearly'),
     const Subscribed(period: 'restore'),
+    const CrossShown(relation: 'divergent', full: false),
+    const CrossVerified(result: 'partial'),
   ];
 
   test('統計事件一律 tr_ 開頭、名稱合規、參數只有字串或數字', () {
@@ -58,6 +60,11 @@ void main() {
         expect(entry.value is String || entry.value is num, isTrue, reason: entry.key);
       }
     }
+  });
+
+  test('交叉解讀事件只送選項值（不含問題與牌面）', () {
+    expect(AnalyticsListener.describe(const CrossVerified(result: 'yes')), ('tr_cross_verify', {'result': 'yes'}));
+    expect(AnalyticsListener.describe(const CrossShown(relation: 'consensus', full: true))!.\$2.keys.toSet(), {'relation', 'full'});
   });
 
   test('認不得的事件不送', () {
@@ -101,7 +108,7 @@ void main() {
     expect(featureFlagKey('journal'), 'tr_feature_journal');
     final ids = registeredFeatures.map((f) => f.id).toList();
     expect(activeFeatures(const DefaultRemoteFlags()).map((f) => f.id), ids);
-    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'journal', 'breath']);
+    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'cross', 'journal', 'breath']);
     expect(activeFeatures(_Off({'journal'})).map((f) => f.id), isNot(contains('journal')));
     expect(activeFeatures(_Off({'journal'})).length, ids.length - 1);
     // Remote Config 參數名稱限制：字母或底線開頭，最多 256 字

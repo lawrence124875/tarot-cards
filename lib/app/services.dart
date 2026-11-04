@@ -62,6 +62,7 @@ class Services {
     CastQuota? quota,
     this.updater = const NoUpdater(),
     this.lenormand = const EmptyLenormandSource(),
+    this.crossIntro,
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
@@ -112,6 +113,7 @@ class Services {
         quota: CastQuota(limits: limits),
         updater: const PlayAppUpdater(),
         lenormand: AssetLenormandSource(folder: () => L10n.contentFolder),
+        crossIntro: FileIntroStore(name: 'cross_intro.json'),
       );
 
   final ContentSource content;
@@ -175,6 +177,9 @@ class Services {
 
   /// 雷諾曼內容（牌義、牌陣、課程；zh-Hant／zh-Hans／en，其他語言退回英文）。
   final LenormandSource lenormand;
+
+  /// 交叉解讀的 3 頁引導是否看過；null＝不自動顯示（測試）。
+  final IntroStore? crossIntro;
 
   bool get isPremium => premium.isPremium.value;
 

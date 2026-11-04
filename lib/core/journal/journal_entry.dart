@@ -33,7 +33,10 @@ class JournalEntry {
     this.deckId = '',
     this.reminderAt,
     List<FollowUp> followUps = const [],
+    List<int> lenormand = const [],
+    this.verdict = '',
   })  : cards = List.unmodifiable(cards),
+        lenormand = List.unmodifiable(lenormand),
         readingIndexes = List.unmodifiable(readingIndexes),
         followUps = List.unmodifiable(followUps);
 
@@ -46,6 +49,7 @@ class JournalEntry {
     List<int?> readingIndexes = const [],
     String deckId = '',
     DateTime? reminderAt,
+    List<int> lenormand = const [],
   }) =>
       JournalEntry(
         id: now.microsecondsSinceEpoch.toRadixString(36),
@@ -59,6 +63,7 @@ class JournalEntry {
         readingIndexes: readingIndexes,
         deckId: deckId,
         reminderAt: reminderAt,
+        lenormand: lenormand,
       );
 
   final String id;
@@ -80,6 +85,16 @@ class JournalEntry {
   final DateTime? reminderAt;
   final List<FollowUp> followUps;
 
+  /// 塔羅 × 雷諾曼交叉解讀時抽到的雷諾曼牌（1–36）；一般塔羅紀錄為空。
+  final List<int> lenormand;
+
+  /// 交叉紀錄回顧「事後應驗了嗎？」：yes／partial／no；空字串＝還沒選。
+  final String verdict;
+
+  bool get isCross => lenormand.isNotEmpty;
+
+  static const verdicts = ['yes', 'partial', 'no'];
+
   SpreadDraw get draw => SpreadDraw(spreadId: spreadId, methodId: methodId, cards: cards);
 
   Spread get spread => Spreads.byId(spreadId);
@@ -97,6 +112,7 @@ class JournalEntry {
     DateTime? reminderAt,
     bool clearReminder = false,
     List<FollowUp>? followUps,
+    String? verdict,
   }) =>
       JournalEntry(
         id: id,
@@ -111,6 +127,8 @@ class JournalEntry {
         deckId: deckId,
         reminderAt: clearReminder ? null : (reminderAt ?? this.reminderAt),
         followUps: followUps ?? this.followUps,
+        lenormand: lenormand,
+        verdict: verdict ?? this.verdict,
       );
 
   Map<String, dynamic> toJson() => {
@@ -126,6 +144,8 @@ class JournalEntry {
         if (deckId.isNotEmpty) 'deck': deckId,
         if (reminderAt != null) 'reminderAt': reminderAt!.toIso8601String(),
         'followUps': [for (final f in followUps) f.toJson()],
+        if (lenormand.isNotEmpty) 'lenormand': lenormand,
+        if (verdict.isNotEmpty) 'verdict': verdict,
       };
 
   /// 寬鬆解析：欄位缺漏給預設值；牌不合法或數量與牌陣不符時回傳 null（略過該筆）。
@@ -155,6 +175,11 @@ class JournalEntry {
         for (final f in (j['followUps'] as List? ?? const []))
           if (f is Map<String, dynamic>) FollowUp.fromJson(f),
       ],
+      lenormand: [
+        for (final x in (j['lenormand'] is List ? j['lenormand'] as List : const []))
+          if (x is int && x >= 1 && x <= 36) x,
+      ],
+      verdict: verdicts.contains(j['verdict']) ? j['verdict'] as String : '',
     );
   }
 }

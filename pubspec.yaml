@@ -64,6 +64,10 @@ flutter:
     - assets/lenormand/zh-Hans/
     - assets/lenormand/en/
     - assets/lenormand/deck/
+    - assets/cross/
+    - assets/cross/zh-Hant/
+    - assets/cross/zh-Hans/
+    - assets/cross/en/
     - assets/licenses/
     - assets/audio/ # 真實自然錄音音景（CC0／公有領域，見 CREDITS.md）
 

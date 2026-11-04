@@ -23,7 +23,12 @@ class MemoryIntroStore implements IntroStore {
 
 /// 存在 App 文件資料夾的 `intro.json`（與卦記同一個資料夾，不需權限）。
 class FileIntroStore implements IntroStore {
-  Future<File> _file() async => File('${(await getApplicationDocumentsDirectory()).path}/intro.json');
+  /// [name]：檔名（交叉解讀引導用 `cross_intro.json`）。
+  FileIntroStore({this.name = 'intro.json'});
+
+  final String name;
+
+  Future<File> _file() async => File('${(await getApplicationDocumentsDirectory()).path}/$name');
 
   @override
   Future<bool> seen() async {

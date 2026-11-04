@@ -6,6 +6,7 @@ import '../../core/content/card_content.dart';
 import '../../core/deck/deck.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_reminders.dart';
+import '../cross/cross_journal_section.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/reading_page.dart';
 import '../../reading/section.dart';
@@ -190,6 +191,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
         const SizedBox(height: 12),
         Text([for (final c in e.cards) l.drawnName(c)].join(l.listSeparator),
             textAlign: TextAlign.center, style: t.titleMedium),
+        if (e.isCross) CrossJournalSection(entry: e, onChanged: _update),
         if (reading != null) ...[
           const SizedBox(height: 8),
           Text(l.journalReadingThen, textAlign: TextAlign.center, style: t.bodySmall),
