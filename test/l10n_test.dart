@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tarot_cards/core/journal/journal_entry.dart';
 import 'package:tarot_cards/app/theme.dart';
 import 'package:tarot_cards/core/content/asset_content_source.dart';
 import 'package:tarot_cards/core/reminders/reminder_service.dart';
@@ -271,6 +272,8 @@ void main() {
       expect(m.body, startsWith('7 天前抽到惡魔'));
       final en = lookupAppLocalizations(AppLanguages.en.locale).reviewMessage(22, 1);
       expect(en.body, contains('Ace of Wands'));
+      expect(zh.reviewMessage(-31, 3).title, '回顧一張牌：雷諾曼');
+      expect(zh.journalKindName(JournalKind.cross), '塔羅 × 雷諾曼');
       expect(hour12(20), 8);
       expect(hour12(12), 12);
       expect(hour12(0), 12);

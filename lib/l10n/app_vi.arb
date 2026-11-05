@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "Chậm",
   "lenormandContentMissing": "Nội dung Lenormand chưa được tải.",
   "featureCross": "Tarot × Lenormand",
+  "journalKindTarot": "Tarot",
   "crossHubHint": "Một câu hỏi: Tarot xem mặt tâm lý, Lenormand xem mặt sự việc.",
   "crossQuestionLabel": "Điều bạn muốn hỏi",
   "crossQuestionNeeded": "Hãy viết một câu hỏi trước",

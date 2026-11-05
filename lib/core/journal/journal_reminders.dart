@@ -2,6 +2,7 @@ import '../reminders/reminder_service.dart';
 import 'journal_entry.dart';
 
 /// 通知標題與內文：由介面層提供（l10n 的 reviewMessage），core 不放介面文字。
+/// cardId 為負數時表示雷諾曼牌（-1 ～ -36）。
 typedef ReviewMessage = ({String title, String body}) Function(int cardId, int days);
 
 /// 日記與提醒的接合：回顧時間、payload、排程。
@@ -30,7 +31,8 @@ class JournalReminders {
     final days = DateTime(at.year, at.month, at.day)
         .difference(DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day))
         .inDays;
-    final m = message(e.keyCard.cardId, days);
+    // 雷諾曼單獨紀錄沒有塔羅牌：以負數傳雷諾曼牌號，由介面層換成「雷諾曼」字樣。
+    final m = message(e.isLenormand ? -e.keyLenormand! : e.keyCard.cardId, days);
     return reminders.schedule(
       id: e.notificationId,
       at: at,

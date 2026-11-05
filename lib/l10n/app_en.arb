@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "Slow",
   "lenormandContentMissing": "Lenormand content is not loaded yet.",
   "featureCross": "Tarot × Lenormand",
+  "journalKindTarot": "Tarot",
   "crossHubHint": "One question: tarot for the inner side, Lenormand for events.",
   "crossQuestionLabel": "The one thing you want to ask",
   "crossQuestionNeeded": "Please write a question first",

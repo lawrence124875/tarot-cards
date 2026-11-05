@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "Lento",
   "lenormandContentMissing": "El contenido de Lenormand aún no se ha cargado.",
   "featureCross": "Tarot × Lenormand",
+  "journalKindTarot": "Tarot",
   "crossHubHint": "Una pregunta: el tarot mira lo interior y el Lenormand los hechos.",
   "crossQuestionLabel": "Lo que quieres preguntar",
   "crossQuestionNeeded": "Escribe primero una pregunta",

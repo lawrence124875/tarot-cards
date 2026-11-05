@@ -2,6 +2,9 @@ import '../content/reading_area.dart';
 import '../tarot/draw.dart';
 import '../tarot/spread.dart';
 
+/// 紀錄類型：塔羅、雷諾曼、塔羅 × 雷諾曼。
+enum JournalKind { tarot, lenormand, cross }
+
 /// 事後的一次回顧：後來發生了什麼、牌面的象怎麼對上。
 class FollowUp {
   const FollowUp({required this.at, required this.text});
@@ -66,6 +69,23 @@ class JournalEntry {
         lenormand: lenormand,
       );
 
+  /// 雷諾曼單獨抽牌的紀錄（不含塔羅牌）。spreadId 為 len_one／len_three。
+  factory JournalEntry.fromLenormand({
+    required String spreadId,
+    required List<int> cards,
+    required DateTime now,
+    String question = '',
+  }) =>
+      JournalEntry(
+        id: now.microsecondsSinceEpoch.toRadixString(36),
+        createdAt: now,
+        spreadId: spreadId,
+        methodId: DrawMethods.quick,
+        cards: const [],
+        question: question,
+        lenormand: cards,
+      );
+
   final String id;
   final DateTime createdAt;
   final String spreadId;
@@ -91,7 +111,15 @@ class JournalEntry {
   /// 交叉紀錄回顧「事後應驗了嗎？」：yes／partial／no；空字串＝還沒選。
   final String verdict;
 
-  bool get isCross => lenormand.isNotEmpty;
+  bool get isCross => cards.isNotEmpty && lenormand.isNotEmpty;
+
+  /// 只有雷諾曼牌（沒有塔羅牌）。
+  bool get isLenormand => cards.isEmpty && lenormand.isNotEmpty;
+
+  JournalKind get kind => isLenormand ? JournalKind.lenormand : (isCross ? JournalKind.cross : JournalKind.tarot);
+
+  /// 雷諾曼紀錄的關鍵牌（三張取中間）；沒有雷諾曼牌時為 null。
+  int? get keyLenormand => lenormand.isEmpty ? null : lenormand[lenormand.length == 3 ? 1 : 0];
 
   static const verdicts = ['yes', 'partial', 'no'];
 
@@ -155,9 +183,19 @@ class JournalEntry {
     final rawCards = j['cards'];
     if (rawCards is! List) return null;
     final cards = [for (final c in rawCards) DrawnCard.tryFromJson(c)];
-    if (cards.isEmpty || cards.any((c) => c == null)) return null;
+    if (cards.any((c) => c == null)) return null;
     final spreadId = j['spread'] as String? ?? 'one';
-    if (Spreads.byId(spreadId).size != cards.length) return null;
+    final len = [
+      for (final x in (j['lenormand'] is List ? j['lenormand'] as List : const []))
+        if (x is int && x >= 1 && x <= 36) x,
+    ];
+    if (cards.isEmpty) {
+      // 雷諾曼單獨紀錄：len_one／len_three，牌數要對上。
+      final ok = (spreadId == 'len_one' && len.length == 1) || (spreadId == 'len_three' && len.length == 3);
+      if (!ok) return null;
+    } else if (Spreads.byId(spreadId).size != cards.length) {
+      return null;
+    }
     final idx = j['readingIndexes'];
     return JournalEntry(
       id: j['id'] as String? ?? created.microsecondsSinceEpoch.toRadixString(36),
@@ -175,10 +213,7 @@ class JournalEntry {
         for (final f in (j['followUps'] as List? ?? const []))
           if (f is Map<String, dynamic>) FollowUp.fromJson(f),
       ],
-      lenormand: [
-        for (final x in (j['lenormand'] is List ? j['lenormand'] as List : const []))
-          if (x is int && x >= 1 && x <= 36) x,
-      ],
+      lenormand: len,
       verdict: verdicts.contains(j['verdict']) ? j['verdict'] as String : '',
     );
   }

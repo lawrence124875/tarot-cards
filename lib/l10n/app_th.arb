@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "ช้า",
   "lenormandContentMissing": "ยังไม่ได้โหลดเนื้อหาเลอนอร์มองด์",
   "featureCross": "ทาโรต์ × เลอนอร์มองด์",
+  "journalKindTarot": "ทาโรต์",
   "crossHubHint": "คำถามเดียว ทาโรต์ดูด้านจิตใจ เลอนอร์มองด์ดูด้านเหตุการณ์",
   "crossQuestionLabel": "สิ่งที่อยากถาม",
   "crossQuestionNeeded": "กรุณาเขียนคำถามก่อน",

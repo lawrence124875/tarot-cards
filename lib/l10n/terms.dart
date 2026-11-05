@@ -1,3 +1,4 @@
+import '../core/journal/journal_entry.dart';
 import '../core/reminders/reminder_service.dart';
 import '../core/soundscape/breath_timeline.dart';
 import '../core/soundscape/sound_bed.dart';
@@ -53,9 +54,16 @@ extension TarotTerms on AppLocalizations {
         ReminderFailureKind.unsupported => reminderUnsupported,
       };
 
+  /// 日記類型標籤。
+  String journalKindName(JournalKind k) => switch (k) {
+        JournalKind.tarot => journalKindTarot,
+        JournalKind.lenormand => featureLenormand,
+        JournalKind.cross => featureCross,
+      };
+
   /// 日記回顧通知（內文不放想問的事）。
   ({String title, String body}) reviewMessage(int cardId, int days) {
-    final name = cardName(cardId);
+    final name = cardId < 0 ? featureLenormand : cardName(cardId);
     return (title: reviewNotificationTitle(name), body: reviewNotificationBody(days, name));
   }
 }

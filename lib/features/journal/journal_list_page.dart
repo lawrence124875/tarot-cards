@@ -6,11 +6,13 @@ import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_stats.dart';
+import '../../core/lenormand/lenormand.dart';
 import '../../core/tarot/tarot_card.dart';
 import '../../core/journal/journal_store.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/format.dart';
 import '../../shared/widgets/card_face.dart';
+import '../lenormand/lenormand_widgets.dart';
 import 'journal_backup_menu.dart';
 import 'journal_entry_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
@@ -50,50 +52,77 @@ class _List extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: store,
-      builder: (context, _) => FutureBuilder<List<JournalEntry>>(
-        future: store.all(),
+      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)>(
+        future: _load(context),
         builder: (context, snap) {
           if (!snap.hasData) return const Center(child: CircularProgressIndicator());
-          final entries = snap.data!;
+          final (entries, names, spreads) = snap.data!;
           if (entries.isEmpty) return const _Empty();
           return ListView.separated(
             padding: readablePadding(context, horizontal: 16, top: 8, bottom: 32),
             itemCount: entries.length,
             separatorBuilder: (_, __) => Divider(height: 1, color: TarotColors.mountain),
-            itemBuilder: (context, i) => _Tile(entry: entries[i]),
+            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names, spreads: spreads),
           );
         },
       ),
     );
   }
+
+  /// 紀錄、雷諾曼牌名、牌陣名（塔羅用原 id，雷諾曼用 len_ 前綴）。
+  Future<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)> _load(BuildContext context) async {
+    final s = AppServices.of(context);
+    final entries = await store.all();
+    final anyLen = entries.any((e) => e.lenormand.isNotEmpty);
+    final names = anyLen ? await s.lenormand.cards() : const <int, LenormandText>{};
+    final spreads = <String, String>{
+      for (final e in ((await s.content.spreads())?.spreads ?? const {}).entries) e.key: e.value.name,
+      if (anyLen)
+        for (final e in (await s.lenormand.spreads()).entries) 'len_${e.key}': e.value.name,
+    };
+    return (entries, names, spreads);
+  }
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.entry});
+  const _Tile({required this.entry, required this.names, required this.spreads});
 
   final JournalEntry entry;
+  final Map<int, LenormandText> names;
+  final Map<String, String> spreads;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final l = context.l10n;
-    final key = entry.keyCard;
     final reviews = entry.followUps.length;
     final pending = entry.reminderAt != null && entry.reminderAt!.isAfter(DateTime.now());
+    final String title;
+    final Widget face;
+    if (entry.isLenormand) {
+      final id = entry.keyLenormand!;
+      final name = names[id]?.name ?? '$id';
+      title = entry.lenormand.length == 1 ? name : l.journalTitleSpread(name, entry.lenormand.length);
+      face = AspectRatio(aspectRatio: kLenormandAspect, child: LenormandFace(cardId: id, name: name));
+    } else {
+      final key = entry.keyCard;
+      title = entry.cards.length == 1 ? l.drawnName(key) : l.journalTitleSpread(l.drawnName(key), entry.cards.length);
+      face = AspectRatio(aspectRatio: kCardAspect, child: CardFace(cardId: key.cardId, reversed: key.reversed));
+    }
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      leading: SizedBox(
-        width: 40,
-        child: AspectRatio(aspectRatio: kCardAspect, child: CardFace(cardId: key.cardId, reversed: key.reversed)),
-      ),
-      title: Text(
-          entry.cards.length == 1
-              ? l.drawnName(key)
-              : l.journalTitleSpread(l.drawnName(key), entry.cards.length),
-          style: t.titleMedium),
+      leading: SizedBox(width: 40, child: face),
+      title: Text(title, style: t.titleMedium),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+              [
+                l.journalKindName(entry.kind),
+                // 交叉解讀固定是塔羅三張＋雷諾曼三張，不另標牌陣
+                if (!entry.isCross) spreads[entry.spreadId] ?? '',
+              ].where((x) => x.isNotEmpty).join('・'),
+              style: t.labelMedium?.copyWith(color: TarotColors.rice)),
           Text(
             entry.question.isEmpty ? l.journalNoQuestion : entry.question,
             maxLines: 2,

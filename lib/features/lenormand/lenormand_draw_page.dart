@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
+import '../../core/events/event_bus.dart';
+import '../../core/journal/journal_entry.dart';
 import '../../core/lenormand/lenormand.dart';
 import '../../core/monetization/cast_quota.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/section.dart';
 import '../../shared/premium/cast_gate.dart';
+import '../../shared/premium/paywall_page.dart';
 import '../../shared/premium/reading_interstitial.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/flip_card.dart';
@@ -33,6 +36,7 @@ class _LenormandDrawPageState extends State<LenormandDrawPage> {
   CastGrant? _grant;
   bool _busy = false;
   bool _interstitialPlayed = false;
+  bool _saved = false;
 
   LenormandSpread get _spread => widget.spread;
   bool get _allRevealed => _cards.isNotEmpty && _revealed.length == _cards.length;
@@ -68,6 +72,7 @@ class _LenormandDrawPageState extends State<LenormandDrawPage> {
     setState(() {
       _grant = grant;
       _interstitialPlayed = false;
+      _saved = false;
       _cards = drawLenormand(_s.random, _spread.size);
       _revealed.clear();
     });
@@ -83,6 +88,26 @@ class _LenormandDrawPageState extends State<LenormandDrawPage> {
     }
     HapticFeedback.lightImpact();
     setState(() => _revealed.addAll(positions));
+  }
+
+  Future<void> _save() async {
+    final journal = _s.journal;
+    if (journal == null || _saved) return;
+    if (!_s.isPremium && (await journal.all()).length >= _s.limits.journalMax) {
+      _s.events.emit(const HitFreeLimit(type: 'journal'));
+      if (!mounted || !await openPaywall(context, source: 'journal_limit')) return;
+    }
+    final entry = JournalEntry.fromLenormand(
+      spreadId: 'len_${_spread.id}',
+      cards: _cards,
+      now: DateTime.now(),
+      question: _question.text.trim(),
+    );
+    await journal.save(entry);
+    _s.events.emit(const JournalSaved(hasReminder: false));
+    if (!mounted) return;
+    setState(() => _saved = true);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.crossSaved)));
   }
 
   @override
@@ -175,15 +200,21 @@ class _LenormandDrawPageState extends State<LenormandDrawPage> {
               const SizedBox(height: 16),
               Text(l.lenormandNotice, style: t.bodySmall?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
               const SizedBox(height: 12),
-              Center(
-                child: OutlinedButton(
+              Wrap(alignment: WrapAlignment.center, spacing: 12, runSpacing: 8, children: [
+                if (_s.journal != null)
+                  OutlinedButton.icon(
+                    icon: Icon(_saved ? Icons.check : Icons.bookmark_add_outlined, size: 18),
+                    label: Text(_saved ? l.crossSaved : l.crossSave),
+                    onPressed: _saved ? null : _save,
+                  ),
+                OutlinedButton(
                   onPressed: () => setState(() {
                     _cards = const [];
                     _revealed.clear();
                   }),
                   child: Text(l.lenormandAgain),
                 ),
-              ),
+              ]),
             ],
           ],
         ],

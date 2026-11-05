@@ -886,6 +886,7 @@
   "lenormandSpeedSlow": "較慢",
   "lenormandContentMissing": "雷諾曼內容尚未載入。",
   "featureCross": "塔羅 × 雷諾曼",
+  "journalKindTarot": "塔羅",
   "crossHubHint": "同一個問題，塔羅看心理面、雷諾曼看事件面。",
   "crossQuestionLabel": "想問的一件事",
   "crossQuestionNeeded": "請先寫下一個問題",

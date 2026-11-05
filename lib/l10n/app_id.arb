@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "Lambat",
   "lenormandContentMissing": "Konten Lenormand belum dimuat.",
   "featureCross": "Tarot × Lenormand",
+  "journalKindTarot": "Tarot",
   "crossHubHint": "Satu pertanyaan: tarot melihat sisi batin, Lenormand melihat peristiwa.",
   "crossQuestionLabel": "Hal yang ingin kamu tanyakan",
   "crossQuestionNeeded": "Tulis pertanyaan terlebih dahulu",

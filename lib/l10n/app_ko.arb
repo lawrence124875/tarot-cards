@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "느림",
   "lenormandContentMissing": "르노르망 내용을 아직 불러오지 못했습니다.",
   "featureCross": "타로 × 르노르망",
+  "journalKindTarot": "타로",
   "crossHubHint": "하나의 질문을 타로는 마음, 르노르망은 사건의 측면에서 봅니다.",
   "crossQuestionLabel": "묻고 싶은 한 가지",
   "crossQuestionNeeded": "먼저 질문을 적어 주세요",
