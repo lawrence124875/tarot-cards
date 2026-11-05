@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "较慢",
   "lenormandContentMissing": "雷诺曼内容尚未加载。",
   "featureCross": "塔罗 × 雷诺曼",
+  "journalKindTarot": "塔罗",
   "crossHubHint": "同一个问题，塔罗看心理面、雷诺曼看事件面。",
   "crossQuestionLabel": "想问的一件事",
   "crossQuestionNeeded": "请先写下一个问题",

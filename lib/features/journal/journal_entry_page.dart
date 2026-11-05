@@ -6,7 +6,9 @@ import '../../core/content/card_content.dart';
 import '../../core/deck/deck.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_reminders.dart';
+import '../../core/lenormand/lenormand.dart';
 import '../cross/cross_journal_section.dart';
+import '../lenormand/lenormand_widgets.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/reading_page.dart';
 import '../../reading/section.dart';
@@ -32,6 +34,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   CardContent? _content;
   SpreadText? _spreadText;
   Deck? _deck;
+  Map<int, LenormandText> _lenNames = const {};
   bool _loaded = false;
   bool _ready = false;
 
@@ -44,8 +47,9 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   Future<void> _load() async {
     _loaded = true;
     final e = await _services.journal?.byId(widget.entryId);
-    final c = e == null ? null : await _services.content.card(e.keyCard.cardId);
-    final sp = e == null ? null : (await _services.content.spreads())?[e.spreadId];
+    final c = (e == null || e.isLenormand) ? null : await _services.content.card(e.keyCard.cardId);
+    final sp = (e == null || e.isLenormand) ? null : (await _services.content.spreads())?[e.spreadId];
+    final lenNames = (e == null || !e.isLenormand) ? const <int, LenormandText>{} : await _services.lenormand.cards();
     final deck = (e == null || e.deckId.isEmpty) ? null : await _services.decks.deck(e.deckId);
     if (!mounted) return;
     setState(() {
@@ -53,6 +57,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       _content = c;
       _spreadText = sp;
       _deck = deck;
+      _lenNames = lenNames;
       _ready = true;
     });
   }
@@ -156,9 +161,10 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   Widget _body(BuildContext context, JournalEntry e) {
     final t = Theme.of(context).textTheme;
     final l = context.l10n;
-    final key = e.keyCard;
-    final keyPos = e.spread.keyPosition.clamp(0, e.cards.length - 1);
-    final readings = _content?.readings(key.reversed) ?? const [];
+    final lenOnly = e.isLenormand;
+    final key = lenOnly ? null : e.keyCard;
+    final keyPos = lenOnly ? 0 : e.spread.keyPosition.clamp(0, e.cards.length - 1);
+    final readings = key == null ? const [] : (_content?.readings(key.reversed) ?? const []);
     final idx = e.readingIndex(keyPos);
     final reading = (idx == null || readings.isEmpty) ? null : readings[idx % readings.length];
     final now = DateTime.now();
@@ -173,24 +179,47 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       padding: readablePadding(context, top: 8, bottom: 40),
       children: [
         Text(
-            [formatDateTime(e.createdAt), _spreadText?.name ?? '', l.methodName(e.methodId)]
+            [l.journalKindName(e.kind), formatDateTime(e.createdAt), _spreadText?.name ?? '', if (!lenOnly) l.methodName(e.methodId)]
                 .where((x) => x.isNotEmpty)
                 .join(l.separator),
             textAlign: TextAlign.center,
             style: t.bodySmall),
         const SizedBox(height: 16),
-        SizedBox(
-          height: e.cards.length == 1 ? 220 : (e.cards.length > 5 ? 360 : 240),
-          child: SpreadLayout(
-            spread: e.spread,
-            cards: e.cards,
-            revealed: {for (var i = 0; i < e.cards.length; i++) i},
-            maxCardWidth: 130,
+        if (lenOnly) ...[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            for (final id in e.lenormand)
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 130),
+                    child: InkWell(
+                      onTap: () => Navigator.of(context)
+                          .push(MaterialPageRoute<void>(builder: (_) => LenormandCardPage(cardId: id))),
+                      child: AspectRatio(
+                          aspectRatio: kLenormandAspect, child: LenormandFace(cardId: id, name: _lenNames[id]?.name)),
+                    ),
+                  ),
+                ),
+              ),
+          ]),
+          const SizedBox(height: 12),
+          Text([for (final id in e.lenormand) _lenNames[id]?.name ?? '$id'].join(l.listSeparator),
+              textAlign: TextAlign.center, style: t.titleMedium),
+        ] else ...[
+          SizedBox(
+            height: e.cards.length == 1 ? 220 : (e.cards.length > 5 ? 360 : 240),
+            child: SpreadLayout(
+              spread: e.spread,
+              cards: e.cards,
+              revealed: {for (var i = 0; i < e.cards.length; i++) i},
+              maxCardWidth: 130,
+            ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Text([for (final c in e.cards) l.drawnName(c)].join(l.listSeparator),
-            textAlign: TextAlign.center, style: t.titleMedium),
+          const SizedBox(height: 12),
+          Text([for (final c in e.cards) l.drawnName(c)].join(l.listSeparator),
+              textAlign: TextAlign.center, style: t.titleMedium),
+        ],
         if (e.isCross) CrossJournalSection(entry: e, onChanged: _update),
         if (reading != null) ...[
           const SizedBox(height: 8),
@@ -224,7 +253,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
           ),
         ),
         const SizedBox(height: 20),
-        OutlinedButton(
+        if (!lenOnly) OutlinedButton(
           onPressed: () => Navigator.of(context).push(MaterialPageRoute<void>(
             builder: (_) => ReadingPage(
               draw: e.draw,

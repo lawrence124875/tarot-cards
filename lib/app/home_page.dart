@@ -48,9 +48,25 @@ class HomePage extends StatelessWidget {
           child: FilledButton(onPressed: () => open(f), child: Text(f.label(l))),
         ),
       // 次要功能用 Wrap：字較長的語言（如阿拉伯文）在橫放的窄欄裡自動換行，不溢出
+      // 次要功能用淡色外框膠囊：看得出能按，又比主按鈕低一階。
       Wrap(
         alignment: WrapAlignment.center,
-        children: [for (final f in secondary) TextButton(onPressed: () => open(f), child: Text(f.label(l)))],
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          for (final f in secondary)
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                shape: const StadiumBorder(),
+                side: BorderSide(color: TarotColors.earth.withValues(alpha: 0.6)),
+                backgroundColor: TarotColors.earth.withValues(alpha: 0.10),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                visualDensity: VisualDensity.compact,
+              ),
+              onPressed: () => open(f),
+              child: Text(f.label(l)),
+            ),
+        ],
       ),
     ];
 

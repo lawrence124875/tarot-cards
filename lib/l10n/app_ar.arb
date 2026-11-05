@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "بطيء",
   "lenormandContentMissing": "لم يتم تحميل محتوى لونورمان بعد.",
   "featureCross": "التاروت × لونورمان",
+  "journalKindTarot": "التاروت",
   "crossHubHint": "سؤال واحد: التاروت للجانب الداخلي ولونورمان للأحداث.",
   "crossQuestionLabel": "الأمر الذي تريد السؤال عنه",
   "crossQuestionNeeded": "اكتب سؤالًا أولًا",

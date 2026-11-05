@@ -179,4 +179,24 @@ void main() {
     expect(cleaned.verdict, '');
     expect(cleaned.lenormand, [5]);
   });
+
+  test('紀錄：雷諾曼單獨存檔，類型標示正確', () {
+    final e = JournalEntry.fromLenormand(spreadId: 'len_three', cards: [4, 31, 35], now: DateTime(2026, 11, 5), question: 'q');
+    expect(e.kind, JournalKind.lenormand);
+    expect(e.keyLenormand, 31);
+    final back = JournalEntry.tryFromJson(e.toJson())!;
+    expect(back.isLenormand, isTrue);
+    expect(back.isCross, isFalse);
+    expect(back.lenormand, [4, 31, 35]);
+    expect(back.spreadId, 'len_three');
+    final wrong = Map<String, dynamic>.from(e.toJson())..['spread'] = 'len_one';
+    expect(JournalEntry.tryFromJson(wrong), isNull);
+    final none = Map<String, dynamic>.from(e.toJson())..remove('lenormand');
+    expect(JournalEntry.tryFromJson(none), isNull);
+    final tarot = JournalEntry.fromDraw(
+      draw: SpreadDraw(spreadId: 'one', methodId: 'quick', cards: const [DrawnCard(1)]),
+      now: DateTime(2026, 11, 5),
+    );
+    expect(tarot.kind, JournalKind.tarot);
+  });
 }

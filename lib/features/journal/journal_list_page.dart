@@ -6,11 +6,13 @@ import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_stats.dart';
+import '../../core/lenormand/lenormand.dart';
 import '../../core/tarot/tarot_card.dart';
 import '../../core/journal/journal_store.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/format.dart';
 import '../../shared/widgets/card_face.dart';
+import '../lenormand/lenormand_widgets.dart';
 import 'journal_backup_menu.dart';
 import 'journal_entry_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
@@ -50,50 +52,63 @@ class _List extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: store,
-      builder: (context, _) => FutureBuilder<List<JournalEntry>>(
-        future: store.all(),
+      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>)>(
+        future: _load(context),
         builder: (context, snap) {
           if (!snap.hasData) return const Center(child: CircularProgressIndicator());
-          final entries = snap.data!;
+          final (entries, names) = snap.data!;
           if (entries.isEmpty) return const _Empty();
           return ListView.separated(
             padding: readablePadding(context, horizontal: 16, top: 8, bottom: 32),
             itemCount: entries.length,
             separatorBuilder: (_, __) => Divider(height: 1, color: TarotColors.mountain),
-            itemBuilder: (context, i) => _Tile(entry: entries[i]),
+            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names),
           );
         },
       ),
     );
   }
+
+  Future<(List<JournalEntry>, Map<int, LenormandText>)> _load(BuildContext context) async {
+    final lenormand = AppServices.of(context).lenormand;
+    final entries = await store.all();
+    final names = entries.any((e) => e.lenormand.isNotEmpty) ? await lenormand.cards() : const <int, LenormandText>{};
+    return (entries, names);
+  }
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.entry});
+  const _Tile({required this.entry, required this.names});
 
   final JournalEntry entry;
+  final Map<int, LenormandText> names;
 
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final l = context.l10n;
-    final key = entry.keyCard;
     final reviews = entry.followUps.length;
     final pending = entry.reminderAt != null && entry.reminderAt!.isAfter(DateTime.now());
+    final String title;
+    final Widget face;
+    if (entry.isLenormand) {
+      final id = entry.keyLenormand!;
+      final name = names[id]?.name ?? '$id';
+      title = entry.lenormand.length == 1 ? name : l.journalTitleSpread(name, entry.lenormand.length);
+      face = AspectRatio(aspectRatio: kLenormandAspect, child: LenormandFace(cardId: id, name: name));
+    } else {
+      final key = entry.keyCard;
+      title = entry.cards.length == 1 ? l.drawnName(key) : l.journalTitleSpread(l.drawnName(key), entry.cards.length);
+      face = AspectRatio(aspectRatio: kCardAspect, child: CardFace(cardId: key.cardId, reversed: key.reversed));
+    }
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      leading: SizedBox(
-        width: 40,
-        child: AspectRatio(aspectRatio: kCardAspect, child: CardFace(cardId: key.cardId, reversed: key.reversed)),
-      ),
-      title: Text(
-          entry.cards.length == 1
-              ? l.drawnName(key)
-              : l.journalTitleSpread(l.drawnName(key), entry.cards.length),
-          style: t.titleMedium),
+      leading: SizedBox(width: 40, child: face),
+      title: Text(title, style: t.titleMedium),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(l.journalKindName(entry.kind), style: t.labelMedium?.copyWith(color: TarotColors.rice)),
           Text(
             entry.question.isEmpty ? l.journalNoQuestion : entry.question,
             maxLines: 2,

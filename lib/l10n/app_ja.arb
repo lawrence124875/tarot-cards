@@ -335,6 +335,7 @@
   "lenormandSpeedSlow": "ゆっくり",
   "lenormandContentMissing": "ルノルマンの内容がまだ読み込まれていません。",
   "featureCross": "タロット × ルノルマン",
+  "journalKindTarot": "タロット",
   "crossHubHint": "一つの問いを、タロットで心の面、ルノルマンで出来事の面から。",
   "crossQuestionLabel": "聞きたいこと一つ",
   "crossQuestionNeeded": "まず質問を書いてください",
