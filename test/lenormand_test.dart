@@ -55,13 +55,11 @@ void main() {
     expect(LenormandSpread.byId('nope'), LenormandSpread.one);
   });
 
-  test('語言：繁中、簡中、英文用自己的，其他語言退回英文', () {
-    expect(AssetLenormandSource.folderFor('zh-Hant'), 'zh-Hant');
-    expect(AssetLenormandSource.folderFor('zh-Hans'), 'zh-Hans');
-    expect(AssetLenormandSource.folderFor('en'), 'en');
-    for (final f in ['ja', 'ko', 'vi', 'es', 'pt-BR', 'id', 'th', 'ar']) {
-      expect(AssetLenormandSource.folderFor(f), 'en', reason: f);
+  test('語言：11 語各用自己的資料夾，未知語言退回英文', () {
+    for (final f in ['zh-Hant', 'zh-Hans', 'en', 'ja', 'ko', 'vi', 'es', 'pt-BR', 'id', 'th', 'ar']) {
+      expect(AssetLenormandSource.folderFor(f), f, reason: f);
     }
+    expect(AssetLenormandSource.folderFor('fr'), 'en');
   });
 
   test('讀內容：日文退回英文；缺欄位給預設值', () async {

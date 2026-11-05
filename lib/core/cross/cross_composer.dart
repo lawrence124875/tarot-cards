@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import '../lenormand/lenormand.dart';
 import 'cross_engine.dart';
 
 /// 交叉解讀模板（tarot-content `cross/<語言>/templates.json`）。只有繁中、簡中、英文，其他語言用英文。
@@ -94,7 +95,7 @@ class CrossReport {
 
 /// 從 App 資產讀模板：assets/cross/<語言>/templates.json（其他語言退回英文）。
 Future<CrossTemplates> loadCrossTemplates(String contentFolder, {AssetBundle? bundle}) async {
-  final f = const {'zh-Hant', 'zh-Hans', 'en'}.contains(contentFolder) ? contentFolder : 'en';
+  final f = AssetLenormandSource.folderFor(contentFolder);
   for (final dir in {f, 'en'}) {
     try {
       final raw = await (bundle ?? rootBundle).loadString('assets/cross/$dir/templates.json');

@@ -41,11 +41,11 @@ if [ -f "$src/decks/decks.json" ]; then
   done
 fi
 
-# 雷諾曼：lenormand/<語言>/cards.json、spreads.json、lessons.json（只有 zh-Hant、zh-Hans、en），
+# 雷諾曼：lenormand/<語言>/cards.json、spreads.json、lessons.json（11 語），
 # lenormand/deck/01.webp–36.webp、back.webp。
 len=""
 if [ -d "$src/lenormand" ]; then
-  for lang in zh-Hant zh-Hans en; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
     mkdir -p "assets/lenormand/$lang"
     n=0
     for f in "$src/lenormand/$lang"/*.json; do
@@ -71,7 +71,7 @@ if [ -f "$src/cross/scores.json" ]; then
   mkdir -p assets/cross
   cp "$src/cross/scores.json" assets/cross/
   cross=1
-  for lang in zh-Hant zh-Hans en; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
     if [ -f "$src/cross/$lang/templates.json" ]; then
       mkdir -p "assets/cross/$lang"
       cp "$src/cross/$lang/templates.json" "assets/cross/$lang/"
