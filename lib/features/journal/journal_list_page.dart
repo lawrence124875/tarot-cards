@@ -52,36 +52,44 @@ class _List extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: store,
-      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>)>(
+      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)>(
         future: _load(context),
         builder: (context, snap) {
           if (!snap.hasData) return const Center(child: CircularProgressIndicator());
-          final (entries, names) = snap.data!;
+          final (entries, names, spreads) = snap.data!;
           if (entries.isEmpty) return const _Empty();
           return ListView.separated(
             padding: readablePadding(context, horizontal: 16, top: 8, bottom: 32),
             itemCount: entries.length,
             separatorBuilder: (_, __) => Divider(height: 1, color: TarotColors.mountain),
-            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names),
+            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names, spreads: spreads),
           );
         },
       ),
     );
   }
 
-  Future<(List<JournalEntry>, Map<int, LenormandText>)> _load(BuildContext context) async {
-    final lenormand = AppServices.of(context).lenormand;
+  /// 紀錄、雷諾曼牌名、牌陣名（塔羅用原 id，雷諾曼用 len_ 前綴）。
+  Future<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)> _load(BuildContext context) async {
+    final s = AppServices.of(context);
     final entries = await store.all();
-    final names = entries.any((e) => e.lenormand.isNotEmpty) ? await lenormand.cards() : const <int, LenormandText>{};
-    return (entries, names);
+    final anyLen = entries.any((e) => e.lenormand.isNotEmpty);
+    final names = anyLen ? await s.lenormand.cards() : const <int, LenormandText>{};
+    final spreads = <String, String>{
+      for (final e in ((await s.content.spreads())?.spreads ?? const {}).entries) e.key: e.value.name,
+      if (anyLen)
+        for (final e in (await s.lenormand.spreads()).entries) 'len_${e.key}': e.value.name,
+    };
+    return (entries, names, spreads);
   }
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.entry, required this.names});
+  const _Tile({required this.entry, required this.names, required this.spreads});
 
   final JournalEntry entry;
   final Map<int, LenormandText> names;
+  final Map<String, String> spreads;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +116,13 @@ class _Tile extends StatelessWidget {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l.journalKindName(entry.kind), style: t.labelMedium?.copyWith(color: TarotColors.rice)),
+          Text(
+              [
+                l.journalKindName(entry.kind),
+                // 交叉解讀固定是塔羅三張＋雷諾曼三張，不另標牌陣
+                if (!entry.isCross) spreads[entry.spreadId] ?? '',
+              ].where((x) => x.isNotEmpty).join('・'),
+              style: t.labelMedium?.copyWith(color: TarotColors.rice)),
           Text(
             entry.question.isEmpty ? l.journalNoQuestion : entry.question,
             maxLines: 2,

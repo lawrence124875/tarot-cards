@@ -35,6 +35,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   SpreadText? _spreadText;
   Deck? _deck;
   Map<int, LenormandText> _lenNames = const {};
+  String _lenSpreadName = '';
   bool _loaded = false;
   bool _ready = false;
 
@@ -50,6 +51,9 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
     final c = (e == null || e.isLenormand) ? null : await _services.content.card(e.keyCard.cardId);
     final sp = (e == null || e.isLenormand) ? null : (await _services.content.spreads())?[e.spreadId];
     final lenNames = (e == null || !e.isLenormand) ? const <int, LenormandText>{} : await _services.lenormand.cards();
+    final lenSpread = (e == null || !e.isLenormand)
+        ? ''
+        : (await _services.lenormand.spreads())[e.spreadId.replaceFirst('len_', '')]?.name ?? '';
     final deck = (e == null || e.deckId.isEmpty) ? null : await _services.decks.deck(e.deckId);
     if (!mounted) return;
     setState(() {
@@ -58,6 +62,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       _spreadText = sp;
       _deck = deck;
       _lenNames = lenNames;
+      _lenSpreadName = lenSpread;
       _ready = true;
     });
   }
@@ -179,7 +184,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       padding: readablePadding(context, top: 8, bottom: 40),
       children: [
         Text(
-            [l.journalKindName(e.kind), formatDateTime(e.createdAt), _spreadText?.name ?? '', if (!lenOnly) l.methodName(e.methodId)]
+            [l.journalKindName(e.kind), formatDateTime(e.createdAt), lenOnly ? _lenSpreadName : (e.isCross ? '' : _spreadText?.name ?? ''), if (!lenOnly) l.methodName(e.methodId)]
                 .where((x) => x.isNotEmpty)
                 .join(l.separator),
             textAlign: TextAlign.center,
