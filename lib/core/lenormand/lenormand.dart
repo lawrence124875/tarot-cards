@@ -128,9 +128,9 @@ class AssetLenormandSource implements LenormandSource {
   final AssetBundle _bundle;
   final Map<String, Object?> _cache = {};
 
-  static const contentFolders = {'zh-Hant', 'zh-Hans', 'en'};
+  static const contentFolders = {'zh-Hant', 'zh-Hans', 'en', 'ja', 'ko', 'vi', 'id', 'es', 'pt-BR', 'th', 'ar'};
 
-  /// 語言資料夾 → 雷諾曼內容資料夾（沒有內容的語言用英文）。
+  /// 語言資料夾 → 雷諾曼內容資料夾（11 語各有資料夾；未知語言用英文，讀不到時也退英文）。
   static String folderFor(String contentFolder) => contentFolders.contains(contentFolder) ? contentFolder : 'en';
 
   Future<Map<String, dynamic>?> _json(String name) async {
