@@ -98,8 +98,8 @@ PYEOF
 grep -q "proguard-rules.pro" "$GRADLE" && echo "已套用 ProGuard 規則（通知排程）" || { echo "::error::ProGuard 規則未套用"; exit 1; }
 
 # 呼吸音景背景播放與通知／鎖定畫面控制（audio_service，見 lib/core/audio/breath_audio_handler.dart）：
-# 1) 前景服務權限；2) AudioService 與 MediaButtonReceiver；3) MainActivity 改繼承 AudioServiceActivity；
-# 4) launchMode=singleTask——AudioServiceActivity 共用同一個 FlutterEngine，點通知若另建第二個
+# 1) 前景服務權限；2) AudioService 與 MediaButtonReceiver；3) MainActivity 改繼承 AudioServiceFragmentActivity（是 ComponentActivity，可用 enableEdgeToEdge）；
+# 4) launchMode=singleTask——AudioServiceFragmentActivity 共用同一個 FlutterEngine，點通知若另建第二個
 #    MainActivity，舊的被銷毀時會把引擎拆走，畫面卡住（智慧聽覺巡航 2026-09-29 的教訓）。
 python3 - "$MANIFEST" << 'PYEOF'
 import re, sys
@@ -138,42 +138,42 @@ m = m.replace(t, nt, 1)
 open(path, "w", encoding="utf-8").write(m)
 PYEOF
 MAIN_ACTIVITY=$(find android/app/src/main -name "MainActivity.kt" | head -n 1)
-sed -i 's/import io.flutter.embedding.android.FlutterActivity/import com.ryanheise.audioservice.AudioServiceActivity/; s/class MainActivity *: *FlutterActivity()/class MainActivity : AudioServiceActivity()/' "$MAIN_ACTIVITY"
-if grep -q AudioServiceActivity "$MAIN_ACTIVITY" && grep -q 'com.ryanheise.audioservice.AudioService"' "$MANIFEST" && grep -q 'launchMode="singleTask"' "$MANIFEST"; then
-  echo "已設定背景播放（AudioService、AudioServiceActivity、singleTask）"
+sed -i 's/import io.flutter.embedding.android.FlutterActivity/import com.ryanheise.audioservice.AudioServiceFragmentActivity/; s/class MainActivity *: *FlutterActivity()/class MainActivity : AudioServiceFragmentActivity()/' "$MAIN_ACTIVITY"
+if grep -q AudioServiceFragmentActivity "$MAIN_ACTIVITY" && grep -q 'com.ryanheise.audioservice.AudioService"' "$MANIFEST" && grep -q 'launchMode="singleTask"' "$MANIFEST"; then
+  echo "已設定背景播放（AudioService、AudioServiceFragmentActivity、singleTask）"
 else
   echo "::error::背景播放設定失敗（flutter create 範本可能改了）"; exit 1
 fi
 
-# 無邊框畫面（Play Console：Android 15 起 targetSdk 35 預設無邊框，舊版 Android 也應一併啟用）：
-# AudioServiceActivity 不是 ComponentActivity，不能用 enableEdgeToEdge()，改用它內部同一個做法
-# WindowCompat.setDecorFitsSystemWindows(window, false)，在 super.onCreate 之前（第一個畫面就無邊框）。
-# 系統列透明與圖示顏色由 Dart 端設定（lib/main.dart、theme.dart 的 tarotSystemBars）。
+# 無邊框畫面（Play Console「可能不會向所有使用者顯示無邊框畫面」）：Android 15 起 targetSdk 35 預設無邊框，
+# 舊版 Android 也要啟用；Play 檢查的是 androidx.activity 的 enableEdgeToEdge()，所以 MainActivity 繼承
+# AudioServiceFragmentActivity（ComponentActivity），在 super.onCreate 之前呼叫（第一個畫面就無邊框）。
+# 系統列透明與圖示顏色仍由 Dart 端設定（lib/main.dart、theme.dart 的 tarotSystemBars），會覆蓋這裡的預設遮罩。
 python3 - "$MAIN_ACTIVITY" "$GRADLE" << 'PYEOF'
 import re, sys
 activity, gradle = sys.argv[1], sys.argv[2]
 k = open(activity, encoding="utf-8").read()
-if "setDecorFitsSystemWindows" not in k:
-    k = k.replace("import com.ryanheise.audioservice.AudioServiceActivity",
-                  "import android.os.Bundle\nimport androidx.core.view.WindowCompat\nimport com.ryanheise.audioservice.AudioServiceActivity", 1)
-    body = """class MainActivity : AudioServiceActivity() {
+if "enableEdgeToEdge" not in k:
+    k = k.replace("import com.ryanheise.audioservice.AudioServiceFragmentActivity",
+                  "import android.os.Bundle\nimport androidx.activity.enableEdgeToEdge\nimport com.ryanheise.audioservice.AudioServiceFragmentActivity", 1)
+    body = """class MainActivity : AudioServiceFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
     }
 }
 """
-    k, n = re.subn(r"class MainActivity : AudioServiceActivity\(\)\s*(\{\s*\})?\s*$", body, k)
+    k, n = re.subn(r"class MainActivity : AudioServiceFragmentActivity\(\)\s*(\{\s*\})?\s*$", body, k)
     if n != 1:
         raise SystemExit("MainActivity 格式不符，無法加入無邊框設定")
     open(activity, "w", encoding="utf-8").write(k)
 g = open(gradle, encoding="utf-8").read()
-if "androidx.core:core" not in g:
-    g = g.rstrip() + '\n\ndependencies {\n    implementation("androidx.core:core:1.13.1")\n}\n'
+if "androidx.activity:activity" not in g:
+    g = g.rstrip() + '\n\ndependencies {\n    implementation("androidx.activity:activity-ktx:1.9.3")\n}\n'
     open(gradle, "w", encoding="utf-8").write(g)
 PYEOF
-if grep -q 'WindowCompat.setDecorFitsSystemWindows(window, false)' "$MAIN_ACTIVITY"; then
-  echo "已啟用無邊框畫面（MainActivity）"
+if grep -q 'enableEdgeToEdge()' "$MAIN_ACTIVITY"; then
+  echo "已啟用無邊框畫面（MainActivity enableEdgeToEdge）"
 else
   echo "::error::無邊框設定失敗"; exit 1
 fi
