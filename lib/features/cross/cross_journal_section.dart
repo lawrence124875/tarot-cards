@@ -26,6 +26,7 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
   CrossScores? _scores;
   CrossTemplates? _templates;
   Map<int, LenormandText> _names = const {};
+  CrossCards? _cards;
 
   @override
   void initState() {
@@ -35,11 +36,15 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
       final scores = await loadCrossScores();
       final templates = await loadCrossTemplates(L10n.contentFolder);
       final names = await s.lenormand.cards();
+      if (!mounted) return;
+      final e = widget.entry;
+      final cards = await loadCrossCards(context, scores, e.cards, e.lenormand, e.area);
       if (mounted) {
         setState(() {
           _scores = scores;
           _templates = templates;
           _names = names;
+          _cards = cards;
         });
       }
     });
@@ -80,6 +85,7 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
             result: evaluateCross(_scores!, e.cards, e.lenormand),
             templates: _templates ?? CrossTemplates(const {}),
             seed: crossSeed([for (final c in e.cards) c.cardId], e.lenormand),
+            cards: _cards,
             onUnlocked: () => setState(() {}),
           ),
         ),

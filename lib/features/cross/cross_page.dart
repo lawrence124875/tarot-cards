@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
+import '../../core/content/reading_area.dart';
 import '../../core/cross/cross_composer.dart';
 import '../../core/cross/cross_engine.dart';
 import '../../core/events/event_bus.dart';
@@ -46,6 +47,10 @@ class _CrossPageState extends State<CrossPage> {
   CrossScores? _scores;
   CrossTemplates? _templates;
   Map<int, LenormandText> _lenTexts = const {};
+
+  /// 提問主題（ReadingAreas：love、work、self；空字串＝不指定）。
+  String _area = '';
+  CrossCards? _cards;
 
   @override
   void initState() {
@@ -99,7 +104,10 @@ class _CrossPageState extends State<CrossPage> {
       _lenormand = drawLenormand(_s.random, 3);
       _revealed = false;
       _saved = false;
+      _cards = null;
     });
+    final cards = await loadCrossCards(context, _scores, _tarot, _lenormand, _area);
+    if (mounted) setState(() => _cards = cards);
   }
 
   Future<void> _reveal() async {
@@ -128,6 +136,7 @@ class _CrossPageState extends State<CrossPage> {
       draw: SpreadDraw(spreadId: 'three', methodId: DrawMethods.quick, cards: _tarot),
       now: DateTime.now(),
       question: _question.text.trim(),
+      area: _area,
       deckId: _s.deck.value?.id ?? '',
       lenormand: _lenormand,
     );
@@ -163,6 +172,20 @@ class _CrossPageState extends State<CrossPage> {
               controller: _question,
               maxLength: 120,
               decoration: InputDecoration(labelText: l.crossQuestionLabel, border: const OutlineInputBorder()),
+            ),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 6,
+              runSpacing: 4,
+              children: [
+                for (final a in ['', ...ReadingAreas.all])
+                  ChoiceChip(
+                    visualDensity: VisualDensity.compact,
+                    label: Text(l.areaName(a.isEmpty ? 'none' : a)),
+                    selected: _area == a,
+                    onSelected: (_) => setState(() => _area = a),
+                  ),
+              ],
             ),
             const SizedBox(height: 12),
             Center(child: FilledButton(onPressed: _start, child: Text(l.crossStart))),
@@ -204,6 +227,7 @@ class _CrossPageState extends State<CrossPage> {
                 result: r,
                 templates: _templates ?? CrossTemplates(const {}),
                 seed: crossSeed([for (final c in _tarot) c.cardId], _lenormand),
+                cards: _cards,
                 onUnlocked: () => setState(() {}),
               ),
               const SizedBox(height: 16),
@@ -218,6 +242,7 @@ class _CrossPageState extends State<CrossPage> {
                   onPressed: () => setState(() {
                     _tarot = const [];
                     _lenormand = const [];
+                    _cards = null;
                     _question.clear();
                   }),
                   child: Text(l.crossAgain),
@@ -270,9 +295,17 @@ class _Row extends StatelessWidget {
 
 /// 交叉頁的結果區（交叉頁與紀錄回顧共用）。免費版只顯示關係標題，其餘需訂閱。
 class CrossResultView extends StatelessWidget {
-  const CrossResultView({super.key, required this.result, required this.templates, required this.seed, this.onUnlocked});
+  const CrossResultView({
+    super.key,
+    required this.result,
+    required this.templates,
+    required this.seed,
+    this.cards,
+    this.onUnlocked,
+  });
 
   final CrossResult result;
+  final CrossCards? cards;
   final CrossTemplates templates;
   final int seed;
   final VoidCallback? onUnlocked;
@@ -282,7 +315,7 @@ class CrossResultView extends StatelessWidget {
     final l = context.l10n;
     final t = Theme.of(context).textTheme;
     final s = AppServices.of(context);
-    final rep = templates.compose(result, seed);
+    final rep = templates.compose(result, seed, cards: cards);
     final header = Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -318,23 +351,149 @@ class CrossResultView extends StatelessWidget {
         ),
       ]);
     }
+    final d = rep.detail;
+    final chips = Wrap(spacing: 8, runSpacing: 8, alignment: WrapAlignment.center, children: [
+      Chip(label: Text('${l.crossOverall}：${rep.overall}')),
+      for (final tag in rep.tags) Chip(label: Text(tag)),
+      if (rep.timing.isNotEmpty) Chip(avatar: const Icon(Icons.schedule, size: 16), label: Text(rep.timing)),
+    ]);
+    String title(String key, String fallback) {
+      final v = templates.sectionTitle(key);
+      return v.isEmpty ? fallback : v;
+    }
+
+    final italic = t.bodyLarge?.copyWith(fontStyle: FontStyle.italic);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       header,
       const SizedBox(height: 8),
-      Wrap(spacing: 8, runSpacing: 8, alignment: WrapAlignment.center, children: [
-        Chip(label: Text('${l.crossOverall}：${rep.overall}')),
-        for (final tag in rep.tags) Chip(label: Text(tag)),
-        if (rep.timing.isNotEmpty) Chip(avatar: const Icon(Icons.schedule, size: 16), label: Text(rep.timing)),
-      ]),
-      Section(title: '${l.crossTarotSide}・${rep.tarotLevel}', child: Text(rep.tarotText)),
-      Section(title: '${l.crossLenormandSide}・${rep.lenormandLevel}', child: Text(rep.lenormandText)),
-      if (rep.relationText.isNotEmpty) Section(title: rep.relationName, child: Text(rep.relationText)),
-      if (rep.action.isNotEmpty) Section(title: l.crossActionTitle, child: Text(rep.action)),
-      if (rep.reflection.isNotEmpty)
-        Section(title: l.crossReflectTitle, child: Text(rep.reflection, style: t.bodyLarge?.copyWith(fontStyle: FontStyle.italic))),
+      chips,
+      if (d == null) ...[
+        Section(title: '${l.crossTarotSide}・${rep.tarotLevel}', child: Text(rep.tarotText)),
+        Section(title: '${l.crossLenormandSide}・${rep.lenormandLevel}', child: Text(rep.lenormandText)),
+        if (rep.relationText.isNotEmpty) Section(title: rep.relationName, child: Text(rep.relationText)),
+        if (rep.action.isNotEmpty) Section(title: l.crossActionTitle, child: Text(rep.action)),
+        if (rep.reflection.isNotEmpty) Section(title: l.crossReflectTitle, child: Text(rep.reflection, style: italic)),
+      ] else ...[
+        Section(title: title('core', rep.relationName), child: Text(d.core)),
+        Section(
+          title: '${title('tarot', l.crossTarotSide)}・${rep.tarotLevel}',
+          child: _Lines(lines: d.tarotLines, after: [d.tarotSummary]),
+        ),
+        Section(
+          title: '${title('lenormand', l.crossLenormandSide)}・${rep.lenormandLevel}',
+          child: _Lines(lines: d.lenormandLines, after: [...d.pairs, d.lenormandTiming]),
+        ),
+        Section(
+          title: title('breakthrough', l.crossActionTitle),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            if (d.inner.isNotEmpty) _Labeled(label: d.innerLabel, text: d.inner),
+            if (d.outer.isNotEmpty) _Labeled(label: d.outerLabel, text: d.outer),
+            if (rep.reflection.isNotEmpty) _Labeled(label: d.reflectLabel, text: rep.reflection, style: italic),
+          ]),
+        ),
+      ],
       const SizedBox(height: 12),
       Text(rep.disclaimer.isEmpty ? l.lenormandNotice : rep.disclaimer,
           style: t.bodySmall?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
     ]);
   }
+}
+
+/// 段落內逐張牌：牌名＋關鍵字（粗體）、盲點標籤、解釋；最後接幾句串接說明。
+class _Lines extends StatelessWidget {
+  const _Lines({required this.lines, this.after = const []});
+
+  final List<CrossLine> lines;
+  final List<String> after;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      for (final x in lines)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text.rich(TextSpan(children: [
+              TextSpan(text: x.title, style: t.titleSmall),
+              if (x.keywords.isNotEmpty)
+                TextSpan(text: '  ${x.keywords}', style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
+            ])),
+            if (x.label.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(x.label, style: t.labelMedium?.copyWith(color: TarotColors.earth)),
+              ),
+            if (x.text.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 2), child: Text(x.text)),
+          ]),
+        ),
+      for (final a in after)
+        if (a.isNotEmpty) Padding(padding: const EdgeInsets.only(bottom: 6), child: Text(a)),
+    ]);
+  }
+}
+
+class _Labeled extends StatelessWidget {
+  const _Labeled({required this.label, required this.text, this.style});
+
+  final String label, text;
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        if (label.isNotEmpty) Text(label, style: t.labelLarge?.copyWith(color: TarotColors.earth)),
+        Text(text, style: style),
+      ]),
+    );
+  }
+}
+
+/// 準備四段式需要的各張牌文字：塔羅取該主題的內在解釋（不指定時用「自我」），
+/// 雷諾曼取感情／工作的實際影響（其他用一般牌義）。
+Future<CrossCards?> loadCrossCards(
+  BuildContext context,
+  CrossScores? scores,
+  List<DrawnCard> tarot,
+  List<int> lenormand,
+  String area,
+) async {
+  final s = AppServices.of(context);
+  final l = context.l10n;
+  final sc = scores ?? CrossScores();
+  final lenTexts = await s.lenormand.cards();
+  final tarotCards = <CrossTarotCard>[];
+  for (final c in tarot) {
+    final content = await s.content.card(c.cardId);
+    final a = area.isEmpty ? ReadingAreas.self : area;
+    tarotCards.add(CrossTarotCard(
+      name: l.drawnName(c),
+      reversed: c.reversed,
+      score: sc.tarot(c).score,
+      keywords: content?.keywords(c.reversed) ?? const [],
+      text: content?.area(c.reversed, a) ?? '',
+      affirmation: content?.affirmation ?? '',
+    ));
+  }
+  final lenCards = [
+    for (final id in lenormand)
+      if (lenTexts[id] case final x?)
+        CrossLenormandCard(
+          name: x.name,
+          score: sc.lenormand(id).score,
+          keywords: x.keywords,
+          text: switch (area) {
+            ReadingAreas.love when x.love.isNotEmpty => x.love,
+            ReadingAreas.work when x.work.isNotEmpty => x.work,
+            _ => x.meaning,
+          },
+          advice: x.advice,
+        )
+      else
+        CrossLenormandCard(name: '$id', score: sc.lenormand(id).score),
+  ];
+  return CrossCards(tarot: tarotCards, lenormand: lenCards);
 }

@@ -159,6 +159,61 @@ void main() {
     expect(crossSeed([1, 2, 3], [4, 5, 6]), isNot(crossSeed([1, 2, 3], [4, 5, 7])));
   });
 
+  test('四段式：點名主牌、盲點標籤、相鄰串接、內外兩步', () {
+    final tpl = CrossTemplates.fromJson({
+      'timing': {'weeks': '數週內'},
+      'tarot': {'0': ['TS']},
+      'relation': {'consensus_flat': ['R。']},
+      'reflection': {'consensus': ['Q？']},
+      'keywordSep': '、',
+      'format': {
+        'name': '〈{name}〉',
+        'coreTiming': '約{timing}明朗。',
+        'lenTiming': '事件約{timing}。',
+        'inner': '內在轉念',
+        'outer': '外在行動',
+        'reflect': '自我覺察',
+      },
+      'core': {'consensus_flat': ['{tarot}（{tarotKw}）×{len}（{lenKw}）。']},
+      'blindSpot': {'labels': ['盲點']},
+      'pair': {'pos': ['{a}+{b}:{ka}>{kb}'], 'flat': ['F'], 'neg': ['N']},
+    });
+    const r = CrossResult(
+      tarotLevel: TrendLevel.neutral,
+      lenormandLevel: TrendLevel.neutral,
+      relation: CrossRelation.consensus,
+      overall: TrendLevel.neutral,
+      tags: [],
+      timing: CrossTiming.weeks,
+      tarotAverage: 0,
+      lenormandAverage: 0,
+    );
+    const cards = CrossCards(tarot: [
+      CrossTarotCard(name: '愚者', reversed: false, score: 1, keywords: ['開始', '信任', '冒險'], affirmation: 'A0'),
+      CrossTarotCard(name: '星星', reversed: false, score: 2, keywords: ['希望'], text: 'T17', affirmation: 'A17'),
+      CrossTarotCard(name: '高塔（逆位）', reversed: true, score: -2, keywords: ['鬆動'], affirmation: 'A16'),
+    ], lenormand: [
+      CrossLenormandCard(name: '騎士', score: 1, keywords: ['消息']),
+      CrossLenormandCard(name: '幸運草', score: 1, keywords: ['小確幸'], advice: 'ADV2'),
+      CrossLenormandCard(name: '棺材', score: -2, keywords: ['結束']),
+    ]);
+    final d = tpl.compose(r, 0, cards: cards).detail!;
+    // 主牌：塔羅中間 |2| 與第 3 張 |-2| 同分 → 中間優先；雷諾曼第 3 張 |-2| 最大
+    expect(d.core, '〈星星〉（希望）×〈棺材〉（結束）。R。約數週內明朗。');
+    expect(d.tarotLines[0].keywords, '開始、信任');
+    expect(d.tarotLines[0].label, '');
+    expect(d.tarotLines[2].label, '盲點');
+    expect(d.tarotSummary, 'TS');
+    expect(d.pairs, ['〈騎士〉+〈幸運草〉:消息>小確幸', 'N']);
+    expect(d.lenormandTiming, '事件約數週內。');
+    expect(d.inner, 'A16'); // 分數最低的塔羅牌
+    expect(d.outer, ''); // 主雷諾曼牌（棺材）沒寫建議
+    expect(CrossTemplates.mainIndex([1, 1, 1]), 1);
+    expect(CrossTemplates.mainIndex([0, 1, -1]), 1);
+    expect(CrossTemplates.mainIndex([2, 1, 0]), 0);
+    expect(tpl.compose(r, 0).detail, isNull);
+  });
+
   test('紀錄：交叉解讀存雷諾曼牌與應驗選項，舊紀錄不受影響', () {
     final e = JournalEntry.fromDraw(
       draw: SpreadDraw(spreadId: 'three', methodId: 'quick', cards: const [DrawnCard(1), DrawnCard(2, reversed: true), DrawnCard(3)]),
