@@ -30,7 +30,7 @@ class DailyCardStore {
   }
 }
 
-/// 每日提醒：一次排好接下來 [days] 天（一次性通知，App 每次開啟時補排；不依賴重複排程）。
+/// 每日提醒（預設開啟，每天 08:00）：一次排好接下來 [days] 天（一次性通知，App 每次開啟時補排；不依賴重複排程）。
 class DailyReminders {
   DailyReminders._();
 
@@ -46,6 +46,7 @@ class DailyReminders {
     required String title,
     required String body,
     DateTime? now,
+    bool skipToday = false,
   }) async {
     for (var i = 0; i < days; i++) {
       await reminders.cancel(baseId + i);
@@ -53,7 +54,8 @@ class DailyReminders {
     if (!enabled) return true;
     final n = now ?? DateTime.now();
     var ok = true;
-    for (var i = 0; i < days; i++) {
+    // 當天已經抽過牌：今天的提醒不發，從明天開始排
+    for (var i = skipToday ? 1 : 0; i < days; i++) {
       final at = DateTime(n.year, n.month, n.day + i, hour, minute);
       if (!at.isAfter(n)) continue;
       ok = await reminders.schedule(id: baseId + i, at: at, title: title, body: body, payload: payload) && ok;

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
+import '../../app/daily_reminder_sync.dart';
 import '../../app/services.dart';
 import '../../core/events/event_bus.dart';
 import '../../core/monetization/ad_service.dart';
@@ -17,6 +20,7 @@ Future<CastGrant?> ensureCanCast(BuildContext context, {required String spreadId
   Future<CastGrant> record({bool premium = false, bool rewarded = false}) async {
     final g = await s.quota.recordCast(premium: premium, rewarded: rewarded);
     if (g.firstEver) s.events.emit(FirstDraw(spreadId: spreadId));
+    if (s.settings.dailyReminder) unawaited(syncDailyReminder(s)); // 今天起過卦：今天的提醒不發
     return g;
   }
 

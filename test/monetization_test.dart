@@ -15,6 +15,15 @@ void main() {
       storage = MemoryQuotaStorage();
     });
 
+    test('今天起過卦沒（訂閱戶也算），隔天歸零', () async {
+      final q = quota();
+      expect(await q.castToday(), isFalse);
+      await q.recordCast(premium: true);
+      expect(await q.castToday(), isTrue);
+      now = DateTime(2026, 10, 29, 7);
+      expect(await quota().castToday(), isFalse);
+    });
+
     test('免費 2 次 → 需要獎勵 → 獎勵 2 次後用完（每日上限 4）', () async {
       final q = quota();
       for (var i = 0; i < 2; i++) {

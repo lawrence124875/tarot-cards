@@ -11,7 +11,8 @@ class AppSettings extends ChangeNotifier {
 
   String deckId = 'rws1909';
   bool reversals = true;
-  bool dailyReminder = false;
+  /// 每日提醒預設開啟、每天 08:00（Lawrence 2026-11-09）。使用者拒絕通知權限時仍維持開啟，只是不會跳出。
+  bool dailyReminder = true;
   int dailyHour = 8;
   int dailyMinute = 0;
 

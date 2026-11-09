@@ -87,6 +87,14 @@ void main() {
       expect(off.cancelled, hasLength(14));
     });
 
+    test('當天已抽過：今天的提醒不發，從明天開始', () async {
+      final r = _RecordingReminders();
+      await DailyReminders.apply(r,
+          enabled: true, hour: 20, minute: 0, title: 't', body: 'b', now: DateTime(2026, 10, 12, 9), skipToday: true);
+      expect(r.scheduled, hasLength(13));
+      expect(r.scheduled.first.$2, DateTime(2026, 10, 13, 20));
+    });
+
     test('沒有權限時回傳 false', () async {
       final ok = await DailyReminders.apply(NoopReminderService(),
           enabled: true, hour: 23, minute: 0, title: 't', body: 'b', now: DateTime(2026, 10, 12, 9));
