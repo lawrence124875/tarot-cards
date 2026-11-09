@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
-import 'package:app_settings/app_settings.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -132,7 +133,12 @@ class LocalNotificationReminders implements ReminderService {
   @override
   Future<void> openNotificationSettings() async {
     try {
-      await AppSettings.openAppSettings(type: AppSettingsType.notification);
+      if (Platform.isIOS) {
+        await launchUrl(Uri.parse('app-settings:'));
+      } else {
+        // MainActivity 的原生通道（scripts/patch_android.sh 加入）：開本 App 的系統通知設定
+        await const MethodChannel('com.lclab.tarot/settings').invokeMethod<void>('openNotificationSettings');
+      }
     } catch (_) {}
   }
 

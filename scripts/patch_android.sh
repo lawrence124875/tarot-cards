@@ -172,6 +172,44 @@ if "androidx.activity:activity" not in g:
     g = g.rstrip() + '\n\ndependencies {\n    implementation("androidx.activity:activity-ktx:1.9.3")\n}\n'
     open(gradle, "w", encoding="utf-8").write(g)
 PYEOF
+# 通知權限被拒、系統不再跳詢問時，帶使用者去本 App 的系統通知設定（lib/core/reminders/local_notification_reminders.dart）。
+python3 - "$MAIN_ACTIVITY" << 'PYEOF'
+import sys
+activity = sys.argv[1]
+k = open(activity, encoding="utf-8").read()
+if "com.lclab.tarot/settings" not in k:
+    k = k.replace("import android.os.Bundle",
+                  "import android.content.Intent\nimport android.net.Uri\nimport android.os.Build\nimport android.os.Bundle\nimport android.provider.Settings\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugin.common.MethodChannel", 1)
+    method = """
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "com.lclab.tarot/settings").setMethodCallHandler { call, result ->
+            if (call.method != "openNotificationSettings") {
+                result.notImplemented()
+                return@setMethodCallHandler
+            }
+            val details = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
+            val intent = if (Build.VERSION.SDK_INT >= 26)
+                Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            else details
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                try { startActivity(details) } catch (_: Exception) {}
+            }
+            result.success(null)
+        }
+    }
+}
+"""
+    i = k.rstrip().rfind("}")
+    if "import io.flutter.plugin.common.MethodChannel" not in k or i < 0:
+        raise SystemExit("MainActivity 格式不符，無法加入通知設定通道")
+    k = k[:i].rstrip() + "\n" + method
+    open(activity, "w", encoding="utf-8").write(k)
+PYEOF
+grep -q 'com.lclab.tarot/settings' "$MAIN_ACTIVITY" || { echo "::error::MainActivity 未加入通知設定通道"; exit 1; }
+
 if grep -q 'enableEdgeToEdge()' "$MAIN_ACTIVITY"; then
   echo "已啟用無邊框畫面（MainActivity enableEdgeToEdge）"
 else
