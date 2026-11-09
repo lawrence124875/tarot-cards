@@ -4,8 +4,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tarot_cards/app/app.dart';
@@ -50,8 +52,8 @@ void main() {
       tester.view
         ..physicalSize = const Size(1080, 1920)
         ..devicePixelRatio = 2.625
-        ..padding = const FakeViewPadding(top: 63)
-        ..viewPadding = const FakeViewPadding(top: 63);
+        ..padding = const FakeViewPadding(top: 63, bottom: 63)
+        ..viewPadding = const FakeViewPadding(top: 63, bottom: 63);
       addTearDown(tester.view.reset);
       L10n.language = AppLanguages.byCode(code)!;
       tester.platformDispatcher.localesTestValue = [L10n.language.locale];
@@ -84,7 +86,15 @@ void main() {
 
       Future<void> shot(String name) async {
         await settle();
-        await expectLater(find.byKey(shotKey), matchesGoldenFile('screenshots/${code}_$name.png'));
+        // matchesGoldenFile 只輸出邏輯像素（412×732）；這裡用裝置倍率直接輸出 1080×1920
+        final boundary = tester.renderObject<RenderRepaintBoundary>(find.byKey(shotKey));
+        await tester.runAsync(() async {
+          final image = await boundary.toImage(pixelRatio: tester.view.devicePixelRatio);
+          final png = await image.toByteData(format: ui.ImageByteFormat.png);
+          File('test/screenshots/${code}_$name.png')
+            ..createSync(recursive: true)
+            ..writeAsBytesSync(png!.buffer.asUint8List());
+        });
       }
 
       NavigatorState nav() => tester.state<NavigatorState>(find.byType(Navigator).first);
