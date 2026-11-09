@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../app/daily_reminder_sync.dart';
 import '../../app/services.dart';
+import '../../core/reminders/reminder_service.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
 import '../../core/tarot/draw.dart';
@@ -173,10 +174,30 @@ class DailyReminderTile extends StatefulWidget {
   State<DailyReminderTile> createState() => _DailyReminderTileState();
 }
 
-class _DailyReminderTileState extends State<DailyReminderTile> {
+class _DailyReminderTileState extends State<DailyReminderTile> with WidgetsBindingObserver {
   late final Services _s = AppServices.of(context);
+  bool _waitingSettings = false; // 已帶使用者去系統通知設定，回到 App 時再試一次
 
-  Future<void> _apply({bool? enabled, int? hour, int? minute}) async {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed || !_waitingSettings) return;
+    _waitingSettings = false;
+    _apply(enabled: true, fromSettings: true);
+  }
+
+  Future<void> _apply({bool? enabled, int? hour, int? minute, bool fromSettings = false}) async {
     final st = _s.settings;
     await st.update(dailyReminder: enabled, dailyHour: hour, dailyMinute: minute);
     if (!mounted) return;
@@ -185,6 +206,17 @@ class _DailyReminderTileState extends State<DailyReminderTile> {
     if (!ok && mounted) {
       await st.update(dailyReminder: false);
       if (!mounted) return;
+      final f = _s.reminders.lastFailure;
+      // 打開開關時再請求一次權限；系統不再跳對話框（之前拒絕過）就帶去系統通知設定，回來後自動再試
+      if (!fromSettings && f?.kind == ReminderFailureKind.permissionDenied && f?.detail == ReminderFailure.noDialog) {
+        _waitingSettings = true;
+        await _s.reminders.openNotificationSettings();
+        return;
+      }
+      if (fromSettings) {
+        setState(() {});
+        return;
+      }
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(l.reminderFailed(l.reminderFailureText(_s.reminders.lastFailure))),
         duration: const Duration(seconds: 8),
