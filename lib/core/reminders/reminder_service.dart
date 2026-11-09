@@ -5,12 +5,14 @@ abstract class ReminderService {
   Future<void> init();
 
   /// 排定一次性提醒；回傳 false 表示沒有權限或排程失敗。
+  /// [askPermission] 為 false 時不請求通知權限，直接排（App 啟動時用：啟動時請求權限曾造成當機，英文 App v9～10）。
   Future<bool> schedule({
     required int id,
     required DateTime at,
     required String title,
     required String body,
     required String payload,
+    bool askPermission = true,
   });
 
   Future<void> cancel(int id);
@@ -53,6 +55,7 @@ class NoopReminderService implements ReminderService {
     required String title,
     required String body,
     required String payload,
+    bool askPermission = true,
   }) async =>
       false;
 

@@ -89,11 +89,12 @@ class LocalNotificationReminders implements ReminderService {
     required String title,
     required String body,
     required String payload,
+    bool askPermission = true,
   }) async {
     if (!_ready) await init(); // 啟動時失敗就再試一次
     if (!_ready) return false;
     final asked = DateTime.now();
-    if (!await _requestPermission()) {
+    if (askPermission && !await _requestPermission()) {
       // 不到 0.5 秒就回來＝系統沒有跳對話框
       final quick = DateTime.now().difference(asked) < const Duration(milliseconds: 500);
       _lastFailure = ReminderFailure(ReminderFailureKind.permissionDenied, quick ? ReminderFailure.noDialog : '');

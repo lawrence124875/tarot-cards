@@ -17,6 +17,7 @@ class _RecordingReminders extends NoopReminderService {
     required String title,
     required String body,
     required String payload,
+    bool askPermission = true,
   }) async {
     scheduled.add((id, at));
     return true;

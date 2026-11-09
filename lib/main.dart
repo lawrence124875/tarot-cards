@@ -62,8 +62,9 @@ Future<void> main() async {
   await services.reminders.init(); // 不拋例外；失敗時提醒功能停用
   await services.loadDeck(); // 也會讀取設定
   premium.isPremium.addListener(services.loadDeck); // 會員狀態改變時，會員牌面組跟著開放或收回
-  // 今日一張的提醒只排 14 天；每次開啟 App 往後補排（預設開啟，第一次啟動時會請求一次通知權限）
-  if (services.settings.dailyReminder) unawaited(syncDailyReminder(services));
+  // 今日一張的提醒只排 14 天；每次開啟 App 往後補排。
+  // 啟動時不請求通知權限（英文 App v9～10 在啟動時請求造成當機）；第一次抽牌或打開提醒開關時才請求，拒絕就顯示關閉。
+  if (services.settings.dailyReminder) unawaited(syncDailyReminder(services, askPermission: false));
   runApp(AppServices(services: services, child: const TarotApp()));
   appStarted = true;
   syncAds();

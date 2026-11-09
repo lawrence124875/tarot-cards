@@ -47,6 +47,7 @@ class DailyReminders {
     required String body,
     DateTime? now,
     bool skipToday = false,
+    bool askPermission = true,
   }) async {
     for (var i = 0; i < days; i++) {
       await reminders.cancel(baseId + i);
@@ -58,7 +59,7 @@ class DailyReminders {
     for (var i = skipToday ? 1 : 0; i < days; i++) {
       final at = DateTime(n.year, n.month, n.day + i, hour, minute);
       if (!at.isAfter(n)) continue;
-      ok = await reminders.schedule(id: baseId + i, at: at, title: title, body: body, payload: payload) && ok;
+      ok = await reminders.schedule(id: baseId + i, at: at, title: title, body: body, payload: payload, askPermission: askPermission) && ok;
       if (!ok) break;
     }
     return ok;
