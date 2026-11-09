@@ -30,6 +30,7 @@ dependencies:
   google_mobile_ads: ^9.0.0
   purchases_flutter: ">=9.0.0 <10.8.0"
   url_launcher: ^6.3.1 # 隱私權政策、管理訂閱
+  app_settings: ">=5.1.1 <7.0.0" # 通知權限被拒後，打開本 App 的系統通知設定
   share_plus: ^13.3.1 # 分享卦象卡片、推薦給朋友
   file_picker: ^13.1.0 # 卦記從備份還原：選擇備份檔
   package_info_plus: ^10.2.2 # 意見回饋附上 App 版本

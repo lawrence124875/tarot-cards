@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io' show Platform;
 
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
-import '../settings/json_file.dart';
 import 'reminder_service.dart';
 
 /// 以 flutter_local_notifications 實作的一次性提醒。
@@ -64,17 +64,6 @@ class LocalNotificationReminders implements ReminderService {
     }
   }
 
-  static final _permissionFile = JsonFile('notify_permission.json');
-  Future<void>? _asking;
-
-  /// 通知權限只問一次（Lawrence 2026-11-09）：第一次排程（第一次啟動或抽牌）時跳對話框，之後不再問。
-  /// 使用者拒絕也照樣排程：系統不會顯示通知，App 設定仍維持開啟。
-  Future<void> _askPermissionOnce() => _asking ??= () async {
-        if ((await _permissionFile.read())['asked'] == true) return;
-        await _permissionFile.write({'asked': true});
-        await _requestPermission();
-      }();
-
   Future<bool> _requestPermission() async {
     try {
       if (Platform.isIOS) {
@@ -103,7 +92,13 @@ class LocalNotificationReminders implements ReminderService {
   }) async {
     if (!_ready) await init(); // 啟動時失敗就再試一次
     if (!_ready) return false;
-    await _askPermissionOnce();
+    final asked = DateTime.now();
+    if (!await _requestPermission()) {
+      // 不到 0.5 秒就回來＝系統沒有跳對話框
+      final quick = DateTime.now().difference(asked) < const Duration(milliseconds: 500);
+      _lastFailure = ReminderFailure(ReminderFailureKind.permissionDenied, quick ? ReminderFailure.noDialog : '');
+      return false;
+    }
     try {
       await _plugin.zonedSchedule(
         id,
@@ -131,6 +126,13 @@ class LocalNotificationReminders implements ReminderService {
       _lastFailure = ReminderFailure(ReminderFailureKind.scheduleFailed, '$e');
       return false;
     }
+  }
+
+  @override
+  Future<void> openNotificationSettings() async {
+    try {
+      await AppSettings.openAppSettings(type: AppSettingsType.notification);
+    } catch (_) {}
   }
 
   @override
