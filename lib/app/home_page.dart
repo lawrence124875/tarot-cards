@@ -111,9 +111,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
                 child: Text(
                   l.homeDisclaimer,
+                  textAlign: TextAlign.center,
                   style: t.bodySmall?.copyWith(fontSize: 11, color: TarotColors.textSub.withValues(alpha: 0.75)),
                 ),
               ),
