@@ -52,6 +52,7 @@ class CastQuota {
   int _used = 0; // 今天已起卦次數（含用獎勵換來的）
   int _rewarded = 0; // 今天看獎勵廣告換到的次數
   bool _everDrawn = false; // 這台裝置抽過牌沒（不跨日歸零）
+  String _lastDay = ''; // 最後一次起卦的日期（訂閱戶也記；每日提醒用）
   bool _loaded = false;
 
   String _today() {
@@ -66,6 +67,7 @@ class CastQuota {
       _used = (m['used'] as num?)?.toInt() ?? 0;
       _rewarded = (m['rewarded'] as num?)?.toInt() ?? 0;
       _everDrawn = m['ever'] == true;
+      _lastDay = m['last'] as String? ?? '';
       _loaded = true;
     }
     final today = _today();
@@ -76,13 +78,19 @@ class CastQuota {
     }
   }
 
-  Future<void> _persist() => _storage.write({'day': _day, 'used': _used, 'rewarded': _rewarded, 'ever': _everDrawn});
+  Future<void> _persist() => _storage.write({'day': _day, 'used': _used, 'rewarded': _rewarded, 'ever': _everDrawn, 'last': _lastDay});
 
   /// 可用次數＝免費次數＋今天看廣告換到的次數。
   Future<CastAllowance> check() async {
     await _ensure();
     if (_used < limits.castsPerDay + _rewarded) return CastAllowance.free;
     return _rewarded < limits.rewardedPerDay ? CastAllowance.needsReward : CastAllowance.exhausted;
+  }
+
+  /// 今天起過卦沒（含訂閱戶）。
+  Future<bool> castToday() async {
+    await _ensure();
+    return _lastDay == _day;
   }
 
   /// 今天剩幾次免費（不含獎勵）；顯示用。
@@ -99,7 +107,9 @@ class CastQuota {
     final first = !_everDrawn;
     _everDrawn = true;
     if (!premium) _used++;
-    if (!premium || first) await _persist();
+    final newDay = _lastDay != _day;
+    _lastDay = _day;
+    if (!premium || first || newDay) await _persist();
     return CastGrant(premium: premium, rewarded: rewarded, dailyIndex: premium ? 0 : _used, firstEver: first);
   }
 

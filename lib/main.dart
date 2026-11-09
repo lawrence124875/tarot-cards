@@ -5,12 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'app/app.dart';
+import 'app/daily_reminder_sync.dart';
 import 'app/feature_registry.dart';
 import 'app/services.dart';
 import 'app/theme.dart';
 import 'core/audio/just_audio_playback.dart';
 import 'core/admob/admob_ads.dart';
-import 'core/daily/daily_card.dart';
 import 'core/firebase/firebase_feedback.dart';
 import 'core/firebase/firebase_telemetry.dart';
 import 'core/monetization/free_limits.dart';
@@ -62,17 +62,8 @@ Future<void> main() async {
   await services.reminders.init(); // 不拋例外；失敗時提醒功能停用
   await services.loadDeck(); // 也會讀取設定
   premium.isPremium.addListener(services.loadDeck); // 會員狀態改變時，會員牌面組跟著開放或收回
-  // 今日一張的提醒只排 14 天；每次開啟 App 往後補排
-  if (services.settings.dailyReminder) {
-    unawaited(DailyReminders.apply(
-      services.reminders,
-      enabled: true,
-      hour: services.settings.dailyHour,
-      minute: services.settings.dailyMinute,
-      title: l.dailyNotificationTitle,
-      body: l.dailyNotificationBody,
-    ));
-  }
+  // 今日一張的提醒只排 14 天；每次開啟 App 往後補排（預設開啟，第一次啟動時會請求一次通知權限）
+  if (services.settings.dailyReminder) unawaited(syncDailyReminder(services));
   runApp(AppServices(services: services, child: const TarotApp()));
   appStarted = true;
   syncAds();

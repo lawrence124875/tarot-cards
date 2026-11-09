@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../app/daily_reminder_sync.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
-import '../../core/daily/daily_card.dart';
 import '../../core/tarot/draw.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/reading_page.dart';
@@ -51,6 +53,7 @@ class _DailyPageState extends State<DailyPage> {
     if (_card != null) return;
     HapticFeedback.lightImpact();
     final c = await _s.daily.drawToday(DateTime.now(), _s.random, reversals: _s.settings.reversals);
+    if (_s.settings.dailyReminder) unawaited(syncDailyReminder(_s)); // 今天已抽：今天的提醒不發
     final content = await _s.content.card(c.cardId);
     if (!mounted) return;
     setState(() {
@@ -178,14 +181,7 @@ class _DailyReminderTileState extends State<DailyReminderTile> {
     await st.update(dailyReminder: enabled, dailyHour: hour, dailyMinute: minute);
     if (!mounted) return;
     final l = context.l10n;
-    final ok = await DailyReminders.apply(
-      _s.reminders,
-      enabled: st.dailyReminder,
-      hour: st.dailyHour,
-      minute: st.dailyMinute,
-      title: l.dailyNotificationTitle,
-      body: l.dailyNotificationBody,
-    );
+    final ok = await syncDailyReminder(_s);
     if (!ok && mounted) {
       await st.update(dailyReminder: false);
       if (!mounted) return;
