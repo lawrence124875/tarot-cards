@@ -24,12 +24,12 @@ final _celtic = SpreadDraw(
 
 void main() {
   group('功能介紹', () {
-    testWidgets('首次開啟顯示五頁，看完記為已看過', (tester) async {
+    testWidgets('首次開啟顯示六頁，看完記為已看過', (tester) async {
       final store = MemoryIntroStore();
       await tester.pumpWidget(AppServices(services: testServices(intro: store), child: const TarotApp()));
       await tester.pumpAndSettle();
       expect(find.byType(IntroPage), findsOneWidget);
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < 5; i++) {
         await tester.tap(find.byType(FilledButton));
         await tester.pumpAndSettle();
       }
