@@ -135,7 +135,7 @@ class _SaveSheetState extends State<_SaveSheet> {
             ReminderPicker(days: _days, onChanged: (d) => setState(() => _days = d)),
             if (_days != null) ...[
               const SizedBox(height: 6),
-              Text(l.saveSheetRemindIn(_days!, hour12(JournalReminders.reviewHour)), style: t.bodySmall),
+              Text(l.saveSheetRemindIn(_days!, reminderHour(Localizations.localeOf(context).languageCode, JournalReminders.reviewHour)), style: t.bodySmall),
             ],
             const SizedBox(height: 20),
             Center(
