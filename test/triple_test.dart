@@ -120,7 +120,7 @@ void main() {
       expect(rep.overall, '吉');
       expect(rep.reflection, 'R');
       final d = rep.detail!;
-      expect(d.core, startsWith('L1〈節制〉〈棺木〉〈冰雹〉M〈冰雹〉L2〈節制〉〈棺木〉C〈死神〉〈棺木〉〈冰雹〉'));
+      expect(d.core, 'L1〈節制〉〈花束〉〈冰雹〉M〈冰雹〉L2〈節制〉〈花束〉C〈死神〉〈棺木〉〈冰雹〉T數週內');
       expect(d.aettText, 'L3〈冰雹〉');
       expect(d.coreAction, 'A');
       expect(d.reminder, 'RM');
