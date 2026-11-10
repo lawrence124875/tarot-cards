@@ -5,7 +5,7 @@ import '../../app/theme.dart';
 import '../../l10n/l10n.dart';
 
 /// 功能介紹：首次開啟時顯示一次（可略過），之後可從首頁右上角選單重看。
-/// 五頁：抽牌儀式與直覺、今日一張與學習、塔羅日記（含備份）、以牌靜心呼吸（432Hz、7.83Hz 雙耳節拍）、分享會員與選單。
+/// 六頁：抽牌儀式與直覺、雷諾曼／盧恩與交叉解讀（0.3.0 起）、今日一張與學習、塔羅日記（含備份）、以牌靜心呼吸（432Hz、7.83Hz 雙耳節拍）、分享會員與選單。
 /// 文案只描述做法，不寫任何療效（Google Play 健康宣稱政策）。
 Future<void> showIntro(NavigatorState navigator) => navigator.push(MaterialPageRoute<void>(
       fullscreenDialog: true,
@@ -23,7 +23,7 @@ class _IntroPageState extends State<IntroPage> {
   final _pages = PageController();
   int _index = 0;
 
-  static const _icons = [Icons.style_outlined, Icons.wb_sunny_outlined, Icons.bookmark_outline, Icons.air, Icons.favorite_outline];
+  static const _icons = [Icons.style_outlined, Icons.auto_awesome_outlined, Icons.wb_sunny_outlined, Icons.bookmark_outline, Icons.air, Icons.favorite_outline];
 
   @override
   void dispose() {
@@ -40,6 +40,7 @@ class _IntroPageState extends State<IntroPage> {
     final l = context.l10n;
     final pages = [
       (l.intro1Title, l.intro1Body),
+      (l.intro6Title, l.intro6Body),
       (l.intro2Title, l.intro2Body),
       (l.intro3Title, l.intro3Body),
       (l.intro4Title, l.intro4Body),
