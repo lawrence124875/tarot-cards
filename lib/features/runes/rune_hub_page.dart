@@ -7,6 +7,7 @@ import '../../core/runes/runes.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/premium/ad_banner.dart';
 import '../../shared/widgets/adaptive_layout.dart';
+import '../cross/triple_page.dart';
 import '../learn/lesson_page.dart';
 import 'rune_draw_page.dart';
 import 'rune_widgets.dart';
@@ -72,6 +73,14 @@ class _RuneHubPageState extends State<RuneHubPage> {
             title: l.runeDrawThree,
             onTap: () => _push(const RuneDrawPage(spread: RuneSpread.three)),
           ),
+          // 三系統交叉入口（遠端開關 tr_feature_triple）
+          if (_s.flags.featureEnabled('triple'))
+            _Tile(
+              icon: Icons.layers_outlined,
+              title: l.featureTriple,
+              subtitle: l.tripleHubHint,
+              onTap: () => _push(const TriplePage()),
+            ),
           Padding(
             padding: const EdgeInsets.fromLTRB(4, 24, 4, 8),
             child: Text(l.runeLibrary, style: t.titleMedium),

@@ -35,6 +35,15 @@ class CrossShown extends AppEvent {
   final bool full;
 }
 
+/// 看到一次塔羅 × 雷諾曼 × 盧恩三系統交叉頁（只送關係代碼與是否完整內容）。
+class TripleShown extends AppEvent {
+  const TripleShown({required this.relation, required this.full});
+
+  /// strong／majority／divergent。
+  final String relation;
+  final bool full;
+}
+
 /// 交叉紀錄回顧時選了「事後應驗了嗎？」（只送選項值 yes／partial／no）。
 class CrossVerified extends AppEvent {
   const CrossVerified({required this.result});

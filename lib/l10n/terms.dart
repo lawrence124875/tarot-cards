@@ -60,6 +60,7 @@ extension TarotTerms on AppLocalizations {
         JournalKind.lenormand => featureLenormand,
         JournalKind.cross => featureCross,
         JournalKind.runes => featureRunes,
+        JournalKind.triple => featureTriple,
       };
 
   /// 日記回顧通知（內文不放想問的事）。

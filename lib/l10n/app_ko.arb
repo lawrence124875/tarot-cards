@@ -382,5 +382,16 @@
   "runeReversedLabel": "역방향: 안으로 정리하기",
   "runeUprightLabel": "정방향의 의미",
   "runeCoreReminder": "핵심 메시지",
-  "runeNameReversed": "{name} (역방향)"
+  "runeNameReversed": "{name} (역방향)",
+  "featureTriple": "타로 × 르노르망 × 룬",
+  "tripleRuneRow": "룬 · 핵심의 돌",
+  "tripleLockedBody": "구독하면 다섯 부분의 전체 내용을 볼 수 있습니다: 핵심 정리, 타로의 내면, 르노르망의 외부 상황, 룬의 핵심 에너지, 세 갈래의 길.",
+  "tripleUnlock": "세 시스템 해석 전체 보기",
+  "tripleHubHint": "타로 3장 + 르노르망 3장 + 핵심의 돌 1개, 세 각도에서 교차해 봅니다 (구독 전용)",
+  "tripleIntroTitle1": "세 시스템, 세 가지 시선",
+  "tripleIntroBody1": "타로는 내면의 심리(왜), 르노르망은 구체적인 사건과 시기(무엇이, 언제), 룬은 핵심 에너지와 메시지(가장 중요한 한 가지)를 봅니다. 하나의 질문을 내면, 외부, 핵심에서 함께 봅니다.",
+  "tripleIntroTitle2": "결과 읽는 법",
+  "tripleIntroBody2": "강한 일치: 세 쪽이 같은 방향.\n다수 일치: 두 쪽이 일치하고 나머지 하나가 메시지를 더합니다.\n세 갈래의 차이: 각자의 의미를 읽고 억지로 합치지 않습니다.",
+  "tripleIntroTitle3": "핵심의 돌",
+  "tripleIntroBody3": "룬은 하나만 뽑아 해석 전체의 핵심으로 삼습니다. 역방향은 에너지가 안으로 정리되는 시간이며, 나쁜 소식이 아닙니다. 결과는 성찰을 위한 참고이며, 앞으로의 길은 당신이 정합니다."
 }

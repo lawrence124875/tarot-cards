@@ -382,5 +382,16 @@
   "runeReversedLabel": "Invertida: organizar por dentro",
   "runeUprightLabel": "Significado na posição normal",
   "runeCoreReminder": "Lembrete essencial",
-  "runeNameReversed": "{name} (invertida)"
+  "runeNameReversed": "{name} (invertida)",
+  "featureTriple": "Tarô × Lenormand × Runas",
+  "tripleRuneRow": "Runa · Pedra central",
+  "tripleLockedBody": "Assine para ver a leitura completa em cinco partes: síntese central, olhar interior do Tarô, situação exterior do Lenormand, energia central da runa e três caminhos adiante.",
+  "tripleUnlock": "Desbloquear a leitura completa de três sistemas",
+  "tripleHubHint": "Três cartas de Tarô, três de Lenormand e uma runa central, lidas por três ângulos (para assinantes)",
+  "tripleIntroTitle1": "Três sistemas, três olhares",
+  "tripleIntroBody1": "O Tarô olha o seu mundo interior (por quê), o Lenormand os fatos concretos e o tempo (o quê e quando), e a runa a energia central e o lembrete (o que mais importa). Uma pergunta, vista de dentro, de fora e do centro.",
+  "tripleIntroTitle2": "Como ler o resultado",
+  "tripleIntroBody2": "Consenso forte: os três concordam.\nMaioria: dois concordam e o terceiro traz um lembrete.\nDivergência tripla: leia cada um separadamente, sem forçar uma mistura.",
+  "tripleIntroTitle3": "A pedra central",
+  "tripleIntroBody3": "Só uma runa é tirada, como centro de toda a leitura. Uma runa invertida significa energia voltada para dentro, não uma má notícia. O resultado é para reflexão; o próximo passo é decisão sua."
 }

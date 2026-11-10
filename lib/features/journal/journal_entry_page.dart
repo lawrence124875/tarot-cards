@@ -194,7 +194,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       padding: readablePadding(context, top: 8, bottom: 40),
       children: [
         Text(
-            [l.journalKindName(e.kind), formatDateTime(e.createdAt), lenOnly ? _lenSpreadName : (e.isCross ? '' : _spreadText?.name ?? ''), if (!lenOnly) l.methodName(e.methodId)]
+            [l.journalKindName(e.kind), formatDateTime(e.createdAt), lenOnly ? _lenSpreadName : (e.isCross || e.isTriple ? '' : _spreadText?.name ?? ''), if (!lenOnly) l.methodName(e.methodId)]
                 .where((x) => x.isNotEmpty)
                 .join(l.separator),
             textAlign: TextAlign.center,
@@ -261,7 +261,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
           Text([for (final c in e.cards) l.drawnName(c)].join(l.listSeparator),
               textAlign: TextAlign.center, style: t.titleMedium),
         ],
-        if (e.isCross) CrossJournalSection(entry: e, onChanged: _update),
+        if (e.isCross || e.isTriple) CrossJournalSection(entry: e, onChanged: _update),
         if (reading != null) ...[
           const SizedBox(height: 8),
           Text(l.journalReadingThen, textAlign: TextAlign.center, style: t.bodySmall),

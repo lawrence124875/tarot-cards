@@ -65,6 +65,7 @@ class Services {
     this.lenormand = const EmptyLenormandSource(),
     this.runes = const EmptyRuneSource(),
     this.crossIntro,
+    this.tripleIntro,
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
@@ -117,6 +118,7 @@ class Services {
         lenormand: AssetLenormandSource(folder: () => L10n.contentFolder),
         runes: AssetRuneSource(folder: () => L10n.contentFolder),
         crossIntro: FileIntroStore(name: 'cross_intro.json'),
+        tripleIntro: FileIntroStore(name: 'triple_intro.json'),
       );
 
   final ContentSource content;
@@ -186,6 +188,9 @@ class Services {
 
   /// 交叉解讀的 3 頁引導是否看過；null＝不自動顯示（測試）。
   final IntroStore? crossIntro;
+
+  /// 三系統交叉的 3 頁引導是否看過；null＝不自動顯示（測試）。
+  final IntroStore? tripleIntro;
 
   bool get isPremium => premium.isPremium.value;
 

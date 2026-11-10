@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import '../runes/runes.dart';
 import '../tarot/draw.dart';
 
 /// 趨勢五級（不用「凶」字）：大吉 +2、吉 +1、平 0、小阻 -1、阻 -2。
@@ -73,13 +74,21 @@ class CardScore {
 
 /// 全部牌的分數（tarot-content `cross/scores.json`：預設表＋overrides 合併後的結果）。
 class CrossScores {
-  CrossScores({Map<int, CardScore>? tarotUp, Map<int, CardScore>? tarotRev, Map<int, CardScore>? lenormand})
-      : _up = tarotUp ?? const {},
+  CrossScores({
+    Map<int, CardScore>? tarotUp,
+    Map<int, CardScore>? tarotRev,
+    Map<int, CardScore>? lenormand,
+    Map<int, CardScore>? runeUp,
+    Map<int, CardScore>? runeRev,
+  })  : _up = tarotUp ?? const {},
         _rev = tarotRev ?? const {},
-        _len = lenormand ?? const {};
+        _len = lenormand ?? const {},
+        _runeUp = runeUp ?? const {},
+        _runeRev = runeRev ?? const {};
 
   factory CrossScores.fromJson(Map<String, dynamic> j) {
     final up = <int, CardScore>{}, rev = <int, CardScore>{}, len = <int, CardScore>{};
+    final rUp = <int, CardScore>{}, rRev = <int, CardScore>{};
     final t = j['tarot'];
     if (t is Map) {
       for (final e in t.entries) {
@@ -96,16 +105,30 @@ class CrossScores {
         if (id != null) len[id] = CardScore.fromJson(e.value);
       }
     }
-    return CrossScores(tarotUp: up, tarotRev: rev, lenormand: len);
+    // 盧恩（三系統交叉）：u 正位；r 逆位，只有 15 個非對稱符文有。
+    final r = j['runes'];
+    if (r is Map) {
+      for (final e in r.entries) {
+        final id = int.tryParse(e.key.toString());
+        if (id == null || e.value is! Map) continue;
+        rUp[id] = CardScore.fromJson((e.value as Map)['u']);
+        if ((e.value as Map)['r'] != null) rRev[id] = CardScore.fromJson((e.value as Map)['r']);
+      }
+    }
+    return CrossScores(tarotUp: up, tarotRev: rev, lenormand: len, runeUp: rUp, runeRev: rRev);
   }
 
-  final Map<int, CardScore> _up, _rev, _len;
+  final Map<int, CardScore> _up, _rev, _len, _runeUp, _runeRev;
 
   bool get isEmpty => _up.isEmpty && _len.isEmpty;
 
   CardScore tarot(DrawnCard c) => (c.reversed ? _rev : _up)[c.cardId] ?? const CardScore(score: 0);
 
   CardScore lenormand(int id) => _len[id] ?? const CardScore(score: 0);
+
+  /// 盧恩：逆位缺資料時退回正位分數（理論上只有對稱符文沒有逆位）。
+  CardScore rune(DrawnRune r) =>
+      (r.reversed ? (_runeRev[r.id] ?? _runeUp[r.id]) : _runeUp[r.id]) ?? const CardScore(score: 0);
 }
 
 /// 一次交叉解讀的判斷結果（全部規則，不呼叫 AI）。

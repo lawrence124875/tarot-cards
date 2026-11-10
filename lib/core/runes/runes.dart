@@ -117,10 +117,14 @@ class RuneText {
         love = _s(j, 'love'),
         work = _s(j, 'work'),
         advice = _s(j, 'advice'),
-        poem = _s(j, 'poem');
+        poem = _s(j, 'poem'),
+        reminder = _s(j, 'reminder');
 
   final int id;
   final String key, name, meaning, reversedMeaning, love, work, advice, poem;
+
+  /// 核心提醒（一句；三系統交叉的盧恩段落用）。
+  final String reminder;
 
   /// 主題標籤代碼（與雷諾曼相同：news、love、work、money、home、health、social、self、travel）。
   final List<String> tags;

@@ -133,7 +133,7 @@ class _Tile extends StatelessWidget {
               [
                 l.journalKindName(entry.kind),
                 // 交叉解讀固定是塔羅三張＋雷諾曼三張，不另標牌陣
-                if (!entry.isCross) spreads[entry.spreadId] ?? '',
+                if (!entry.isCross && !entry.isTriple) spreads[entry.spreadId] ?? '',
               ].where((x) => x.isNotEmpty).join('・'),
               style: t.labelMedium?.copyWith(color: TarotColors.rice)),
           Text(

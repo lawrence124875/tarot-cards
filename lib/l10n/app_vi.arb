@@ -382,5 +382,16 @@
   "runeReversedLabel": "Ngược: sắp xếp bên trong",
   "runeUprightLabel": "Ý nghĩa xuôi",
   "runeCoreReminder": "Lời nhắc cốt lõi",
-  "runeNameReversed": "{name} (ngược)"
+  "runeNameReversed": "{name} (ngược)",
+  "featureTriple": "Tarot × Lenormand × Rune",
+  "tripleRuneRow": "Rune · Viên đá cốt lõi",
+  "tripleLockedBody": "Đăng ký để xem trọn năm phần: tổng hợp cốt lõi, Tarot nội tâm, Lenormand bên ngoài, năng lượng cốt lõi của rune và ba hướng đi.",
+  "tripleUnlock": "Mở khóa trọn bài đọc ba hệ thống",
+  "tripleHubHint": "Ba lá Tarot, ba lá Lenormand và một viên rune cốt lõi, đối chiếu từ ba góc nhìn (dành cho người đăng ký)",
+  "tripleIntroTitle1": "Ba hệ thống, ba góc nhìn",
+  "tripleIntroBody1": "Tarot nhìn vào tâm lý bên trong (vì sao), Lenormand nhìn vào sự việc cụ thể và thời điểm (điều gì, khi nào), rune nhìn vào năng lượng cốt lõi và lời nhắc (điều quan trọng nhất). Một câu hỏi, nhìn từ bên trong, bên ngoài và cốt lõi.",
+  "tripleIntroTitle2": "Cách đọc kết quả",
+  "tripleIntroBody2": "Đồng thuận mạnh: cả ba cùng hướng.\nĐa số đồng thuận: hai bên giống nhau, bên còn lại mang đến lời nhắc.\nBa hướng khác nhau: đọc từng bên, không ép gộp lại.",
+  "tripleIntroTitle3": "Viên đá cốt lõi",
+  "tripleIntroBody3": "Chỉ rút một viên rune làm cốt lõi của cả bài đọc. Rune ngược nghĩa là năng lượng hướng vào trong để sắp xếp lại, không phải tin xấu. Kết quả là để tham khảo và tự nhận biết; bước tiếp theo do bạn quyết định."
 }

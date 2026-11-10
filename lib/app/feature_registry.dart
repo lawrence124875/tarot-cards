@@ -1,5 +1,6 @@
 import '../features/breath/breath_feature.dart';
 import '../features/cross/cross_feature.dart';
+import '../features/cross/triple_feature.dart';
 import '../features/daily/daily_feature.dart';
 import '../features/draw/draw_feature.dart';
 import '../features/journal/journal_feature.dart';
@@ -19,6 +20,7 @@ final List<AppFeature> registeredFeatures = [
   lenormandFeature,
   crossFeature,
   runeFeature,
+  tripleFeature,
   journalFeature,
   breathFeature,
 ];

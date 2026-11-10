@@ -39,6 +39,16 @@ class CrossTemplates {
   String _fill(String tpl, Map<String, String> v) =>
       v.entries.fold(tpl, (s, e) => s.replaceAll('{${e.key}}', e.value));
 
+  /// 牌名加上語言的括號格式（例：〈愚者〉）。
+  String quote(String name) =>
+      _fill(_str('format', 'name').isEmpty ? '{name}' : _str('format', 'name'), {'name': name});
+
+  /// format 區的字串（coreTiming、lenTiming…）。
+  String formatText(String key) => _str('format', key);
+
+  /// 關鍵詞之間的分隔符號。
+  String get keywordSep => (_j['keywordSep'] ?? '、').toString();
+
   /// 四段標題（core／tarot／lenormand／breakthrough）。
   String sectionTitle(String key) => _str('sections', key);
 

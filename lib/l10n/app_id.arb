@@ -382,5 +382,16 @@
   "runeReversedLabel": "Terbalik: menata ke dalam",
   "runeUprightLabel": "Makna tegak",
   "runeCoreReminder": "Pengingat inti",
-  "runeNameReversed": "{name} (terbalik)"
+  "runeNameReversed": "{name} (terbalik)",
+  "featureTriple": "Tarot × Lenormand × Rune",
+  "tripleRuneRow": "Rune · Batu inti",
+  "tripleLockedBody": "Berlangganan untuk melihat lima bagian lengkap: ringkasan inti, sisi batin Tarot, situasi luar Lenormand, energi inti rune, dan tiga jalur ke depan.",
+  "tripleUnlock": "Buka bacaan tiga sistem lengkap",
+  "tripleHubHint": "Tiga kartu Tarot, tiga kartu Lenormand, dan satu batu rune inti, dibaca silang dari tiga sudut (khusus pelanggan)",
+  "tripleIntroTitle1": "Tiga sistem, tiga sudut pandang",
+  "tripleIntroBody1": "Tarot melihat dunia batin (mengapa), Lenormand melihat peristiwa nyata dan waktunya (apa dan kapan), dan rune melihat energi inti serta pengingat (satu hal yang paling penting). Satu pertanyaan, dilihat dari dalam, luar, dan inti.",
+  "tripleIntroTitle2": "Cara membaca hasil",
+  "tripleIntroBody2": "Kesepakatan kuat: ketiganya searah.\nKesepakatan mayoritas: dua searah, yang ketiga memberi pengingat.\nTiga arah berbeda: baca masing-masing, tanpa memaksa digabung.",
+  "tripleIntroTitle3": "Batu inti",
+  "tripleIntroBody3": "Hanya satu rune yang diambil, sebagai inti seluruh bacaan. Rune terbalik berarti energi berbalik ke dalam untuk ditata, bukan kabar buruk. Hasilnya untuk refleksi dan kesadaran; langkah selanjutnya kamu yang menentukan."
 }
