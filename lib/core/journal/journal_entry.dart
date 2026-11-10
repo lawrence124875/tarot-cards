@@ -2,8 +2,8 @@ import '../content/reading_area.dart';
 import '../tarot/draw.dart';
 import '../tarot/spread.dart';
 
-/// 紀錄類型：塔羅、雷諾曼、塔羅 × 雷諾曼、盧恩。
-enum JournalKind { tarot, lenormand, cross, runes }
+/// 紀錄類型：塔羅、雷諾曼、塔羅 × 雷諾曼、盧恩、塔羅 × 雷諾曼 × 盧恩（三系統）。
+enum JournalKind { tarot, lenormand, cross, runes, triple }
 
 /// 事後的一次回顧：後來發生了什麼、牌面的象怎麼對上。
 class FollowUp {
@@ -55,6 +55,7 @@ class JournalEntry {
     String deckId = '',
     DateTime? reminderAt,
     List<int> lenormand = const [],
+    List<int> runes = const [],
   }) =>
       JournalEntry(
         id: now.microsecondsSinceEpoch.toRadixString(36),
@@ -69,6 +70,7 @@ class JournalEntry {
         deckId: deckId,
         reminderAt: reminderAt,
         lenormand: lenormand,
+        runes: runes,
       );
 
   /// 雷諾曼單獨抽牌的紀錄（不含塔羅牌）。spreadId 為 len_one／len_three。
@@ -134,7 +136,11 @@ class JournalEntry {
   /// 交叉紀錄回顧「事後應驗了嗎？」：yes／partial／no；空字串＝還沒選。
   final String verdict;
 
-  bool get isCross => cards.isNotEmpty && lenormand.isNotEmpty;
+  /// 塔羅 × 雷諾曼（雙系統，沒有盧恩）。
+  bool get isCross => cards.isNotEmpty && lenormand.isNotEmpty && runes.isEmpty;
+
+  /// 塔羅 × 雷諾曼 × 盧恩（三系統：塔羅三張、雷諾曼三張、盧恩一顆）。
+  bool get isTriple => cards.isNotEmpty && lenormand.isNotEmpty && runes.isNotEmpty;
 
   /// 只有雷諾曼牌（沒有塔羅牌）。
   bool get isLenormand => cards.isEmpty && lenormand.isNotEmpty && runes.isEmpty;
@@ -146,7 +152,9 @@ class JournalEntry {
       ? JournalKind.runes
       : isLenormand
           ? JournalKind.lenormand
-          : (isCross ? JournalKind.cross : JournalKind.tarot);
+          : isTriple
+              ? JournalKind.triple
+              : (isCross ? JournalKind.cross : JournalKind.tarot);
 
   /// 盧恩紀錄的關鍵符文（三顆取中間，帶號整數）；沒有時為 null。
   int? get keyRune => runes.isEmpty ? null : runes[runes.length == 3 ? 1 : 0];
@@ -257,7 +265,8 @@ class JournalEntry {
           if (f is Map<String, dynamic>) FollowUp.fromJson(f),
       ],
       lenormand: len,
-      runes: spreadId.startsWith('rune_') ? runes : const [],
+      // 盧恩：單獨紀錄（rune_*），或三系統（塔羅＋雷諾曼＋一顆盧恩）
+      runes: spreadId.startsWith('rune_') || (cards.isNotEmpty && len.isNotEmpty && runes.length == 1) ? runes : const [],
       verdict: verdicts.contains(j['verdict']) ? j['verdict'] as String : '',
     );
   }

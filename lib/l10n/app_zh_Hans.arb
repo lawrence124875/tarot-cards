@@ -382,5 +382,16 @@
   "runeReversedLabel": "逆位：向内整理",
   "runeUprightLabel": "正位的意思",
   "runeCoreReminder": "核心提醒",
-  "runeNameReversed": "{name}（逆位）"
+  "runeNameReversed": "{name}（逆位）",
+  "featureTriple": "塔罗 × 雷诺曼 × 卢恩",
+  "tripleRuneRow": "卢恩・内核之石",
+  "tripleLockedBody": "订阅后可看完整五段式内容：内核指引、塔罗内在、雷诺曼外在、卢恩内核能量与三轨破局。",
+  "tripleUnlock": "解锁完整三系统解读",
+  "tripleHubHint": "塔罗三张＋雷诺曼三张＋一颗内核之石，三个角度交叉对照（订阅专属）",
+  "tripleIntroTitle1": "三套系统，三个角度",
+  "tripleIntroBody1": "塔罗看内在心理（为什么），雷诺曼看具体事件与时间（发生什么、何时），卢恩看内核能量与提醒（最重要的一件事）。同一个问题，从内在、外在与内核一起看。",
+  "tripleIntroTitle2": "怎么读结果",
+  "tripleIntroBody2": "强共识：三方同向。\n多数共识：两方一致，少数方带来提醒。\n三方分歧：各看其意，不强行合成。",
+  "tripleIntroTitle3": "内核之石",
+  "tripleIntroBody3": "卢恩只抽一颗，作为整次解读的内核。逆位代表能量向内整理，不是坏消息。结果是参考与觉察，接下来怎么走，由你决定。"
 }

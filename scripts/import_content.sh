@@ -80,18 +80,20 @@ if [ -d "$src/runes" ]; then
   done
 fi
 
-# 交叉解讀：cross/scores.json（預設表＋overrides 合併後）、cross/<語言>/templates.json。
+# 交叉解讀：cross/scores.json（預設表＋overrides 合併後）、cross/<語言>/templates.json、triple.json（三系統）。
 cross=0
 if [ -f "$src/cross/scores.json" ]; then
   mkdir -p assets/cross
   cp "$src/cross/scores.json" assets/cross/
   cross=1
   for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
-    if [ -f "$src/cross/$lang/templates.json" ]; then
-      mkdir -p "assets/cross/$lang"
-      cp "$src/cross/$lang/templates.json" "assets/cross/$lang/"
-      cross=$((cross + 1))
-    fi
+    for f in templates triple; do
+      if [ -f "$src/cross/$lang/$f.json" ]; then
+        mkdir -p "assets/cross/$lang"
+        cp "$src/cross/$lang/$f.json" "assets/cross/$lang/"
+        cross=$((cross + 1))
+      fi
+    done
   done
 fi
 

@@ -382,5 +382,16 @@
   "runeReversedLabel": "Reversed: turning inward",
   "runeUprightLabel": "Upright meaning",
   "runeCoreReminder": "Core reminder",
-  "runeNameReversed": "{name} (reversed)"
+  "runeNameReversed": "{name} (reversed)",
+  "featureTriple": "Tarot × Lenormand × Runes",
+  "tripleRuneRow": "Rune · Core stone",
+  "tripleLockedBody": "Subscribe to see the full five-part reading: core synthesis, Tarot inner view, Lenormand outer view, the rune's core energy, and a three-track way forward.",
+  "tripleUnlock": "Unlock the full three-system reading",
+  "tripleHubHint": "Three Tarot cards, three Lenormand cards and one core rune, cross-read from three angles (subscribers)",
+  "tripleIntroTitle1": "Three systems, three angles",
+  "tripleIntroBody1": "Tarot looks at your inner world (why), Lenormand at concrete events and timing (what and when), and the rune at core energy and reminders (the one thing that matters most). One question, seen from inside, outside and the core.",
+  "tripleIntroTitle2": "How to read the result",
+  "tripleIntroBody2": "Strong consensus: all three agree.\nMajority view: two agree, and the third brings a reminder.\nThree-way divergence: read each on its own, without forcing a blend.",
+  "tripleIntroTitle3": "The core stone",
+  "tripleIntroBody3": "Only one rune is drawn, as the core of the whole reading. A reversed rune means energy turning inward, not bad news. The result is for reflection and awareness; what happens next is up to you."
 }

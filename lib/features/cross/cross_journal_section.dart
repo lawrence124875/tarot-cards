@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import '../../app/services.dart';
 import '../../core/cross/cross_composer.dart';
 import '../../core/cross/cross_engine.dart';
+import '../../core/cross/triple_composer.dart';
+import '../../core/cross/triple_engine.dart';
 import '../../core/events/event_bus.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/lenormand/lenormand.dart';
+import '../../core/runes/runes.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/section.dart';
 import '../lenormand/lenormand_widgets.dart';
+import '../runes/rune_widgets.dart';
 import 'cross_page.dart';
+import 'triple_page.dart';
 
-/// 紀錄回顧中的交叉解讀：雷諾曼三張、當時的交叉結果、「事後應驗了嗎？」（應驗／部分／沒有）。
+/// 紀錄回顧中的交叉解讀：雷諾曼三張（三系統另加盧恩核心之石）、當時的交叉結果、「事後應驗了嗎？」（應驗／部分／沒有）。
 class CrossJournalSection extends StatefulWidget {
   const CrossJournalSection({super.key, required this.entry, required this.onChanged});
 
@@ -27,6 +32,11 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
   CrossTemplates? _templates;
   Map<int, LenormandText> _names = const {};
   CrossCards? _cards;
+  TripleTemplates? _triple;
+  TripleCards? _tripleCards;
+  Map<int, RuneText> _runeNames = const {};
+
+  DrawnRune? get _rune => widget.entry.isTriple ? DrawnRune.fromCode(widget.entry.runes.first) : null;
 
   @override
   void initState() {
@@ -39,8 +49,18 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
       if (!mounted) return;
       final e = widget.entry;
       final cards = await loadCrossCards(context, scores, e.cards, e.lenormand, e.area);
+      if (!mounted) return;
+      final rune = _rune;
+      final triple = rune == null ? null : await loadTripleTemplates(L10n.contentFolder);
+      final runeNames = rune == null ? const <int, RuneText>{} : await s.runes.runes();
+      final tripleCards = (rune == null || !mounted)
+          ? null
+          : await loadTripleCards(context, scores, e.cards, e.lenormand, rune, e.area);
       if (mounted) {
         setState(() {
+          _triple = triple;
+          _tripleCards = tripleCards;
+          _runeNames = runeNames;
           _scores = scores;
           _templates = templates;
           _names = names;
@@ -78,7 +98,34 @@ class _CrossJournalSectionState extends State<CrossJournalSection> {
             ),
         ]),
       ),
-      if (_scores != null)
+      if (_rune case final r?)
+        Section(
+          title: l.tripleRuneRow,
+          child: Column(children: [
+            SizedBox(
+              width: 64,
+              child: AspectRatio(
+                aspectRatio: kRuneAspect,
+                child: RuneStoneFace(runeId: r.id, reversed: r.reversed, name: _runeNames[r.id]?.name),
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(runeDisplayName(l, _runeNames, r), style: t.bodySmall),
+          ]),
+        ),
+      if (_scores != null && _rune != null)
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: TripleResultView(
+            result: evaluateTriple(_scores!, e.cards, e.lenormand, _rune!),
+            templates: _templates ?? CrossTemplates(const {}),
+            triple: _triple ?? TripleTemplates(const {}),
+            seed: tripleSeed([for (final c in e.cards) c.cardId], e.lenormand, _rune!.code),
+            cards: _tripleCards,
+            onUnlocked: () => setState(() {}),
+          ),
+        )
+      else if (_scores != null)
         Padding(
           padding: const EdgeInsets.only(top: 12),
           child: CrossResultView(

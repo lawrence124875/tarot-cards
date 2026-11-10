@@ -192,7 +192,7 @@ class _CrossPageState extends State<CrossPage> {
           ] else ...[
             Text('「${_question.text.trim()}」', style: t.titleMedium, textAlign: TextAlign.center),
             const SizedBox(height: 12),
-            _Row(
+            CrossCardRow(
               title: l.crossTarotRow,
               children: [
                 for (final c in _tarot)
@@ -206,7 +206,7 @@ class _CrossPageState extends State<CrossPage> {
               names: _revealed ? [for (final c in _tarot) l.drawnName(c)] : null,
             ),
             const SizedBox(height: 12),
-            _Row(
+            CrossCardRow(
               title: l.crossLenormandRow,
               children: [
                 for (final id in _lenormand)
@@ -256,8 +256,8 @@ class _CrossPageState extends State<CrossPage> {
   }
 }
 
-class _Row extends StatelessWidget {
-  const _Row({required this.title, required this.children, required this.aspect, this.names});
+class CrossCardRow extends StatelessWidget {
+  const CrossCardRow({super.key, required this.title, required this.children, required this.aspect, this.names});
 
   final String title;
   final List<Widget> children;
@@ -377,18 +377,18 @@ class CrossResultView extends StatelessWidget {
         Section(title: title('core', rep.relationName), child: Text(d.core)),
         Section(
           title: '${title('tarot', l.crossTarotSide)}・${rep.tarotLevel}',
-          child: _Lines(lines: d.tarotLines, after: [d.tarotSummary]),
+          child: CrossLinesView(lines: d.tarotLines, after: [d.tarotSummary]),
         ),
         Section(
           title: '${title('lenormand', l.crossLenormandSide)}・${rep.lenormandLevel}',
-          child: _Lines(lines: d.lenormandLines, after: [...d.pairs, d.lenormandTiming]),
+          child: CrossLinesView(lines: d.lenormandLines, after: [...d.pairs, d.lenormandTiming]),
         ),
         Section(
           title: title('breakthrough', l.crossActionTitle),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            if (d.inner.isNotEmpty) _Labeled(label: d.innerLabel, text: d.inner),
-            if (d.outer.isNotEmpty) _Labeled(label: d.outerLabel, text: d.outer),
-            if (rep.reflection.isNotEmpty) _Labeled(label: d.reflectLabel, text: rep.reflection, style: italic),
+            if (d.inner.isNotEmpty) CrossLabeled(label: d.innerLabel, text: d.inner),
+            if (d.outer.isNotEmpty) CrossLabeled(label: d.outerLabel, text: d.outer),
+            if (rep.reflection.isNotEmpty) CrossLabeled(label: d.reflectLabel, text: rep.reflection, style: italic),
           ]),
         ),
       ],
@@ -400,8 +400,8 @@ class CrossResultView extends StatelessWidget {
 }
 
 /// 段落內逐張牌：牌名＋關鍵字（粗體）、盲點標籤、解釋；最後接幾句串接說明。
-class _Lines extends StatelessWidget {
-  const _Lines({required this.lines, this.after = const []});
+class CrossLinesView extends StatelessWidget {
+  const CrossLinesView({super.key, required this.lines, this.after = const []});
 
   final List<CrossLine> lines;
   final List<String> after;
@@ -433,8 +433,8 @@ class _Lines extends StatelessWidget {
   }
 }
 
-class _Labeled extends StatelessWidget {
-  const _Labeled({required this.label, required this.text, this.style});
+class CrossLabeled extends StatelessWidget {
+  const CrossLabeled({super.key, required this.label, required this.text, this.style});
 
   final String label, text;
   final TextStyle? style;
