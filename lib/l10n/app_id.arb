@@ -367,5 +367,20 @@
   "crossIntroNext": "Berikutnya",
   "crossIntroBack": "Kembali",
   "crossIntroDone": "Mulai",
-  "crossLessonGo": "Coba Tarot × Lenormand"
+  "crossLessonGo": "Coba Tarot × Lenormand",
+  "featureRunes": "Rune",
+  "runeHubIntro": "24 rune kuno yang terukir di batu, memberi pengingat inti yang paling perlu kamu lihat saat ini. Rune terbalik berarti energi berbalik ke dalam untuk ditata, bukan kabar buruk.",
+  "runeDrawOne": "Rune hari ini",
+  "runeDrawThree": "Tiga rune: yang telah, yang sedang, yang mungkin",
+  "runeLibrary": "24 rune",
+  "runeLessons": "Pelajaran rune",
+  "runeQuestionHint": "Pertanyaanmu (opsional)",
+  "runeDraw": "Ambil rune",
+  "runeRevealAll": "Buka semua",
+  "runeAgain": "Ambil lagi",
+  "runeContentMissing": "Konten rune belum dimuat.",
+  "runeReversedLabel": "Terbalik: menata ke dalam",
+  "runeUprightLabel": "Makna tegak",
+  "runeCoreReminder": "Pengingat inti",
+  "runeNameReversed": "{name} (terbalik)"
 }

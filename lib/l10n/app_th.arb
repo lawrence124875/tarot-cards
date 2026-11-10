@@ -367,5 +367,20 @@
   "crossIntroNext": "ถัดไป",
   "crossIntroBack": "ย้อนกลับ",
   "crossIntroDone": "เริ่ม",
-  "crossLessonGo": "ลองทาโรต์ × เลอนอร์มองด์"
+  "crossLessonGo": "ลองทาโรต์ × เลอนอร์มองด์",
+  "featureRunes": "รูน",
+  "runeHubIntro": "รูนโบราณ 24 ตัวที่สลักบนหิน มอบข้อเตือนใจหลักที่คุณควรมองให้ชัดในตอนนี้ รูนกลับหัวหมายถึงพลังที่หันเข้าด้านในเพื่อจัดระเบียบ ไม่ใช่ข่าวร้าย",
+  "runeDrawOne": "รูนประจำวัน",
+  "runeDrawThree": "รูนสามตัว: สิ่งที่เป็นมา สิ่งที่กำลังเป็น สิ่งที่อาจเป็น",
+  "runeLibrary": "รูน 24 ตัว",
+  "runeLessons": "บทเรียนรูน",
+  "runeQuestionHint": "สิ่งที่อยากถาม (ไม่บังคับ)",
+  "runeDraw": "จับรูน",
+  "runeRevealAll": "เปิดทั้งหมด",
+  "runeAgain": "จับอีกครั้ง",
+  "runeContentMissing": "ยังโหลดเนื้อหารูนไม่ได้",
+  "runeReversedLabel": "กลับหัว: จัดระเบียบภายใน",
+  "runeUprightLabel": "ความหมายตั้งตรง",
+  "runeCoreReminder": "ข้อเตือนใจหลัก",
+  "runeNameReversed": "{name} (กลับหัว)"
 }

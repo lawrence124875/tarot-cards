@@ -59,11 +59,12 @@ extension TarotTerms on AppLocalizations {
         JournalKind.tarot => journalKindTarot,
         JournalKind.lenormand => featureLenormand,
         JournalKind.cross => featureCross,
+        JournalKind.runes => featureRunes,
       };
 
   /// 日記回顧通知（內文不放想問的事）。
   ({String title, String body}) reviewMessage(int cardId, int days) {
-    final name = cardId < 0 ? featureLenormand : cardName(cardId);
+    final name = cardId <= -100 ? featureRunes : (cardId < 0 ? featureLenormand : cardName(cardId));
     return (title: reviewNotificationTitle(name), body: reviewNotificationBody(days, name));
   }
 }

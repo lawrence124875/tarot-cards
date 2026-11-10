@@ -5,6 +5,7 @@ import '../features/draw/draw_feature.dart';
 import '../features/journal/journal_feature.dart';
 import '../features/learn/learn_feature.dart';
 import '../features/lenormand/lenormand_feature.dart';
+import '../features/runes/rune_feature.dart';
 import '../core/telemetry/remote_flags.dart';
 import 'app_feature.dart';
 
@@ -17,6 +18,7 @@ final List<AppFeature> registeredFeatures = [
   learnFeature,
   lenormandFeature,
   crossFeature,
+  runeFeature,
   journalFeature,
   breathFeature,
 ];

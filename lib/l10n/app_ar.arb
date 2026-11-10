@@ -367,5 +367,20 @@
   "crossIntroNext": "التالي",
   "crossIntroBack": "رجوع",
   "crossIntroDone": "ابدأ",
-  "crossLessonGo": "جرّب التاروت × لونورمان"
+  "crossLessonGo": "جرّب التاروت × لونورمان",
+  "featureRunes": "الرونات",
+  "runeHubIntro": "٢٤ رونًا قديمًا منقوشًا على الحجر، تقدّم لك التذكير الجوهري الذي تحتاج أن تراه بوضوح الآن. الرون المقلوب يعني طاقة تتجه إلى الداخل لإعادة الترتيب، وليس خبرًا سيئًا.",
+  "runeDrawOne": "رون اليوم",
+  "runeDrawThree": "ثلاثة رونات: ما كان، ما يتكوّن، ما قد يكون",
+  "runeLibrary": "الرونات الـ٢٤",
+  "runeLessons": "دروس الرونات",
+  "runeQuestionHint": "سؤالك (اختياري)",
+  "runeDraw": "اسحب الرونات",
+  "runeRevealAll": "اكشف الكل",
+  "runeAgain": "اسحب مرة أخرى",
+  "runeContentMissing": "لم يتم تحميل محتوى الرونات بعد.",
+  "runeReversedLabel": "مقلوب: ترتيب داخلي",
+  "runeUprightLabel": "المعنى في الوضع المستقيم",
+  "runeCoreReminder": "تذكير جوهري",
+  "runeNameReversed": "{name} (مقلوب)"
 }

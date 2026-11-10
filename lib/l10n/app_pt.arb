@@ -367,5 +367,20 @@
   "crossIntroNext": "Próximo",
   "crossIntroBack": "Voltar",
   "crossIntroDone": "Começar",
-  "crossLessonGo": "Experimentar Tarô × Lenormand"
+  "crossLessonGo": "Experimentar Tarô × Lenormand",
+  "featureRunes": "Runas",
+  "runeHubIntro": "24 runas antigas gravadas em pedra, trazendo o lembrete essencial que você mais precisa enxergar agora. Uma runa invertida significa energia voltada para dentro, não uma má notícia.",
+  "runeDrawOne": "Runa do dia",
+  "runeDrawThree": "Três runas: o que foi, o que está sendo, o que pode ser",
+  "runeLibrary": "As 24 runas",
+  "runeLessons": "Lições de runas",
+  "runeQuestionHint": "Sua pergunta (opcional)",
+  "runeDraw": "Tirar runas",
+  "runeRevealAll": "Revelar todas",
+  "runeAgain": "Tirar de novo",
+  "runeContentMissing": "O conteúdo das runas ainda não foi carregado.",
+  "runeReversedLabel": "Invertida: organizar por dentro",
+  "runeUprightLabel": "Significado na posição normal",
+  "runeCoreReminder": "Lembrete essencial",
+  "runeNameReversed": "{name} (invertida)"
 }

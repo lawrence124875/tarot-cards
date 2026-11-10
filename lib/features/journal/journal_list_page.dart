@@ -7,12 +7,14 @@ import '../../app/theme.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_stats.dart';
 import '../../core/lenormand/lenormand.dart';
+import '../../core/runes/runes.dart';
 import '../../core/tarot/tarot_card.dart';
 import '../../core/journal/journal_store.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/format.dart';
 import '../../shared/widgets/card_face.dart';
 import '../lenormand/lenormand_widgets.dart';
+import '../runes/rune_widgets.dart';
 import 'journal_backup_menu.dart';
 import 'journal_entry_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
@@ -52,17 +54,17 @@ class _List extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListenableBuilder(
       listenable: store,
-      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)>(
+      builder: (context, _) => FutureBuilder<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>, Map<int, RuneText>)>(
         future: _load(context),
         builder: (context, snap) {
           if (!snap.hasData) return const Center(child: CircularProgressIndicator());
-          final (entries, names, spreads) = snap.data!;
+          final (entries, names, spreads, runeNames) = snap.data!;
           if (entries.isEmpty) return const _Empty();
           return ListView.separated(
             padding: readablePadding(context, horizontal: 16, top: 8, bottom: 32),
             itemCount: entries.length,
             separatorBuilder: (_, __) => Divider(height: 1, color: TarotColors.mountain),
-            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names, spreads: spreads),
+            itemBuilder: (context, i) => _Tile(entry: entries[i], names: names, spreads: spreads, runeNames: runeNames),
           );
         },
       ),
@@ -70,25 +72,31 @@ class _List extends StatelessWidget {
   }
 
   /// 紀錄、雷諾曼牌名、牌陣名（塔羅用原 id，雷諾曼用 len_ 前綴）。
-  Future<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>)> _load(BuildContext context) async {
+  Future<(List<JournalEntry>, Map<int, LenormandText>, Map<String, String>, Map<int, RuneText>)> _load(
+      BuildContext context) async {
     final s = AppServices.of(context);
     final entries = await store.all();
     final anyLen = entries.any((e) => e.lenormand.isNotEmpty);
     final names = anyLen ? await s.lenormand.cards() : const <int, LenormandText>{};
+    final anyRune = entries.any((e) => e.runes.isNotEmpty);
+    final runeNames = anyRune ? await s.runes.runes() : const <int, RuneText>{};
     final spreads = <String, String>{
       for (final e in ((await s.content.spreads())?.spreads ?? const {}).entries) e.key: e.value.name,
       if (anyLen)
         for (final e in (await s.lenormand.spreads()).entries) 'len_${e.key}': e.value.name,
+      if (anyRune)
+        for (final e in (await s.runes.spreads()).entries) 'rune_${e.key}': e.value.name,
     };
-    return (entries, names, spreads);
+    return (entries, names, spreads, runeNames);
   }
 }
 
 class _Tile extends StatelessWidget {
-  const _Tile({required this.entry, required this.names, required this.spreads});
+  const _Tile({required this.entry, required this.names, required this.spreads, this.runeNames = const {}});
 
   final JournalEntry entry;
   final Map<int, LenormandText> names;
+  final Map<int, RuneText> runeNames;
   final Map<String, String> spreads;
 
   @override
@@ -99,7 +107,12 @@ class _Tile extends StatelessWidget {
     final pending = entry.reminderAt != null && entry.reminderAt!.isAfter(DateTime.now());
     final String title;
     final Widget face;
-    if (entry.isLenormand) {
+    if (entry.isRunes) {
+      final r = DrawnRune.fromCode(entry.keyRune!) ?? const DrawnRune(1);
+      final name = runeDisplayName(l, runeNames, r);
+      title = entry.runes.length == 1 ? name : l.journalTitleSpread(name, entry.runes.length);
+      face = AspectRatio(aspectRatio: kRuneAspect, child: RuneStoneFace(runeId: r.id, reversed: r.reversed, name: name));
+    } else if (entry.isLenormand) {
       final id = entry.keyLenormand!;
       final name = names[id]?.name ?? '$id';
       title = entry.lenormand.length == 1 ? name : l.journalTitleSpread(name, entry.lenormand.length);

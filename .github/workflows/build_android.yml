@@ -48,6 +48,7 @@ jobs:
             ar
             decks
             lenormand
+            runes
             cross
             branding
             store/release-notes

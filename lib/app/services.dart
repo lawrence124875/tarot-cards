@@ -13,6 +13,7 @@ import '../core/deck/deck.dart';
 import '../core/deck/deck_source.dart';
 import '../core/learn/card_quiz.dart';
 import '../core/lenormand/lenormand.dart';
+import '../core/runes/runes.dart';
 import '../core/learn/lesson_progress.dart';
 import '../core/settings/app_settings.dart';
 import '../core/settings/json_file.dart';
@@ -62,6 +63,7 @@ class Services {
     CastQuota? quota,
     this.updater = const NoUpdater(),
     this.lenormand = const EmptyLenormandSource(),
+    this.runes = const EmptyRuneSource(),
     this.crossIntro,
   })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
@@ -113,6 +115,7 @@ class Services {
         quota: CastQuota(limits: limits),
         updater: const PlayAppUpdater(),
         lenormand: AssetLenormandSource(folder: () => L10n.contentFolder),
+        runes: AssetRuneSource(folder: () => L10n.contentFolder),
         crossIntro: FileIntroStore(name: 'cross_intro.json'),
       );
 
@@ -177,6 +180,9 @@ class Services {
 
   /// 雷諾曼內容（牌義、牌陣、課程；zh-Hant／zh-Hans／en，其他語言退回英文）。
   final LenormandSource lenormand;
+
+  /// 盧恩內容（符文、牌陣、課程；11 語，缺的語言退回英文）。
+  final RuneSource runes;
 
   /// 交叉解讀的 3 頁引導是否看過；null＝不自動顯示（測試）。
   final IntroStore? crossIntro;

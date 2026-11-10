@@ -7,8 +7,10 @@ import '../../core/deck/deck.dart';
 import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_reminders.dart';
 import '../../core/lenormand/lenormand.dart';
+import '../../core/runes/runes.dart';
 import '../cross/cross_journal_section.dart';
 import '../lenormand/lenormand_widgets.dart';
+import '../runes/rune_widgets.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/reading_page.dart';
 import '../../reading/section.dart';
@@ -36,6 +38,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   Deck? _deck;
   Map<int, LenormandText> _lenNames = const {};
   String _lenSpreadName = '';
+  Map<int, RuneText> _runeNames = const {};
   bool _loaded = false;
   bool _ready = false;
 
@@ -48,12 +51,18 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   Future<void> _load() async {
     _loaded = true;
     final e = await _services.journal?.byId(widget.entryId);
-    final c = (e == null || e.isLenormand) ? null : await _services.content.card(e.keyCard.cardId);
-    final sp = (e == null || e.isLenormand) ? null : (await _services.content.spreads())?[e.spreadId];
+    final noTarot = e == null || e.cards.isEmpty;
+    final c = noTarot ? null : await _services.content.card(e.keyCard.cardId);
+    final sp = noTarot ? null : (await _services.content.spreads())?[e.spreadId];
     final lenNames = (e == null || !e.isLenormand) ? const <int, LenormandText>{} : await _services.lenormand.cards();
-    final lenSpread = (e == null || !e.isLenormand)
+    final runeNames = (e == null || e.runes.isEmpty) ? const <int, RuneText>{} : await _services.runes.runes();
+    final lenSpread = e == null
         ? ''
-        : (await _services.lenormand.spreads())[e.spreadId.replaceFirst('len_', '')]?.name ?? '';
+        : e.isLenormand
+            ? (await _services.lenormand.spreads())[e.spreadId.replaceFirst('len_', '')]?.name ?? ''
+            : e.isRunes
+                ? (await _services.runes.spreads())[e.spreadId.replaceFirst('rune_', '')]?.name ?? ''
+                : '';
     final deck = (e == null || e.deckId.isEmpty) ? null : await _services.decks.deck(e.deckId);
     if (!mounted) return;
     setState(() {
@@ -63,6 +72,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
       _deck = deck;
       _lenNames = lenNames;
       _lenSpreadName = lenSpread;
+      _runeNames = runeNames;
       _ready = true;
     });
   }
@@ -166,7 +176,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
   Widget _body(BuildContext context, JournalEntry e) {
     final t = Theme.of(context).textTheme;
     final l = context.l10n;
-    final lenOnly = e.isLenormand;
+    final lenOnly = e.isLenormand || e.isRunes;
     final key = lenOnly ? null : e.keyCard;
     final keyPos = lenOnly ? 0 : e.spread.keyPosition.clamp(0, e.cards.length - 1);
     final readings = key == null ? const [] : (_content?.readings(key.reversed) ?? const []);
@@ -190,7 +200,33 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
             textAlign: TextAlign.center,
             style: t.bodySmall),
         const SizedBox(height: 16),
-        if (lenOnly) ...[
+        if (e.isRunes) ...[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            for (final c in e.runes)
+              if (DrawnRune.fromCode(c) case final r?)
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 100),
+                    child: InkWell(
+                      onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(builder: (_) => RuneStonePage(runeId: r.id, reversed: r.reversed))),
+                      child: AspectRatio(
+                          aspectRatio: kRuneAspect,
+                          child: RuneStoneFace(runeId: r.id, reversed: r.reversed, name: _runeNames[r.id]?.name)),
+                    ),
+                  ),
+                ),
+              ),
+          ]),
+          const SizedBox(height: 12),
+          Text(
+              [for (final c in e.runes) if (DrawnRune.fromCode(c) case final r?) runeDisplayName(l, _runeNames, r)]
+                  .join(l.listSeparator),
+              textAlign: TextAlign.center,
+              style: t.titleMedium),
+        ] else if (lenOnly) ...[
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             for (final id in e.lenormand)
               Flexible(
