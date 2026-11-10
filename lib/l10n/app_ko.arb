@@ -367,5 +367,20 @@
   "crossIntroNext": "다음",
   "crossIntroBack": "이전",
   "crossIntroDone": "시작",
-  "crossLessonGo": "타로 × 르노르망 해 보기"
+  "crossLessonGo": "타로 × 르노르망 해 보기",
+  "featureRunes": "룬",
+  "runeHubIntro": "돌에 새겨진 24개의 고대 룬이 지금 가장 바라봐야 할 핵심 메시지를 전합니다. 역방향은 에너지가 안으로 향하는 정리의 시간이며, 나쁜 소식이 아닙니다.",
+  "runeDrawOne": "오늘의 룬",
+  "runeDrawThree": "룬 세 개: 지나온 것・되어 가는 것・될 것",
+  "runeLibrary": "24개의 룬",
+  "runeLessons": "룬 강좌",
+  "runeQuestionHint": "묻고 싶은 것 (선택)",
+  "runeDraw": "룬 뽑기",
+  "runeRevealAll": "모두 펼치기",
+  "runeAgain": "다시 뽑기",
+  "runeContentMissing": "룬 내용을 아직 불러오지 못했습니다.",
+  "runeReversedLabel": "역방향: 안으로 정리하기",
+  "runeUprightLabel": "정방향의 의미",
+  "runeCoreReminder": "핵심 메시지",
+  "runeNameReversed": "{name} (역방향)"
 }

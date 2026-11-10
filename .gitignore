@@ -40,6 +40,7 @@ doc/api/
 /assets/lenormand/**/*.json
 /assets/lenormand/**/*.webp
 /assets/cross/**/*.json
+/assets/runes/**/*.json
 /_content/
 # 金鑰絕不 commit
 *.jks

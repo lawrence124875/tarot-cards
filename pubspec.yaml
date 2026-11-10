@@ -72,6 +72,17 @@ flutter:
     - assets/lenormand/th/
     - assets/lenormand/ar/
     - assets/lenormand/deck/
+    - assets/runes/zh-Hant/
+    - assets/runes/zh-Hans/
+    - assets/runes/en/
+    - assets/runes/ja/
+    - assets/runes/ko/
+    - assets/runes/vi/
+    - assets/runes/id/
+    - assets/runes/es/
+    - assets/runes/pt-BR/
+    - assets/runes/th/
+    - assets/runes/ar/
     - assets/cross/
     - assets/cross/zh-Hant/
     - assets/cross/zh-Hans/

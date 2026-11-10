@@ -367,5 +367,20 @@
   "crossIntroNext": "Tiếp",
   "crossIntroBack": "Quay lại",
   "crossIntroDone": "Bắt đầu",
-  "crossLessonGo": "Thử Tarot × Lenormand"
+  "crossLessonGo": "Thử Tarot × Lenormand",
+  "featureRunes": "Rune",
+  "runeHubIntro": "24 chữ rune cổ khắc trên đá, mang đến lời nhắc cốt lõi bạn cần nhìn rõ lúc này. Rune ngược nghĩa là năng lượng hướng vào trong để sắp xếp lại, không phải tin xấu.",
+  "runeDrawOne": "Rune hôm nay",
+  "runeDrawThree": "Ba rune: đã thành, đang thành, sẽ thành",
+  "runeLibrary": "24 rune",
+  "runeLessons": "Bài học rune",
+  "runeQuestionHint": "Điều bạn muốn hỏi (không bắt buộc)",
+  "runeDraw": "Rút rune",
+  "runeRevealAll": "Mở tất cả",
+  "runeAgain": "Rút lại",
+  "runeContentMissing": "Chưa tải được nội dung rune.",
+  "runeReversedLabel": "Ngược: sắp xếp bên trong",
+  "runeUprightLabel": "Ý nghĩa xuôi",
+  "runeCoreReminder": "Lời nhắc cốt lõi",
+  "runeNameReversed": "{name} (ngược)"
 }

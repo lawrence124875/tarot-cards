@@ -367,5 +367,20 @@
   "crossIntroNext": "Next",
   "crossIntroBack": "Back",
   "crossIntroDone": "Start",
-  "crossLessonGo": "Try Tarot × Lenormand"
+  "crossLessonGo": "Try Tarot × Lenormand",
+  "featureRunes": "Runes",
+  "runeHubIntro": "24 ancient runes carved in stone, offering the core reminder you most need to see right now. A reversed rune means energy turning inward, not bad news.",
+  "runeDrawOne": "Today's rune",
+  "runeDrawThree": "Three runes: has been, becoming, may be",
+  "runeLibrary": "The 24 runes",
+  "runeLessons": "Rune lessons",
+  "runeQuestionHint": "Your question (optional)",
+  "runeDraw": "Draw runes",
+  "runeRevealAll": "Reveal all",
+  "runeAgain": "Draw again",
+  "runeContentMissing": "Rune content is not loaded yet.",
+  "runeReversedLabel": "Reversed: turning inward",
+  "runeUprightLabel": "Upright meaning",
+  "runeCoreReminder": "Core reminder",
+  "runeNameReversed": "{name} (reversed)"
 }

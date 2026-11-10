@@ -2,8 +2,8 @@ import '../content/reading_area.dart';
 import '../tarot/draw.dart';
 import '../tarot/spread.dart';
 
-/// 紀錄類型：塔羅、雷諾曼、塔羅 × 雷諾曼。
-enum JournalKind { tarot, lenormand, cross }
+/// 紀錄類型：塔羅、雷諾曼、塔羅 × 雷諾曼、盧恩。
+enum JournalKind { tarot, lenormand, cross, runes }
 
 /// 事後的一次回顧：後來發生了什麼、牌面的象怎麼對上。
 class FollowUp {
@@ -37,9 +37,11 @@ class JournalEntry {
     this.reminderAt,
     List<FollowUp> followUps = const [],
     List<int> lenormand = const [],
+    List<int> runes = const [],
     this.verdict = '',
   })  : cards = List.unmodifiable(cards),
         lenormand = List.unmodifiable(lenormand),
+        runes = List.unmodifiable(runes),
         readingIndexes = List.unmodifiable(readingIndexes),
         followUps = List.unmodifiable(followUps);
 
@@ -86,6 +88,24 @@ class JournalEntry {
         lenormand: cards,
       );
 
+  /// 盧恩單獨抽的紀錄（不含塔羅、雷諾曼）。spreadId 為 rune_one／rune_three；
+  /// [runes] 為帶號整數（負數＝逆位，見 DrawnRune.code）。
+  factory JournalEntry.fromRunes({
+    required String spreadId,
+    required List<int> runes,
+    required DateTime now,
+    String question = '',
+  }) =>
+      JournalEntry(
+        id: now.microsecondsSinceEpoch.toRadixString(36),
+        createdAt: now,
+        spreadId: spreadId,
+        methodId: DrawMethods.quick,
+        cards: const [],
+        question: question,
+        runes: runes,
+      );
+
   final String id;
   final DateTime createdAt;
   final String spreadId;
@@ -108,15 +128,28 @@ class JournalEntry {
   /// 塔羅 × 雷諾曼交叉解讀時抽到的雷諾曼牌（1–36）；一般塔羅紀錄為空。
   final List<int> lenormand;
 
+  /// 抽到的盧恩符文（帶號整數：1–24 正位，負數逆位）。
+  final List<int> runes;
+
   /// 交叉紀錄回顧「事後應驗了嗎？」：yes／partial／no；空字串＝還沒選。
   final String verdict;
 
   bool get isCross => cards.isNotEmpty && lenormand.isNotEmpty;
 
   /// 只有雷諾曼牌（沒有塔羅牌）。
-  bool get isLenormand => cards.isEmpty && lenormand.isNotEmpty;
+  bool get isLenormand => cards.isEmpty && lenormand.isNotEmpty && runes.isEmpty;
 
-  JournalKind get kind => isLenormand ? JournalKind.lenormand : (isCross ? JournalKind.cross : JournalKind.tarot);
+  /// 只有盧恩符文。
+  bool get isRunes => cards.isEmpty && lenormand.isEmpty && runes.isNotEmpty;
+
+  JournalKind get kind => isRunes
+      ? JournalKind.runes
+      : isLenormand
+          ? JournalKind.lenormand
+          : (isCross ? JournalKind.cross : JournalKind.tarot);
+
+  /// 盧恩紀錄的關鍵符文（三顆取中間，帶號整數）；沒有時為 null。
+  int? get keyRune => runes.isEmpty ? null : runes[runes.length == 3 ? 1 : 0];
 
   /// 雷諾曼紀錄的關鍵牌（三張取中間）；沒有雷諾曼牌時為 null。
   int? get keyLenormand => lenormand.isEmpty ? null : lenormand[lenormand.length == 3 ? 1 : 0];
@@ -156,6 +189,7 @@ class JournalEntry {
         reminderAt: clearReminder ? null : (reminderAt ?? this.reminderAt),
         followUps: followUps ?? this.followUps,
         lenormand: lenormand,
+        runes: runes,
         verdict: verdict ?? this.verdict,
       );
 
@@ -173,6 +207,7 @@ class JournalEntry {
         if (reminderAt != null) 'reminderAt': reminderAt!.toIso8601String(),
         'followUps': [for (final f in followUps) f.toJson()],
         if (lenormand.isNotEmpty) 'lenormand': lenormand,
+        if (runes.isNotEmpty) 'runes': runes,
         if (verdict.isNotEmpty) 'verdict': verdict,
       };
 
@@ -189,7 +224,15 @@ class JournalEntry {
       for (final x in (j['lenormand'] is List ? j['lenormand'] as List : const []))
         if (x is int && x >= 1 && x <= 36) x,
     ];
-    if (cards.isEmpty) {
+    final runes = [
+      for (final x in (j['runes'] is List ? j['runes'] as List : const []))
+        if (x is int && x != 0 && x.abs() <= 24) x,
+    ];
+    if (cards.isEmpty && spreadId.startsWith('rune_')) {
+      // 盧恩單獨紀錄：rune_one／rune_three，數量要對上。
+      final ok = (spreadId == 'rune_one' && runes.length == 1) || (spreadId == 'rune_three' && runes.length == 3);
+      if (!ok || len.isNotEmpty) return null;
+    } else if (cards.isEmpty) {
       // 雷諾曼單獨紀錄：len_one／len_three，牌數要對上。
       final ok = (spreadId == 'len_one' && len.length == 1) || (spreadId == 'len_three' && len.length == 3);
       if (!ok) return null;
@@ -214,6 +257,7 @@ class JournalEntry {
           if (f is Map<String, dynamic>) FollowUp.fromJson(f),
       ],
       lenormand: len,
+      runes: spreadId.startsWith('rune_') ? runes : const [],
       verdict: verdicts.contains(j['verdict']) ? j['verdict'] as String : '',
     );
   }

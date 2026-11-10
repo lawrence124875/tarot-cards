@@ -367,5 +367,20 @@
   "crossIntroNext": "下一页",
   "crossIntroBack": "上一页",
   "crossIntroDone": "开始",
-  "crossLessonGo": "试试塔罗 × 雷诺曼"
+  "crossLessonGo": "试试塔罗 × 雷诺曼",
+  "featureRunes": "卢恩",
+  "runeHubIntro": "24 个刻在石头上的古老符文，给你此刻最需要看清的核心提醒。逆位代表能量向内整理，不是坏消息。",
+  "runeDrawOne": "今日一符文",
+  "runeDrawThree": "三颗符文：已成・正在成・将成",
+  "runeLibrary": "24 个符文",
+  "runeLessons": "卢恩课程",
+  "runeQuestionHint": "想问的事（可不填）",
+  "runeDraw": "抽符文",
+  "runeRevealAll": "全部翻开",
+  "runeAgain": "再抽一次",
+  "runeContentMissing": "卢恩内容尚未加载。",
+  "runeReversedLabel": "逆位：向内整理",
+  "runeUprightLabel": "正位的意思",
+  "runeCoreReminder": "核心提醒",
+  "runeNameReversed": "{name}（逆位）"
 }

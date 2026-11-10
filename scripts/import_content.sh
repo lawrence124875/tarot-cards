@@ -65,6 +65,21 @@ if [ -d "$src/lenormand" ]; then
   len="$len deck=$n"
 fi
 
+# 盧恩：runes/<語言>/runes.json、spreads.json、lessons.json（符文以程式繪製，沒有圖檔）。
+rune=""
+if [ -d "$src/runes" ]; then
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+    mkdir -p "assets/runes/$lang"
+    n=0
+    for f in "$src/runes/$lang"/*.json; do
+      [ -e "$f" ] || continue
+      cp "$f" "assets/runes/$lang/"
+      n=$((n + 1))
+    done
+    rune="$rune $lang=$n"
+  done
+fi
+
 # 交叉解讀：cross/scores.json（預設表＋overrides 合併後）、cross/<語言>/templates.json。
 cross=0
 if [ -f "$src/cross/scores.json" ]; then
@@ -86,4 +101,4 @@ if [ -d "$src/branding" ]; then
   cp -r "$src/branding" branding
 fi
 
-echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、交叉 ${cross} 檔"
+echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、盧恩（${rune# }）、交叉 ${cross} 檔"

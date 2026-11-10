@@ -31,8 +31,9 @@ class JournalReminders {
     final days = DateTime(at.year, at.month, at.day)
         .difference(DateTime(e.createdAt.year, e.createdAt.month, e.createdAt.day))
         .inDays;
-    // 雷諾曼單獨紀錄沒有塔羅牌：以負數傳雷諾曼牌號，由介面層換成「雷諾曼」字樣。
-    final m = message(e.isLenormand ? -e.keyLenormand! : e.keyCard.cardId, days);
+    // 雷諾曼／盧恩單獨紀錄沒有塔羅牌：雷諾曼傳 -牌號、盧恩傳 -100 以下，由介面層換成「雷諾曼」「盧恩」字樣。
+    final m = message(
+        e.isRunes ? -100 - e.keyRune!.abs() : (e.isLenormand ? -e.keyLenormand! : e.keyCard.cardId), days);
     return reminders.schedule(
       id: e.notificationId,
       at: at,

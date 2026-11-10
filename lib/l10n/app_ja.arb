@@ -367,5 +367,20 @@
   "crossIntroNext": "次へ",
   "crossIntroBack": "戻る",
   "crossIntroDone": "はじめる",
-  "crossLessonGo": "タロット × ルノルマンを試す"
+  "crossLessonGo": "タロット × ルノルマンを試す",
+  "featureRunes": "ルーン",
+  "runeHubIntro": "石に刻まれた24の古代ルーン。今いちばん見つめたい核心のメッセージを届けます。逆位置はエネルギーが内側へ向かう整理のときで、悪い知らせではありません。",
+  "runeDrawOne": "今日のルーン",
+  "runeDrawThree": "3つのルーン：過去・現在・これから",
+  "runeLibrary": "24のルーン",
+  "runeLessons": "ルーン講座",
+  "runeQuestionHint": "聞きたいこと（任意）",
+  "runeDraw": "ルーンを引く",
+  "runeRevealAll": "すべて開く",
+  "runeAgain": "もう一度引く",
+  "runeContentMissing": "ルーンの内容がまだ読み込まれていません。",
+  "runeReversedLabel": "逆位置：内側の整理",
+  "runeUprightLabel": "正位置の意味",
+  "runeCoreReminder": "核心のメッセージ",
+  "runeNameReversed": "{name}（逆位置）"
 }
