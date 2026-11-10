@@ -351,7 +351,7 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
             children: [
               Text(
                 pending
-                    ? l.journalReminderPending(formatDate(e.reminderAt!), hour12(JournalReminders.reviewHour))
+                    ? l.journalReminderPending(formatDate(e.reminderAt!), reminderHour(Localizations.localeOf(context).languageCode, JournalReminders.reviewHour))
                     : l.journalReminderNone,
                 style: t.bodySmall,
               ),

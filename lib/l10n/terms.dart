@@ -88,3 +88,7 @@ String roman(int n) {
 
 /// 24 小時制 → 12 小時制（晚上 8 點＝8）。
 int hour12(int h) => h % 12 == 0 ? 12 : h % 12;
+
+/// 提醒時間顯示用：泰文用 24 小時制（20:00 น.），其他語言用 12 小時制。
+int reminderHour(String languageCode, int h) =>
+    languageCode == 'th' ? h : hour12(h);
