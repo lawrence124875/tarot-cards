@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "Cara membaca hasil",
   "tripleIntroBody2": "Kesepakatan kuat: ketiganya searah.\nKesepakatan mayoritas: dua searah, yang ketiga memberi pengingat.\nTiga arah berbeda: baca masing-masing, tanpa memaksa digabung.",
   "tripleIntroTitle3": "Batu inti",
-  "tripleIntroBody3": "Hanya satu rune yang diambil, sebagai inti seluruh bacaan. Rune terbalik berarti energi berbalik ke dalam untuk ditata, bukan kabar buruk. Hasilnya untuk refleksi dan kesadaran; langkah selanjutnya kamu yang menentukan."
+  "tripleIntroBody3": "Hanya satu rune yang diambil, sebagai inti seluruh bacaan. Rune terbalik berarti energi berbalik ke dalam untuk ditata, bukan kabar buruk. Hasilnya untuk refleksi dan kesadaran; langkah selanjutnya kamu yang menentukan.",
+  "premiumBenefitCross": "Bacaan silang 2 dan 3 sistem secara lengkap",
+  "planSave": "Hemat {percent}%",
+  "premiumTrialBadge": "{days} hari pertama gratis",
+  "flipHint": "Buka kartu",
+  "featureCrossHub": "Bacaan silang",
+  "crossHubIntro": "Lihat satu pertanyaan lewat beberapa sistem, dari dalam dan luar.",
+  "crossHubDualDesc": "Tarot untuk batin, Lenormand untuk peristiwa",
+  "crossHubTripleDesc": "Tambah satu rune untuk pesan intinya"
 }

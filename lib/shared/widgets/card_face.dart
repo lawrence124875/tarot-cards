@@ -57,10 +57,10 @@ class CardFace extends StatelessWidget {
                 end: 6,
                 bottom: 6,
                 child: DecoratedBox(
-                  decoration: BoxDecoration(color: Color(0x88000000), shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: TarotColors.scrimSoft, shape: BoxShape.circle),
                   child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: Icon(Icons.open_in_full, size: 14, color: Colors.white),
+                    child: Icon(Icons.open_in_full, size: 14, color: TarotColors.onImage),
                   ),
                 ),
               ),
@@ -159,7 +159,7 @@ class PaintedCardFace extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFFFFF6E3), Color(0xFFF7E1C4)],
+          colors: [TarotColors.cardFaceTop, TarotColors.cardFaceBottom],
         ),
       ),
       padding: const EdgeInsets.all(10),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../app/services.dart';
+import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
 import '../../core/deck/deck.dart';
 import '../../l10n/l10n.dart';
@@ -15,7 +16,7 @@ Future<void> showCardArt(BuildContext context,
     {required int cardId, bool reversed = false, Deck? deck, Widget? overlay}) {
   return Navigator.of(context).push(PageRouteBuilder<void>(
     opaque: false,
-    barrierColor: Colors.black,
+    barrierColor: TarotColors.scrim,
     transitionDuration: const Duration(milliseconds: 280),
     reverseTransitionDuration: const Duration(milliseconds: 220),
     pageBuilder: (_, __, ___) =>
@@ -70,9 +71,9 @@ class _CardArtViewerState extends State<CardArtViewer> {
     final t = Theme.of(context).textTheme;
     final l = context.l10n;
     final spots = _deck?.annotation(widget.cardId).symbols ?? const [];
-    final white = t.bodySmall?.copyWith(color: Colors.white, shadows: const [Shadow(blurRadius: 6, color: Colors.black)]);
+    final white = t.bodySmall?.copyWith(color: TarotColors.onImage, shadows: const [Shadow(blurRadius: 6, color: TarotColors.scrim)]);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: TarotColors.scrim,
       body: Semantics(
         label: l.artViewerLabel(l.cardName(widget.cardId)),
         child: GestureDetector(
@@ -88,7 +89,7 @@ class _CardArtViewerState extends State<CardArtViewer> {
                   final img = snap.data![0] as ImageProvider?;
                   final content = snap.data![1] as CardContent?;
                   if (img == null) {
-                    return Center(child: Text(l.cardName(widget.cardId), style: t.headlineSmall?.copyWith(color: Colors.white)));
+                    return Center(child: Text(l.cardName(widget.cardId), style: t.headlineSmall?.copyWith(color: TarotColors.onImage)));
                   }
                   final aspect = _deck?.aspect ?? 0.58;
                   return InteractiveViewer(
@@ -152,7 +153,7 @@ class _CardArtViewerState extends State<CardArtViewer> {
                   child: IconButton(
                     tooltip: _symbols ? l.hideSymbols : l.showSymbols,
                     onPressed: () => setState(() => _symbols = !_symbols),
-                    icon: Icon(_symbols ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: Colors.white70),
+                    icon: Icon(_symbols ? Icons.visibility_off_outlined : Icons.visibility_outlined, color: TarotColors.onImage.withValues(alpha: 0.7)),
                   ),
                 ),
               PositionedDirectional(
@@ -162,7 +163,7 @@ class _CardArtViewerState extends State<CardArtViewer> {
                   child: IconButton(
                     tooltip: l.back,
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close, color: Colors.white70),
+                    icon: Icon(Icons.close, color: TarotColors.onImage.withValues(alpha: 0.7)),
                   ),
                 ),
               ),

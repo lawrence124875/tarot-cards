@@ -106,8 +106,8 @@ class _DotState extends State<_Dot> with SingleTickerProviderStateMixin {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: TarotColors.dawn.withValues(alpha: 0.55 + 0.25 * v),
-            border: Border.all(color: Colors.white, width: 2),
-            boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.35), blurRadius: 6)],
+            border: Border.all(color: TarotColors.onImage, width: 2),
+            boxShadow: [BoxShadow(color: TarotColors.shadow.withValues(alpha: 0.35), blurRadius: 6)],
           ),
         );
       },

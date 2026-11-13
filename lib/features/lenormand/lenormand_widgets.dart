@@ -50,8 +50,8 @@ class LenormandBack extends StatelessWidget {
           LenormandCard.backAsset,
           fit: BoxFit.cover,
           errorBuilder: (_, __, ___) => const ColoredBox(
-            color: Color(0xFF2E2646),
-            child: Center(child: Icon(Icons.auto_awesome, color: Color(0xFFBF9648))),
+            color: TarotColors.lenormandBack,
+            child: Center(child: Icon(Icons.auto_awesome, color: TarotColors.lenormandBackStar)),
           ),
         ),
       );

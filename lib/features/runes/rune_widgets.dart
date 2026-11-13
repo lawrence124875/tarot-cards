@@ -13,10 +13,10 @@ import '../../shared/widgets/adaptive_layout.dart';
 /// 符文石寬高比（3:4）。
 const double kRuneAspect = 3 / 4;
 
-const _stoneLight = Color(0xFF8F8A80);
-const _stoneDark = Color(0xFF4F4A44);
-const _carve = Color(0xFFE9D3A2);
-const _carveShadow = Color(0xFF2B2622);
+const _stoneLight = TarotColors.stoneLight;
+const _stoneDark = TarotColors.stoneDark;
+const _carve = TarotColors.stoneCarve;
+const _carveShadow = TarotColors.stoneCarveShadow;
 
 /// 符文石正面：石面漸層＋刻痕線條（程式繪製，不佔 App 空間）。逆位時符文旋轉 180°。
 class RuneStoneFace extends StatelessWidget {
@@ -64,7 +64,7 @@ class _StonePainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.2
-        ..color = Colors.black.withValues(alpha: 0.25),
+        ..color = TarotColors.shadow.withValues(alpha: 0.25),
     );
     final strokes = key == null ? null : runeStrokes[key];
     if (strokes == null) return;

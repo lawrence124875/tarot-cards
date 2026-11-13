@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "怎么读结果",
   "tripleIntroBody2": "强共识：三方同向。\n多数共识：两方一致，少数方带来提醒。\n三方分歧：各看其意，不强行合成。",
   "tripleIntroTitle3": "内核之石",
-  "tripleIntroBody3": "卢恩只抽一颗，作为整次解读的内核。逆位代表能量向内整理，不是坏消息。结果是参考与觉察，接下来怎么走，由你决定。"
+  "tripleIntroBody3": "卢恩只抽一颗，作为整次解读的内核。逆位代表能量向内整理，不是坏消息。结果是参考与觉察，接下来怎么走，由你决定。",
+  "premiumBenefitCross": "双／三系统交叉完整解读",
+  "planSave": "省 {percent}%",
+  "premiumTrialBadge": "前 {days} 天免费",
+  "flipHint": "翻牌",
+  "featureCrossHub": "交叉解读",
+  "crossHubIntro": "同一个问题，用不同系统一起看，内外都照顾到。",
+  "crossHubDualDesc": "塔罗看内心，雷诺曼看事件",
+  "crossHubTripleDesc": "再加一颗卢恩，看最核心的提醒"
 }

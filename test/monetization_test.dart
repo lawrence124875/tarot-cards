@@ -140,5 +140,16 @@ void main() {
       expect(const SubscriptionPlan(period: PlanPeriod.yearly, price: 'x', trialDays: 7).hasTrial, isTrue);
       expect(const SubscriptionPlan(period: PlanPeriod.yearly, price: 'x').hasTrial, isFalse);
     });
+
+    test('年繳省幾 %：USD 3.99／24.99 → 48，TWD 99／590 → 50；幣別不同或缺數字不顯示', () {
+      const mu = SubscriptionPlan(period: PlanPeriod.monthly, price: '\$3.99', amount: 3.99, currencyCode: 'USD');
+      const yu = SubscriptionPlan(period: PlanPeriod.yearly, price: '\$24.99', amount: 24.99, currencyCode: 'USD');
+      expect(SubscriptionPlan.savePercent(monthly: mu, yearly: yu), 48);
+      const mt = SubscriptionPlan(period: PlanPeriod.monthly, price: 'NT\$99', amount: 99, currencyCode: 'TWD');
+      const yt = SubscriptionPlan(period: PlanPeriod.yearly, price: 'NT\$590', amount: 590, currencyCode: 'TWD');
+      expect(SubscriptionPlan.savePercent(monthly: mt, yearly: yt), 50);
+      expect(SubscriptionPlan.savePercent(monthly: mu, yearly: yt), isNull);
+      expect(SubscriptionPlan.savePercent(monthly: const SubscriptionPlan(period: PlanPeriod.monthly, price: 'x'), yearly: yu), isNull);
+    });
   });
 }

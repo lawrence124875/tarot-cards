@@ -110,7 +110,7 @@ class _PaywallPageState extends State<PaywallPage> {
               Text(l.premiumSubtitle,
                   style: t.bodyMedium?.copyWith(color: TarotColors.textSub), textAlign: TextAlign.center),
               const SizedBox(height: 24),
-              for (final b in [l.premiumBenefitCourses, l.premiumBenefitSpreads, l.premiumBenefitNoAds, l.premiumBenefitJournal])
+              for (final b in [l.premiumBenefitCross, l.premiumBenefitCourses, l.premiumBenefitSpreads, l.premiumBenefitNoAds, l.premiumBenefitJournal])
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(children: [
@@ -155,7 +155,39 @@ class _PaywallPageState extends State<PaywallPage> {
     }
     final locale = Localizations.localeOf(context).toString();
     final selected = plans.where((p) => p.period == _selected).firstOrNull;
+    final monthly = plans.where((p) => p.period == PlanPeriod.monthly).firstOrNull;
+    final yearly = plans.where((p) => p.period == PlanPeriod.yearly).firstOrNull;
+    // 0.4.0 P1：年訂標「省 X%」（和月訂×12 比）；有試用時在方案上方放醒目的「前 7 天免費」。
+    final save = monthly == null || yearly == null ? null : SubscriptionPlan.savePercent(monthly: monthly, yearly: yearly);
+    final trialDays = (yearly?.hasTrial ?? false) ? yearly!.trialDays : null;
     return [
+      if (trialDays != null)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14),
+          child: Material(
+            color: TarotColors.rice.withValues(alpha: 0.14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: TarotColors.rice.withValues(alpha: 0.6)),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () => setState(() => _selected = PlanPeriod.yearly),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(Icons.card_giftcard, color: TarotColors.rice),
+                  const SizedBox(width: 10),
+                  Flexible(
+                    child: Text(l.premiumTrialBadge(trialDays),
+                        style: t.titleMedium?.copyWith(color: TarotColors.rice, fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center),
+                  ),
+                ]),
+              ),
+            ),
+          ),
+        ),
       for (final p in plans)
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
@@ -166,6 +198,10 @@ class _PaywallPageState extends State<PaywallPage> {
               if (p.hasTrial && p.period == PlanPeriod.yearly) l.premiumTrial(p.trialDays!, p.price),
               if (p.perMonth(locale) case final m?) l.planPerMonth(m),
             ].join('\n'),
+            badges: [
+              if (p.period == PlanPeriod.yearly && save != null) l.planSave(save),
+              if (p.period == PlanPeriod.yearly && trialDays != null) l.premiumTrialBadge(trialDays),
+            ],
             selected: _selected == p.period,
             onTap: () => setState(() => _selected = p.period),
           ),
@@ -214,6 +250,7 @@ class _PlanTile extends StatelessWidget {
     required this.title,
     required this.price,
     this.detail = '',
+    this.badges = const [],
     required this.selected,
     required this.onTap,
   });
@@ -223,6 +260,9 @@ class _PlanTile extends StatelessWidget {
 
   /// 方案下方的小字（試用說明、每月約多少）；空字串不顯示。
   final String detail;
+
+  /// 方案名稱旁的小標籤（年訂的「省 X%」「前 7 天免費」）。
+  final List<String> badges;
   final bool selected;
   final VoidCallback onTap;
 
@@ -250,7 +290,15 @@ class _PlanTile extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(title, style: t.titleMedium),
+                Wrap(spacing: 6, runSpacing: 4, crossAxisAlignment: WrapCrossAlignment.center, children: [
+                  Text(title, style: t.titleMedium),
+                  for (final b in badges)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                      decoration: BoxDecoration(color: TarotColors.earth, borderRadius: BorderRadius.circular(10)),
+                      child: Text(b, style: t.labelSmall?.copyWith(color: TarotColors.onEarth, fontWeight: FontWeight.w700)),
+                    ),
+                ]),
                 if (detail.isNotEmpty) Text(detail, style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
               ]),
             ),

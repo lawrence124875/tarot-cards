@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "Cómo leer el resultado",
   "tripleIntroBody2": "Consenso fuerte: los tres coinciden.\nMayoría: dos coinciden y el tercero aporta un recordatorio.\nDivergencia a tres: se lee cada uno por separado, sin forzar una mezcla.",
   "tripleIntroTitle3": "La piedra central",
-  "tripleIntroBody3": "Solo se saca una runa, como centro de toda la lectura. Una runa invertida significa energía que se vuelve hacia dentro, no una mala noticia. El resultado es para reflexionar; lo que sigue lo decides tú."
+  "tripleIntroBody3": "Solo se saca una runa, como centro de toda la lectura. Una runa invertida significa energía que se vuelve hacia dentro, no una mala noticia. El resultado es para reflexionar; lo que sigue lo decides tú.",
+  "premiumBenefitCross": "Lecturas cruzadas completas de 2 y 3 sistemas",
+  "planSave": "Ahorra un {percent}%",
+  "premiumTrialBadge": "{days} primeros días gratis",
+  "flipHint": "Voltear la carta",
+  "featureCrossHub": "Lectura cruzada",
+  "crossHubIntro": "Mira una pregunta desde varios sistemas, por dentro y por fuera.",
+  "crossHubDualDesc": "Tarot para lo interior, Lenormand para los hechos",
+  "crossHubTripleDesc": "Añade una runa para el mensaje central"
 }

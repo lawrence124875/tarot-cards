@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "How to read the result",
   "tripleIntroBody2": "Strong consensus: all three agree.\nMajority view: two agree, and the third brings a reminder.\nThree-way divergence: read each on its own, without forcing a blend.",
   "tripleIntroTitle3": "The core stone",
-  "tripleIntroBody3": "Only one rune is drawn, as the core of the whole reading. A reversed rune means energy turning inward, not bad news. The result is for reflection and awareness; what happens next is up to you."
+  "tripleIntroBody3": "Only one rune is drawn, as the core of the whole reading. A reversed rune means energy turning inward, not bad news. The result is for reflection and awareness; what happens next is up to you.",
+  "premiumBenefitCross": "Full two- and three-system cross readings",
+  "planSave": "Save {percent}%",
+  "premiumTrialBadge": "First {days} days free",
+  "flipHint": "Turn over the card",
+  "featureCrossHub": "Cross reading",
+  "crossHubIntro": "Look at one question through several systems, inside and out.",
+  "crossHubDualDesc": "Tarot for the inner view, Lenormand for events",
+  "crossHubTripleDesc": "Add one rune for the core message"
 }

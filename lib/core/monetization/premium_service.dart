@@ -54,6 +54,15 @@ class SubscriptionPlan {
 
   bool get hasTrial => (trialDays ?? 0) > 0;
 
+  /// 年繳比月繳×12 省幾 %（四捨五入）；缺數字、幣別不同或沒省錢時回傳 null。
+  static int? savePercent({required SubscriptionPlan monthly, required SubscriptionPlan yearly}) {
+    final m = monthly.amount, y = yearly.amount;
+    if (m == null || y == null || m <= 0 || y <= 0) return null;
+    if (monthly.currencyCode != yearly.currencyCode) return null;
+    final pct = ((1 - y / (m * 12)) * 100).round();
+    return pct > 0 ? pct : null;
+  }
+
   /// 年繳換算每月約多少（當地幣別符號沿用 [price] 的寫法）；算不出來回傳 null。
   /// RevenueCat Flutter SDK 沒有 pricePerMonthString，所以由 price／12 換算。
   String? perMonth(String locale) {

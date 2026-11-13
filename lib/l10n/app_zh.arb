@@ -954,5 +954,27 @@
   "tripleIntroTitle2": "怎麼讀結果",
   "tripleIntroBody2": "強共識：三方同向。\n多數共識：兩方一致，少數方帶來提醒。\n三方分歧：各看其意，不強行合成。",
   "tripleIntroTitle3": "核心之石",
-  "tripleIntroBody3": "盧恩只抽一顆，作為整次解讀的核心。逆位代表能量向內整理，不是壞消息。結果是參考與覺察，接下來怎麼走，由你決定。"
+  "tripleIntroBody3": "盧恩只抽一顆，作為整次解讀的核心。逆位代表能量向內整理，不是壞消息。結果是參考與覺察，接下來怎麼走，由你決定。",
+  "premiumBenefitCross": "雙／三系統交叉完整解讀",
+  "planSave": "省 {percent}%",
+  "@planSave": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumTrialBadge": "前 {days} 天免費",
+  "@premiumTrialBadge": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "flipHint": "翻牌",
+  "featureCrossHub": "交叉解讀",
+  "crossHubIntro": "同一個問題，用不同系統一起看，內外都照顧到。",
+  "crossHubDualDesc": "塔羅看內心，雷諾曼看事件",
+  "crossHubTripleDesc": "再加一顆盧恩，看最核心的提醒"
 }
