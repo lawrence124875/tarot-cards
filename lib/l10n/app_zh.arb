@@ -996,5 +996,14 @@
   "homeCrossDesc": "同一個問題，用不同系統一起看",
   "homePremiumDesc": "全部課程、進階牌陣、交叉解讀，無廣告",
   "settingsAbout": "關於與隱私",
-  "homeSettings": "設定"
+  "homeSettings": "設定",
+  "onboardTitle": "你想從哪裡開始？",
+  "onboardSubtitle": "選一個，馬上帶你抽第一張牌。之後隨時可以從底部切換。",
+  "onboardDaily": "每日覺察",
+  "onboardDailyDesc": "每天一張牌，看見今天的自己",
+  "onboardLearn": "學塔羅",
+  "onboardLearnDesc": "從牌庫和入門課程，一步步認識 78 張牌",
+  "onboardAsk": "問一件事",
+  "onboardAskDesc": "寫下心裡的問題，抽牌看看",
+  "onboardLater": "先自己逛逛"
 }

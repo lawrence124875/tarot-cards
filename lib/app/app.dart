@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../core/update/app_updater.dart';
 import '../l10n/l10n.dart';
-import '../features/intro/intro_page.dart';
+import '../features/intro/onboarding_page.dart';
 import 'feature_registry.dart';
 import 'home_page.dart';
 import 'services.dart';
@@ -36,11 +36,15 @@ class _TarotAppState extends State<TarotApp> {
         _open(p);
         return;
       }
-      // 首次開啟顯示功能介紹（從通知打開時不打斷）；看過介紹後才檢查新版
+      // 首次開啟問「你想從哪裡開始？」（0.4.0 新手引導，從通知打開時不打斷），選完直接帶進第一次抽牌；
+      // 看過引導後才檢查新版。功能介紹頁保留在設定「關於與隱私」。
       final intro = services.intro;
       if (intro != null && !await intro.seen()) {
         final nav = _navigatorKey.currentState;
-        if (nav != null) await showIntro(nav);
+        if (nav != null) {
+          final choice = await showOnboarding(nav);
+          if (choice != null) homeStartRequest.value = choice;
+        }
         return;
       }
       await _maybePromptUpdate(services);

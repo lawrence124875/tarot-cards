@@ -4,7 +4,12 @@ import 'package:tarot_cards/app/app.dart';
 import 'package:tarot_cards/app/services.dart';
 import 'package:tarot_cards/core/onboarding/intro_store.dart';
 import 'package:tarot_cards/core/tarot/draw.dart';
+import 'package:tarot_cards/app/home_tabs.dart';
+import 'package:tarot_cards/features/daily/daily_page.dart';
+import 'package:tarot_cards/features/draw/spread_picker_page.dart';
 import 'package:tarot_cards/features/intro/intro_page.dart';
+import 'package:tarot_cards/features/intro/onboarding_page.dart';
+import 'package:tarot_cards/features/learn/learn_hub_page.dart';
 import 'package:tarot_cards/features/share/share.dart';
 import 'package:tarot_cards/l10n/l10n.dart';
 
@@ -23,19 +28,40 @@ final _celtic = SpreadDraw(
 );
 
 void main() {
-  group('功能介紹', () {
-    testWidgets('首次開啟顯示六頁，看完記為已看過', (tester) async {
+  group('新手引導', () {
+    Future<MemoryIntroStore> open(WidgetTester tester) async {
       final store = MemoryIntroStore();
       await tester.pumpWidget(AppServices(services: testServices(intro: store), child: const TarotApp()));
       await tester.pumpAndSettle();
-      expect(find.byType(IntroPage), findsOneWidget);
-      for (var i = 0; i < 5; i++) {
-        await tester.tap(find.byType(FilledButton));
-        await tester.pumpAndSettle();
-      }
-      await tester.tap(find.byType(FilledButton)); // 最後一頁：開始使用
+      expect(find.byType(OnboardingPage), findsOneWidget);
+      expect(find.byType(IntroPage), findsNothing); // 功能介紹改放設定頁
+      return store;
+    }
+
+    testWidgets('選「學塔羅」切到學習分頁，記為已看過', (tester) async {
+      final store = await open(tester);
+      await tester.tap(find.byKey(const ValueKey('onboard_learn')));
       await tester.pumpAndSettle();
-      expect(find.byType(IntroPage), findsNothing);
+      expect(find.byType(OnboardingPage), findsNothing);
+      expect(find.byType(LearnHubPage), findsOneWidget);
+      expect(store.value, isTrue);
+    });
+
+    testWidgets('選「問一件事」直接進抽牌', (tester) async {
+      final store = await open(tester);
+      await tester.tap(find.byKey(const ValueKey('onboard_ask')));
+      await tester.pumpAndSettle();
+      expect(find.byType(SpreadPickerPage), findsOneWidget);
+      expect(store.value, isTrue);
+    });
+
+    testWidgets('選「每日覺察」直接進今日一張', (tester) async {
+      final store = await open(tester);
+      await tester.tap(find.byKey(const ValueKey('onboard_daily')));
+      for (var i = 0; i < 10; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      expect(find.byType(DailyPage), findsOneWidget);
       expect(store.value, isTrue);
     });
 
@@ -43,23 +69,22 @@ void main() {
       await tester.pumpWidget(
           AppServices(services: testServices(intro: MemoryIntroStore(value: true)), child: const TarotApp()));
       await tester.pumpAndSettle();
-      expect(find.byType(IntroPage), findsNothing);
+      expect(find.byType(OnboardingPage), findsNothing);
     });
 
-    testWidgets('略過也記為已看過', (tester) async {
-      final store = MemoryIntroStore();
-      await tester.pumpWidget(AppServices(services: testServices(intro: store), child: const TarotApp()));
+    testWidgets('略過也記為已看過，停在首頁', (tester) async {
+      final store = await open(tester);
+      await tester.tap(find.descendant(of: find.byType(OnboardingPage), matching: find.byType(TextButton)));
       await tester.pumpAndSettle();
-      await tester.tap(find.byType(TextButton).first);
-      await tester.pumpAndSettle();
-      expect(find.byType(IntroPage), findsNothing);
+      expect(find.byType(OnboardingPage), findsNothing);
+      expect(find.byType(TodayTab), findsOneWidget);
       expect(store.value, isTrue);
     });
   });
 
   group('分享卡片', () {
     for (final lang in AppLanguages.all) {
-      testWidgets('${lang.code}：卡片（單張、三張、凱爾特十字）與介紹頁排版不溢出', (tester) async {
+      testWidgets('${lang.code}：卡片（單張、三張、凱爾特十字）、介紹頁與新手引導排版不溢出', (tester) async {
         L10n.language = lang;
         Widget app(Widget home) => testApp(testServices(), home, locale: lang.locale);
         for (final d in [_single, _three, _celtic]) {
@@ -88,6 +113,9 @@ void main() {
           expect(tester.takeException(), isNull);
           if (i < 5) await tester.tap(find.byType(FilledButton));
         }
+        await tester.pumpWidget(app(const OnboardingPage()));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
       });
     }
   });
@@ -95,7 +123,7 @@ void main() {
   group('橫放與平板', () {
     const sizes = [Size(392, 850), Size(850, 392), Size(640, 360), Size(1280, 800)];
     for (final size in sizes) {
-      testWidgets('${size.width.toInt()}×${size.height.toInt()}：介紹頁與分享預覽不溢出', (tester) async {
+      testWidgets('${size.width.toInt()}×${size.height.toInt()}：介紹頁、新手引導與分享預覽不溢出', (tester) async {
         L10n.language = AppLanguages.zhHant;
         tester.view
           ..physicalSize = size
@@ -130,6 +158,9 @@ void main() {
           await tester.pumpAndSettle();
         }
         expect(find.byType(IntroPage), findsNothing);
+        await tester.pumpWidget(testApp(testServices(), const OnboardingPage()));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
       });
     }
   });

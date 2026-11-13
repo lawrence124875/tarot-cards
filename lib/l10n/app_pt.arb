@@ -416,5 +416,14 @@
   "homeCrossDesc": "Uma pergunta vista por vários sistemas",
   "homePremiumDesc": "Todas as lições, tiragens avançadas, leituras cruzadas, sem anúncios",
   "settingsAbout": "Sobre e privacidade",
-  "homeSettings": "Configurações"
+  "homeSettings": "Configurações",
+  "onboardTitle": "Por onde você quer começar?",
+  "onboardSubtitle": "Escolha uma opção e levamos você direto à sua primeira carta. Dá para trocar a qualquer momento pela barra abaixo.",
+  "onboardDaily": "Reflexão diária",
+  "onboardDailyDesc": "Uma carta por dia para enxergar você mesmo hoje",
+  "onboardLearn": "Aprender tarô",
+  "onboardLearnDesc": "Conheça as 78 cartas pelo baralho e pelas lições iniciais",
+  "onboardAsk": "Fazer uma pergunta",
+  "onboardAskDesc": "Escreva o que está no seu coração e tire as cartas",
+  "onboardLater": "Explorar sozinho primeiro"
 }

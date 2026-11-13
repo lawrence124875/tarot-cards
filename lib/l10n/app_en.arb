@@ -416,5 +416,14 @@
   "homeCrossDesc": "One question, seen through several systems",
   "homePremiumDesc": "All lessons, advanced spreads, cross readings, no ads",
   "settingsAbout": "About & privacy",
-  "homeSettings": "Settings"
+  "homeSettings": "Settings",
+  "onboardTitle": "Where would you like to start?",
+  "onboardSubtitle": "Pick one and we'll take you straight to your first card. You can switch anytime from the bar below.",
+  "onboardDaily": "Daily reflection",
+  "onboardDailyDesc": "One card a day to see yourself more clearly",
+  "onboardLearn": "Learn tarot",
+  "onboardLearnDesc": "Get to know all 78 cards through the deck and beginner lessons",
+  "onboardAsk": "Ask a question",
+  "onboardAskDesc": "Write down what's on your mind and draw cards",
+  "onboardLater": "Just look around"
 }

@@ -416,5 +416,14 @@
   "homeCrossDesc": "Una pregunta vista desde varios sistemas",
   "homePremiumDesc": "Todas las lecciones, tiradas avanzadas, lecturas cruzadas, sin anuncios",
   "settingsAbout": "Información y privacidad",
-  "homeSettings": "Ajustes"
+  "homeSettings": "Ajustes",
+  "onboardTitle": "¿Por dónde quieres empezar?",
+  "onboardSubtitle": "Elige una opción y te llevamos directo a tu primera carta. Puedes cambiar cuando quieras desde la barra inferior.",
+  "onboardDaily": "Reflexión diaria",
+  "onboardDailyDesc": "Una carta al día para verte con más claridad",
+  "onboardLearn": "Aprender tarot",
+  "onboardLearnDesc": "Conoce las 78 cartas con la baraja y las lecciones de inicio",
+  "onboardAsk": "Hacer una pregunta",
+  "onboardAskDesc": "Escribe lo que tienes en mente y saca cartas",
+  "onboardLater": "Explorar por mi cuenta"
 }

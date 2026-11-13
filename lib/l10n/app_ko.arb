@@ -416,5 +416,14 @@
   "homeCrossDesc": "한 질문을 여러 체계로 함께 보기",
   "homePremiumDesc": "모든 강좌, 고급 스프레드, 교차 리딩, 광고 없음",
   "settingsAbout": "정보 및 개인정보",
-  "homeSettings": "설정"
+  "homeSettings": "설정",
+  "onboardTitle": "어디서부터 시작할까요?",
+  "onboardSubtitle": "하나를 고르면 바로 첫 카드로 안내해 드려요. 나중에 아래 메뉴에서 언제든 바꿀 수 있어요.",
+  "onboardDaily": "매일의 성찰",
+  "onboardDailyDesc": "하루 한 장, 오늘의 나를 들여다보기",
+  "onboardLearn": "타로 배우기",
+  "onboardLearnDesc": "카드 목록과 입문 강의로 78장을 차근차근 알아가기",
+  "onboardAsk": "질문하기",
+  "onboardAskDesc": "마음속 질문을 적고 카드를 뽑아 보기",
+  "onboardLater": "먼저 둘러보기"
 }

@@ -416,5 +416,14 @@
   "homeCrossDesc": "Một câu hỏi, nhìn qua nhiều hệ thống",
   "homePremiumDesc": "Mọi bài học, trải bài nâng cao, đọc chéo, không quảng cáo",
   "settingsAbout": "Giới thiệu & quyền riêng tư",
-  "homeSettings": "Cài đặt"
+  "homeSettings": "Cài đặt",
+  "onboardTitle": "Bạn muốn bắt đầu từ đâu?",
+  "onboardSubtitle": "Chọn một mục, chúng tôi sẽ đưa bạn đến lá bài đầu tiên ngay. Bạn có thể đổi bất cứ lúc nào ở thanh bên dưới.",
+  "onboardDaily": "Tự soi chiếu mỗi ngày",
+  "onboardDailyDesc": "Mỗi ngày một lá bài để nhìn rõ chính mình hôm nay",
+  "onboardLearn": "Học tarot",
+  "onboardLearnDesc": "Làm quen với 78 lá bài qua bộ bài và bài học nhập môn",
+  "onboardAsk": "Hỏi một điều",
+  "onboardAskDesc": "Viết ra câu hỏi trong lòng rồi rút bài",
+  "onboardLater": "Tự khám phá trước"
 }

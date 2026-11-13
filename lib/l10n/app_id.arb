@@ -416,5 +416,14 @@
   "homeCrossDesc": "Satu pertanyaan, dilihat lewat beberapa sistem",
   "homePremiumDesc": "Semua pelajaran, susunan lanjutan, bacaan silang, tanpa iklan",
   "settingsAbout": "Tentang & privasi",
-  "homeSettings": "Pengaturan"
+  "homeSettings": "Pengaturan",
+  "onboardTitle": "Mau mulai dari mana?",
+  "onboardSubtitle": "Pilih satu dan kami langsung mengantarmu ke kartu pertama. Kamu bisa beralih kapan saja dari bilah di bawah.",
+  "onboardDaily": "Refleksi harian",
+  "onboardDailyDesc": "Satu kartu sehari untuk melihat dirimu hari ini",
+  "onboardLearn": "Belajar tarot",
+  "onboardLearnDesc": "Kenali 78 kartu lewat galeri kartu dan pelajaran pemula",
+  "onboardAsk": "Ajukan pertanyaan",
+  "onboardAskDesc": "Tulis pertanyaan di hatimu lalu tarik kartu",
+  "onboardLater": "Lihat-lihat dulu"
 }

@@ -416,5 +416,14 @@
   "homeCrossDesc": "ひとつの問いを複数のシステムで",
   "homePremiumDesc": "全レッスン・上級スプレッド・クロスリーディング・広告なし",
   "settingsAbout": "アプリ情報とプライバシー",
-  "homeSettings": "設定"
+  "homeSettings": "設定",
+  "onboardTitle": "どこから始めますか？",
+  "onboardSubtitle": "ひとつ選ぶと、すぐに最初の1枚へご案内します。あとで下のメニューからいつでも切り替えられます。",
+  "onboardDaily": "毎日の気づき",
+  "onboardDailyDesc": "1日1枚、今日の自分を見つめる",
+  "onboardLearn": "タロットを学ぶ",
+  "onboardLearnDesc": "カード一覧と入門レッスンで78枚を少しずつ知る",
+  "onboardAsk": "ひとつ質問する",
+  "onboardAskDesc": "心にある問いを書いて、カードを引く",
+  "onboardLater": "まずは自由に見てみる"
 }
