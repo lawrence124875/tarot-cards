@@ -132,6 +132,7 @@ void main() {
         // 今日一張：翻牌
         nav().popUntil((r) => r.isFirst);
         await _settle(tester);
+        await tester.scrollUntilVisible(find.text(l.featureDaily), -200, scrollable: homeList);
         await _tapVisible(tester, find.text(l.featureDaily));
         await _settle(tester);
         final flip = find.widgetWithText(FilledButton, l.dailyFlip);
