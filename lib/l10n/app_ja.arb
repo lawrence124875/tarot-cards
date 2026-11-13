@@ -403,5 +403,18 @@
   "featureCrossHub": "クロスリーディング",
   "crossHubIntro": "ひとつの問いを複数のシステムで、内と外から見つめます。",
   "crossHubDualDesc": "タロットで内面を、ルノルマンで出来事を",
-  "crossHubTripleDesc": "ルーンをひとつ加えて、核心のメッセージを"
+  "crossHubTripleDesc": "ルーンをひとつ加えて、核心のメッセージを",
+  "navToday": "今日",
+  "navDivination": "占い",
+  "navJournal": "日記",
+  "homeStreak": "{count, plural, other{{count}日連続}}",
+  "homeTodayDrawn": "今日のカード",
+  "homeSystemTarot": "タロット",
+  "homeTarotDesc": "今の心の状態を見つめる",
+  "homeLenormandDesc": "近い未来の人や出来事を見通す",
+  "homeRunesDesc": "今いちばん大切な核心のメッセージ",
+  "homeCrossDesc": "ひとつの問いを複数のシステムで",
+  "homePremiumDesc": "全レッスン・上級スプレッド・クロスリーディング・広告なし",
+  "settingsAbout": "アプリ情報とプライバシー",
+  "homeSettings": "設定"
 }

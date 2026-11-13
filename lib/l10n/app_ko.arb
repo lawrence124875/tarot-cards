@@ -403,5 +403,18 @@
   "featureCrossHub": "교차 리딩",
   "crossHubIntro": "하나의 질문을 여러 시스템으로, 안과 밖을 함께 봅니다.",
   "crossHubDualDesc": "타로로 내면을, 르노르망으로 사건을",
-  "crossHubTripleDesc": "룬 하나를 더해 핵심 메시지를"
+  "crossHubTripleDesc": "룬 하나를 더해 핵심 메시지를",
+  "navToday": "오늘",
+  "navDivination": "점",
+  "navJournal": "일기",
+  "homeStreak": "{count, plural, other{{count}일 연속}}",
+  "homeTodayDrawn": "오늘의 카드",
+  "homeSystemTarot": "타로",
+  "homeTarotDesc": "지금 내 마음의 상태 보기",
+  "homeLenormandDesc": "가까운 사람과 일의 흐름 보기",
+  "homeRunesDesc": "지금 가장 필요한 핵심 메시지",
+  "homeCrossDesc": "한 질문을 여러 체계로 함께 보기",
+  "homePremiumDesc": "모든 강좌, 고급 스프레드, 교차 리딩, 광고 없음",
+  "settingsAbout": "정보 및 개인정보",
+  "homeSettings": "설정"
 }

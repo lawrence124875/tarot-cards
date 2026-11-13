@@ -403,5 +403,18 @@
   "featureCrossHub": "การอ่านไขว้",
   "crossHubIntro": "มองคำถามเดียวผ่านหลายศาสตร์ ทั้งด้านในและด้านนอก",
   "crossHubDualDesc": "ทาโรต์ดูภายใน เลอนอร์มองด์ดูเหตุการณ์",
-  "crossHubTripleDesc": "เพิ่มรูนหนึ่งก้อนเพื่อสารหลัก"
+  "crossHubTripleDesc": "เพิ่มรูนหนึ่งก้อนเพื่อสารหลัก",
+  "navToday": "วันนี้",
+  "navDivination": "ดูดวง",
+  "navJournal": "บันทึก",
+  "homeStreak": "{count, plural, other{ต่อเนื่อง {count} วัน}}",
+  "homeTodayDrawn": "ไพ่ของวันนี้",
+  "homeSystemTarot": "ไพ่ทาโรต์",
+  "homeTarotDesc": "มองเห็นสภาพใจของคุณตอนนี้",
+  "homeLenormandDesc": "มองเห็นผู้คนและเหตุการณ์ที่กำลังมา",
+  "homeRunesDesc": "สารสำคัญที่คุณต้องการตอนนี้",
+  "homeCrossDesc": "คำถามเดียว มองผ่านหลายศาสตร์",
+  "homePremiumDesc": "บทเรียนทั้งหมด การวางไพ่ขั้นสูง การอ่านแบบไขว้ ไม่มีโฆษณา",
+  "settingsAbout": "เกี่ยวกับและความเป็นส่วนตัว",
+  "homeSettings": "การตั้งค่า"
 }

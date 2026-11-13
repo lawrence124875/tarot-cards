@@ -403,5 +403,18 @@
   "featureCrossHub": "Bacaan silang",
   "crossHubIntro": "Lihat satu pertanyaan lewat beberapa sistem, dari dalam dan luar.",
   "crossHubDualDesc": "Tarot untuk batin, Lenormand untuk peristiwa",
-  "crossHubTripleDesc": "Tambah satu rune untuk pesan intinya"
+  "crossHubTripleDesc": "Tambah satu rune untuk pesan intinya",
+  "navToday": "Hari ini",
+  "navDivination": "Bacaan",
+  "navJournal": "Jurnal",
+  "homeStreak": "{count, plural, other{{count} hari berturut-turut}}",
+  "homeTodayDrawn": "Kartu hari ini",
+  "homeSystemTarot": "Tarot",
+  "homeTarotDesc": "Lihat keadaan batinmu saat ini",
+  "homeLenormandDesc": "Lihat orang dan peristiwa ke depan",
+  "homeRunesDesc": "Pesan inti yang kamu perlukan sekarang",
+  "homeCrossDesc": "Satu pertanyaan, dilihat lewat beberapa sistem",
+  "homePremiumDesc": "Semua pelajaran, susunan lanjutan, bacaan silang, tanpa iklan",
+  "settingsAbout": "Tentang & privasi",
+  "homeSettings": "Pengaturan"
 }

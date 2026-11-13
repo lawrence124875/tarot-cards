@@ -8,7 +8,8 @@ typedef LocalizedText = String Function(AppLocalizations l);
 /// 處理通知等外部開啟（payload）；認得就導覽並回傳 true。
 typedef PayloadHandler = bool Function(NavigatorState navigator, String payload);
 
-/// primary／secondary：首頁主按鈕／次要連結；none：不在首頁，只從其他地方進入（例如解讀頁）。
+/// primary／secondary：首頁上的入口（0.4.0 起首頁依 id 排版：今日一張大卡、系統卡、底部導覽，見 home_tabs.dart）；
+/// none：不在首頁，只從其他地方進入（例如解讀頁）。
 enum FeaturePlacement { primary, secondary, none }
 
 /// 解讀頁底部的功能入口（例如「以此卦靜心呼吸」），帶入本卦卦序。

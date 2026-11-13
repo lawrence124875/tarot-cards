@@ -403,5 +403,18 @@
   "featureCrossHub": "Cross reading",
   "crossHubIntro": "Look at one question through several systems, inside and out.",
   "crossHubDualDesc": "Tarot for the inner view, Lenormand for events",
-  "crossHubTripleDesc": "Add one rune for the core message"
+  "crossHubTripleDesc": "Add one rune for the core message",
+  "navToday": "Today",
+  "navDivination": "Readings",
+  "navJournal": "Journal",
+  "homeStreak": "{count, plural, one{{count}-day streak} other{{count}-day streak}}",
+  "homeTodayDrawn": "Today's card",
+  "homeSystemTarot": "Tarot",
+  "homeTarotDesc": "See your inner state right now",
+  "homeLenormandDesc": "See the people and events ahead",
+  "homeRunesDesc": "The core message you need now",
+  "homeCrossDesc": "One question, seen through several systems",
+  "homePremiumDesc": "All lessons, advanced spreads, cross readings, no ads",
+  "settingsAbout": "About & privacy",
+  "homeSettings": "Settings"
 }

@@ -24,10 +24,24 @@ class DailyCardStore {
   Future<DrawnCard> drawToday(DateTime now, Random random, {bool reversals = true}) async {
     final have = await today(now);
     if (have != null) return have;
+    final j = await _store.read();
+    final streak = j['day'] == dayKey(_yesterday(now)) ? _streakOf(j) + 1 : 1;
     final card = DrawnCard(random.nextInt(TarotCard.count), reversed: reversals && random.nextBool());
-    await _store.write({'day': dayKey(now), 'card': card.toJson()});
+    await _store.write({'day': dayKey(now), 'card': card.toJson(), 'streak': streak});
     return card;
   }
+
+  /// 連續幾天翻了今日一張（今天或昨天有翻才算數，否則 0）。舊版存檔沒有 streak 時當 1 天。
+  Future<int> streak(DateTime now) async {
+    final j = await _store.read();
+    final day = j['day'];
+    if (day != dayKey(now) && day != dayKey(_yesterday(now))) return 0;
+    return _streakOf(j);
+  }
+
+  static int _streakOf(Map<String, dynamic> j) => (j['streak'] as num?)?.toInt() ?? 1;
+
+  static DateTime _yesterday(DateTime now) => DateTime(now.year, now.month, now.day - 1);
 }
 
 /// 每日提醒（預設開啟，每天 08:00）：一次排好接下來 [days] 天（一次性通知，App 每次開啟時補排；不依賴重複排程）。

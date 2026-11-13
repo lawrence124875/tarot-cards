@@ -403,5 +403,18 @@
   "featureCrossHub": "交叉解读",
   "crossHubIntro": "同一个问题，用不同系统一起看，内外都照顾到。",
   "crossHubDualDesc": "塔罗看内心，雷诺曼看事件",
-  "crossHubTripleDesc": "再加一颗卢恩，看最核心的提醒"
+  "crossHubTripleDesc": "再加一颗卢恩，看最核心的提醒",
+  "navToday": "今日",
+  "navDivination": "占卜",
+  "navJournal": "日记",
+  "homeStreak": "{count, plural, other{连续 {count} 天}}",
+  "homeTodayDrawn": "今天的牌",
+  "homeSystemTarot": "塔罗",
+  "homeTarotDesc": "看见内心与此刻的状态",
+  "homeLenormandDesc": "看清近期的人、事与发展",
+  "homeRunesDesc": "此刻最需要看清的核心提醒",
+  "homeCrossDesc": "同一个问题，用不同系统一起看",
+  "homePremiumDesc": "全部课程、进阶牌阵、交叉解读，无广告",
+  "settingsAbout": "关于与隐私",
+  "homeSettings": "设置"
 }

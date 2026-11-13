@@ -10,8 +10,12 @@ import '../../shared/premium/paywall_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_face.dart';
 import '../daily/daily_page.dart';
+import '../feedback/feedback_page.dart';
+import '../intro/intro_page.dart';
+import '../share/share.dart';
 
-/// 設定：外觀（跟隨系統／淺色／深色）、牌面組（只有一組時不顯示）、是否使用逆位、今日一張的提醒。
+/// 設定：外觀（跟隨系統／淺色／深色）、牌面組（只有一組時不顯示）、是否使用逆位、今日一張的提醒；
+/// 關於與隱私（功能介紹、推薦、回饋、使用統計、廣告隱私、條款與隱私權政策）。
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -122,9 +126,44 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 10),
             const DailyReminderTile(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
+            Text(l.settingsAbout, style: t.titleMedium),
+            const SizedBox(height: 8),
+            // 0.4.0：原本首頁右上選單的項目收到這裡（會員入口移到首頁）
             Card(
               child: Column(children: [
+                ListTile(
+                  leading: const Icon(Icons.auto_stories_outlined),
+                  title: Text(l.menuIntro),
+                  onTap: () => showIntro(Navigator.of(context)),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.share_outlined),
+                  title: Text(l.menuShareApp),
+                  onTap: () => shareApp(context),
+                ),
+                if (_s.feedback != null)
+                  ListTile(
+                    leading: const Icon(Icons.chat_bubble_outline),
+                    title: Text(l.menuFeedback),
+                    onTap: () => openFeedback(context),
+                  ),
+                if (_s.usage != null)
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _s.usage!.enabled,
+                    builder: (context, on, _) => SwitchListTile(
+                      secondary: const Icon(Icons.insights_outlined),
+                      title: Text(l.menuShareUsage),
+                      value: on,
+                      onChanged: (v) => _s.usage!.set(v),
+                    ),
+                  ),
+                if (_s.ads.privacyOptionsRequired && !_s.isPremium)
+                  ListTile(
+                    leading: const Icon(Icons.ads_click_outlined),
+                    title: Text(l.menuAdPrivacy),
+                    onTap: () => _s.ads.showPrivacyOptions(),
+                  ),
                 ListTile(
                   leading: const Icon(Icons.description_outlined),
                   title: Text(l.menuTermsOfService),
