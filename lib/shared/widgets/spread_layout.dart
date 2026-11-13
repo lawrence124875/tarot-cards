@@ -12,6 +12,8 @@ import 'flip_card.dart';
 
 /// 依牌陣的版面擺放牌：未抽到的位置顯示虛線框，已抽未翻的顯示牌背，翻開的顯示牌面。
 /// 版面座標以牌寬＝1、牌高＝1.6 為單位（[SpreadPosition]），整個牌陣等比縮放到可用空間。
+/// x 是「起始邊」算起的距離：由右至左語言（阿拉伯文）整個牌陣左右鏡像，第 1 張在右邊，
+/// 和文字、雷諾曼與盧恩的 Row 排列方向一致；位置靠號碼標示，不受方向影響。
 class SpreadLayout extends StatelessWidget {
   const SpreadLayout({
     super.key,
@@ -56,8 +58,8 @@ class SpreadLayout extends StatelessWidget {
           height: unit * h,
           child: Stack(clipBehavior: Clip.none, children: [
             for (var i = 0; i < ps.length; i++)
-              Positioned(
-                left: (ps[i].x - minX) * unit + (unit - cardW) / 2,
+              PositionedDirectional(
+                start: (ps[i].x - minX) * unit + (unit - cardW) / 2,
                 top: (ps[i].y - minY) * unit + (unit * _slotH - cardH) / 2,
                 width: cardW,
                 height: cardH,
