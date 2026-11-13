@@ -72,11 +72,14 @@ void main() {
             expect(tester.getBottomLeft(find.byType(Navigator).first).dy, lessThanOrEqualTo(size.height - padding.bottom));
         aboveNavBar();
         // 0.4.0 首頁改可捲動：免責聲明在最下面，捲到後要在導覽列上方
-        await tester.ensureVisible(find.text(l.homeDisclaimer));
+        // ListView 只建畫面附近的項目：用 scrollUntilVisible 捲過去（ensureVisible 找不到尚未建立的項目）
+        final homeList = find.descendant(of: find.byType(TodayTab), matching: find.byType(Scrollable)).first;
+        await tester.scrollUntilVisible(find.text(l.homeDisclaimer), 200, scrollable: homeList);
         await tester.pump();
         expect(tester.getBottomLeft(find.text(l.homeDisclaimer)).dy, lessThanOrEqualTo(size.height - padding.bottom));
 
         // 首頁 → 塔羅（抽牌） → 選三張牌陣 → 快速抽牌 → 全部翻開 → 略過第一眼印象 → 解讀（捲到底）
+        await tester.scrollUntilVisible(find.text(l.homeSystemTarot), -200, scrollable: homeList);
         await _tapVisible(tester, find.text(l.homeSystemTarot));
         await _settle(tester);
         await tester.tap(find.text('three')); // 內容檔未匯入時牌陣名稱顯示代號
