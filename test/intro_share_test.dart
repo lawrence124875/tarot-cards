@@ -38,9 +38,17 @@ void main() {
       return store;
     }
 
+    // 測試畫面只有 800×600，ListView 懶建置：先捲到選項再點
+    Future<void> choose(WidgetTester tester, String name) async {
+      final item = find.byKey(ValueKey('onboard_$name'));
+      await tester.scrollUntilVisible(item, 100,
+          scrollable: find.descendant(of: find.byType(OnboardingPage), matching: find.byType(Scrollable)).first);
+      await tester.tap(item);
+    }
+
     testWidgets('選「學塔羅」切到學習分頁，記為已看過', (tester) async {
       final store = await open(tester);
-      await tester.tap(find.byKey(const ValueKey('onboard_learn')));
+      await choose(tester, 'learn');
       await tester.pumpAndSettle();
       expect(find.byType(OnboardingPage), findsNothing);
       expect(find.byType(LearnHubPage), findsOneWidget);
@@ -49,7 +57,7 @@ void main() {
 
     testWidgets('選「問一件事」直接進抽牌', (tester) async {
       final store = await open(tester);
-      await tester.tap(find.byKey(const ValueKey('onboard_ask')));
+      await choose(tester, 'ask');
       await tester.pumpAndSettle();
       expect(find.byType(SpreadPickerPage), findsOneWidget);
       expect(store.value, isTrue);
@@ -57,7 +65,7 @@ void main() {
 
     testWidgets('選「每日覺察」直接進今日一張', (tester) async {
       final store = await open(tester);
-      await tester.tap(find.byKey(const ValueKey('onboard_daily')));
+      await choose(tester, 'daily');
       for (var i = 0; i < 10; i++) {
         await tester.pump(const Duration(milliseconds: 100));
       }
