@@ -403,5 +403,18 @@
   "featureCrossHub": "القراءة المتقاطعة",
   "crossHubIntro": "انظر إلى سؤال واحد عبر عدة أنظمة، من الداخل والخارج.",
   "crossHubDualDesc": "التاروت للداخل، ولونورمان للأحداث",
-  "crossHubTripleDesc": "أضف رونًا واحدًا للرسالة الجوهرية"
+  "crossHubTripleDesc": "أضف رونًا واحدًا للرسالة الجوهرية",
+  "navToday": "اليوم",
+  "navDivination": "القراءات",
+  "navJournal": "اليوميات",
+  "homeStreak": "{count, plural, one{يوم واحد متتالٍ} two{يومان متتاليان} few{{count} أيام متتالية} many{{count} يومًا متتاليًا} other{{count} يوم متتالٍ}}",
+  "homeTodayDrawn": "بطاقة اليوم",
+  "homeSystemTarot": "التاروت",
+  "homeTarotDesc": "انظر إلى حالتك الداخلية الآن",
+  "homeLenormandDesc": "انظر إلى الأشخاص والأحداث القادمة",
+  "homeRunesDesc": "الرسالة الجوهرية التي تحتاجها الآن",
+  "homeCrossDesc": "سؤال واحد عبر عدة أنظمة",
+  "homePremiumDesc": "كل الدروس، فرد متقدم، قراءات متقاطعة، بلا إعلانات",
+  "settingsAbout": "حول التطبيق والخصوصية",
+  "homeSettings": "الإعدادات"
 }

@@ -403,5 +403,18 @@
   "featureCrossHub": "Lectura cruzada",
   "crossHubIntro": "Mira una pregunta desde varios sistemas, por dentro y por fuera.",
   "crossHubDualDesc": "Tarot para lo interior, Lenormand para los hechos",
-  "crossHubTripleDesc": "Añade una runa para el mensaje central"
+  "crossHubTripleDesc": "Añade una runa para el mensaje central",
+  "navToday": "Hoy",
+  "navDivination": "Lecturas",
+  "navJournal": "Diario",
+  "homeStreak": "{count, plural, one{Racha de {count} día} other{Racha de {count} días}}",
+  "homeTodayDrawn": "La carta de hoy",
+  "homeSystemTarot": "Tarot",
+  "homeTarotDesc": "Mira tu estado interior ahora",
+  "homeLenormandDesc": "Mira las personas y los hechos que vienen",
+  "homeRunesDesc": "El mensaje esencial que necesitas ahora",
+  "homeCrossDesc": "Una pregunta vista desde varios sistemas",
+  "homePremiumDesc": "Todas las lecciones, tiradas avanzadas, lecturas cruzadas, sin anuncios",
+  "settingsAbout": "Información y privacidad",
+  "homeSettings": "Ajustes"
 }

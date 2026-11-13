@@ -403,5 +403,18 @@
   "featureCrossHub": "Giải bài kết hợp",
   "crossHubIntro": "Nhìn một câu hỏi qua nhiều hệ thống, cả bên trong lẫn bên ngoài.",
   "crossHubDualDesc": "Tarot cho nội tâm, Lenormand cho sự việc",
-  "crossHubTripleDesc": "Thêm một viên rune cho thông điệp cốt lõi"
+  "crossHubTripleDesc": "Thêm một viên rune cho thông điệp cốt lõi",
+  "navToday": "Hôm nay",
+  "navDivination": "Xem bài",
+  "navJournal": "Nhật ký",
+  "homeStreak": "{count, plural, other{Chuỗi {count} ngày}}",
+  "homeTodayDrawn": "Lá bài hôm nay",
+  "homeSystemTarot": "Tarot",
+  "homeTarotDesc": "Nhìn rõ nội tâm lúc này",
+  "homeLenormandDesc": "Nhìn rõ người và việc sắp tới",
+  "homeRunesDesc": "Thông điệp cốt lõi bạn cần lúc này",
+  "homeCrossDesc": "Một câu hỏi, nhìn qua nhiều hệ thống",
+  "homePremiumDesc": "Mọi bài học, trải bài nâng cao, đọc chéo, không quảng cáo",
+  "settingsAbout": "Giới thiệu & quyền riêng tư",
+  "homeSettings": "Cài đặt"
 }

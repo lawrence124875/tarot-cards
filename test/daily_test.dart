@@ -69,6 +69,26 @@ void main() {
       expect(await daily.today(DateTime(2026, 10, 12)), isNull);
       expect((await daily.drawToday(DateTime(2026, 10, 12), Random(1))).cardId, lessThan(78));
     });
+
+    test('連續天數：每天翻＋1，跨月也算，斷一天重來，昨天翻了今天還沒翻仍保留', () async {
+      final daily = DailyCardStore(store: MemoryKeyValue());
+      expect(await daily.streak(DateTime(2026, 10, 30)), 0);
+      await daily.drawToday(DateTime(2026, 10, 30, 8), Random(1));
+      await daily.drawToday(DateTime(2026, 10, 30, 22), Random(1)); // 同一天再開不加
+      expect(await daily.streak(DateTime(2026, 10, 30)), 1);
+      await daily.drawToday(DateTime(2026, 10, 31), Random(1));
+      await daily.drawToday(DateTime(2026, 11, 1), Random(1));
+      expect(await daily.streak(DateTime(2026, 11, 1)), 3);
+      expect(await daily.streak(DateTime(2026, 11, 2, 7)), 3);
+      expect(await daily.streak(DateTime(2026, 11, 3)), 0);
+      await daily.drawToday(DateTime(2026, 11, 3), Random(1));
+      expect(await daily.streak(DateTime(2026, 11, 3)), 1);
+      // 舊版存檔（沒有 streak）
+      final old = DailyCardStore(store: MemoryKeyValue({'day': '2026-11-3', 'card': const DrawnCard(1).toJson()}));
+      expect(await old.streak(DateTime(2026, 11, 3)), 1);
+      await old.drawToday(DateTime(2026, 11, 4), Random(1));
+      expect(await old.streak(DateTime(2026, 11, 4)), 2);
+    });
   });
 
   group('每日提醒', () {

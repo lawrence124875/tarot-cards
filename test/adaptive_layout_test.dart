@@ -10,6 +10,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tarot_cards/app/app.dart';
+import 'package:tarot_cards/app/home_tabs.dart';
 import 'package:tarot_cards/app/services.dart';
 import 'package:tarot_cards/core/audio/audio_playback.dart';
 import 'package:tarot_cards/core/audio/screen_awake.dart';
@@ -21,6 +22,7 @@ import 'package:tarot_cards/core/soundscape/soundscape_files.dart';
 import 'package:tarot_cards/core/tarot/tarot_card.dart';
 import 'package:tarot_cards/features/breath/breath_page.dart';
 import 'package:tarot_cards/features/draw/draw_page.dart';
+import 'package:tarot_cards/features/journal/journal_list_page.dart';
 import 'package:tarot_cards/features/learn/learn_hub_page.dart';
 import 'package:tarot_cards/l10n/l10n.dart';
 import 'package:tarot_cards/reading/reading_page.dart';
@@ -69,10 +71,16 @@ void main() {
         void aboveNavBar() =>
             expect(tester.getBottomLeft(find.byType(Navigator).first).dy, lessThanOrEqualTo(size.height - padding.bottom));
         aboveNavBar();
+        // 0.4.0 首頁改可捲動：免責聲明在最下面，捲到後要在導覽列上方
+        // ListView 只建畫面附近的項目：用 scrollUntilVisible 捲過去（ensureVisible 找不到尚未建立的項目）
+        final homeList = find.descendant(of: find.byType(TodayTab), matching: find.byType(Scrollable)).first;
+        await tester.scrollUntilVisible(find.text(l.homeDisclaimer), 200, scrollable: homeList);
+        await tester.pump();
         expect(tester.getBottomLeft(find.text(l.homeDisclaimer)).dy, lessThanOrEqualTo(size.height - padding.bottom));
 
-        // 首頁 → 抽牌 → 選三張牌陣 → 快速抽牌 → 全部翻開 → 略過第一眼印象 → 解讀（捲到底）
-        await tester.tap(find.text(l.featureDraw));
+        // 首頁 → 塔羅（抽牌） → 選三張牌陣 → 快速抽牌 → 全部翻開 → 略過第一眼印象 → 解讀（捲到底）
+        await tester.scrollUntilVisible(find.text(l.homeSystemTarot), -200, scrollable: homeList);
+        await _tapVisible(tester, find.text(l.homeSystemTarot));
         await _settle(tester);
         await tester.tap(find.text('three')); // 內容檔未匯入時牌陣名稱顯示代號
         await _settle(tester);
@@ -124,7 +132,8 @@ void main() {
         // 今日一張：翻牌
         nav().popUntil((r) => r.isFirst);
         await _settle(tester);
-        await tester.tap(find.text(l.featureDaily));
+        await tester.scrollUntilVisible(find.text(l.featureDaily), -200, scrollable: homeList);
+        await _tapVisible(tester, find.text(l.featureDaily));
         await _settle(tester);
         final flip = find.widgetWithText(FilledButton, l.dailyFlip);
         await tester.scrollUntilVisible(flip, 200, scrollable: find.byType(Scrollable).last);
@@ -133,12 +142,21 @@ void main() {
         await _settle(tester, frames: 30);
         expect(await services.daily.today(DateTime.now()), isNotNull);
 
-        // 學習
+        // 底部導覽（橫放時為側邊導覽）：學習、日記、占卜
         nav().popUntil((r) => r.isFirst);
         await _settle(tester);
         await tester.tap(find.text(l.featureLearn));
         await _settle(tester);
         expect(find.byType(LearnHubPage), findsOneWidget);
+        await tester.tap(find.text(l.navJournal));
+        await _settle(tester);
+        expect(find.byType(JournalListPage), findsOneWidget);
+        await tester.tap(find.text(l.navDivination).last);
+        await _settle(tester);
+        expect(find.byType(DivinationTab), findsOneWidget);
+        await tester.tap(find.text(l.navToday));
+        await _settle(tester);
+        expect(find.byType(TodayTab), findsOneWidget);
 
         // 呼吸音景（太陽：火元素）
         nav().popUntil((r) => r.isFirst);

@@ -976,5 +976,25 @@
   "featureCrossHub": "交叉解讀",
   "crossHubIntro": "同一個問題，用不同系統一起看，內外都照顧到。",
   "crossHubDualDesc": "塔羅看內心，雷諾曼看事件",
-  "crossHubTripleDesc": "再加一顆盧恩，看最核心的提醒"
+  "crossHubTripleDesc": "再加一顆盧恩，看最核心的提醒",
+  "navToday": "今日",
+  "navDivination": "占卜",
+  "navJournal": "日記",
+  "homeStreak": "{count, plural, other{連續 {count} 天}}",
+  "@homeStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeTodayDrawn": "今天的牌",
+  "homeSystemTarot": "塔羅",
+  "homeTarotDesc": "看見內心與此刻的狀態",
+  "homeLenormandDesc": "看清近期的人、事與發展",
+  "homeRunesDesc": "此刻最需要看清的核心提醒",
+  "homeCrossDesc": "同一個問題，用不同系統一起看",
+  "homePremiumDesc": "全部課程、進階牌陣、交叉解讀，無廣告",
+  "settingsAbout": "關於與隱私",
+  "homeSettings": "設定"
 }
