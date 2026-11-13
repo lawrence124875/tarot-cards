@@ -43,6 +43,8 @@ void main() {
       final item = find.byKey(ValueKey('onboard_$name'));
       await tester.scrollUntilVisible(item, 100,
           scrollable: find.descendant(of: find.byType(OnboardingPage), matching: find.byType(Scrollable)).first);
+      await tester.ensureVisible(item); // 只露出一點邊時點不到，整個捲進畫面
+      await tester.pumpAndSettle();
       await tester.tap(item);
     }
 
