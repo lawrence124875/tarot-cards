@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "Cách đọc kết quả",
   "tripleIntroBody2": "Đồng thuận mạnh: cả ba cùng hướng.\nĐa số đồng thuận: hai bên giống nhau, bên còn lại mang đến lời nhắc.\nBa hướng khác nhau: đọc từng bên, không ép gộp lại.",
   "tripleIntroTitle3": "Viên đá cốt lõi",
-  "tripleIntroBody3": "Chỉ rút một viên rune làm cốt lõi của cả bài đọc. Rune ngược nghĩa là năng lượng hướng vào trong để sắp xếp lại, không phải tin xấu. Kết quả là để tham khảo và tự nhận biết; bước tiếp theo do bạn quyết định."
+  "tripleIntroBody3": "Chỉ rút một viên rune làm cốt lõi của cả bài đọc. Rune ngược nghĩa là năng lượng hướng vào trong để sắp xếp lại, không phải tin xấu. Kết quả là để tham khảo và tự nhận biết; bước tiếp theo do bạn quyết định.",
+  "premiumBenefitCross": "Giải bài kết hợp 2 và 3 hệ thống đầy đủ",
+  "planSave": "Tiết kiệm {percent}%",
+  "premiumTrialBadge": "{days} ngày đầu miễn phí",
+  "flipHint": "Lật bài",
+  "featureCrossHub": "Giải bài kết hợp",
+  "crossHubIntro": "Nhìn một câu hỏi qua nhiều hệ thống, cả bên trong lẫn bên ngoài.",
+  "crossHubDualDesc": "Tarot cho nội tâm, Lenormand cho sự việc",
+  "crossHubTripleDesc": "Thêm một viên rune cho thông điệp cốt lõi"
 }

@@ -416,8 +416,8 @@ class _MiniBreath extends StatelessWidget {
           child: Text(
             context.l10n.phase(state.phase),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Colors.white,
-              shadows: const [Shadow(blurRadius: 6, color: Colors.black)],
+              color: TarotColors.onImage,
+              shadows: const [Shadow(blurRadius: 6, color: TarotColors.scrim)],
             ),
           ),
         ),
@@ -444,7 +444,7 @@ class BreathCirclePainter extends CustomPainter {
     final r = minR + (maxR - minR) * fullness;
 
     if (onImage) {
-      canvas.drawCircle(c, maxR, Paint()..color = Colors.black.withValues(alpha: 0.35));
+      canvas.drawCircle(c, maxR, Paint()..color = TarotColors.scrim.withValues(alpha: 0.35));
     }
     final guide = Paint()
       ..style = PaintingStyle.stroke

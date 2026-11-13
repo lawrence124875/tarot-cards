@@ -26,6 +26,9 @@ class TarotPalette {
 
   bool get isDark => brightness == Brightness.dark;
 
+  /// 琥珀金（[earth]）底上的文字、圖示：淺色用白、深色用夜空底色（深色的金較亮，白字看不清）。
+  Color get onEarth => isDark ? ink : paper;
+
   static const light = TarotPalette(
     brightness: Brightness.light,
     ink: Color(0xFFFBF4E8), // 晨光奶油：主背景
@@ -74,6 +77,41 @@ class TarotColors {
   static Color get twilight => current.twilight;
   static Color get dawn => current.dawn;
   static Color get sage => current.sage;
+  static Color get onEarth => current.onEarth;
+
+  // 以下是「實物」或「疊在圖上」的固定色，不隨深淺色切換（0.4.0 P1 從各頁集中到這裡）。
+
+  /// 全螢幕看牌圖的底、圖上小圓鈕的半透明底。
+  static const scrim = Color(0xFF000000);
+  static const scrimSoft = Color(0x88000000);
+
+  /// 疊在牌圖上的文字與圖示（配 [scrim] 陰影）。
+  static const onImage = Color(0xFFFFFFFF);
+
+  /// 陰影（用時再調透明度）。
+  static const shadow = Color(0xFF000000);
+
+  /// 畫的牌背（暮光紫三段漸層）：固定用淺色配色的紫，深色模式的 twilight 是淡紫字色，不能拿來當牌背。
+  static const cardBackTop = Color(0xFF5A4A86);
+  static const cardBackMid = Color(0xFF4A3E73);
+  static const cardBackBottom = Color(0xFF6E4E7A);
+
+  /// 牌背圖比例不合時補邊的深藍（branding/make_icon.py 的 NAVY）。
+  static const cardBackEdge = Color(0xFF171E33);
+
+  /// 沒有牌圖時畫的牌面（紙色漸層）。
+  static const cardFaceTop = Color(0xFFFFF6E3);
+  static const cardFaceBottom = Color(0xFFF7E1C4);
+
+  /// 雷諾曼牌背圖讀不到時的替代底色與星芒。
+  static const lenormandBack = Color(0xFF2E2646);
+  static const lenormandBackStar = Color(0xFFBF9648);
+
+  /// 符文石：石面亮、暗、刻痕、刻痕陰影。
+  static const stoneLight = Color(0xFF8F8A80);
+  static const stoneDark = Color(0xFF4F4A44);
+  static const stoneCarve = Color(0xFFE9D3A2);
+  static const stoneCarveShadow = Color(0xFF2B2622);
 }
 
 /// 字體：牌名、標題、引文用宋體；白話解讀與介面用黑體（沿用謙卦）。

@@ -395,5 +395,13 @@
   "tripleIntroTitle2": "결과 읽는 법",
   "tripleIntroBody2": "강한 일치: 세 쪽이 같은 방향.\n다수 일치: 두 쪽이 일치하고 나머지 하나가 메시지를 더합니다.\n세 갈래의 차이: 각자의 의미를 읽고 억지로 합치지 않습니다.",
   "tripleIntroTitle3": "핵심의 돌",
-  "tripleIntroBody3": "룬은 하나만 뽑아 해석 전체의 핵심으로 삼습니다. 역방향은 에너지가 안으로 정리되는 시간이며, 나쁜 소식이 아닙니다. 결과는 성찰을 위한 참고이며, 앞으로의 길은 당신이 정합니다."
+  "tripleIntroBody3": "룬은 하나만 뽑아 해석 전체의 핵심으로 삼습니다. 역방향은 에너지가 안으로 정리되는 시간이며, 나쁜 소식이 아닙니다. 결과는 성찰을 위한 참고이며, 앞으로의 길은 당신이 정합니다.",
+  "premiumBenefitCross": "2·3 시스템 교차 리딩 전체 보기",
+  "planSave": "{percent}% 절약",
+  "premiumTrialBadge": "처음 {days}일 무료",
+  "flipHint": "카드 뒤집기",
+  "featureCrossHub": "교차 리딩",
+  "crossHubIntro": "하나의 질문을 여러 시스템으로, 안과 밖을 함께 봅니다.",
+  "crossHubDualDesc": "타로로 내면을, 르노르망으로 사건을",
+  "crossHubTripleDesc": "룬 하나를 더해 핵심 메시지를"
 }

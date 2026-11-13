@@ -6,7 +6,7 @@ import '../../app/services.dart';
 import '../../app/theme.dart';
 
 /// 牌背圖最上、最下一列的顏色（branding/make_icon.py 的 NAVY）。
-const kBackEdge = Color(0xFF171E33);
+const kBackEdge = TarotColors.cardBackEdge;
 
 /// 牌背：牌面組有牌背圖就用圖（完整顯示不裁切，比例不合時多出的邊用牌背的深藍補滿），否則畫一張暮光紫底、晨光金太陽與星星的牌背（App 精神：光明）。
 class CardBack extends StatelessWidget {
@@ -42,7 +42,7 @@ class _PaintedBack extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFF5A4A86), TarotColors.twilight, Color(0xFF6E4E7A)],
+          colors: [TarotColors.cardBackTop, TarotColors.cardBackMid, TarotColors.cardBackBottom],
         ),
         border: Border.all(color: TarotColors.dawn, width: 1.4),
         borderRadius: BorderRadius.circular(10),

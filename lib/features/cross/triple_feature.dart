@@ -6,6 +6,6 @@ import 'triple_page.dart';
 final tripleFeature = AppFeature(
   id: 'triple',
   label: (l) => l.featureTriple,
-  placement: FeaturePlacement.secondary,
+  placement: FeaturePlacement.none, // 0.4.0：首頁改由「交叉解讀」入口進入
   builder: (_) => const TriplePage(),
 );

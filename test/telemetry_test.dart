@@ -112,9 +112,12 @@ void main() {
     expect(featureFlagKey('journal'), 'tr_feature_journal');
     final ids = registeredFeatures.map((f) => f.id).toList();
     expect(activeFeatures(const DefaultRemoteFlags()).map((f) => f.id), ids);
-    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'cross', 'runes', 'triple', 'journal', 'breath']);
+    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'runes', 'cross_hub', 'cross', 'triple', 'journal', 'breath']);
     expect(activeFeatures(_Off({'journal'})).map((f) => f.id), isNot(contains('journal')));
     expect(activeFeatures(_Off({'journal'})).length, ids.length - 1);
+    // 首頁「交叉解讀」入口：雙、三系統都關掉才隱藏
+    expect(activeFeatures(_Off({'cross'})).map((f) => f.id), contains('cross_hub'));
+    expect(activeFeatures(_Off({'cross', 'triple'})).map((f) => f.id), isNot(contains('cross_hub')));
     // Remote Config 參數名稱限制：字母或底線開頭，最多 256 字
     for (final id in ids) {
       expect(RegExp(r'^[a-z_][a-z0-9_]*$').hasMatch(featureFlagKey(id)), isTrue, reason: id);

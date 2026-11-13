@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../core/tarot/draw.dart';
 import '../../core/tarot/spread.dart';
+import '../../l10n/l10n.dart';
 import 'card_back.dart';
 import 'card_face.dart';
 import 'flip_card.dart';
@@ -111,7 +112,19 @@ class _Slot extends StatelessWidget {
         front: CardFace(cardId: c.cardId, reversed: c.reversed),
       );
     }
-    return GestureDetector(
+    // 讀屏（TalkBack／VoiceOver）：「第 N 張牌」；未翻開時提示「點兩下翻牌」，翻開後唸出牌名與正逆位。
+    final l = context.l10n;
+    final name = c == null || !revealed
+        ? null
+        : (c.reversed ? l.cardReversedName(l.cardName(c.cardId)) : l.cardName(c.cardId));
+    return Semantics(
+      button: onTap != null && c != null,
+      selected: selected,
+      label: name == null ? l.pickCardLabel(index + 1) : '${l.pickCardLabel(index + 1)}${l.separator}$name',
+      onTapHint: c != null && !revealed && onTap != null ? l.flipHint : null,
+      excludeSemantics: true,
+      onTap: onTap,
+      child: GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
@@ -119,7 +132,7 @@ class _Slot extends StatelessWidget {
           borderRadius: BorderRadius.circular(9),
           boxShadow: [
             if (selected) BoxShadow(color: TarotColors.rice.withValues(alpha: 0.7), blurRadius: 10, spreadRadius: 1),
-            if (!selected && c != null) BoxShadow(color: Colors.black.withValues(alpha: 0.12), blurRadius: 6, offset: const Offset(0, 2)),
+            if (!selected && c != null) BoxShadow(color: TarotColors.shadow.withValues(alpha: 0.12), blurRadius: 6, offset: const Offset(0, 2)),
           ],
         ),
         child: Stack(fit: StackFit.expand, clipBehavior: Clip.none, children: [
@@ -131,10 +144,11 @@ class _Slot extends StatelessWidget {
               child: CircleAvatar(
                 radius: 11,
                 backgroundColor: TarotColors.earth,
-                child: Text('${index + 1}', style: const TextStyle(fontSize: 12, color: Colors.white, height: 1)),
+                child: Text('${index + 1}', style: TextStyle(fontSize: 12, color: TarotColors.onEarth, height: 1)),
               ),
             ),
         ]),
+      ),
       ),
     );
   }

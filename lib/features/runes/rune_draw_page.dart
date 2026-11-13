@@ -151,7 +151,14 @@ class _RuneDrawPageState extends State<RuneDrawPage> {
                         child: Column(children: [
                           Text(spreadText?.positions[_spread.positions[i]]?.name ?? '', style: t.labelMedium),
                           const SizedBox(height: 4),
-                          GestureDetector(
+                          // 讀屏：「第 N 張牌」，未翻開提示「點兩下翻牌」；翻開後牌名由下方文字唸出。
+                          Semantics(
+                            button: !_revealed.contains(i),
+                            label: l.pickCardLabel(i + 1),
+                            onTapHint: _revealed.contains(i) ? null : l.flipHint,
+                            onTap: () => _reveal({i}),
+                            excludeSemantics: true,
+                            child: GestureDetector(
                             onTap: () => _reveal({i}),
                             child: AspectRatio(
                               aspectRatio: kRuneAspect,
@@ -161,6 +168,7 @@ class _RuneDrawPageState extends State<RuneDrawPage> {
                                 front: RuneStoneFace(runeId: r.id, reversed: r.reversed, name: _texts[r.id]?.name),
                               ),
                             ),
+                          ),
                           ),
                           const SizedBox(height: 4),
                           Text(_revealed.contains(i) ? runeDisplayName(l, _texts, r) : '', style: t.bodySmall, textAlign: TextAlign.center),
