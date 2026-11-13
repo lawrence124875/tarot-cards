@@ -411,8 +411,9 @@ class _Fan extends StatelessWidget {
           child: Stack(children: [
             for (var i = 0; i < _count; i++)
               if (!taken.contains(i))
-                Positioned(
-                  left: i * _step,
+                // 由起始邊排起：阿拉伯文第 1 張在右邊，和捲動起點（右側）一致
+                PositionedDirectional(
+                  start: i * _step,
                   // 弧形：中間的牌略高
                   top: 14 - 12 * math.sin(i / (_count - 1) * math.pi),
                   width: _cardW,
