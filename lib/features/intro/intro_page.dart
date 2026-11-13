@@ -4,7 +4,7 @@ import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../l10n/l10n.dart';
 
-/// 功能介紹：首次開啟時顯示一次（可略過），之後可從首頁右上角選單重看。
+/// 功能介紹：首次開啟時顯示一次（可略過），之後可從設定「關於與隱私」重看（0.4.0 起首次開啟改為新手引導，見 onboarding_page.dart）。
 /// 六頁：抽牌儀式與直覺、雷諾曼／盧恩與交叉解讀（0.3.0 起）、今日一張與學習、塔羅日記（含備份）、以牌靜心呼吸（432Hz、7.83Hz 雙耳節拍）、分享會員與選單。
 /// 文案只描述做法，不寫任何療效（Google Play 健康宣稱政策）。
 Future<void> showIntro(NavigatorState navigator) => navigator.push(MaterialPageRoute<void>(

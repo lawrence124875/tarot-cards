@@ -416,5 +416,14 @@
   "homeCrossDesc": "同一个问题，用不同系统一起看",
   "homePremiumDesc": "全部课程、进阶牌阵、交叉解读，无广告",
   "settingsAbout": "关于与隐私",
-  "homeSettings": "设置"
+  "homeSettings": "设置",
+  "onboardTitle": "你想从哪里开始？",
+  "onboardSubtitle": "选一个，马上带你抽第一张牌。之后随时可以从底部切换。",
+  "onboardDaily": "每日觉察",
+  "onboardDailyDesc": "每天一张牌，看见今天的自己",
+  "onboardLearn": "学塔罗",
+  "onboardLearnDesc": "从牌库和入门课程，一步步认识 78 张牌",
+  "onboardAsk": "问一件事",
+  "onboardAskDesc": "写下心里的问题，抽牌看看",
+  "onboardLater": "先自己逛逛"
 }

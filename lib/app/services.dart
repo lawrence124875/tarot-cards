@@ -101,7 +101,7 @@ class Services {
         ),
         journal: FileJournalStore(),
         // version 2：0.3.0 新增雷諾曼／盧恩介紹頁，舊使用者更新後再看一次
-        intro: FileIntroStore(version: 2),
+        intro: FileIntroStore(version: 3),
         breath: BreathServices(
           files: CachedSoundscapeFiles(),
           playback: JustAudioPlayback(),
