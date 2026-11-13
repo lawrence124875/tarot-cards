@@ -154,7 +154,11 @@ class _TodayCardState extends State<_TodayCard> {
     final now = DateTime.now();
     final card = await _s.daily.today(now);
     final streak = await _s.daily.streak(now);
-    if (mounted) setState(() => (_card, _streak) = (card, streak));
+    if (!mounted) return;
+    setState(() {
+      _card = card;
+      _streak = streak;
+    });
   }
 
   Future<void> _open() async {
