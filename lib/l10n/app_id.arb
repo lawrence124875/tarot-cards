@@ -340,7 +340,7 @@
   "journalKindTarot": "Tarot",
   "crossHubHint": "Satu pertanyaan: tarot melihat sisi batin, Lenormand melihat peristiwa.",
   "crossQuestionLabel": "Hal yang ingin kamu tanyakan",
-  "crossQuestionNeeded": "Tulis pertanyaan terlebih dahulu",
+  "crossQuestionNeeded": "Opsional. Tulis satu pertanyaan agar bacaannya terasa lebih dekat",
   "crossStart": "Tarik (3 tarot + 3 Lenormand)",
   "crossTarotRow": "Tarot · sisi batin",
   "crossLenormandRow": "Lenormand · peristiwa",

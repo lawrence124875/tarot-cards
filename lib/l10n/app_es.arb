@@ -340,7 +340,7 @@
   "journalKindTarot": "Tarot",
   "crossHubHint": "Una pregunta: el tarot mira lo interior y el Lenormand los hechos.",
   "crossQuestionLabel": "Lo que quieres preguntar",
-  "crossQuestionNeeded": "Escribe primero una pregunta",
+  "crossQuestionNeeded": "Opcional. Escribir una pregunta hace la lectura más cercana a ti",
   "crossStart": "Sacar (3 de tarot + 3 de Lenormand)",
   "crossTarotRow": "Tarot · lo interior",
   "crossLenormandRow": "Lenormand · los hechos",
