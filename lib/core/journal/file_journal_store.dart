@@ -89,4 +89,14 @@ class FileJournalStore extends JournalStore {
     notifyListeners();
     await _persist();
   }
+
+  /// 一次寫檔（不逐筆 delete）。
+  @override
+  Future<void> deleteMany(Iterable<String> ids) async {
+    final set = ids.toSet();
+    if (set.isEmpty) return;
+    (await _load()).removeWhere((e) => set.contains(e.id));
+    notifyListeners();
+    await _persist();
+  }
 }

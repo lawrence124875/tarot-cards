@@ -8,6 +8,7 @@ class FreeLimits {
     this.castsPerDay = 2,
     this.rewardedPerDay = 2,
     this.journalMax = 10,
+    this.journalDays = 30,
     this.freeBreathMinutes = const {1, 2},
   });
 
@@ -20,6 +21,9 @@ class FreeLimits {
   /// 免費版卦記上限（已存的不會被刪、仍可查看，只是不能再新增）。
   final int journalMax;
 
+  /// 免費版日記列表只顯示最近幾天（較舊的先收起、不刪除；訂閱後全部顯示，匯出一律包含）。
+  final int journalDays;
+
   /// 免費版可選的呼吸時長；其餘時長與雙耳節拍屬訂閱。
   final Set<int> freeBreathMinutes;
 
@@ -28,6 +32,7 @@ class FreeLimits {
     'tr_free_casts_per_day': 2,
     'tr_free_rewarded_per_day': 2,
     'tr_free_journal_max': 10,
+    'tr_free_journal_days': 30,
   };
 
   /// 由遠端數值建立；讀不到或數值不合理就用預設。
@@ -42,6 +47,7 @@ class FreeLimits {
       castsPerDay: v('tr_free_casts_per_day', min: 1),
       rewardedPerDay: v('tr_free_rewarded_per_day'),
       journalMax: v('tr_free_journal_max', min: 1),
+      journalDays: v('tr_free_journal_days', min: 1, max: 3650),
     );
   }
 }

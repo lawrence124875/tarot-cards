@@ -195,6 +195,18 @@ class Services {
 
   bool get isPremium => premium.isPremium.value;
 
+  /// 免費版日記列表只顯示這個時間之後的紀錄；會員為 null（全部顯示）。
+  DateTime? journalCutoff([DateTime? now]) =>
+      isPremium ? null : (now ?? DateTime.now()).subtract(Duration(days: limits.journalDays));
+
+  /// 免費版日記是否已達上限（只算列表上看得到的近期紀錄；收起的舊紀錄不佔名額）。
+  Future<bool> journalFull() async {
+    final j = journal;
+    if (isPremium || j == null) return false;
+    final cutoff = journalCutoff()!;
+    return (await j.all()).where((e) => !e.createdAt.isBefore(cutoff)).length >= limits.journalMax;
+  }
+
   /// 目前使用的牌面組（[loadDeck] 後才有值；沒有任何牌面組時為 null，畫面用程式畫的牌面）。
   final ValueNotifier<Deck?> deck = ValueNotifier(null);
 

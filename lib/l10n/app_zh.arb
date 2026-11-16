@@ -333,7 +333,7 @@
   "premiumBenefitCourses": "全部課程，完整學習",
   "premiumBenefitSpreads": "開放所有進階牌陣",
   "premiumBenefitNoAds": "沒有任何廣告",
-  "premiumBenefitJournal": "塔羅日記不限則數",
+  "premiumBenefitJournal": "塔羅日記不限則數、完整保留所有紀錄",
   "premiumFreeNote": "78 張牌的解讀、象徵與東西相映，永遠免費。",
   "planMonthly": "月訂",
   "planYearly": "年訂",
@@ -1005,5 +1005,50 @@
   "onboardLearnDesc": "從牌庫和入門課程，一步步認識 78 張牌",
   "onboardAsk": "問一件事",
   "onboardAskDesc": "寫下心裡的問題，抽牌看看",
-  "onboardLater": "先自己逛逛"
+  "onboardLater": "先自己逛逛",
+  "journalSearchHint": "搜尋牌名、問題、筆記",
+  "journalFilterAll": "全部",
+  "journalFilterCross": "交叉解讀",
+  "journalJumpToDate": "跳到某一天",
+  "journalSelectedCount": "{count, plural, other{已選 {count} 則}}",
+  "@journalSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalSelectAll": "全選",
+  "journalDeleteManyTitle": "{count, plural, other{刪除 {count} 則日記？}}",
+  "@journalDeleteManyTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "journalDeleteUndoBody": "刪除後可以馬上按「復原」取回；提示消失後就無法復原。",
+  "journalDeletedCount": "{count, plural, other{已刪除 {count} 則日記}}",
+  "@journalDeletedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "undo": "復原",
+  "journalNoResults": "找不到符合的日記",
+  "journalHiddenOld": "{count, plural, other{還有 {count} 則超過 {days} 天的日記先收起來了，紀錄都還在。成為會員就能看到全部。}}",
+  "@journalHiddenOld": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "journalSeeAllHistory": "查看全部日記",
+  "journalClearSearch": "清除搜尋"
 }
