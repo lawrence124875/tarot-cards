@@ -72,7 +72,7 @@ class JournalListPage extends StatefulWidget {
 }
 
 class _JournalListPageState extends State<JournalListPage> {
-  late final AppServices _s = AppServices.of(context);
+  late final Services _s = AppServices.of(context);
   final _scroll = ScrollController();
   final _search = TextEditingController();
   final _keys = <String, GlobalKey>{};
