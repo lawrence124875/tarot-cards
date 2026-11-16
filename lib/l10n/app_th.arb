@@ -439,5 +439,6 @@
   "journalNoResults": "ไม่พบบันทึกที่ตรงกัน",
   "journalHiddenOld": "{count, plural, other{มีบันทึกที่เก่ากว่า {days} วันอีก {count} รายการเก็บพับไว้ ข้อมูลยังอยู่ครบ สมัครสมาชิกเพื่อดูทั้งหมด}}",
   "journalSeeAllHistory": "ดูบันทึกทั้งหมด",
-  "journalClearSearch": "ล้างการค้นหา"
+  "journalClearSearch": "ล้างการค้นหา",
+  "crossTrialNote": "ครั้งนี้เป็นการทดลองแบบเต็มฟรี ครั้งต่อไปเนื้อหาเต็มของการอ่านไขว้สำหรับสมาชิก"
 }

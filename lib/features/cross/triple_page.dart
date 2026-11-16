@@ -16,6 +16,7 @@ import '../../core/runes/runes.dart';
 import '../../core/tarot/draw.dart';
 import '../../l10n/l10n.dart';
 import '../../reading/section.dart';
+import '../../core/monetization/free_trials.dart';
 import '../../shared/premium/cast_gate.dart';
 import '../../shared/premium/paywall_page.dart';
 import '../../shared/premium/reading_interstitial.dart';
@@ -96,7 +97,7 @@ class _TriplePageState extends State<TriplePage> {
     final l = context.l10n;
     if (_busy) return;
     FocusManager.instance.primaryFocus?.unfocus();
-    if (!_s.isPremium && !_freePreview) {
+    if (!_s.isPremium && !_freePreview && !_s.trials.available(FreeTrials.triple)) {
       if (!await openPaywall(context, source: 'triple_preview') || !mounted) return;
     }
     _busy = true;
@@ -123,6 +124,9 @@ class _TriplePageState extends State<TriplePage> {
       await playReadingInterstitial(context);
       if (!mounted) return;
     }
+    // 免費版第一次：完整顯示這一組（記下種子，日記回顧時同樣完整）
+    if (!_s.isPremium && _s.trials.available(FreeTrials.triple)) await _s.trials.use(FreeTrials.triple, tripleSeed([for (final c in _tarot) c.cardId], _lenormand, _rune!.code));
+    if (!mounted) return;
     HapticFeedback.mediumImpact();
     setState(() => _revealed = true);
     final r = _result;
@@ -332,7 +336,8 @@ class TripleResultView extends StatelessWidget {
         ]),
       ),
     );
-    if (!s.isPremium) {
+    final trial = !s.isPremium && s.trials.unlocked(FreeTrials.triple, seed);
+    if (!s.isPremium && !trial) {
       return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         header,
         const SizedBox(height: 12),
@@ -367,6 +372,11 @@ class TripleResultView extends StatelessWidget {
     ]);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       header,
+      if (trial)
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(l.crossTrialNote, textAlign: TextAlign.center, style: t.bodySmall?.copyWith(color: TarotColors.textSub)),
+        ),
       const SizedBox(height: 8),
       chips,
       if (d == null || cd == null)

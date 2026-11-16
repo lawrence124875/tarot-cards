@@ -7,7 +7,7 @@ class FreeLimits {
   const FreeLimits({
     this.castsPerDay = 2,
     this.rewardedPerDay = 2,
-    this.journalMax = 10,
+    this.journalMax = 30,
     this.journalDays = 30,
     this.freeBreathMinutes = const {1, 2},
   });
@@ -31,7 +31,7 @@ class FreeLimits {
   static const remoteDefaults = <String, int>{
     'tr_free_casts_per_day': 2,
     'tr_free_rewarded_per_day': 2,
-    'tr_free_journal_max': 10,
+    'tr_free_journal_max': 30,
     'tr_free_journal_days': 30,
   };
 

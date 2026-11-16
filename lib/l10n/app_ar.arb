@@ -439,5 +439,6 @@
   "journalNoResults": "لا توجد تدوينات مطابقة",
   "journalHiddenOld": "{count, plural, other{تدوينات أقدم من {days} يومًا ({count}) مطويّة مؤقتًا، وما زالت محفوظة. اشترك لترى دفترك كاملًا.}}",
   "journalSeeAllHistory": "عرض الدفتر كاملًا",
-  "journalClearSearch": "مسح البحث"
+  "journalClearSearch": "مسح البحث",
+  "crossTrialNote": "هذه تجربة كاملة مجانية. بعدها يصبح المحتوى الكامل للقراءات المتقاطعة للأعضاء"
 }

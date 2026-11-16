@@ -439,5 +439,6 @@
   "journalNoResults": "Tidak ada catatan yang cocok",
   "journalHiddenOld": "{count, plural, other{{count} catatan yang lebih lama dari {days} hari sedang disimpan terlipat, datanya tetap ada. Jadi anggota untuk melihat semuanya.}}",
   "journalSeeAllHistory": "Lihat seluruh jurnal",
-  "journalClearSearch": "Hapus pencarian"
+  "journalClearSearch": "Hapus pencarian",
+  "crossTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap bacaan silang khusus anggota"
 }
