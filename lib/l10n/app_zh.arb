@@ -891,7 +891,7 @@
   "journalKindTarot": "塔羅",
   "crossHubHint": "同一個問題，塔羅看心理面、雷諾曼看事件面。",
   "crossQuestionLabel": "想問的一件事",
-  "crossQuestionNeeded": "請先寫下一個問題",
+  "crossQuestionNeeded": "選填。寫下一個問題，解讀會更貼近你",
   "crossStart": "抽牌（塔羅三張＋雷諾曼三張）",
   "crossTarotRow": "塔羅・心理面",
   "crossLenormandRow": "雷諾曼・事件面",

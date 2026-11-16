@@ -340,7 +340,7 @@
   "journalKindTarot": "ทาโรต์",
   "crossHubHint": "คำถามเดียว ทาโรต์ดูด้านจิตใจ เลอนอร์มองด์ดูด้านเหตุการณ์",
   "crossQuestionLabel": "สิ่งที่อยากถาม",
-  "crossQuestionNeeded": "กรุณาเขียนคำถามก่อน",
+  "crossQuestionNeeded": "ไม่บังคับ เขียนคำถามไว้จะทำให้คำอ่านใกล้ตัวคุณมากขึ้น",
   "crossStart": "จั่ว (ทาโรต์ 3 + เลอนอร์มองด์ 3)",
   "crossTarotRow": "ทาโรต์・ด้านจิตใจ",
   "crossLenormandRow": "เลอนอร์มองด์・ด้านเหตุการณ์",

@@ -83,10 +83,6 @@ class _CrossPageState extends State<CrossPage> {
 
   Future<void> _start() async {
     final l = context.l10n;
-    if (_question.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.crossQuestionNeeded)));
-      return;
-    }
     if (_busy) return;
     FocusManager.instance.primaryFocus?.unfocus();
     if (!_s.isPremium && !_freePreview) {
@@ -171,7 +167,7 @@ class _CrossPageState extends State<CrossPage> {
             TextField(
               controller: _question,
               maxLength: 120,
-              decoration: InputDecoration(labelText: l.crossQuestionLabel, border: const OutlineInputBorder()),
+              decoration: InputDecoration(labelText: l.crossQuestionLabel, helperText: l.crossQuestionNeeded, helperMaxLines: 2, border: const OutlineInputBorder()),
             ),
             Wrap(
               alignment: WrapAlignment.center,
@@ -190,8 +186,10 @@ class _CrossPageState extends State<CrossPage> {
             const SizedBox(height: 12),
             Center(child: FilledButton(onPressed: _start, child: Text(l.crossStart))),
           ] else ...[
-            Text('「${_question.text.trim()}」', style: t.titleMedium, textAlign: TextAlign.center),
-            const SizedBox(height: 12),
+            if (_question.text.trim().isNotEmpty) ...[
+              Text('「${_question.text.trim()}」', style: t.titleMedium, textAlign: TextAlign.center),
+              const SizedBox(height: 12),
+            ],
             CrossCardRow(
               title: l.crossTarotRow,
               children: [

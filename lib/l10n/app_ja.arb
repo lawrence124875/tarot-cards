@@ -340,7 +340,7 @@
   "journalKindTarot": "タロット",
   "crossHubHint": "一つの問いを、タロットで心の面、ルノルマンで出来事の面から。",
   "crossQuestionLabel": "聞きたいこと一つ",
-  "crossQuestionNeeded": "まず質問を書いてください",
+  "crossQuestionNeeded": "任意。質問を書くと、より自分に寄り添った読み解きに",
   "crossStart": "引く（タロット 3 枚＋ルノルマン 3 枚）",
   "crossTarotRow": "タロット・心の面",
   "crossLenormandRow": "ルノルマン・出来事の面",

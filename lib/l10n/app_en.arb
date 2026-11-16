@@ -340,7 +340,7 @@
   "journalKindTarot": "Tarot",
   "crossHubHint": "One question: tarot for the inner side, Lenormand for events.",
   "crossQuestionLabel": "The one thing you want to ask",
-  "crossQuestionNeeded": "Please write a question first",
+  "crossQuestionNeeded": "Optional. Writing a question makes the reading feel closer to you",
   "crossStart": "Draw (3 tarot + 3 Lenormand)",
   "crossTarotRow": "Tarot · inner side",
   "crossLenormandRow": "Lenormand · events",
