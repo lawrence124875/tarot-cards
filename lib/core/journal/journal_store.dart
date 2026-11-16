@@ -20,6 +20,13 @@ abstract class JournalStore extends ChangeNotifier {
 
   Future<void> delete(String id);
 
+  /// 一次刪除多筆（多選刪除）。
+  Future<void> deleteMany(Iterable<String> ids) async {
+    for (final id in ids.toList()) {
+      await delete(id);
+    }
+  }
+
   /// 匯入備份：只加入這支手機上還沒有的（以 id 判斷），已有的不覆蓋。回傳實際加入的那些。
   /// 不受免費版則數上限限制（已存的日記一律保留，§23.1）。
   Future<List<JournalEntry>> addMissing(List<JournalEntry> entries) async {

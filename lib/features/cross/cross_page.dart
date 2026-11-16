@@ -128,7 +128,7 @@ class _CrossPageState extends State<CrossPage> {
   Future<void> _save() async {
     final journal = _s.journal;
     if (journal == null || _saved) return;
-    if (!_s.isPremium && (await journal.all()).length >= _s.limits.journalMax) {
+    if (await _s.journalFull()) {
       _s.events.emit(const HitFreeLimit(type: 'journal'));
       if (!mounted || !await openPaywall(context, source: 'journal_limit')) return;
     }

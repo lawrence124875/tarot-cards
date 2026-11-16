@@ -250,7 +250,7 @@ class _ReadingPageState extends State<ReadingPage> {
   Future<void> _save(_Loaded d) async {
     // 免費版日記上限：已存的不刪，只是不能再新增
     final journal = _s.journal;
-    if (!_s.isPremium && journal != null && (await journal.all()).length >= _s.limits.journalMax) {
+    if (await _s.journalFull()) {
       _s.events.emit(const HitFreeLimit(type: 'journal'));
       if (!mounted || !await _journalLimit()) return;
       if (!mounted) return;
