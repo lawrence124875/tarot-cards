@@ -25,8 +25,8 @@ void main() {
     return store;
   }
 
-  test('免費版預設：最多 10 則、只看 30 天；遠端值不合理退回預設', () {
-    expect(const FreeLimits().journalMax, 10);
+  test('免費版預設：最多 30 則、只看 30 天；遠端值不合理退回預設', () {
+    expect(const FreeLimits().journalMax, 30);
     expect(const FreeLimits().journalDays, 30);
     expect(FreeLimits.remoteDefaults['tr_free_journal_days'], 30);
     expect(FreeLimits.from((k, d) => k == 'tr_free_journal_days' ? 0 : d).journalDays, 30);

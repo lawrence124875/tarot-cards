@@ -439,5 +439,6 @@
   "journalNoResults": "Nenhum registro encontrado",
   "journalHiddenOld": "{count, plural, =1{1 registro com mais de {days} dias está guardado à parte; nada foi apagado. Torne-se membro para ver o diário completo.} other{{count} registros com mais de {days} dias estão guardados à parte; nada foi apagado. Torne-se membro para ver o diário completo.}}",
   "journalSeeAllHistory": "Ver diário completo",
-  "journalClearSearch": "Limpar busca"
+  "journalClearSearch": "Limpar busca",
+  "crossTrialNote": "Desta vez é uma experiência completa grátis. Depois, as leituras cruzadas completas são para membros"
 }

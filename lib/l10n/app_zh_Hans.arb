@@ -439,5 +439,6 @@
   "journalNoResults": "找不到符合的日记",
   "journalHiddenOld": "{count, plural, other{还有 {count} 则超过 {days} 天的日记先收起来了，记录都还在。成为会员就能看到全部。}}",
   "journalSeeAllHistory": "查看全部日记",
-  "journalClearSearch": "清除搜索"
+  "journalClearSearch": "清除搜索",
+  "crossTrialNote": "这次是免费完整体验，之后的交叉解读完整内容需要订阅"
 }

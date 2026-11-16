@@ -439,5 +439,6 @@
   "journalNoResults": "No hay entradas que coincidan",
   "journalHiddenOld": "{count, plural, =1{1 entrada de hace más de {days} días está guardada aparte; no se ha borrado. Hazte miembro para ver todo tu diario.} other{{count} entradas de hace más de {days} días están guardadas aparte; no se han borrado. Hazte miembro para ver todo tu diario.}}",
   "journalSeeAllHistory": "Ver todo el diario",
-  "journalClearSearch": "Borrar búsqueda"
+  "journalClearSearch": "Borrar búsqueda",
+  "crossTrialNote": "Esta vez es una prueba completa gratuita. Después, las lecturas cruzadas completas son para miembros"
 }

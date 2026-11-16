@@ -439,5 +439,6 @@
   "journalNoResults": "Không có mục nhật ký phù hợp",
   "journalHiddenOld": "{count, plural, other{{count} mục nhật ký cũ hơn {days} ngày đang được thu gọn, dữ liệu vẫn còn nguyên. Trở thành thành viên để xem toàn bộ.}}",
   "journalSeeAllHistory": "Xem toàn bộ nhật ký",
-  "journalClearSearch": "Xóa tìm kiếm"
+  "journalClearSearch": "Xóa tìm kiếm",
+  "crossTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của đọc kết hợp dành cho thành viên"
 }

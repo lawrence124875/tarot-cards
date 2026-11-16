@@ -439,5 +439,6 @@
   "journalNoResults": "該当する日記がありません",
   "journalHiddenOld": "{count, plural, other{{days} 日より前の日記 {count} 件はしまってあります（記録は残っています）。メンバーになるとすべて見られます。}}",
   "journalSeeAllHistory": "すべての日記を見る",
-  "journalClearSearch": "検索をクリア"
+  "journalClearSearch": "検索をクリア",
+  "crossTrialNote": "今回は無料の完全体験です。次回以降のクロスリーディング全文はメンバー向けです"
 }

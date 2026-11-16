@@ -439,5 +439,6 @@
   "journalNoResults": "일치하는 일기가 없어요",
   "journalHiddenOld": "{count, plural, other{{days}일이 지난 일기 {count}개는 잠시 접어 두었어요. 기록은 그대로 있어요. 멤버가 되면 모두 볼 수 있어요.}}",
   "journalSeeAllHistory": "모든 일기 보기",
-  "journalClearSearch": "검색 지우기"
+  "journalClearSearch": "검색 지우기",
+  "crossTrialNote": "이번은 무료 전체 체험이에요. 다음부터 교차 리딩 전체 내용은 멤버 전용이에요"
 }

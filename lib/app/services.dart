@@ -25,6 +25,7 @@ import '../core/onboarding/intro_store.dart';
 import '../core/monetization/ad_service.dart';
 import '../core/monetization/cast_quota.dart';
 import '../core/monetization/free_limits.dart';
+import '../core/monetization/free_trials.dart';
 import '../core/monetization/premium_service.dart';
 import '../core/journal/journal_store.dart';
 import '../core/reminders/local_notification_reminders.dart';
@@ -66,7 +67,9 @@ class Services {
     this.runes = const EmptyRuneSource(),
     this.crossIntro,
     this.tripleIntro,
-  })  : settings = settings ?? AppSettings(store: MemoryKeyValue()),
+    FreeTrials? trials,
+  })  : trials = trials ?? (FreeTrials(store: MemoryKeyValue())..load()),
+        settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
         lessonProgress = lessonProgress ?? LessonProgress(store: MemoryKeyValue()),
@@ -92,6 +95,7 @@ class Services {
         atmosphere: const StandardAtmosphere(),
         random: Random.secure(),
         settings: AppSettings(),
+        trials: FreeTrials(),
         daily: DailyCardStore(),
         quiz: CardQuiz(),
         lessonProgress: LessonProgress(),
@@ -135,6 +139,9 @@ class Services {
 
   /// 使用者設定（牌面組、逆位、每日提醒）。
   final AppSettings settings;
+
+  /// 免費版交叉解讀的第一次完整體驗。
+  final FreeTrials trials;
 
   /// 今日一張。
   final DailyCardStore daily;
@@ -213,6 +220,7 @@ class Services {
   /// 依設定載入牌面組。會員牌面組在非會員時改用第一組免費的。
   Future<void> loadDeck() async {
     await settings.load();
+    await trials.load();
     var d = await decks.deck(settings.deckId);
     if (d != null && d.premium && !isPremium) {
       for (final x in await decks.decks()) {
