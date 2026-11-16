@@ -1,7 +1,7 @@
 name: tarot_cards
 description: "塔羅｜塔羅學習與自我覺察（LC Lab）"
 publish_to: 'none'
-version: 0.4.2+1
+version: 0.4.3+1
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -96,6 +96,7 @@ flutter:
     - assets/cross/th/
     - assets/cross/ar/
     - assets/licenses/
+    - assets/other_apps/ # LC Lab 其他 App 圖示（私人 repo branding/other_apps，建置時匯入）
     - assets/audio/ # 真實自然錄音音景（CC0／公有領域，見 CREDITS.md）
 
   # 思源黑體／宋體子集（HANDOFF §15）：字型檔由 CI 以 scripts/build_fonts.py 產生，

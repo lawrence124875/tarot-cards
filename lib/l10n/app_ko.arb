@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, other{{days}일이 지난 일기 {count}개는 잠시 접어 두었어요. 기록은 그대로 있어요. 멤버가 되면 모두 볼 수 있어요.}}",
   "journalSeeAllHistory": "모든 일기 보기",
   "journalClearSearch": "검색 지우기",
-  "crossTrialNote": "이번은 무료 전체 체험이에요. 다음부터 교차 리딩 전체 내용은 멤버 전용이에요"
+  "crossTrialNote": "이번은 무료 전체 체험이에요. 다음부터 교차 리딩 전체 내용은 멤버 전용이에요",
+  "otherAppsTitle": "LC Lab의 다른 앱",
+  "otherAppQianguaName": "겸괘 Qiangua",
+  "otherAppQianguaDesc": "주역 64괘 카드, 매화역수·자미두수·사주 포함",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "듣기로 외우는 영어 단어, 화면이 잠겨도 재생"
 }

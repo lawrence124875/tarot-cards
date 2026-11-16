@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, other{{count} catatan yang lebih lama dari {days} hari sedang disimpan terlipat, datanya tetap ada. Jadi anggota untuk melihat semuanya.}}",
   "journalSeeAllHistory": "Lihat seluruh jurnal",
   "journalClearSearch": "Hapus pencarian",
-  "crossTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap bacaan silang khusus anggota"
+  "crossTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap bacaan silang khusus anggota",
+  "otherAppsTitle": "Aplikasi lain dari LC Lab",
+  "otherAppQianguaName": "Qiangua",
+  "otherAppQianguaDesc": "Kartu 64 heksagram I Ching, dengan numerologi Plum Blossom, Zi Wei, dan BaZi",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "Hafalkan kosakata bahasa Inggris dengan mendengar, tetap berputar saat layar terkunci"
 }

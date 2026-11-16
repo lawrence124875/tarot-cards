@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, =1{1 registro com mais de {days} dias está guardado à parte; nada foi apagado. Torne-se membro para ver o diário completo.} other{{count} registros com mais de {days} dias estão guardados à parte; nada foi apagado. Torne-se membro para ver o diário completo.}}",
   "journalSeeAllHistory": "Ver diário completo",
   "journalClearSearch": "Limpar busca",
-  "crossTrialNote": "Desta vez é uma experiência completa grátis. Depois, as leituras cruzadas completas são para membros"
+  "crossTrialNote": "Desta vez é uma experiência completa grátis. Depois, as leituras cruzadas completas são para membros",
+  "otherAppsTitle": "Mais apps da LC Lab",
+  "otherAppQianguaName": "Qiangua",
+  "otherAppQianguaDesc": "Cartas dos 64 hexagramas do I Ching, com numerologia Flor de Ameixeira, Zi Wei e BaZi",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "Aprenda palavras em inglês ouvindo, mesmo com a tela bloqueada"
 }

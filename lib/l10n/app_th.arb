@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, other{มีบันทึกที่เก่ากว่า {days} วันอีก {count} รายการเก็บพับไว้ ข้อมูลยังอยู่ครบ สมัครสมาชิกเพื่อดูทั้งหมด}}",
   "journalSeeAllHistory": "ดูบันทึกทั้งหมด",
   "journalClearSearch": "ล้างการค้นหา",
-  "crossTrialNote": "ครั้งนี้เป็นการทดลองแบบเต็มฟรี ครั้งต่อไปเนื้อหาเต็มของการอ่านไขว้สำหรับสมาชิก"
+  "crossTrialNote": "ครั้งนี้เป็นการทดลองแบบเต็มฟรี ครั้งต่อไปเนื้อหาเต็มของการอ่านไขว้สำหรับสมาชิก",
+  "otherAppsTitle": "แอปอื่นจาก LC Lab",
+  "otherAppQianguaName": "Qiangua",
+  "otherAppQianguaDesc": "ไพ่ 64 ฉบับคัมภีร์อี้จิง พร้อมเลขดอกเหมย จื่อเวย และปาจื้อ",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "ท่องศัพท์ภาษาอังกฤษด้วยการฟัง เล่นได้แม้ล็อกหน้าจอ"
 }

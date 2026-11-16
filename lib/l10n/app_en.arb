@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, =1{1 entry older than {days} days is tucked away. It’s still saved — become a member to see your full journal.} other{{count} entries older than {days} days are tucked away. They’re still saved — become a member to see your full journal.}}",
   "journalSeeAllHistory": "See full journal",
   "journalClearSearch": "Clear search",
-  "crossTrialNote": "This one is a free full preview. Full cross readings after this are for members."
+  "crossTrialNote": "This one is a free full preview. Full cross readings after this are for members.",
+  "otherAppsTitle": "More apps from LC Lab",
+  "otherAppQianguaName": "Qiangua",
+  "otherAppQianguaDesc": "I Ching 64-hexagram cards, with Plum Blossom numerology, Zi Wei and BaZi",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "Learn English words by listening, even with the screen locked"
 }

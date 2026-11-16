@@ -13,6 +13,7 @@ import '../daily/daily_page.dart';
 import '../feedback/feedback_page.dart';
 import '../intro/intro_page.dart';
 import '../share/share.dart';
+import 'other_apps.dart';
 
 /// 設定：外觀（跟隨系統／淺色／深色）、牌面組（只有一組時不顯示）、是否使用逆位、今日一張的提醒；
 /// 關於與隱私（功能介紹、推薦、回饋、使用統計、廣告隱私、條款與隱私權政策）。
@@ -178,6 +179,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ]),
             ),
+            const SizedBox(height: 24),
+            const OtherAppsSection(),
           ],
         ),
       ),
