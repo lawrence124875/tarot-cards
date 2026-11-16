@@ -60,3 +60,6 @@ GoogleService-Info.plist
 
 # App 圖示與牌背原圖只在私人 repo（tarot-content branding/），建置時由 import_content.sh 複製進來
 /branding/
+
+# LC Lab 其他 App 圖示只在私人 repo（tarot-content branding/other_apps），建置時匯入
+/assets/other_apps/*.png

@@ -1051,5 +1051,10 @@
   },
   "journalSeeAllHistory": "查看全部日記",
   "journalClearSearch": "清除搜尋",
-  "crossTrialNote": "這次是免費完整體驗，之後的交叉解讀完整內容需要訂閱"
+  "crossTrialNote": "這次是免費完整體驗，之後的交叉解讀完整內容需要訂閱",
+  "otherAppsTitle": "LC Lab 其他 App",
+  "otherAppQianguaName": "謙卦 Qiangua",
+  "otherAppQianguaDesc": "易經 64 卦牌，含梅花易數、紫微、八字",
+  "otherAppEnglishName": "智慧聽覺巡航 English Words Audio Cruise",
+  "otherAppEnglishDesc": "用聽的背英文單字，鎖螢幕也能播"
 }

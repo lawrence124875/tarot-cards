@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, other{{count} mục nhật ký cũ hơn {days} ngày đang được thu gọn, dữ liệu vẫn còn nguyên. Trở thành thành viên để xem toàn bộ.}}",
   "journalSeeAllHistory": "Xem toàn bộ nhật ký",
   "journalClearSearch": "Xóa tìm kiếm",
-  "crossTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của đọc kết hợp dành cho thành viên"
+  "crossTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của đọc kết hợp dành cho thành viên",
+  "otherAppsTitle": "Ứng dụng khác của LC Lab",
+  "otherAppQianguaName": "Qiangua",
+  "otherAppQianguaDesc": "Bộ bài 64 quẻ Kinh Dịch, có Mai Hoa Dịch Số, Tử Vi và Bát Tự",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "Học từ vựng tiếng Anh bằng cách nghe, phát cả khi khóa màn hình"
 }

@@ -440,5 +440,10 @@
   "journalHiddenOld": "{count, plural, other{{days} 日より前の日記 {count} 件はしまってあります（記録は残っています）。メンバーになるとすべて見られます。}}",
   "journalSeeAllHistory": "すべての日記を見る",
   "journalClearSearch": "検索をクリア",
-  "crossTrialNote": "今回は無料の完全体験です。次回以降のクロスリーディング全文はメンバー向けです"
+  "crossTrialNote": "今回は無料の完全体験です。次回以降のクロスリーディング全文はメンバー向けです",
+  "otherAppsTitle": "LC Lab のほかのアプリ",
+  "otherAppQianguaName": "謙卦 Qiangua",
+  "otherAppQianguaDesc": "易経64卦カード。梅花易数・紫微斗数・四柱推命つき",
+  "otherAppEnglishName": "English Words Audio Cruise",
+  "otherAppEnglishDesc": "聞いて覚える英単語。画面ロック中も再生"
 }

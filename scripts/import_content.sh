@@ -103,4 +103,9 @@ if [ -d "$src/branding" ]; then
   cp -r "$src/branding" branding
 fi
 
+# LC Lab 其他 App 圖示（設定頁「LC Lab 其他 App」）
+if [ -d "$src/branding/other_apps" ]; then
+  cp "$src/branding/other_apps/"*.png assets/other_apps/ 2>/dev/null || true
+fi
+
 echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、盧恩（${rune# }）、交叉 ${cross} 檔"
