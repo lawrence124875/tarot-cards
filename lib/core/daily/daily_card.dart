@@ -52,6 +52,7 @@ class DailyReminders {
   static const baseId = 7700000;
   static const days = 14;
 
+  /// [bodyFor]：每天各自的內文（例如當天的流日主題）；回傳 null 用 [body]。
   static Future<bool> apply(
     ReminderService reminders, {
     required bool enabled,
@@ -59,6 +60,7 @@ class DailyReminders {
     required int minute,
     required String title,
     required String body,
+    String? Function(DateTime at)? bodyFor,
     DateTime? now,
     bool skipToday = false,
     bool askPermission = true,
@@ -73,7 +75,14 @@ class DailyReminders {
     for (var i = skipToday ? 1 : 0; i < days; i++) {
       final at = DateTime(n.year, n.month, n.day + i, hour, minute);
       if (!at.isAfter(n)) continue;
-      ok = await reminders.schedule(id: baseId + i, at: at, title: title, body: body, payload: payload, askPermission: askPermission) && ok;
+      ok = await reminders.schedule(
+              id: baseId + i,
+              at: at,
+              title: title,
+              body: bodyFor?.call(at) ?? body,
+              payload: payload,
+              askPermission: askPermission) &&
+          ok;
       if (!ok) break;
     }
     return ok;

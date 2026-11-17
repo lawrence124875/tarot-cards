@@ -22,6 +22,7 @@ import '../../shared/widgets/card_back.dart';
 import '../../shared/widgets/card_face.dart';
 import '../../shared/widgets/flip_card.dart';
 import '../lenormand/lenormand_widgets.dart';
+import '../numerology/numday_banner.dart';
 import 'cross_intro.dart';
 
 /// Remote Config：免費版能否抽牌並看共識／分歧標題（1＝可以，0＝直接開付費牆）。
@@ -250,6 +251,7 @@ class _CrossPageState extends State<CrossPage> {
                   child: Text(l.crossAgain),
                 ),
               ]),
+              const NumdayHint(),
             ],
           ],
         ],

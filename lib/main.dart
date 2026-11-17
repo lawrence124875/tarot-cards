@@ -65,6 +65,12 @@ Future<void> main() async {
   // 今日一張的提醒只排 14 天；每次開啟 App 往後補排。
   // 啟動時不請求通知權限（英文 App v9～10 在啟動時請求造成當機）；第一次抽牌或打開提醒開關時才請求，拒絕就顯示關閉。
   if (services.settings.dailyReminder) unawaited(syncDailyReminder(services, askPermission: false));
+  // 生日改了：提醒內文的流日跟著重排（不請求權限）。
+  services.birthdays.birthday.addListener(() {
+    if (services.settings.dailyReminder) {
+      unawaited(syncDailyReminder(services, askPermission: false, offOnDenied: false));
+    }
+  });
   runApp(AppServices(services: services, child: const TarotApp()));
   appStarted = true;
   syncAds();

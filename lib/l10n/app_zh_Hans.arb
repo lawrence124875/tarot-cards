@@ -489,5 +489,11 @@
   "numQuizDone": "这一轮答对 {correct}／{total} 题",
   "numQuizAnswer": "答案是 {number}。",
   "numQuizMasterHint": "途中遇到 11、22、33 就停下来，这是主数。",
-  "numQuizNext": "下一题"
+  "numQuizNext": "下一题",
+  "numShortDay": "流日",
+  "numShortMonth": "流月",
+  "numShortYear": "流年",
+  "numBannerPrompt": "输入生日看今日流日",
+  "numReminderBody": "今天是流日 {n}：{theme}。翻开今天的牌，看看它怎么呼应。",
+  "numCrossFooter": "今天的流日提醒：流日 {n}・{theme}"
 }

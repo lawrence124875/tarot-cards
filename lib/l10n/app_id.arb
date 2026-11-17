@@ -489,5 +489,11 @@
   "numQuizDone": "Benar {correct} dari {total} di putaran ini",
   "numQuizAnswer": "Jawabannya {number}.",
   "numQuizMasterHint": "Jika muncul 11, 22, atau 33 di tengah jalan, berhenti di situ: itu angka master.",
-  "numQuizNext": "Soal berikutnya"
+  "numQuizNext": "Soal berikutnya",
+  "numShortDay": "Hari",
+  "numShortMonth": "Bulan",
+  "numShortYear": "Tahun",
+  "numBannerPrompt": "Masukkan tanggal lahir untuk melihat hari pribadimu hari ini",
+  "numReminderBody": "Hari ini hari pribadi {n}: {theme}. Buka kartu hari ini dan lihat kaitannya.",
+  "numCrossFooter": "Hari pribadi hari ini: {n} · {theme}"
 }

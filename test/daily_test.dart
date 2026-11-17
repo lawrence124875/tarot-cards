@@ -9,6 +9,7 @@ import 'package:tarot_cards/core/tarot/draw.dart';
 class _RecordingReminders extends NoopReminderService {
   final scheduled = <(int, DateTime)>[];
   final cancelled = <int>[];
+  final bodies = <String>[];
 
   @override
   Future<bool> schedule({
@@ -20,6 +21,7 @@ class _RecordingReminders extends NoopReminderService {
     bool askPermission = true,
   }) async {
     scheduled.add((id, at));
+    bodies.add(body);
     return true;
   }
 
@@ -114,6 +116,20 @@ void main() {
           enabled: true, hour: 20, minute: 0, title: 't', body: 'b', now: DateTime(2026, 10, 12, 9), skipToday: true);
       expect(r.scheduled, hasLength(13));
       expect(r.scheduled.first.$2, DateTime(2026, 10, 13, 20));
+    });
+
+    test('bodyFor：每天各自的內文，回傳 null 用預設', () async {
+      final r = _RecordingReminders();
+      await DailyReminders.apply(r,
+          enabled: true,
+          hour: 8,
+          minute: 0,
+          title: 't',
+          body: 'b',
+          bodyFor: (at) => at.day.isEven ? 'day ${at.day}' : null,
+          now: DateTime(2026, 10, 12, 9));
+      expect(r.bodies.first, 'b'); // 10/13
+      expect(r.bodies[1], 'day 14');
     });
 
     test('沒有權限時回傳 false', () async {

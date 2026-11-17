@@ -489,5 +489,11 @@
   "numQuizDone": "Você acertou {correct} de {total} nesta rodada",
   "numQuizAnswer": "A resposta é {number}.",
   "numQuizMasterHint": "Se aparecer 11, 22 ou 33 no caminho, pare aí: é um número mestre.",
-  "numQuizNext": "Próxima pergunta"
+  "numQuizNext": "Próxima pergunta",
+  "numShortDay": "Dia",
+  "numShortMonth": "Mês",
+  "numShortYear": "Ano",
+  "numBannerPrompt": "Informe sua data de nascimento para ver seu dia pessoal de hoje",
+  "numReminderBody": "Hoje é seu dia pessoal {n}: {theme}. Vire a carta de hoje e veja como ela se relaciona.",
+  "numCrossFooter": "Seu dia pessoal de hoje: {n} · {theme}"
 }

@@ -489,5 +489,11 @@
   "numQuizDone": "이번 라운드 정답 {correct}/{total}문제",
   "numQuizAnswer": "정답은 {number}입니다.",
   "numQuizMasterHint": "중간에 11, 22, 33이 나오면 멈춥니다. 이것이 마스터 넘버입니다.",
-  "numQuizNext": "다음 문제"
+  "numQuizNext": "다음 문제",
+  "numShortDay": "일수",
+  "numShortMonth": "월수",
+  "numShortYear": "연수",
+  "numBannerPrompt": "생년월일을 입력하고 오늘의 개인 일수를 확인하세요",
+  "numReminderBody": "오늘은 개인 일수 {n}: {theme}. 오늘의 카드를 뒤집고 어떻게 이어지는지 살펴보세요.",
+  "numCrossFooter": "오늘의 개인 일수: {n} · {theme}"
 }
