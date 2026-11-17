@@ -36,6 +36,7 @@ class AnalyticsListener {
         TrialStarted t => ('tr_trial_start', {'period': t.period}),
         CrossShown c => ('tr_cross_shown', {'relation': c.relation, 'full': c.full ? 1 : 0}),
         TripleShown c => ('tr_triple_shown', {'relation': c.relation, 'full': c.full ? 1 : 0}),
+        NumdayShown n => ('tr_num_day_card', {'relation': n.relation, 'day': n.day, 'full': n.full ? 1 : 0}),
         CrossVerified v => ('tr_cross_verify', {'result': v.result}),
         Subscribed s when s.period == 'restore' => ('tr_restore', const {}),
         Subscribed s => ('tr_purchase', {'period': s.period}),

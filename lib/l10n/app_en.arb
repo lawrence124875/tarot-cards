@@ -474,5 +474,10 @@
   "numGift": "Gift",
   "numInnerWork": "Inner work",
   "numPractice": "Small practice",
-  "numQuestion": "Ask yourself"
+  "numQuestion": "Ask yourself",
+  "numdayTitle": "Personal day × Today's card",
+  "numdayPrompt": "Enter your birthday to see how today's personal day echoes this card.",
+  "numdayLockedBody": "Subscribe to see everything: today's personal-day theme, what the card reminds you, where they meet, a small practice and a reflection question.",
+  "numdayUnlock": "Unlock the full personal day × card",
+  "numdayTrialNote": "This one is a free full preview. Full personal day × card readings after this are for members."
 }

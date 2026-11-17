@@ -474,5 +474,10 @@
   "numGift": "재능",
   "numInnerWork": "내면의 과제",
   "numPractice": "작은 연습",
-  "numQuestion": "스스로에게 묻기"
+  "numQuestion": "스스로에게 묻기",
+  "numdayTitle": "개인일 × 오늘의 카드",
+  "numdayPrompt": "생일을 입력하고 오늘의 개인일이 이 카드와 어떻게 어우러지는지 확인해 보세요.",
+  "numdayLockedBody": "구독하면 전체 내용을 볼 수 있어요: 오늘의 개인일 주제, 카드의 메시지, 둘이 만나는 지점, 오늘의 작은 연습과 성찰 질문.",
+  "numdayUnlock": "개인일 × 오늘의 카드 전체 보기",
+  "numdayTrialNote": "이번은 무료 전체 체험이에요. 다음부터 개인일 × 오늘의 카드 전체 내용은 멤버 전용이에요"
 }

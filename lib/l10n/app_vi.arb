@@ -474,5 +474,10 @@
   "numGift": "Thế mạnh",
   "numInnerWork": "Bài học bên trong",
   "numPractice": "Thực hành nhỏ",
-  "numQuestion": "Tự hỏi mình"
+  "numQuestion": "Tự hỏi mình",
+  "numdayTitle": "Ngày cá nhân × Lá bài hôm nay",
+  "numdayPrompt": "Nhập ngày sinh để xem ngày cá nhân hôm nay hòa nhịp với lá bài này thế nào.",
+  "numdayLockedBody": "Đăng ký để xem toàn bộ: chủ đề ngày cá nhân, lời nhắc của lá bài, điểm giao nhau, bài tập nhỏ và câu hỏi suy ngẫm.",
+  "numdayUnlock": "Mở khóa đầy đủ Ngày cá nhân × Lá bài",
+  "numdayTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của Ngày cá nhân × Lá bài dành cho thành viên"
 }

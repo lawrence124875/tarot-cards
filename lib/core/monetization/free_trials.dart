@@ -1,12 +1,15 @@
 import '../settings/json_file.dart';
 
-/// 免費版「第一次完整體驗」（Lawrence 2026-11-16）：塔羅 × 雷諾曼、三系統交叉各一次。
+/// 免費版「第一次完整體驗」（Lawrence 2026-11-16）：塔羅 × 雷諾曼、三系統交叉、流日 × 今日一牌各一次。
 /// 記下那一次的牌面種子，同一組牌之後在日記回顧時也維持完整顯示。存在 free_trials.json。
 class FreeTrials {
   FreeTrials({KeyValueFile? store}) : _store = store ?? FileKeyValue('free_trials.json');
 
   static const cross = 'cross';
   static const triple = 'triple';
+
+  /// 流日 × 今日一牌（Lawrence 2026-11-17：比照塔羅 × 雷諾曼）；種子為 numdaySeed（那天那張牌）。
+  static const numday = 'numday';
 
   final KeyValueFile _store;
   Map<String, dynamic> _data = {};

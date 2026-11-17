@@ -5,6 +5,7 @@ import '../app/theme.dart';
 import '../core/tarot/draw.dart';
 import '../core/journal/journal_entry.dart';
 import '../core/journal/journal_reminders.dart';
+import '../core/numerology/numerology.dart';
 import '../l10n/l10n.dart';
 import '../shared/widgets/reminder_picker.dart';
 
@@ -51,6 +52,13 @@ class _SaveSheetState extends State<_SaveSheet> {
     super.dispose();
   }
 
+  /// 今日一牌：有生日時記下當天的流日數字（只記數字，不記生日）。
+  Future<int> _numday(Services s, DateTime now) async {
+    if (widget.draw.methodId != DrawMethods.daily) return 0;
+    final birth = await s.birthdays.load();
+    return birth == null ? 0 : Numerology.personalDay(birth, now);
+  }
+
   Future<void> _save() async {
     final services = AppServices.of(context);
     final l = context.l10n;
@@ -67,6 +75,7 @@ class _SaveSheetState extends State<_SaveSheet> {
       readingIndexes: widget.readingIndexes,
       deckId: services.deck.value?.id ?? '',
       reminderAt: _days == null ? null : JournalReminders.reviewTime(now, _days!),
+      numday: await _numday(services, now),
     );
     await store.save(entry);
     var reminderOk = true;

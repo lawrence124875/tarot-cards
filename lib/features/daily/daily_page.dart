@@ -15,6 +15,7 @@ import '../../shared/widgets/adaptive_layout.dart';
 import '../../shared/widgets/card_back.dart';
 import '../../shared/widgets/card_face.dart';
 import '../../shared/widgets/flip_card.dart';
+import '../numerology/numday_section.dart';
 
 /// 今日一張：翻開今天的牌 → 一句肯定語、關鍵詞與一組解讀的「給現在的你」→ 看完整解讀。
 /// 同一天再打開看到的是同一張。下方可開關每日提醒。
@@ -157,6 +158,8 @@ class _DailyPageState extends State<DailyPage> {
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(l.dailyComeBack, textAlign: TextAlign.center, style: t.bodySmall),
                   ),
+                  // 流日 × 今日一牌（0.5.0）：沒有生日時引導輸入
+                  NumdaySection(card: c, date: DateTime.now()),
                 ],
                 const SizedBox(height: 28),
                 const DailyReminderTile(),
