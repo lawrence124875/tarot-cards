@@ -80,6 +80,21 @@ if [ -d "$src/runes" ]; then
   done
 fi
 
+# 生命靈數：numerology/<語言>/numbers.json、lessons.json。
+num=""
+if [ -d "$src/numerology" ]; then
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+    mkdir -p "assets/numerology/$lang"
+    n=0
+    for f in "$src/numerology/$lang"/*.json; do
+      [ -e "$f" ] || continue
+      cp "$f" "assets/numerology/$lang/"
+      n=$((n + 1))
+    done
+    num="$num $lang=$n"
+  done
+fi
+
 # 交叉解讀：cross/scores.json（預設表＋overrides 合併後）、cross/<語言>/templates.json、triple.json（三系統）。
 cross=0
 if [ -f "$src/cross/scores.json" ]; then
@@ -108,4 +123,4 @@ if [ -d "$src/branding/other_apps" ]; then
   cp "$src/branding/other_apps/"*.png assets/other_apps/ 2>/dev/null || true
 fi
 
-echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、盧恩（${rune# }）、交叉 ${cross} 檔"
+echo "已匯入解讀（${summary# }）、牌面組（${decks# }）、雷諾曼（${len# }）、盧恩（${rune# }）、靈數（${num# }）、交叉 ${cross} 檔"

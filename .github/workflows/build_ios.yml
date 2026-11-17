@@ -38,6 +38,7 @@ jobs:
             decks
             lenormand
             runes
+            numerology
             cross
             branding
             store/release-notes

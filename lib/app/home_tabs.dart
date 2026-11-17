@@ -6,6 +6,7 @@ import '../features/daily/daily_feature.dart';
 import '../features/daily/daily_page.dart';
 import '../features/draw/draw_feature.dart';
 import '../features/lenormand/lenormand_feature.dart';
+import '../features/numerology/numerology_feature.dart';
 import '../features/runes/rune_feature.dart';
 import '../features/settings/settings_page.dart';
 import '../l10n/l10n.dart';
@@ -36,9 +37,13 @@ List<_System> _systems(BuildContext context) {
     _System(drawFeature, Icons.style_outlined, (l) => l.homeSystemTarot, (l) => l.homeTarotDesc),
     _System(lenormandFeature, Icons.grid_view_outlined, (l) => l.featureLenormand, (l) => l.homeLenormandDesc),
     _System(runeFeature, Icons.hexagon_outlined, (l) => l.featureRunes, (l) => l.homeRunesDesc),
+    _System(numerologyFeature, Icons.pin_outlined, (l) => l.featureNumerology, (l) => l.homeNumerologyDesc),
     _System(crossHubFeature, Icons.join_inner, (l) => l.featureCrossHub, (l) => l.homeCrossDesc),
   ].where((s) => ids.contains(s.feature.id)).toList();
 }
+
+List<List<_System>> _rows(List<_System> xs, int n) =>
+    [for (var i = 0; i < xs.length; i += n) xs.sublist(i, i + n > xs.length ? xs.length : i + n)];
 
 /// 「今日」分頁（首頁）：品牌＋設定、今日一張大卡（是否已抽、連續天數）、會員入口（免費版）、
 /// 三張系統卡＋交叉解讀、箴言與免責聲明。內容可捲動，不再整頁縮放（字放大、阿拉伯文也不會變小）。
@@ -88,10 +93,11 @@ class TodayTab extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.only(start: 4, bottom: 8),
                 child: Text(l.navDivination, style: t.titleMedium),
               ),
-              if (singles.isNotEmpty)
+              // 四個系統時排成兩列兩個，三個以下一列（字放大、阿拉伯文不擠）
+              for (final row in _rows(singles, singles.length > 3 ? 2 : 3))
                 IntrinsicHeight(
                   child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                    for (final x in singles) Expanded(child: _SystemTile(system: x)),
+                    for (final x in row) Expanded(child: _SystemTile(system: x)),
                   ]),
                 ),
               for (final x in cross) _SystemListTile(system: x),

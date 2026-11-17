@@ -13,6 +13,7 @@ import '../core/deck/deck.dart';
 import '../core/deck/deck_source.dart';
 import '../core/learn/card_quiz.dart';
 import '../core/lenormand/lenormand.dart';
+import '../core/numerology/numerology.dart';
 import '../core/runes/runes.dart';
 import '../core/learn/lesson_progress.dart';
 import '../core/settings/app_settings.dart';
@@ -65,10 +66,13 @@ class Services {
     this.updater = const NoUpdater(),
     this.lenormand = const EmptyLenormandSource(),
     this.runes = const EmptyRuneSource(),
+    this.numerology = const EmptyNumerologySource(),
+    BirthdayStore? birthdays,
     this.crossIntro,
     this.tripleIntro,
     FreeTrials? trials,
-  })  : trials = trials ?? (FreeTrials(store: MemoryKeyValue())..load()),
+  })  : birthdays = birthdays ?? BirthdayStore(store: MemoryKeyValue()),
+        trials = trials ?? (FreeTrials(store: MemoryKeyValue())..load()),
         settings = settings ?? AppSettings(store: MemoryKeyValue()),
         daily = daily ?? DailyCardStore(store: MemoryKeyValue()),
         quiz = quiz ?? CardQuiz(store: MemoryKeyValue()),
@@ -122,6 +126,8 @@ class Services {
         updater: const PlayAppUpdater(),
         lenormand: AssetLenormandSource(folder: () => L10n.contentFolder),
         runes: AssetRuneSource(folder: () => L10n.contentFolder),
+        numerology: AssetNumerologySource(folder: () => L10n.contentFolder),
+        birthdays: BirthdayStore(),
         crossIntro: FileIntroStore(name: 'cross_intro.json'),
         tripleIntro: FileIntroStore(name: 'triple_intro.json'),
       );
@@ -193,6 +199,10 @@ class Services {
 
   /// 盧恩內容（符文、牌陣、課程；11 語，缺的語言退回英文）。
   final RuneSource runes;
+
+  /// 生命靈數內容（numbers.json、lessons.json）與本機生日。
+  final NumerologySource numerology;
+  final BirthdayStore birthdays;
 
   /// 交叉解讀的 3 頁引導是否看過；null＝不自動顯示（測試）。
   final IntroStore? crossIntro;
