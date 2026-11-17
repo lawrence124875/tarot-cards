@@ -109,7 +109,7 @@ void main() {
 
   test('日記：今日一牌記流日數字（1–9），舊紀錄或不合法的值當 0', () {
     final e = JournalEntry.fromDraw(
-      draw: const SpreadDraw(spreadId: 'one', methodId: DrawMethods.daily, cards: [DrawnCard(3)]),
+      draw: SpreadDraw(spreadId: 'one', methodId: DrawMethods.daily, cards: [DrawnCard(3)]),
       now: DateTime(2026, 11, 17),
       numday: 4,
     );
