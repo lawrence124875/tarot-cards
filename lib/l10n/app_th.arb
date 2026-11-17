@@ -489,5 +489,11 @@
   "numQuizDone": "รอบนี้ตอบถูก {correct}/{total} ข้อ",
   "numQuizAnswer": "คำตอบคือ {number}",
   "numQuizMasterHint": "ถ้าระหว่างทางเจอ 11, 22 หรือ 33 ให้หยุดตรงนั้น นี่คือเลขมาสเตอร์",
-  "numQuizNext": "ข้อถัดไป"
+  "numQuizNext": "ข้อถัดไป",
+  "numShortDay": "วัน",
+  "numShortMonth": "เดือน",
+  "numShortYear": "ปี",
+  "numBannerPrompt": "ใส่วันเกิดเพื่อดูเลขวันส่วนตัวของวันนี้",
+  "numReminderBody": "วันนี้คือเลขวันส่วนตัว {n}: {theme} เปิดไพ่ของวันนี้แล้วดูว่าเชื่อมโยงกันอย่างไร",
+  "numCrossFooter": "เลขวันส่วนตัววันนี้: {n} · {theme}"
 }

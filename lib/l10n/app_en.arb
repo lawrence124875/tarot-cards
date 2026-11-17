@@ -489,5 +489,11 @@
   "numQuizDone": "You got {correct} of {total} right this round",
   "numQuizAnswer": "The answer is {number}.",
   "numQuizMasterHint": "If 11, 22 or 33 appears along the way, stop there: it is a master number.",
-  "numQuizNext": "Next question"
+  "numQuizNext": "Next question",
+  "numShortDay": "Day",
+  "numShortMonth": "Month",
+  "numShortYear": "Year",
+  "numBannerPrompt": "Enter your birth date to see today's personal day",
+  "numReminderBody": "Personal day {n}: {theme}. Turn over today's card and see how it connects.",
+  "numCrossFooter": "Today's personal day: {n} · {theme}"
 }

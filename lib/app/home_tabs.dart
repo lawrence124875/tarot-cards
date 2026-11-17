@@ -6,6 +6,7 @@ import '../features/daily/daily_feature.dart';
 import '../features/daily/daily_page.dart';
 import '../features/draw/draw_feature.dart';
 import '../features/lenormand/lenormand_feature.dart';
+import '../features/numerology/numday_banner.dart';
 import '../features/numerology/numerology_feature.dart';
 import '../features/runes/rune_feature.dart';
 import '../features/settings/settings_page.dart';
@@ -82,6 +83,7 @@ class TodayTab extends StatelessWidget {
               ),
             ]),
             const SizedBox(height: 16),
+            const NumdayBanner(),
             if (daily) const _TodayCard(),
             ValueListenableBuilder<bool>(
               valueListenable: s.premium.isPremium,

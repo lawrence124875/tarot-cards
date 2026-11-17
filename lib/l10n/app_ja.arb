@@ -489,5 +489,11 @@
   "numQuizDone": "このラウンドの正解 {correct}／{total} 問",
   "numQuizAnswer": "答えは {number} です。",
   "numQuizMasterHint": "途中で 11・22・33 が出たらそこで止めます。これがマスターナンバーです。",
-  "numQuizNext": "次の問題"
+  "numQuizNext": "次の問題",
+  "numShortDay": "デイ",
+  "numShortMonth": "マンス",
+  "numShortYear": "イヤー",
+  "numBannerPrompt": "生年月日を入力して今日のパーソナルデイを見る",
+  "numReminderBody": "今日はパーソナルデイ {n}：{theme}。今日のカードをめくって、つながりを見てみましょう。",
+  "numCrossFooter": "今日のパーソナルデイ：{n}・{theme}"
 }

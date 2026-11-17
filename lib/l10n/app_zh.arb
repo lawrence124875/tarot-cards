@@ -1157,5 +1157,31 @@
     }
   },
   "numQuizMasterHint": "途中遇到 11、22、33 就停下來，這是主數。",
-  "numQuizNext": "下一題"
+  "numQuizNext": "下一題",
+  "numShortDay": "流日",
+  "numShortMonth": "流月",
+  "numShortYear": "流年",
+  "numBannerPrompt": "輸入生日看今日流日",
+  "numReminderBody": "今天是流日 {n}：{theme}。翻開今天的牌，看看它怎麼呼應。",
+  "@numReminderBody": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "theme": {
+        "type": "String"
+      }
+    }
+  },
+  "numCrossFooter": "今天的流日提醒：流日 {n}・{theme}",
+  "@numCrossFooter": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "theme": {
+        "type": "String"
+      }
+    }
+  }
 }

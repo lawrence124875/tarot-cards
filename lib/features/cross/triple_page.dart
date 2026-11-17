@@ -25,6 +25,7 @@ import '../../shared/widgets/card_back.dart';
 import '../../shared/widgets/card_face.dart';
 import '../../shared/widgets/flip_card.dart';
 import '../lenormand/lenormand_widgets.dart';
+import '../numerology/numday_banner.dart';
 import '../runes/rune_widgets.dart';
 import 'cross_intro.dart';
 import 'cross_page.dart';
@@ -287,6 +288,7 @@ class _TriplePageState extends State<TriplePage> {
                   child: Text(l.crossAgain),
                 ),
               ]),
+              const NumdayHint(),
             ],
           ],
         ],

@@ -489,5 +489,11 @@
   "numQuizDone": "أجبت إجابة صحيحة عن {correct} من {total} في هذه الجولة",
   "numQuizAnswer": "الإجابة هي {number}.",
   "numQuizMasterHint": "إذا ظهر 11 أو 22 أو 33 في الطريق فتوقف عنده: إنه رقم رئيسي.",
-  "numQuizNext": "السؤال التالي"
+  "numQuizNext": "السؤال التالي",
+  "numShortDay": "اليوم",
+  "numShortMonth": "الشهر",
+  "numShortYear": "السنة",
+  "numBannerPrompt": "أدخل تاريخ ميلادك لترى يومك الشخصي اليوم",
+  "numReminderBody": "اليوم هو يومك الشخصي {n}: {theme}. اكشف بطاقة اليوم وانظر كيف تتصل به.",
+  "numCrossFooter": "يومك الشخصي اليوم: {n} · {theme}"
 }

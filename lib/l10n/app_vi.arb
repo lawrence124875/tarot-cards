@@ -489,5 +489,11 @@
   "numQuizDone": "Vòng này bạn đúng {correct}/{total} câu",
   "numQuizAnswer": "Đáp án là {number}.",
   "numQuizMasterHint": "Nếu gặp 11, 22 hoặc 33 giữa chừng thì dừng lại: đó là số bậc thầy.",
-  "numQuizNext": "Câu tiếp theo"
+  "numQuizNext": "Câu tiếp theo",
+  "numShortDay": "Ngày",
+  "numShortMonth": "Tháng",
+  "numShortYear": "Năm",
+  "numBannerPrompt": "Nhập ngày sinh để xem ngày cá nhân hôm nay",
+  "numReminderBody": "Hôm nay là ngày cá nhân {n}: {theme}. Lật lá bài hôm nay và xem chúng liên hệ thế nào.",
+  "numCrossFooter": "Ngày cá nhân hôm nay: {n} · {theme}"
 }
