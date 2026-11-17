@@ -11,6 +11,7 @@ void main() {
     expect(otherApps.map((a) => a.url), [
       'https://play.google.com/store/apps/details?id=com.lclab.qiangua',
       'https://play.google.com/store/apps/details?id=tw.bcc.englishapp',
+      'https://play.google.com/store/apps/details?id=com.lclab.qimen',
     ]);
   });
 
@@ -25,6 +26,7 @@ void main() {
     }
   });
 
+  // 奇門羅盤預設隱藏（Remote Config tr_other_app_com_lclab_qimen 未設），所以仍是兩列
   testWidgets('顯示兩列（含阿拉伯文由右至左）', (tester) async {
     for (final locale in [AppLanguages.zhHant.locale, AppLanguages.ar.locale]) {
       await tester.pumpWidget(testApp(testServices(), const Scaffold(body: OtherAppsSection()), locale: locale));

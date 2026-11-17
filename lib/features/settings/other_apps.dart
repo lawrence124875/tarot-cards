@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../app/services.dart';
+import '../../core/telemetry/remote_flags.dart';
 import '../../l10n/l10n.dart';
 
 /// LC Lab 其他 App（設定頁最下方）。圖示在 assets/other_apps/（建置時由私人 repo 匯入，不連網抓）；
@@ -20,7 +22,14 @@ class OtherApp {
 final otherApps = [
   OtherApp(id: 'com.lclab.qiangua', name: (l) => l.otherAppQianguaName, desc: (l) => l.otherAppQianguaDesc),
   OtherApp(id: 'tw.bcc.englishapp', name: (l) => l.otherAppEnglishName, desc: (l) => l.otherAppEnglishDesc),
+  OtherApp(id: 'com.lclab.qimen', name: (l) => l.otherAppQimenName, desc: (l) => l.otherAppQimenDesc),
 ];
+
+/// 尚未上架的 App：Remote Config `tr_other_app_<套件名稱以底線取代點>` 設為 1 才顯示（預設不顯示）。
+const _hiddenUntilLaunch = {'com.lclab.qimen'};
+
+bool _visible(RemoteFlags flags, OtherApp a) =>
+    !_hiddenUntilLaunch.contains(a.id) || flags.intValue('tr_other_app_${a.id.replaceAll('.', '_')}', 0) == 1;
 
 class OtherAppsSection extends StatelessWidget {
   const OtherAppsSection({super.key});
@@ -34,7 +43,7 @@ class OtherAppsSection extends StatelessWidget {
       const SizedBox(height: 8),
       Card(
         child: Column(children: [
-          for (final a in otherApps)
+          for (final a in otherApps.where((a) => _visible(AppServices.of(context).flags, a)))
             ListTile(
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
