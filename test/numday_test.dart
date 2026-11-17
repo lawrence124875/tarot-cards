@@ -153,6 +153,9 @@ void main() {
         testApp(s, Scaffold(body: ListView(children: [NumdaySection(key: ValueKey(d), card: const DrawnCard(1), date: d)])));
     await tester.pumpWidget(page(DateTime(2026, 11, 17)));
     await tester.pumpAndSettle();
+    expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsNothing, reason: '已有生日');
+    expect(find.byType(NumdayResultView), findsOneWidget, reason: '應顯示流日卡');
+    expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing, reason: '第一次應完整');
     expect(find.text('這次是免費完整體驗，之後的流日 × 今日一牌完整內容需要訂閱'), findsOneWidget);
     expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing);
 
