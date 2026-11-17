@@ -12,6 +12,14 @@ import 'package:tarot_cards/features/numerology/numday_section.dart';
 import 'helpers.dart';
 
 /// 流日 × 今日一牌（0.5.0 P3）：關係判斷、固定挑句、四段拼接、日記記流日、免費一次完整體驗。
+/// 讀資產（模板不存在時的例外）需要真實 I/O：在 runAsync 裡等一下再 settle。
+Future<void> settle(WidgetTester tester) async {
+  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 200)));
+  await tester.pumpAndSettle();
+  await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 200)));
+  await tester.pumpAndSettle();
+}
+
 void main() {
   test('關係：同頻（化簡相同）、呼應、宮廷牌；愚者 0 一律呼應', () {
     expect(numdayRelation(TarotCard.byId(19), 1), NumdayRelation.sync); // 太陽 19 → 1
@@ -137,12 +145,12 @@ void main() {
   testWidgets('沒有生日：今日一牌顯示輸入生日的引導；日記回顧不顯示', (tester) async {
     final s = testServices();
     await tester.pumpWidget(testApp(s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17))]))));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsOneWidget);
 
     await tester.pumpWidget(testApp(
         s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17), live: false)]))));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsNothing);
   });
 
@@ -152,7 +160,7 @@ void main() {
     Widget page(DateTime d) =>
         testApp(s, Scaffold(body: ListView(children: [NumdaySection(key: ValueKey(d), card: const DrawnCard(1), date: d)])));
     await tester.pumpWidget(page(DateTime(2026, 11, 17)));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsNothing, reason: '已有生日');
     expect(find.byType(NumdayResultView), findsOneWidget, reason: '應顯示流日卡');
     expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing, reason: '第一次應完整');
@@ -160,12 +168,12 @@ void main() {
     expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing);
 
     await tester.pumpWidget(page(DateTime(2026, 11, 18)));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('解鎖完整流日 × 今日一牌'), findsOneWidget);
 
     // 回到那一天：仍完整
     await tester.pumpWidget(page(DateTime(2026, 11, 17)));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing);
   });
 }
