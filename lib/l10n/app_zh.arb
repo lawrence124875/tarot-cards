@@ -1056,5 +1056,64 @@
   "otherAppQianguaName": "謙卦 Qiangua",
   "otherAppQianguaDesc": "易經 64 卦牌，含梅花易數、紫微、八字",
   "otherAppEnglishName": "智慧聽覺巡航 English Words Audio Cruise",
-  "otherAppEnglishDesc": "用聽的背英文單字，鎖螢幕也能播"
+  "otherAppEnglishDesc": "用聽的背英文單字，鎖螢幕也能播",
+  "featureNumerology": "生命靈數",
+  "homeNumerologyDesc": "從出生日期認識自己的節奏",
+  "numHubIntro": "用出生年月日算出生命靈數與每天的流日，當作認識自己的一面鏡子，不是命運的定論。",
+  "numEnterBirthday": "輸入生日",
+  "numBirthdayLocal": "生日只存在這支手機，不會上傳。",
+  "numBirthdayLabel": "生日：{date}",
+  "@numBirthdayLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "numEditBirthday": "修改生日",
+  "numClearBirthday": "清除生日",
+  "numClearConfirm": "清除後靈數會先隱藏，之後可以重新輸入。",
+  "numLifePath": "生命靈數",
+  "numBirthdayNumber": "生日數",
+  "numPersonalDay": "今日流日",
+  "numPersonalMonth": "本月流月",
+  "numPersonalYear": "今年流年",
+  "numPinnacles": "高峰數與挑戰數",
+  "numPinnacle": "高峰數",
+  "numChallenge": "挑戰數",
+  "numPeriod": "第 {index} 期・{from}–{to} 歲",
+  "@numPeriod": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "numPeriodLast": "第 {index} 期・{from} 歲起",
+  "@numPeriodLast": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "from": {
+        "type": "int"
+      }
+    }
+  },
+  "numNow": "目前",
+  "numLibrary": "數字圖鑑",
+  "numLessons": "生命靈數課程",
+  "numMaster": "主數",
+  "numPremiumHint": "訂閱後解鎖",
+  "numDisclaimer": "數字是認識自己的鏡子，不是預言；怎麼走由你決定。",
+  "numGift": "天賦",
+  "numInnerWork": "向內的功課",
+  "numPractice": "小練習",
+  "numQuestion": "問問自己"
 }

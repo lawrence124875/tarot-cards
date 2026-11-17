@@ -83,6 +83,17 @@ flutter:
     - assets/runes/pt-BR/
     - assets/runes/th/
     - assets/runes/ar/
+    - assets/numerology/zh-Hant/
+    - assets/numerology/zh-Hans/
+    - assets/numerology/en/
+    - assets/numerology/ja/
+    - assets/numerology/ko/
+    - assets/numerology/vi/
+    - assets/numerology/id/
+    - assets/numerology/es/
+    - assets/numerology/pt-BR/
+    - assets/numerology/th/
+    - assets/numerology/ar/
     - assets/cross/
     - assets/cross/zh-Hant/
     - assets/cross/zh-Hans/

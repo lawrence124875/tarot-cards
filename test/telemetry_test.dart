@@ -112,7 +112,7 @@ void main() {
     expect(featureFlagKey('journal'), 'tr_feature_journal');
     final ids = registeredFeatures.map((f) => f.id).toList();
     expect(activeFeatures(const DefaultRemoteFlags()).map((f) => f.id), ids);
-    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'runes', 'cross_hub', 'cross', 'triple', 'journal', 'breath']);
+    expect(ids, ['daily', 'draw', 'learn', 'lenormand', 'runes', 'numerology', 'cross_hub', 'cross', 'triple', 'journal', 'breath']);
     expect(activeFeatures(_Off({'journal'})).map((f) => f.id), isNot(contains('journal')));
     expect(activeFeatures(_Off({'journal'})).length, ids.length - 1);
     // 首頁「交叉解讀」入口：雙、三系統都關掉才隱藏
