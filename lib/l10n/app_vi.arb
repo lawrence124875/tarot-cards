@@ -479,5 +479,15 @@
   "numdayPrompt": "Nhập ngày sinh để xem ngày cá nhân hôm nay hòa nhịp với lá bài này thế nào.",
   "numdayLockedBody": "Đăng ký để xem toàn bộ: chủ đề ngày cá nhân, lời nhắc của lá bài, điểm giao nhau, bài tập nhỏ và câu hỏi suy ngẫm.",
   "numdayUnlock": "Mở khóa đầy đủ Ngày cá nhân × Lá bài",
-  "numdayTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của Ngày cá nhân × Lá bài dành cho thành viên"
+  "numdayTrialNote": "Lần này là trải nghiệm đầy đủ miễn phí. Từ lần sau, nội dung đầy đủ của Ngày cá nhân × Lá bài dành cho thành viên",
+  "numCourseHint": "7 bài học: từ cách tính, ý nghĩa các con số đến thần số học × tarot, kèm bài luyện tập.",
+  "numQuiz": "Luyện tập thần số học",
+  "numQuizHint": "Từ khóa con số và bài tính số chủ đạo",
+  "numQuizKeyword": "Từ khóa của con số này là gì?",
+  "numQuizLifePath": "Người sinh ngày này có số chủ đạo là bao nhiêu?",
+  "numQuizProgress": "Luyện tập {n}/{total}",
+  "numQuizDone": "Vòng này bạn đúng {correct}/{total} câu",
+  "numQuizAnswer": "Đáp án là {number}.",
+  "numQuizMasterHint": "Nếu gặp 11, 22 hoặc 33 giữa chừng thì dừng lại: đó là số bậc thầy.",
+  "numQuizNext": "Câu tiếp theo"
 }

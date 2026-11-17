@@ -479,5 +479,15 @@
   "numdayPrompt": "Introduce tu fecha de nacimiento para ver cómo tu día personal dialoga con esta carta.",
   "numdayLockedBody": "Suscríbete para verlo todo: el tema de tu día personal, lo que la carta te recuerda, dónde se encuentran, una pequeña práctica y una pregunta de reflexión.",
   "numdayUnlock": "Desbloquear Día personal × Carta completo",
-  "numdayTrialNote": "Esta vez es una prueba completa gratuita. Después, las lecturas completas de Día personal × Carta son para miembros"
+  "numdayTrialNote": "Esta vez es una prueba completa gratuita. Después, las lecturas completas de Día personal × Carta son para miembros",
+  "numCourseHint": "7 unidades: del cálculo y el significado de cada número a numerología × tarot, con ejercicios.",
+  "numQuiz": "Práctica de numerología",
+  "numQuizHint": "Palabras clave de los números y cálculo del número de camino de vida",
+  "numQuizKeyword": "¿Qué palabras clave corresponden a este número?",
+  "numQuizLifePath": "¿Cuál es el número de camino de vida para esta fecha de nacimiento?",
+  "numQuizProgress": "Práctica {n}/{total}",
+  "numQuizDone": "Acertaste {correct} de {total} en esta ronda",
+  "numQuizAnswer": "La respuesta es {number}.",
+  "numQuizMasterHint": "Si aparece 11, 22 o 33 por el camino, detente: es un número maestro.",
+  "numQuizNext": "Siguiente pregunta"
 }

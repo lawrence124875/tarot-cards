@@ -479,5 +479,15 @@
   "numdayPrompt": "Enter your birthday to see how today's personal day echoes this card.",
   "numdayLockedBody": "Subscribe to see everything: today's personal-day theme, what the card reminds you, where they meet, a small practice and a reflection question.",
   "numdayUnlock": "Unlock the full personal day × card",
-  "numdayTrialNote": "This one is a free full preview. Full personal day × card readings after this are for members."
+  "numdayTrialNote": "This one is a free full preview. Full personal day × card readings after this are for members.",
+  "numCourseHint": "7 units, from how to calculate and what each number means to numerology × tarot, with practice questions.",
+  "numQuiz": "Numerology practice",
+  "numQuizHint": "Number keywords and life path calculations",
+  "numQuizKeyword": "Which keywords belong to this number?",
+  "numQuizLifePath": "What is the life path number for this birth date?",
+  "numQuizProgress": "Practice {n}/{total}",
+  "numQuizDone": "You got {correct} of {total} right this round",
+  "numQuizAnswer": "The answer is {number}.",
+  "numQuizMasterHint": "If 11, 22 or 33 appears along the way, stop there: it is a master number.",
+  "numQuizNext": "Next question"
 }
