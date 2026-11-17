@@ -21,7 +21,7 @@ import 'numerology_widgets.dart';
 /// - 免費／付費比照塔羅 × 雷諾曼（Lawrence 2026-11-17）：免費一次完整（記住那天那張牌，回看仍完整），
 ///   之後只顯示標題列（流日數字＋牌名＋關係名稱）＋付費牆（來源 numday）；Premium 全部完整。
 class NumdaySection extends StatefulWidget {
-  const NumdaySection({super.key, required this.card, required this.date, this.day, this.live = true});
+  const NumdaySection({super.key, required this.card, required this.date, this.day, this.live = true, this.templates});
 
   final DrawnCard card;
 
@@ -33,6 +33,9 @@ class NumdaySection extends StatefulWidget {
 
   /// 今日一牌畫面（可輸入生日、可用掉免費體驗）。
   final bool live;
+
+  /// 測試用：直接給模板（不讀資產）。
+  final NumdayTemplates? templates;
 
   static const featureId = 'numday';
 
@@ -57,7 +60,7 @@ class _NumdaySectionState extends State<NumdaySection> {
 
   Future<void> _load() async {
     await _s.birthdays.load();
-    final templates = await loadNumdayTemplates(L10n.contentFolder);
+    final templates = widget.templates ?? await loadNumdayTemplates(L10n.contentFolder);
     final numbers = await _s.numerology.texts();
     final content = await _s.content.card(widget.card.cardId);
     if (!mounted) return;

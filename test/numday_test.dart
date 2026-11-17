@@ -144,12 +144,12 @@ void main() {
 
   testWidgets('沒有生日：今日一牌顯示輸入生日的引導；日記回顧不顯示', (tester) async {
     final s = testServices();
-    await tester.pumpWidget(testApp(s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17))]))));
+    await tester.pumpWidget(testApp(s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17), templates: templates)]))));
     await settle(tester);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsOneWidget);
 
     await tester.pumpWidget(testApp(
-        s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17), live: false)]))));
+        s, Scaffold(body: ListView(children: [NumdaySection(card: const DrawnCard(1), date: DateTime(2026, 11, 17), live: false, templates: templates)]))));
     await settle(tester);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsNothing);
   });
@@ -158,11 +158,13 @@ void main() {
     final s = testServices();
     await s.birthdays.save(DateTime(1990, 5, 23));
     Widget page(DateTime d) =>
-        testApp(s, Scaffold(body: ListView(children: [NumdaySection(key: ValueKey(d), card: const DrawnCard(1), date: d)])));
+        testApp(s, Scaffold(body: ListView(children: [NumdaySection(key: ValueKey(d), card: const DrawnCard(1), date: d, templates: templates)])));
     await tester.pumpWidget(page(DateTime(2026, 11, 17)));
     await settle(tester);
     expect(tester.takeException()?.toString().split('\n').take(3).join(' / '), isNull);
     expect(find.text('輸入生日，看今天的流日怎麼呼應這張牌。'), findsNothing, reason: '已有生日');
+    expect(find.byType(NumdaySection), findsOneWidget);
+    expect(find.byType(Card), findsWidgets, reason: '應有卡片');
     expect(find.byType(NumdayResultView), findsOneWidget, reason: '應顯示流日卡');
     expect(find.text('解鎖完整流日 × 今日一牌'), findsNothing, reason: '第一次應完整');
     expect(find.text('這次是免費完整體驗，之後的流日 × 今日一牌完整內容需要訂閱'), findsOneWidget);
