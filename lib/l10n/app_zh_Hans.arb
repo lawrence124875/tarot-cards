@@ -474,5 +474,10 @@
   "numGift": "天赋",
   "numInnerWork": "向内的功课",
   "numPractice": "小练习",
-  "numQuestion": "问问自己"
+  "numQuestion": "问问自己",
+  "numdayTitle": "流日 × 今日一牌",
+  "numdayPrompt": "输入生日，看今天的流日怎么呼应这张牌。",
+  "numdayLockedBody": "订阅后可看完整内容：今日流日主题、牌的提醒、两者交会、今日小练习与反思问题。",
+  "numdayUnlock": "解锁完整流日 × 今日一牌",
+  "numdayTrialNote": "这次是免费完整体验，之后的流日 × 今日一牌完整内容需要订阅"
 }

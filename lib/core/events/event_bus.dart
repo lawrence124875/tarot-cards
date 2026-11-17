@@ -44,6 +44,15 @@ class TripleShown extends AppEvent {
   final bool full;
 }
 
+/// 今日一牌看到一次流日 × 今日一牌（只送關係代碼 sync／echo／court、流日數字與是否完整內容；不含生日）。
+class NumdayShown extends AppEvent {
+  const NumdayShown({required this.relation, required this.day, required this.full});
+
+  final String relation;
+  final int day;
+  final bool full;
+}
+
 /// 交叉紀錄回顧時選了「事後應驗了嗎？」（只送選項值 yes／partial／no）。
 class CrossVerified extends AppEvent {
   const CrossVerified({required this.result});

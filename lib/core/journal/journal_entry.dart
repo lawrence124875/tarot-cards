@@ -39,6 +39,7 @@ class JournalEntry {
     List<int> lenormand = const [],
     List<int> runes = const [],
     this.verdict = '',
+    this.numday = 0,
   })  : cards = List.unmodifiable(cards),
         lenormand = List.unmodifiable(lenormand),
         runes = List.unmodifiable(runes),
@@ -56,6 +57,7 @@ class JournalEntry {
     DateTime? reminderAt,
     List<int> lenormand = const [],
     List<int> runes = const [],
+    int numday = 0,
   }) =>
       JournalEntry(
         id: now.microsecondsSinceEpoch.toRadixString(36),
@@ -71,6 +73,7 @@ class JournalEntry {
         reminderAt: reminderAt,
         lenormand: lenormand,
         runes: runes,
+        numday: numday,
       );
 
   /// 雷諾曼單獨抽牌的紀錄（不含塔羅牌）。spreadId 為 len_one／len_three。
@@ -136,6 +139,9 @@ class JournalEntry {
   /// 交叉紀錄回顧「事後應驗了嗎？」：yes／partial／no；空字串＝還沒選。
   final String verdict;
 
+  /// 今日一牌存檔時的流日數字（1–9；0＝沒有生日或不是今日一牌）。生日本身不存進日記。
+  final int numday;
+
   /// 塔羅 × 雷諾曼（雙系統，沒有盧恩）。
   bool get isCross => cards.isNotEmpty && lenormand.isNotEmpty && runes.isEmpty;
 
@@ -199,6 +205,7 @@ class JournalEntry {
         lenormand: lenormand,
         runes: runes,
         verdict: verdict ?? this.verdict,
+        numday: numday,
       );
 
   Map<String, dynamic> toJson() => {
@@ -217,6 +224,7 @@ class JournalEntry {
         if (lenormand.isNotEmpty) 'lenormand': lenormand,
         if (runes.isNotEmpty) 'runes': runes,
         if (verdict.isNotEmpty) 'verdict': verdict,
+        if (numday > 0) 'numday': numday,
       };
 
   /// 寬鬆解析：欄位缺漏給預設值；牌不合法或數量與牌陣不符時回傳 null（略過該筆）。
@@ -268,6 +276,7 @@ class JournalEntry {
       // 盧恩：單獨紀錄（rune_*），或三系統（塔羅＋雷諾曼＋一顆盧恩）
       runes: spreadId.startsWith('rune_') || (cards.isNotEmpty && len.isNotEmpty && runes.length == 1) ? runes : const [],
       verdict: verdicts.contains(j['verdict']) ? j['verdict'] as String : '',
+      numday: j['numday'] is int && (j['numday'] as int) >= 1 && (j['numday'] as int) <= 9 ? j['numday'] as int : 0,
     );
   }
 }

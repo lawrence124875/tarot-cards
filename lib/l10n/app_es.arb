@@ -474,5 +474,10 @@
   "numGift": "Don",
   "numInnerWork": "Trabajo interior",
   "numPractice": "Pequeña práctica",
-  "numQuestion": "Pregúntate"
+  "numQuestion": "Pregúntate",
+  "numdayTitle": "Día personal × Carta de hoy",
+  "numdayPrompt": "Introduce tu fecha de nacimiento para ver cómo tu día personal dialoga con esta carta.",
+  "numdayLockedBody": "Suscríbete para verlo todo: el tema de tu día personal, lo que la carta te recuerda, dónde se encuentran, una pequeña práctica y una pregunta de reflexión.",
+  "numdayUnlock": "Desbloquear Día personal × Carta completo",
+  "numdayTrialNote": "Esta vez es una prueba completa gratuita. Después, las lecturas completas de Día personal × Carta son para miembros"
 }

@@ -474,5 +474,10 @@
   "numGift": "持ち味",
   "numInnerWork": "内なる課題",
   "numPractice": "小さな練習",
-  "numQuestion": "自分に問いかける"
+  "numQuestion": "自分に問いかける",
+  "numdayTitle": "個人日 × 今日の一枚",
+  "numdayPrompt": "誕生日を入力して、今日の個人日がこのカードとどう響き合うか見てみましょう。",
+  "numdayLockedBody": "メンバーになると全文を読めます：今日の個人日のテーマ、カードからのヒント、二つが重なるところ、今日の小さな練習と問いかけ。",
+  "numdayUnlock": "個人日 × 今日の一枚の全文を解除",
+  "numdayTrialNote": "今回は無料の完全体験です。次回以降の個人日 × 今日の一枚の全文はメンバー向けです"
 }

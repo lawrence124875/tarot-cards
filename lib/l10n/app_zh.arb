@@ -1115,5 +1115,10 @@
   "numGift": "天賦",
   "numInnerWork": "向內的功課",
   "numPractice": "小練習",
-  "numQuestion": "問問自己"
+  "numQuestion": "問問自己",
+  "numdayTitle": "流日 × 今日一牌",
+  "numdayPrompt": "輸入生日，看今天的流日怎麼呼應這張牌。",
+  "numdayLockedBody": "訂閱後可看完整內容：今日流日主題、牌的提醒、兩者交會、今日小練習與反思問題。",
+  "numdayUnlock": "解鎖完整流日 × 今日一牌",
+  "numdayTrialNote": "這次是免費完整體驗，之後的流日 × 今日一牌完整內容需要訂閱"
 }

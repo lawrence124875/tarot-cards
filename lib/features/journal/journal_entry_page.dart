@@ -8,7 +8,9 @@ import '../../core/journal/journal_entry.dart';
 import '../../core/journal/journal_reminders.dart';
 import '../../core/lenormand/lenormand.dart';
 import '../../core/runes/runes.dart';
+import '../../core/tarot/draw.dart';
 import '../cross/cross_journal_section.dart';
+import '../numerology/numday_section.dart';
 import '../lenormand/lenormand_widgets.dart';
 import '../runes/rune_widgets.dart';
 import '../../l10n/l10n.dart';
@@ -262,6 +264,8 @@ class _JournalEntryPageState extends State<JournalEntryPage> {
               textAlign: TextAlign.center, style: t.titleMedium),
         ],
         if (e.isCross || e.isTriple) CrossJournalSection(entry: e, onChanged: _update),
+        if (e.methodId == DrawMethods.daily && e.numday > 0 && e.cards.isNotEmpty)
+          NumdaySection(card: e.cards.first, date: e.createdAt, day: e.numday, live: false),
         if (reading != null) ...[
           const SizedBox(height: 8),
           Text(l.journalReadingThen, textAlign: TextAlign.center, style: t.bodySmall),

@@ -474,5 +474,10 @@
   "numGift": "Bakat",
   "numInnerWork": "Pekerjaan batin",
   "numPractice": "Latihan kecil",
-  "numQuestion": "Tanyakan pada dirimu"
+  "numQuestion": "Tanyakan pada dirimu",
+  "numdayTitle": "Hari pribadi × Kartu hari ini",
+  "numdayPrompt": "Masukkan tanggal lahir untuk melihat bagaimana hari pribadimu selaras dengan kartu ini.",
+  "numdayLockedBody": "Berlangganan untuk melihat semuanya: tema hari pribadi, pesan kartu, titik temu keduanya, latihan kecil dan pertanyaan refleksi.",
+  "numdayUnlock": "Buka lengkap Hari pribadi × Kartu",
+  "numdayTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap Hari pribadi × Kartu khusus anggota"
 }
