@@ -118,7 +118,7 @@ class NumTile extends StatelessWidget {
         child: ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           leading: number != null
-              ? NumberBadge(number: number!, size: 40)
+              ? SizedBox.square(dimension: 40, child: NumberBadge(number: number!, size: 40))
               : CircleAvatar(
                   backgroundColor: TarotColors.dawn.withValues(alpha: 0.3),
                   foregroundColor: TarotColors.earth,
