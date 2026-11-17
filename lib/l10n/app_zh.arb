@@ -1120,5 +1120,42 @@
   "numdayPrompt": "輸入生日，看今天的流日怎麼呼應這張牌。",
   "numdayLockedBody": "訂閱後可看完整內容：今日流日主題、牌的提醒、兩者交會、今日小練習與反思問題。",
   "numdayUnlock": "解鎖完整流日 × 今日一牌",
-  "numdayTrialNote": "這次是免費完整體驗，之後的流日 × 今日一牌完整內容需要訂閱"
+  "numdayTrialNote": "這次是免費完整體驗，之後的流日 × 今日一牌完整內容需要訂閱",
+  "numCourseHint": "7 個單元：從計算方法、數字意義到靈數 × 塔羅，附練習題。",
+  "numQuiz": "靈數練習",
+  "numQuizHint": "數字關鍵字與生命靈數計算題",
+  "numQuizKeyword": "這個數字的關鍵字是？",
+  "numQuizLifePath": "這一天出生的人，生命靈數是？",
+  "numQuizProgress": "靈數練習 {n}／{total}",
+  "@numQuizProgress": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "numQuizDone": "這一輪答對 {correct}／{total} 題",
+  "@numQuizDone": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "numQuizAnswer": "答案是 {number}。",
+  "@numQuizAnswer": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "numQuizMasterHint": "途中遇到 11、22、33 就停下來，這是主數。",
+  "numQuizNext": "下一題"
 }

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../app/services.dart';
 import '../../app/theme.dart';
-import '../../core/content/card_content.dart';
 import '../../core/numerology/numerology.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/premium/ad_banner.dart';
 import '../../shared/premium/paywall_page.dart';
 import '../../shared/widgets/adaptive_layout.dart';
-import '../learn/lesson_page.dart';
+import 'numerology_course_page.dart';
 import 'numerology_widgets.dart';
 
 /// 生命靈數首頁：沒有生日先請輸入；有生日顯示生命靈數、生日數、今日流日（免費）、
@@ -23,8 +22,6 @@ class NumerologyHubPage extends StatefulWidget {
 class _NumerologyHubPageState extends State<NumerologyHubPage> {
   late final Services _s = AppServices.of(context);
   NumerologyTexts _texts = const NumerologyTexts();
-  LessonBook? _book;
-  Map<String, int> _unitDone = const {};
   bool _loaded = false;
 
   @override
@@ -36,16 +33,9 @@ class _NumerologyHubPageState extends State<NumerologyHubPage> {
   Future<void> _load() async {
     await _s.birthdays.load();
     final texts = await _s.numerology.texts();
-    final book = await _s.numerology.lessons();
-    final done = {
-      for (final u in book?.units ?? const <LessonUnit>[])
-        u.id: await _s.lessonProgress.doneIn(u.id, [for (final x in u.lessons) x.id]),
-    };
     if (!mounted) return;
     setState(() {
       _texts = texts;
-      _book = book;
-      _unitDone = done;
       _loaded = true;
     });
   }
@@ -126,30 +116,13 @@ class _NumerologyHubPageState extends State<NumerologyHubPage> {
                         ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 24, 4, 8),
-                    child: Text(l.numLessons, style: t.titleMedium),
+                  const SizedBox(height: 24),
+                  NumTile(
+                    icon: Icons.menu_book_outlined,
+                    title: l.numLessons,
+                    subtitle: l.numCourseHint,
+                    onTap: () => _push(const NumerologyCoursePage()),
                   ),
-                  if (_book == null || _book!.units.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text(l.learnComingSoon, style: t.bodyMedium?.copyWith(color: TarotColors.textSub)),
-                    )
-                  else
-                    for (final u in _book!.units)
-                      NumTile(
-                        icon: Icons.menu_book_outlined,
-                        title: u.title,
-                        subtitle: [
-                          if ((_unitDone[u.id] ?? 0) > 0) l.learnUnitProgress(_unitDone[u.id]!, u.lessons.length),
-                          if (!u.free && !_s.isPremium) l.learnPreviewFree,
-                          u.summary,
-                        ].join('\n'),
-                        onTap: () {
-                          if (!u.ready) return;
-                          _push(LessonUnitPage(unit: u, cardTile: numberLessonTile));
-                        },
-                      ),
                 ],
               ),
       ),

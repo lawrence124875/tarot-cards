@@ -479,5 +479,15 @@
   "numdayPrompt": "Masukkan tanggal lahir untuk melihat bagaimana hari pribadimu selaras dengan kartu ini.",
   "numdayLockedBody": "Berlangganan untuk melihat semuanya: tema hari pribadi, pesan kartu, titik temu keduanya, latihan kecil dan pertanyaan refleksi.",
   "numdayUnlock": "Buka lengkap Hari pribadi × Kartu",
-  "numdayTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap Hari pribadi × Kartu khusus anggota"
+  "numdayTrialNote": "Kali ini adalah pengalaman lengkap gratis. Selanjutnya, isi lengkap Hari pribadi × Kartu khusus anggota",
+  "numCourseHint": "7 unit: dari cara menghitung dan makna angka hingga numerologi × tarot, dengan latihan soal.",
+  "numQuiz": "Latihan numerologi",
+  "numQuizHint": "Kata kunci angka dan soal hitung angka jalan hidup",
+  "numQuizKeyword": "Apa kata kunci angka ini?",
+  "numQuizLifePath": "Berapa angka jalan hidup untuk tanggal lahir ini?",
+  "numQuizProgress": "Latihan {n}/{total}",
+  "numQuizDone": "Benar {correct} dari {total} di putaran ini",
+  "numQuizAnswer": "Jawabannya {number}.",
+  "numQuizMasterHint": "Jika muncul 11, 22, atau 33 di tengah jalan, berhenti di situ: itu angka master.",
+  "numQuizNext": "Soal berikutnya"
 }

@@ -479,5 +479,15 @@
   "numdayPrompt": "誕生日を入力して、今日の個人日がこのカードとどう響き合うか見てみましょう。",
   "numdayLockedBody": "メンバーになると全文を読めます：今日の個人日のテーマ、カードからのヒント、二つが重なるところ、今日の小さな練習と問いかけ。",
   "numdayUnlock": "個人日 × 今日の一枚の全文を解除",
-  "numdayTrialNote": "今回は無料の完全体験です。次回以降の個人日 × 今日の一枚の全文はメンバー向けです"
+  "numdayTrialNote": "今回は無料の完全体験です。次回以降の個人日 × 今日の一枚の全文はメンバー向けです",
+  "numCourseHint": "全7ユニット：計算方法と数字の意味から数秘術 × タロットまで。練習問題つき。",
+  "numQuiz": "数秘術の練習",
+  "numQuizHint": "数字のキーワードとライフパスナンバーの計算問題",
+  "numQuizKeyword": "この数字のキーワードは？",
+  "numQuizLifePath": "この日に生まれた人のライフパスナンバーは？",
+  "numQuizProgress": "練習 {n}／{total}",
+  "numQuizDone": "このラウンドの正解 {correct}／{total} 問",
+  "numQuizAnswer": "答えは {number} です。",
+  "numQuizMasterHint": "途中で 11・22・33 が出たらそこで止めます。これがマスターナンバーです。",
+  "numQuizNext": "次の問題"
 }

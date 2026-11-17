@@ -479,5 +479,15 @@
   "numdayPrompt": "생일을 입력하고 오늘의 개인일이 이 카드와 어떻게 어우러지는지 확인해 보세요.",
   "numdayLockedBody": "구독하면 전체 내용을 볼 수 있어요: 오늘의 개인일 주제, 카드의 메시지, 둘이 만나는 지점, 오늘의 작은 연습과 성찰 질문.",
   "numdayUnlock": "개인일 × 오늘의 카드 전체 보기",
-  "numdayTrialNote": "이번은 무료 전체 체험이에요. 다음부터 개인일 × 오늘의 카드 전체 내용은 멤버 전용이에요"
+  "numdayTrialNote": "이번은 무료 전체 체험이에요. 다음부터 개인일 × 오늘의 카드 전체 내용은 멤버 전용이에요",
+  "numCourseHint": "7개 단원: 계산 방법과 숫자의 의미부터 수비학 × 타로까지, 연습 문제 포함.",
+  "numQuiz": "수비학 연습",
+  "numQuizHint": "숫자 키워드와 생명수 계산 문제",
+  "numQuizKeyword": "이 숫자의 키워드는?",
+  "numQuizLifePath": "이 날 태어난 사람의 생명수는?",
+  "numQuizProgress": "연습 {n}/{total}",
+  "numQuizDone": "이번 라운드 정답 {correct}/{total}문제",
+  "numQuizAnswer": "정답은 {number}입니다.",
+  "numQuizMasterHint": "중간에 11, 22, 33이 나오면 멈춥니다. 이것이 마스터 넘버입니다.",
+  "numQuizNext": "다음 문제"
 }

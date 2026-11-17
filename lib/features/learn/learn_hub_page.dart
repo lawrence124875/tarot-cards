@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../app/feature_registry.dart';
 import '../../app/services.dart';
 import '../../app/theme.dart';
 import '../../core/content/card_content.dart';
 import '../../l10n/l10n.dart';
 import '../../shared/premium/ad_banner.dart';
 import '../../shared/widgets/adaptive_layout.dart';
+import '../numerology/numerology_course_page.dart';
 import 'card_library_page.dart';
 import 'lesson_page.dart';
 import 'quiz_page.dart';
@@ -82,6 +84,13 @@ class _LearnHubPageState extends State<LearnHubPage> {
                   subtitle: _seen == 0 ? l.learnQuizHint : l.learnQuizProgress(_seen, _mastered),
                   onTap: () => _push(const QuizSetupPage()),
                 ),
+                if (activeFeatures(_s.flags).any((f) => f.id == 'numerology'))
+                  _Tile(
+                    icon: Icons.pin_outlined,
+                    title: l.numLessons,
+                    subtitle: l.numCourseHint,
+                    onTap: () => _push(const NumerologyCoursePage()),
+                  ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 28, 4, 8),
                   child: Text(l.learnCourses, style: t.titleMedium),
