@@ -117,8 +117,24 @@ class AppLanguages {
     contentReady: true,
   );
 
+  /// 0.6.0 新增歐洲五語（2026-11-21）：內容翻完前 contentReady 為 false（使用者看不到）。
+  /// 德文：稱 du。
+  static const de = AppLanguage(code: 'de', locale: Locale('de'), contentFolder: 'de', contentReady: false);
+
+  /// 法文：稱 tu（法國標準法文）。
+  static const fr = AppLanguage(code: 'fr', locale: Locale('fr'), contentFolder: 'fr', contentReady: false);
+
+  /// 義大利文：稱 tu。
+  static const it = AppLanguage(code: 'it', locale: Locale('it'), contentFolder: 'it', contentReady: false);
+
+  /// 土耳其文：稱 sen。大小寫轉換注意 İ／ı，不要對內容文字用不帶語系的 toUpperCase。
+  static const tr = AppLanguage(code: 'tr', locale: Locale('tr'), contentFolder: 'tr', contentReady: false);
+
+  /// 波蘭文：稱 ty。
+  static const pl = AppLanguage(code: 'pl', locale: Locale('pl'), contentFolder: 'pl', contentReady: false);
+
   /// 已有介面翻譯（ARB）的語言。順序無意義。
-  static const all = [zhHant, en, zhHans, ja, ko, vi, es, pt, id, th, ar];
+  static const all = [zhHant, en, zhHans, ja, ko, vi, es, pt, id, th, ar, de, fr, it, tr, pl];
 
   /// 只看介面不開放內容的測試用開關：建置時加 --dart-define=FORCE_LANG=en，
   /// 不論手機語言一律用該語言介面（內容仍退回繁中）。正式版不加。

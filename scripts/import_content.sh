@@ -6,7 +6,7 @@ src="${1:?用法：import_content.sh <tarot-content 路徑>}"
 
 # 語言資料夾：新增語言時加在這裡，並同步 build_android.yml 的 sparse-checkout 與 pubspec.yaml assets。
 # 每個語言：00.json–77.json（每張牌）、spreads.json、atmosphere.json、lessons.json。
-LANGS="zh-Hant en zh-Hans ja ko vi es pt-BR id th ar"
+LANGS="zh-Hant en zh-Hans ja ko vi es pt-BR id th ar de fr it tr pl"
 summary=""
 for lang in $LANGS; do
   mkdir -p "assets/content/$lang"
@@ -45,7 +45,7 @@ fi
 # lenormand/deck/01.webp–36.webp、back.webp。
 len=""
 if [ -d "$src/lenormand" ]; then
-  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar de fr it tr pl; do
     mkdir -p "assets/lenormand/$lang"
     n=0
     for f in "$src/lenormand/$lang"/*.json; do
@@ -68,7 +68,7 @@ fi
 # 盧恩：runes/<語言>/runes.json、spreads.json、lessons.json（符文以程式繪製，沒有圖檔）。
 rune=""
 if [ -d "$src/runes" ]; then
-  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar de fr it tr pl; do
     mkdir -p "assets/runes/$lang"
     n=0
     for f in "$src/runes/$lang"/*.json; do
@@ -83,7 +83,7 @@ fi
 # 生命靈數：numerology/<語言>/numbers.json、lessons.json。
 num=""
 if [ -d "$src/numerology" ]; then
-  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar de fr it tr pl; do
     mkdir -p "assets/numerology/$lang"
     n=0
     for f in "$src/numerology/$lang"/*.json; do
@@ -101,7 +101,7 @@ if [ -f "$src/cross/scores.json" ]; then
   mkdir -p assets/cross
   cp "$src/cross/scores.json" assets/cross/
   cross=1
-  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar; do
+  for lang in zh-Hant zh-Hans en ja ko vi id es pt-BR th ar de fr it tr pl; do
     for f in templates triple; do
       if [ -f "$src/cross/$lang/$f.json" ]; then
         mkdir -p "assets/cross/$lang"
