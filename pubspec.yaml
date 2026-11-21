@@ -57,6 +57,11 @@ flutter:
     - assets/content/id/
     - assets/content/th/
     - assets/content/ar/
+    - assets/content/de/
+    - assets/content/fr/
+    - assets/content/it/
+    - assets/content/tr/
+    - assets/content/pl/
     - assets/decks/
     - assets/decks/rws1909/
     - assets/decks/gemini/
@@ -71,6 +76,11 @@ flutter:
     - assets/lenormand/pt-BR/
     - assets/lenormand/th/
     - assets/lenormand/ar/
+    - assets/lenormand/de/
+    - assets/lenormand/fr/
+    - assets/lenormand/it/
+    - assets/lenormand/tr/
+    - assets/lenormand/pl/
     - assets/lenormand/deck/
     - assets/runes/zh-Hant/
     - assets/runes/zh-Hans/
@@ -83,6 +93,11 @@ flutter:
     - assets/runes/pt-BR/
     - assets/runes/th/
     - assets/runes/ar/
+    - assets/runes/de/
+    - assets/runes/fr/
+    - assets/runes/it/
+    - assets/runes/tr/
+    - assets/runes/pl/
     - assets/numerology/zh-Hant/
     - assets/numerology/zh-Hans/
     - assets/numerology/en/
@@ -94,6 +109,11 @@ flutter:
     - assets/numerology/pt-BR/
     - assets/numerology/th/
     - assets/numerology/ar/
+    - assets/numerology/de/
+    - assets/numerology/fr/
+    - assets/numerology/it/
+    - assets/numerology/tr/
+    - assets/numerology/pl/
     - assets/cross/
     - assets/cross/zh-Hant/
     - assets/cross/zh-Hans/
@@ -106,6 +126,11 @@ flutter:
     - assets/cross/pt-BR/
     - assets/cross/th/
     - assets/cross/ar/
+    - assets/cross/de/
+    - assets/cross/fr/
+    - assets/cross/it/
+    - assets/cross/tr/
+    - assets/cross/pl/
     - assets/licenses/
     - assets/other_apps/ # LC Lab 其他 App 圖示（私人 repo branding/other_apps，建置時匯入）
     - assets/audio/ # 真實自然錄音音景（CC0／公有領域，見 CREDITS.md）

@@ -35,6 +35,10 @@ void main() {
     expect(en.card(49), 'King of Cups');
     expect(en.card(77), 'King of Pentacles');
     expect(CardNames.of('zh-Hant').card(36 + 9), '聖杯十');
+    expect(CardNames.of('fr').card(50), "As d'Épées");
+    expect(CardNames.of('pl').card(22 + 13), 'Król Buław');
+    expect(CardNames.of('tr').card(22), 'Asa Ası');
+    expect(CardNames.of('de').card(77), 'König der Pentakel');
     expect(CardNames.of('xx').card(0), CardNames.of(CardNames.fallback).card(0));
   });
 

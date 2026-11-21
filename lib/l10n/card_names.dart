@@ -2,7 +2,7 @@
 /// 名稱是學習用的通行譯名（各語言塔羅書與牌組的常見叫法）；不用商標名「Rider-Waite」。
 /// 畫面不直接用本檔，一律經過 TarotTerms（terms.dart）。
 class CardNames {
-  const CardNames._(this.majors, this.suits, this.ranks);
+  const CardNames._(this.majors, this.suits, this.ranks, [this.rankSuits]);
 
   /// 0–21。
   final List<String> majors;
@@ -13,6 +13,10 @@ class CardNames {
   /// Ace、2–10、侍者、騎士、皇后、國王的樣板（{s}＝花色名）。
   final List<String> ranks;
 
+  /// 套進牌階樣板時用的花色形式（2026-11-21）：波蘭文要用屬格（Buław）、法文 Épées 前要省音（d'Épées）、
+  /// 土耳其文用單數（Asa Ası）。沒有就用 [suits]。
+  final List<String>? rankSuits;
+
   static const fallback = 'zh-Hant';
 
   static CardNames of(String code) => _names[code] ?? _names[fallback]!;
@@ -22,7 +26,7 @@ class CardNames {
   String card(int id) {
     if (id < 22) return majors[id];
     final suit = (id - 22) ~/ 14, rank = (id - 22) % 14;
-    return ranks[rank].replaceAll('{s}', suits[suit]);
+    return ranks[rank].replaceAll('{s}', (rankSuits ?? suits)[suit]);
   }
 }
 
@@ -111,5 +115,49 @@ const _names = <String, CardNames>{
     ['العصي', 'الكؤوس', 'السيوف', 'العملات'],
     ['آس {s}', 'اثنان من {s}', 'ثلاثة من {s}', 'أربعة من {s}', 'خمسة من {s}', 'ستة من {s}', 'سبعة من {s}',
      'ثمانية من {s}', 'تسعة من {s}', 'عشرة من {s}', 'غلام {s}', 'فارس {s}', 'ملكة {s}', 'ملك {s}'],
+  ),
+  'de': CardNames._(
+    ['Der Narr', 'Der Magier', 'Die Hohepriesterin', 'Die Herrscherin', 'Der Herrscher', 'Der Hierophant',
+     'Die Liebenden', 'Der Wagen', 'Die Kraft', 'Der Eremit', 'Das Rad des Schicksals', 'Die Gerechtigkeit',
+     'Der Gehängte', 'Der Tod', 'Die Mäßigkeit', 'Der Teufel', 'Der Turm', 'Der Stern', 'Der Mond', 'Die Sonne',
+     'Das Gericht', 'Die Welt'],
+    ['Stäbe', 'Kelche', 'Schwerter', 'Pentakel'],
+    ['Ass der {s}', 'Zwei der {s}', 'Drei der {s}', 'Vier der {s}', 'Fünf der {s}', 'Sechs der {s}', 'Sieben der {s}',
+     'Acht der {s}', 'Neun der {s}', 'Zehn der {s}', 'Bube der {s}', 'Ritter der {s}', 'Königin der {s}', 'König der {s}'],
+  ),
+  'fr': CardNames._(
+    ['Le Fou', 'Le Magicien', 'La Grande Prêtresse', "L'Impératrice", "L'Empereur", 'Le Hiérophante',
+     'Les Amoureux', 'Le Chariot', 'La Force', "L'Ermite", 'La Roue de Fortune', 'La Justice', 'Le Pendu',
+     'La Mort', 'La Tempérance', 'Le Diable', 'La Tour', "L'Étoile", 'La Lune', 'Le Soleil', 'Le Jugement', 'Le Monde'],
+    ['Bâtons', 'Coupes', 'Épées', 'Pentacles'],
+    ['As {s}', 'Deux {s}', 'Trois {s}', 'Quatre {s}', 'Cinq {s}', 'Six {s}', 'Sept {s}', 'Huit {s}', 'Neuf {s}',
+     'Dix {s}', 'Valet {s}', 'Cavalier {s}', 'Reine {s}', 'Roi {s}'],
+    ['de Bâtons', 'de Coupes', "d'Épées", 'de Pentacles'],
+  ),
+  'it': CardNames._(
+    ['Il Matto', 'Il Mago', 'La Sacerdotessa', "L'Imperatrice", "L'Imperatore", 'Lo Ierofante', 'Gli Amanti',
+     'Il Carro', 'La Forza', "L'Eremita", 'La Ruota della Fortuna', 'La Giustizia', "L'Appeso", 'La Morte',
+     'La Temperanza', 'Il Diavolo', 'La Torre', 'La Stella', 'La Luna', 'Il Sole', 'Il Giudizio', 'Il Mondo'],
+    ['Bastoni', 'Coppe', 'Spade', 'Pentacoli'],
+    ['Asso di {s}', 'Due di {s}', 'Tre di {s}', 'Quattro di {s}', 'Cinque di {s}', 'Sei di {s}', 'Sette di {s}',
+     'Otto di {s}', 'Nove di {s}', 'Dieci di {s}', 'Fante di {s}', 'Cavaliere di {s}', 'Regina di {s}', 'Re di {s}'],
+  ),
+  'tr': CardNames._(
+    ['Deli', 'Büyücü', 'Başrahibe', 'İmparatoriçe', 'İmparator', 'Başrahip', 'Aşıklar', 'Savaş Arabası', 'Güç',
+     'Ermiş', 'Kader Çarkı', 'Adalet', 'Asılan Adam', 'Ölüm', 'Denge', 'Şeytan', 'Kule', 'Yıldız', 'Ay', 'Güneş',
+     'Mahkeme', 'Dünya'],
+    ['Asalar', 'Kupalar', 'Kılıçlar', 'Tılsımlar'],
+    ['{s} Ası', '{s} İkilisi', '{s} Üçlüsü', '{s} Dörtlüsü', '{s} Beşlisi', '{s} Altılısı', '{s} Yedilisi',
+     '{s} Sekizlisi', '{s} Dokuzlusu', '{s} Onlusu', '{s} Uşağı', '{s} Şövalyesi', '{s} Kraliçesi', '{s} Kralı'],
+    ['Asa', 'Kupa', 'Kılıç', 'Tılsım'],
+  ),
+  'pl': CardNames._(
+    ['Głupiec', 'Mag', 'Kapłanka', 'Cesarzowa', 'Cesarz', 'Hierofant', 'Kochankowie', 'Rydwan', 'Moc',
+     'Pustelnik', 'Koło Fortuny', 'Sprawiedliwość', 'Wisielec', 'Śmierć', 'Umiarkowanie', 'Diabeł', 'Wieża',
+     'Gwiazda', 'Księżyc', 'Słońce', 'Sąd Ostateczny', 'Świat'],
+    ['Buławy', 'Kielichy', 'Miecze', 'Denary'],
+    ['As {s}', 'Dwójka {s}', 'Trójka {s}', 'Czwórka {s}', 'Piątka {s}', 'Szóstka {s}', 'Siódemka {s}',
+     'Ósemka {s}', 'Dziewiątka {s}', 'Dziesiątka {s}', 'Paź {s}', 'Rycerz {s}', 'Królowa {s}', 'Król {s}'],
+    ['Buław', 'Kielichów', 'Mieczy', 'Denarów'],
   ),
 };
